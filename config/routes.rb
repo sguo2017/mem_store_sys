@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  namespace :admin do
+    resources :goods
+  end
   mount Ckeditor::Engine => '/ckeditor'
   namespace :admin do
     resources :tech_servs

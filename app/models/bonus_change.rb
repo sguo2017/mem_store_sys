@@ -1,0 +1,2 @@
+class BonusChange < ApplicationRecord
+end

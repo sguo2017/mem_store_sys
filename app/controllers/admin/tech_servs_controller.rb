@@ -4,7 +4,7 @@ class Admin::TechServsController < AdminController
   # GET /admin/tech_servs
   # GET /admin/tech_servs.json
   def index
-    @tech_servs = TechServ.all
+    @tech_servs = TechServ.page(params[:page]).per(10)
   end
 
   # GET /admin/tech_servs/1

@@ -1,0 +1,2 @@
+class MemLevel < ApplicationRecord
+end

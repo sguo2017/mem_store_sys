@@ -1,14 +1,16 @@
 Rails.application.routes.draw do
   namespace :admin do
+    resources :bonus_changes
+    resources :mem_groups 
+    resources :mem_levels 
+    resources :stores
     resources :goods
-  end
-  mount Ckeditor::Engine => '/ckeditor'
-  namespace :admin do
     resources :tech_servs
-  end
-  namespace :admin do
     resources :goods_catalogs
   end
+
+  mount Ckeditor::Engine => '/ckeditor'
+
   devise_for :users
   
 

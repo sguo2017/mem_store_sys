@@ -35,6 +35,8 @@
   </tbody>
 </table>
 
+<%= paginate @goods_catalogs %>
+
 <%= link_to t('.new', :default => t("helpers.links.new")),
             new_admin_goods_catalog_path,
             :class => 'btn btn-primary' %>

@@ -1,0 +1,83 @@
+<%= form_for [:admin, @good], :html => { :class => "form-horizontal good" } do |f| %>
+
+  <% if @good.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@good.errors.count, "error") %> prohibited this good from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @good.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :code, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :code, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:code) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :name, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :name, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:name) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :goods_catalog, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :goods_catalog, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:goods_catalog) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :spec, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :spec, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:spec) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :status, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :status, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:status) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :score, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :score, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:score) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :ispromotion, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :ispromotion, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:ispromotion) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :avatar, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :avatar, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:avatar) %>
+  </div>
+
+  <div class="form-group">
+    <div class="col-lg-offset-2 col-lg-10">
+      <%= f.submit nil, :class => 'btn btn-primary' %>
+      <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                admin_goods_path, :class => 'btn btn-default' %>
+    </div>
+  </div>
+
+<% end %>

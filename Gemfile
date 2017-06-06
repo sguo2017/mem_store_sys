@@ -78,4 +78,3 @@ gem 'rufus-scheduler'
 gem 'rails-admin-scaffold'
 gem 'ckeditor'
 gem 'mini_magick'
-

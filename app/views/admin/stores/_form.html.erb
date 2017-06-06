@@ -1,0 +1,111 @@
+<%= form_for [:admin, @store], :html => { :class => "form-horizontal store" } do |f| %>
+
+  <% if @store.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@store.errors.count, "error") %> prohibited this store from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @store.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :code, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :code, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:code) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :catalog, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :catalog, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:catalog) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :name, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :name, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:name) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :district, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :district, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:district) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :city, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :city, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:city) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :province, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :province, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:province) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :country, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :country, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:country) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :latitude, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :latitude, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:latitude) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :longitude, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :longitude, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:longitude) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :addr, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :addr, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:addr) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :linkman, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :linkman, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:linkman) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :contact_num, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :contact_num, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:contact_num) %>
+  </div>
+
+  <div class="form-group">
+    <div class="col-lg-offset-2 col-lg-10">
+      <%= f.submit nil, :class => 'btn btn-primary' %>
+      <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                admin_stores_path, :class => 'btn btn-default' %>
+    </div>
+  </div>
+
+<% end %>

@@ -4,7 +4,7 @@ class Admin::GoodsCatalogsController < AdminController
   # GET /admin/goods_catalogs
   # GET /admin/goods_catalogs.json
   def index
-    @goods_catalogs = GoodsCatalog.page(params[:page]).per(2)
+    @goods_catalogs = GoodsCatalog.page(params[:page]).per(10)
   end
 
   # GET /admin/goods_catalogs/1

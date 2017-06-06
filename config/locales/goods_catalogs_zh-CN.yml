@@ -1,12 +1,12 @@
 ---
-en:
+zh-CN:
   activerecord:
     models:
-      goods_catalog: "Goods catalog"
+      goods_catalog: "商品分类"
     attributes:
       goods_catalog: 
-        code: "Code"
-        name: "Name"
+        code: "编码"
+        name: "名称"
   helpers:
     submit:
       goods_catalog:

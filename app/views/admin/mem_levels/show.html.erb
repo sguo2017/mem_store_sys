@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Code:</strong>
+  <%= @mem_level.code %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @mem_level.name %>
+</p>
+
+<p>
+  <strong>District:</strong>
+  <%= @mem_level.district %>
+</p>
+
+<p>
+  <strong>Score:</strong>
+  <%= @mem_level.score %>
+</p>
+
+<%= link_to 'Edit', edit_admin_mem_level_path(@mem_level) %> |
+<%= link_to 'Back', admin_mem_levels_path %>

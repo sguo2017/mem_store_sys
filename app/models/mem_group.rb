@@ -1,0 +1,2 @@
+class MemGroup < ApplicationRecord
+end

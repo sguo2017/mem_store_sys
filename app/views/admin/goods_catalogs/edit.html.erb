@@ -1,6 +1,5 @@
-<h1>Editing goods_catalog</h1>
-
-<%= render 'form' %>
-
-<%= link_to 'Show', [:admin, @goods_catalog] %> |
-<%= link_to 'Back', admin_goods_catalogs_path %>
+<%- model_class = GoodsCatalog -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => [:'helpers.titles.edit', 'Edit %{model}'], :model => model_class.model_name.human.titleize %></h1>
+</div>
+<%= render :partial => 'form' %>

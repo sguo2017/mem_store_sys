@@ -12,8 +12,8 @@
 
   <tbody>
     <% @tech_servs.each do |tech_serv| %>
-      <tr>
-        <td><%= tech_serv.content %></td>
+      <tr> 
+        <td><%= raw tech_serv.content %></td>
         <td><%= link_to 'Show', [:admin, tech_serv] %></td>
         <td><%= link_to 'Edit', edit_admin_tech_serv_path(tech_serv) %></td>
         <td><%= link_to 'Destroy', [:admin, tech_serv], method: :delete, data: { confirm: 'Are you sure?' } %></td>

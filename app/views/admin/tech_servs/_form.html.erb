@@ -1,22 +1,34 @@
-<%= form_for([:admin, @tech_serv]) do |f| %>
-  <% if @tech_serv.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@tech_serv.errors.count, "error") %> prohibited this tech_serv from being saved:</h2>
+<%= form_for [:admin, @tech_serv], :html => { :class => "form-horizontal tech_serv" } do |f| %>
 
-      <ul>
-      <% @tech_serv.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+  <% if @tech_serv.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@tech_serv.errors.count, "error") %> prohibited this tech_serv from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @tech_serv.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
     </div>
   <% end %>
 
-  <div class="field">
-      <%= f.label :content %><br>
-   <!-- <%= f.text_area :content %> -->
-    <%= f.cktext_area :content, :class => 'form-control' %>
+  <div class="form-group">
+    <%= f.label :content, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :content, :class => 'form-control' %>
     </div>
-  <div class="actions">
-    <%= f.submit %>
+    <%=f.error_span(:content) %>
   </div>
+
+  <div class="form-group">
+    <div class="col-lg-offset-2 col-lg-10">
+      <%= f.submit nil, :class => 'btn btn-primary' %>
+      <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                admin_tech_servs_path, :class => 'btn btn-default' %>
+    </div>
+  </div>
+
 <% end %>

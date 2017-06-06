@@ -1,0 +1,1 @@
+json.extract! @tech_serv, :content, :created_at, :updated_at

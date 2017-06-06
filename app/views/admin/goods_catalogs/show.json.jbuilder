@@ -1,0 +1,1 @@
+json.extract! @goods_catalog, :code, :name, :created_at, :updated_at

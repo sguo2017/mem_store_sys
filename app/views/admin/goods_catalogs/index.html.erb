@@ -1,0 +1,29 @@
+<h1>Listing goods_catalogs</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Code</th>
+      <th>Name</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @goods_catalogs.each do |goods_catalog| %>
+      <tr>
+        <td><%= goods_catalog.code %></td>
+        <td><%= goods_catalog.name %></td>
+        <td><%= link_to 'Show', [:admin, goods_catalog] %></td>
+        <td><%= link_to 'Edit', edit_admin_goods_catalog_path(goods_catalog) %></td>
+        <td><%= link_to 'Destroy', [:admin, goods_catalog], method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Goods catalog', new_admin_goods_catalog_path %>

@@ -1,0 +1,2 @@
+module Phone::GoodsDetailsHelper
+end

@@ -1,0 +1,2 @@
+module Phone::MemActivationsHelper
+end

@@ -1,4 +1,4 @@
-class Phone::ProfilesController < ApplicationController
+class Phone::ProfilesController < PhoneController
   layout "phone"  
   before_action :set_profile, only: [:show, :edit, :update, :destroy]
 

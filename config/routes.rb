@@ -1,5 +1,20 @@
 Rails.application.routes.draw do
   namespace :phone do
+    resources :bonus_changes
+  end
+  namespace :phone do
+    resources :score_queries
+  end
+  namespace :phone do
+    resources :city_selections
+  end
+  namespace :phone do
+    resources :mem_activations
+  end
+  namespace :phone do
+    resources :goods_details
+  end
+  namespace :phone do
     resources :goods
   end
   namespace :phone do

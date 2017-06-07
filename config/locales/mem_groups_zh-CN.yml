@@ -1,0 +1,30 @@
+---
+zh-CN:
+  activerecord:
+    models:
+      mem_group: "会员分组"
+    attributes:
+      mem_group: 
+        city: "城市"
+  helpers:
+    submit:
+      mem_group:
+        create: "Create goods catalog"
+        update: "Update goods catalog"
+  mem_groups:
+    edit:
+      title: "Editing of the goods catalog"
+    form:
+      mem_group: "Goods catalog"
+    index:
+      confirm: "Are you sure you want to delete the goods catalog?"
+      empty: "No goods catalogs found"
+      new_mem_group: "Add a new goods catalog"
+      title: "Listing of goods catalogs"
+    new:
+      title: "Adding a new goods catalog"
+    show:
+      title: "Goods catalog details"
+    was_created: "Goods catalog was successfully added"
+    was_deleted: "Goods catalog was successfully deleted"
+    was_updated: "Goods catalog was successfully updated"

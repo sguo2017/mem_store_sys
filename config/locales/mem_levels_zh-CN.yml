@@ -1,0 +1,31 @@
+---
+zh-CN:
+  activerecord:
+    models:
+      mem_level: "商品分类"
+    attributes:
+      mem_level: 
+        code: "编码"
+        name: "名称"
+  helpers:
+    submit:
+      mem_level:
+        create: "Create goods catalog"
+        update: "Update goods catalog"
+  mem_levels:
+    edit:
+      title: "Editing of the goods catalog"
+    form:
+      mem_level: "Goods catalog"
+    index:
+      confirm: "Are you sure you want to delete the goods catalog?"
+      empty: "No goods catalogs found"
+      new_mem_level: "Add a new goods catalog"
+      title: "Listing of goods catalogs"
+    new:
+      title: "Adding a new goods catalog"
+    show:
+      title: "Goods catalog details"
+    was_created: "Goods catalog was successfully added"
+    was_deleted: "Goods catalog was successfully deleted"
+    was_updated: "Goods catalog was successfully updated"

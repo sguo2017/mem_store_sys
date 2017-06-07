@@ -1,23 +1,13 @@
 Rails.application.routes.draw do
+  get 'welcome/index'
+
   namespace :phone do
     resources :bonus_changes
-  end
-  namespace :phone do
     resources :score_queries
-  end
-  namespace :phone do
     resources :city_selections
-  end
-  namespace :phone do
     resources :mem_activations
-  end
-  namespace :phone do
     resources :goods_details
-  end
-  namespace :phone do
     resources :goods
-  end
-  namespace :phone do
     resources :profiles
     resources :homepages
   end
@@ -36,5 +26,6 @@ Rails.application.routes.draw do
 
   devise_for :users
   
+   root 'welcome#index'
 
 end

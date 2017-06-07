@@ -15,6 +15,7 @@ class Admin::GoodsController < AdminController
   # GET /admin/goods/new
   def new
     @good = Good.new
+    @good.avatar= params[:file]
   end
 
   # GET /admin/goods/1/edit

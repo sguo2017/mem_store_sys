@@ -19,7 +19,7 @@
   <dt><strong><%= model_class.human_attribute_name(:ispromotion) %>:</strong></dt>
   <dd><%= @good.ispromotion %></dd>
   <dt><strong><%= model_class.human_attribute_name(:avatar) %>:</strong></dt>
-  <dd><%= @good.avatar %></dd>
+  <dd><img class="media-object" src="<%= @good.avatar %>" alt="Image"></dd>
 </dl>
 
 <%= link_to t('.back', :default => t("helpers.links.back")),

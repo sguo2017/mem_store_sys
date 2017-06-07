@@ -29,7 +29,8 @@
         <td><%= good.status %></td>
         <td><%= good.score %></td>
         <td><%= good.ispromotion %></td>
-        <td><%= good.avatar %></td>
+        <!-- <td><%= good.avatar %></td> -->
+        <td><img class="media-object" src="<%=good.avatar%>" alt="Image"></td>
         <td><%=l good.created_at %></td>
         <td>
           <%= link_to t('.show', :default => t("helpers.links.show")),

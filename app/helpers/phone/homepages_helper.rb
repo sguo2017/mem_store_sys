@@ -1,0 +1,2 @@
+module Phone::HomepagesHelper
+end

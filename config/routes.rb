@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
   namespace :phone do
+    resources :goods
+  end
+  namespace :phone do
     resources :profiles
     resources :homepages
   end

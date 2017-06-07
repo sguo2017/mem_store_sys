@@ -1,1 +1,0 @@
-json.extract! @homepage, :created_at, :updated_at

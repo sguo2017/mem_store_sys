@@ -7,17 +7,17 @@
   </div>
   <!-- header end -->
   <div class="container has-top">
-    <a class="user-info-header" href="">
+    <a class="user-info-header" href="/phone/profiles">
       <div class="user-img-wrap">
         <div class="user-img">
           <img src="/assets/phone/images/img-user.png" alt="">
         </div>
         <div class="flex-fluid">
-          <div class="user-name">PeterPan小飞侠</div>
+          <div class="user-name"><%= @user.name %></div>
           <div class="mt10">
             <div class="lever-bar">
               <i class="ico-lever"></i>
-              等级LV2
+              等级LV<%= @user.level %>
             </div>
             <div class="progress-wrap ml5">
               <div class="small">60%</div>
@@ -28,7 +28,7 @@
           </div>
         </div>
         <div class="score">
-          积分:5650
+          积分:<%= @user.score %>
         </div>
       </div>
     </a>  

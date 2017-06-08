@@ -5,7 +5,7 @@ class Phone::ProfilesController < PhoneController
   # GET /phone/profiles
   # GET /phone/profiles.json
   def index
-    
+     @user = current_user    
   end
 
   # GET /phone/profiles/1

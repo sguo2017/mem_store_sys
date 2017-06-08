@@ -22,21 +22,21 @@
           昵称  
         </div>
         
-        <input class="flex-fluid" type="text" placeholder="PeterPan小飞侠">
+        <input class="flex-fluid" type="text" placeholder="<%= @user.name %>">
       </li>
       <li class="data-item">
         <div>
           <i class="ico-sex"></i>
           性别  
         </div>
-        <input class="flex-fluid" type="text" placeholder="女">
+        <input class="flex-fluid" type="text" placeholder="<%= @user.sex %>">
       </li>
       <li class="data-item">
         <div>
           <i class="ico-birth"></i>
           生日  
         </div>
-        <input class="flex-fluid" type="text" placeholder="1990-01-10">
+        <input class="flex-fluid" type="text" placeholder="<%= @user.birthday %>">
       </li>
     </ul>
     <ul class="data-list block-mt form-list">
@@ -45,14 +45,14 @@
           <i class="ico-email"></i>
           邮箱  
         </div>
-        <input class="flex-fluid" type="text" placeholder="142353455@qq.com">
+        <input class="flex-fluid" type="text" placeholder="<%= @user.email %>">
       </li>
       <li class="data-item">
         <div>
           <i class="ico-phone"></i>
           电话  
         </div>
-        <input class="flex-fluid" type="text" placeholder="13299999999">
+        <input class="flex-fluid" type="text" placeholder="<%= @user.phone_num %>">
       </li>
 
     </ul>

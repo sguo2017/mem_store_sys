@@ -1,11 +1,17 @@
-class Phone::GoodsController < PhoneController
+class Phone::GoodsController < ApplicationController
   layout "phone"
   before_action :set_good, only: [:show, :edit, :update, :destroy]
 
   # GET /phone/goods
   # GET /phone/goods.json
   def index
-
+    @goods_catalog_id = params[:goods_catalog_id]
+    if @goods_catalog_id.blank?
+      @goods = Good.page(params[:page]).per(10)
+    else
+      @goods = Good.where(:goods_catalog=>@goods_catalog_id).page(params[:page]).per(10)
+    end
+      @goods_catalogs = GoodsCatalog.page(params[:page]).per(10)
   end
 
   # GET /phone/goods/1

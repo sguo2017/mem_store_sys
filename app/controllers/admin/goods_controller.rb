@@ -15,7 +15,6 @@ class Admin::GoodsController < AdminController
   # GET /admin/goods/new
   def new
     @good = Good.new
-    @good.avatar= params[:file]
   end
 
   # GET /admin/goods/1/edit
@@ -70,6 +69,6 @@ class Admin::GoodsController < AdminController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def good_params
-      params.require(:good).permit(:code, :name, :goods_catalog, :spec, :status, :score, :ispromotion, :avatar)
+      params.require(:good).permit(:code, :name, :goods_catalog, :spec, :status, :score, :ispromotion, :price, :avatar, :info)
     end
 end

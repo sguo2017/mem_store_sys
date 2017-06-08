@@ -16,10 +16,14 @@
   <dd><%= @good.status %></dd>
   <dt><strong><%= model_class.human_attribute_name(:score) %>:</strong></dt>
   <dd><%= @good.score %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:price) %>:</strong></dt>
+  <dd><%= @good.price %></dd>
   <dt><strong><%= model_class.human_attribute_name(:ispromotion) %>:</strong></dt>
   <dd><%= @good.ispromotion %></dd>
   <dt><strong><%= model_class.human_attribute_name(:avatar) %>:</strong></dt>
   <dd><img class="media-object" src="<%= @good.avatar %>" alt="Image"></dd>
+  <dt><strong><%= model_class.human_attribute_name(:info) %>:</strong></dt>
+  <dd><img class="media-object" src="<%= @good.info %>" alt="Image"></dd>
 </dl>
 
 <%= link_to t('.back', :default => t("helpers.links.back")),

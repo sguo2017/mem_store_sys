@@ -58,19 +58,19 @@
     <%=f.error_span(:score) %>
   </div>
   <div class="form-group">
+    <%= f.label :price, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :price, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:price) %>
+  </div>
+    <div class="form-group">
     <%= f.label :ispromotion, :class => 'control-label col-lg-2' %>
     <div class="col-lg-10">
       <%= f.text_field :ispromotion, :class => 'form-control' %>
     </div>
     <%=f.error_span(:ispromotion) %>
   </div>
-<!--   <div class="form-group">
-  <%= f.label :avatar, :class => 'control-label col-lg-2' %>
-  <div class="col-lg-10">
-    <%= f.text_field :avatar, :class => 'form-control' %>
-  </div>
-  <%=f.error_span(:avatar) %>
-</div> -->
   <div class="form-group">
     <%= f.label :avatar, :class => 'control-label col-lg-2' %>
     <div class="col-lg-10">
@@ -78,11 +78,13 @@
     </div>
     <%=f.error_span(:avatar) %>
   </div>
-<!--   <%= form_tag 'mystore', :multipart => true do%>
-    <%= file_field_tag :localfile %>
-    <%= submit_tag "上传"%>
-  <% end %>
- -->
+    <div class="form-group">
+    <%= f.label :info, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.file_field :info, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:info) %>
+  </div>
 
   <div class="form-group">
     <div class="col-lg-offset-2 col-lg-10">

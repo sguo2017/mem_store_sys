@@ -2,11 +2,13 @@
 zh-CN:
   activerecord:
     models:
-      mem_level: "商品分类"
+      mem_level: "会员等级"
     attributes:
       mem_level: 
         code: "编码"
         name: "名称"
+        level: "级别"
+        score: "积分"        
   helpers:
     submit:
       mem_level:

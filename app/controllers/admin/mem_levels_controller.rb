@@ -69,6 +69,6 @@ class Admin::MemLevelsController < AdminController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def mem_level_params
-      params.require(:mem_level).permit(:code, :name, :district, :score)
+      params.require(:mem_level).permit(:code, :name, :level, :score)
     end
 end

@@ -7,6 +7,16 @@ zh-CN:
       good: 
         code: "编码"
         name: "名称"
+        goods_catalog: "类型"
+        spec: "规格"
+        status: "状态"
+        score: "积分"
+        ispromotion: "是否促销商品"
+        avatar: "图标"
+        created_at: "创建日期"
+        updated_at: "修改日期"
+        price: "价格"
+        info: "简介"
   helpers:
     submit:
       good:

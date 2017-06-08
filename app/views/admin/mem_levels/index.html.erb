@@ -8,7 +8,7 @@
       <th><%= model_class.human_attribute_name(:id) %></th>
       <th><%= model_class.human_attribute_name(:code) %></th>
       <th><%= model_class.human_attribute_name(:name) %></th>
-      <th><%= model_class.human_attribute_name(:district) %></th>
+      <th><%= model_class.human_attribute_name(:level) %></th>
       <th><%= model_class.human_attribute_name(:score) %></th>
       <th><%= model_class.human_attribute_name(:created_at) %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
@@ -20,7 +20,7 @@
         <td><%= link_to mem_level.id, admin_mem_level_path(mem_level) %></td>
         <td><%= mem_level.code %></td>
         <td><%= mem_level.name %></td>
-        <td><%= mem_level.district %></td>
+        <td><%= mem_level.level %></td>
         <td><%= mem_level.score %></td>
         <td><%=l mem_level.created_at %></td>
         <td>

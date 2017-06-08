@@ -20,54 +20,57 @@
 		</div>
 		<ul class="coupon-list">
 		<% @bonus_changes.each_with_index do |bonus_change, index| %>
-		    <% if index  % 3 == 0%>
-			<li class="coupon-item coupon-similar">
-				<i class="dot-line"></i>
-				<i class="coupon-tips">兑换券</i>
-				<div class="coupon-left">
-					￥<span class="coupon-price"><%= bonus_change.red_packet %></span>
-				</div>
-				<div class="coupon-center">
-					<div class="f16 text-tit">扣积分:</div>
-					<span class="label label-similar mt5"><%= bonus_change.score %></span>
-				</div>
-				<div class="coupon-right">
-					<button class="btn-similar-hollow">立即兑换</button>
-				</div>
-			</li>
-			<% end %>
-			<% if index  % 3 == 1%>
-			<li class="coupon-item coupon-warning">
-				<i class="dot-line"></i>
-				<i class="coupon-tips">兑换券</i>
-				<div class="coupon-left">
-					￥<span class="coupon-price"><%= bonus_change.red_packet %></span>
-				</div>
-				<div class="coupon-center">
-					<div class="f16 text-tit">扣积分:</div>
-					<span class="label label-warning mt5"><%= bonus_change.score %></span>
-				</div>
-				<div class="coupon-right">
-					<button class="btn-similar-hollow">立即兑换</button>
-				</div>
-			</li>
-			<% end %>
-			<% if index  % 3 == 2%>
-			<li class="coupon-item coupon-info">
-				<i class="dot-line"></i>
-				<i class="coupon-tips">兑换券</i>
-				<div class="coupon-left">
-					￥<span class="coupon-price"><%= bonus_change.red_packet %></span>
-				</div>
-				<div class="coupon-center">
-					<div class="f16 text-tit">扣积分:</div>
-					<span class="label label-info mt5"><%= bonus_change.score %></span>
-				</div>
-				<div class="coupon-right">
-					<button class="btn-similar-hollow">立即兑换</button>
-				</div>
-			</li>
-			<% end %>
+			    <% if index  % 3 == 0%>
+					<li class="coupon-item coupon-similar">
+						<i class="dot-line"></i>
+						<i class="coupon-tips">兑换券</i>
+						<div class="coupon-left">
+							￥<span class="coupon-price"><%= bonus_change.red_packet %></span>
+						</div>
+						<div class="coupon-center">
+							<div class="f16 text-tit">扣积分:</div>
+							<span class="label label-similar mt5"><%= bonus_change.score %></span>
+						</div>
+						<div class="coupon-right">
+							<button class="btn-similar-hollow">立即兑换</button>
+						</div>
+					</li>
+				<% end %>
+
+				<% if index  % 3 == 1%>
+					<li class="coupon-item coupon-warning">
+						<i class="dot-line"></i>
+						<i class="coupon-tips">兑换券</i>
+						<div class="coupon-left">
+							￥<span class="coupon-price"><%= bonus_change.red_packet %></span>
+						</div>
+						<div class="coupon-center">
+							<div class="f16 text-tit">扣积分:</div>
+							<span class="label label-warning mt5"><%= bonus_change.score %></span>
+						</div>
+						<div class="coupon-right">
+							<button class="btn-similar-hollow">立即兑换</button>
+						</div>
+					</li>
+				<% end %>
+
+				<% if index  % 3 == 2%>
+					<li class="coupon-item coupon-info">
+						<i class="dot-line"></i>
+						<i class="coupon-tips">兑换券</i>
+						<div class="coupon-left">
+							￥<span class="coupon-price"><%= bonus_change.red_packet %></span>
+						</div>
+						<div class="coupon-center">
+							<div class="f16 text-tit">扣积分:</div>
+							<span class="label label-info mt5"><%= bonus_change.score %></span>
+						</div>
+						<div class="coupon-right">
+							<button class="btn-similar-hollow">立即兑换</button>
+						</div>
+					</li>
+				<% end %>
+				
 		    <% end %>
 		</ul>
 	</div>

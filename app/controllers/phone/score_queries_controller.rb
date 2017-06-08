@@ -5,6 +5,8 @@ class Phone::ScoreQueriesController < PhoneController
   # GET /phone/score_queries
   # GET /phone/score_queries.json
   def index
+     @user = current_user   
+     @score_queries = @user.score_histories
   end
 
   # GET /phone/score_queries/1

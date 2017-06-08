@@ -1,0 +1,2 @@
+class ScoreHistory < ApplicationRecord
+end

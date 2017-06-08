@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
   namespace :admin do
+    resources :score_histories
+  end
+  namespace :admin do
     resources :users
   end
   get 'welcome/index'

@@ -1,0 +1,34 @@
+---
+zh-CN:
+  activerecord:
+    models:
+      score_history: "商品分类"
+    attributes:
+      score_history: 
+        point: "编码"
+        object_type: "类型"
+        object_id: "关联id"
+        oper: "类型"
+        user_id: "用户"
+  helpers:
+    submit:
+      score_history:
+        create: "Create goods catalog"
+        update: "Update goods catalog"
+  score_histories:
+    edit:
+      title: "Editing of the goods catalog"
+    form:
+      score_history: "Goods catalog"
+    index:
+      confirm: "Are you sure you want to delete the goods catalog?"
+      empty: "No goods catalogs found"
+      new_score_history: "Add a new goods catalog"
+      title: "Listing of goods catalogs"
+    new:
+      title: "Adding a new goods catalog"
+    show:
+      title: "Goods catalog details"
+    was_created: "Goods catalog was successfully added"
+    was_deleted: "Goods catalog was successfully deleted"
+    was_updated: "Goods catalog was successfully updated"

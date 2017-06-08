@@ -1,0 +1,2 @@
+module Admin::ScoreHistoriesHelper
+end

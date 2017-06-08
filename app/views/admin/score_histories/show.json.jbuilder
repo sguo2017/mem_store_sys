@@ -1,0 +1,1 @@
+json.extract! @score_history, :point, :object_type, :object_id, :oper, :user_id, :created_at, :updated_at

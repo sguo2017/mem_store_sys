@@ -5,6 +5,8 @@ class Phone::BonusChangesController < PhoneController
   # GET /phone/bonus_changes
   # GET /phone/bonus_changes.json
   def index
+     @user = current_user   
+     @bonus_changes = BonusChange.all 
   end
 
   # GET /phone/bonus_changes/1

@@ -1,5 +1,5 @@
 	<div class="header">
-		<a class="header-left" href="">
+		<a class="header-left" href="/phone/profiles">
 			<span class="ico-header-back"></span>
 		</a>
 		<h1>积分查询</h1>
@@ -10,7 +10,7 @@
 		<div class="score-s-header">
 			<a class="ico-question" href="#"></a>
 			<div class="score-scan">
-				<div class="score-num">4234</div>
+				<div class="score-num"><%= @user.score %></div>
 				<div class="f12">我的积分</div>
 			</div>
 			<a class="score-market" href="">
@@ -19,48 +19,56 @@
 			</a>
 		</div>
 		<ul class="coupon-list">
+		<% @bonus_changes.each_with_index do |bonus_change, index| %>
+		    <% if index  % 3 == 0%>
 			<li class="coupon-item coupon-similar">
 				<i class="dot-line"></i>
 				<i class="coupon-tips">兑换券</i>
 				<div class="coupon-left">
-					￥<span class="coupon-price">30</span>
+					￥<span class="coupon-price"><%= bonus_change.red_packet %></span>
 				</div>
 				<div class="coupon-center">
 					<div class="f16 text-tit">扣积分:</div>
-					<span class="label label-similar mt5">25000</span>
+					<span class="label label-similar mt5"><%= bonus_change.score %></span>
 				</div>
 				<div class="coupon-right">
 					<button class="btn-similar-hollow">立即兑换</button>
 				</div>
 			</li>
+			<% end %>
+			<% if index  % 3 == 1%>
 			<li class="coupon-item coupon-warning">
 				<i class="dot-line"></i>
 				<i class="coupon-tips">兑换券</i>
 				<div class="coupon-left">
-					￥<span class="coupon-price">60</span>
+					￥<span class="coupon-price"><%= bonus_change.red_packet %></span>
 				</div>
 				<div class="coupon-center">
 					<div class="f16 text-tit">扣积分:</div>
-					<span class="label label-warning mt5">2500</span>
+					<span class="label label-warning mt5"><%= bonus_change.score %></span>
 				</div>
 				<div class="coupon-right">
 					<button class="btn-similar-hollow">立即兑换</button>
 				</div>
 			</li>
+			<% end %>
+			<% if index  % 3 == 2%>
 			<li class="coupon-item coupon-info">
 				<i class="dot-line"></i>
 				<i class="coupon-tips">兑换券</i>
 				<div class="coupon-left">
-					￥<span class="coupon-price">500</span>
+					￥<span class="coupon-price"><%= bonus_change.red_packet %></span>
 				</div>
 				<div class="coupon-center">
 					<div class="f16 text-tit">扣积分:</div>
-					<span class="label label-info mt5">2500</span>
+					<span class="label label-info mt5"><%= bonus_change.score %></span>
 				</div>
 				<div class="coupon-right">
 					<button class="btn-similar-hollow">立即兑换</button>
 				</div>
 			</li>
+			<% end %>
+		    <% end %>
 		</ul>
 	</div>
 	<div class="line-through">

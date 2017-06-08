@@ -7,3 +7,10 @@ function show_hide_goods_catalog(){
 		$(".goods-catalog-cond").hide();
 	}
 };
+// function event_bind(){
+// 	$(".condition-btn").click(function(){
+// 		show_hide_goods_catalog();
+// 	});
+// }
+// $(document).ready( event_bind );
+

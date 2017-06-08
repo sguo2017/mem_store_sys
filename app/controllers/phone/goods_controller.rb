@@ -17,6 +17,7 @@ class Phone::GoodsController < ApplicationController
   # GET /phone/goods/1
   # GET /phone/goods/1.json
   def show
+      # @good = Good.where(:id=>params[:id]).page(params[:page]).per(10)
   end
 
   # GET /phone/goods/new

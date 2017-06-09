@@ -19,16 +19,18 @@ class Phone::ScoreQueriesController < PhoneController
     @score_query = ScoreHistory.new(score_history_params)
 
     respond_to do |format|
-      if @score_query.save
-        #扣减积分 TODO:
-        @user = current_user  
+        @user = current_user
+
         @user.score = @user.score - params[:score_history][:point].presence.to_i
-        @user.save
-        #扣减积分 TODO:
-        format.html { redirect_to phone_score_queries_url, notice: '积分兑换成功' }
-      else
-        format.html { redirect_to [:phone, @bonus_change], notice: '积分兑换失败' }
-      end
+        if(@user.score > 0)
+          @user.save               #会员扣减积分 
+          User.transaction do
+            @score_query.save        #积分兑换记录 
+          end
+          format.html { redirect_to phone_score_queries_url, notice: '积分兑换成功' }
+        else
+          format.html { redirect_to phone_bonus_changes_url, notice: '积分兑换失败:积分余额不足' }
+        end
     end
   end
 

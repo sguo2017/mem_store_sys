@@ -14,6 +14,7 @@
       <th><%= model_class.human_attribute_name(:score) %></th>
       <th><%= model_class.human_attribute_name(:price) %></th>
       <th><%= model_class.human_attribute_name(:ispromotion) %></th>
+      <th>二维码</th>
       <th><%= model_class.human_attribute_name(:avatar) %></th>
       <th><%= model_class.human_attribute_name(:info) %></th>
       <th><%= model_class.human_attribute_name(:created_at) %></th>
@@ -32,6 +33,7 @@
         <td><%= good.score %></td>
         <td><%= good.price %></td>
         <td><%= good.ispromotion %></td>
+        <td><img class="media-object" src="<%='/uploads/good/qrcode/qrcode_'+good.id.to_s+'.png'%>" alt="Image"></td>
         <td><img class="media-object" src="<%=good.avatar%>" alt="Image"></td>
         <td><img class="media-object" src="<%=good.info%>" alt="Image"></td>
         <td><%=l good.created_at %></td>

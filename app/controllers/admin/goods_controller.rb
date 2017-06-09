@@ -15,10 +15,12 @@ class Admin::GoodsController < AdminController
   # GET /admin/goods/new
   def new
     @good = Good.new
+    @goods_catalog = GoodsCatalog.page(params[:page])
   end
 
   # GET /admin/goods/1/edit
   def edit
+    @goods_catalog = GoodsCatalog.page(params[:page])
   end
 
   # POST /admin/goods

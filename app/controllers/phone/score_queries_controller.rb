@@ -21,7 +21,9 @@ class Phone::ScoreQueriesController < PhoneController
     respond_to do |format|
       if @score_query.save
         #扣减积分 TODO:
-
+        @user = current_user  
+        @user.score = @user.score - params[:score_history][:point].presence.to_i
+        @user.save
         #扣减积分 TODO:
         format.html { redirect_to phone_score_queries_url, notice: '积分兑换成功' }
       else

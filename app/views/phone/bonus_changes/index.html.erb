@@ -32,7 +32,9 @@
 							<span class="label label-similar mt5"><%= bonus_change.score %></span>
 						</div>
 						<div class="coupon-right">
-							<button class="btn-similar-hollow">立即兑换</button>
+							<%= link_to "立即兑换",
+		                      new_phone_score_query_path(:score_history => {:bonus_change_id => bonus_change.id,:user_id => @user.id, :object_type => "积分兑换", :object_id => bonus_change.id, :point => bonus_change.score, :red_packet => bonus_change.red_packet, :oper => "扣减"}),
+		                      :class => 'btn-similar-hollow' %>
 						</div>
 					</li>
 				<% end %>

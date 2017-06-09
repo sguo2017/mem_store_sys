@@ -6,7 +6,7 @@ class Phone::ScoreQueriesController < PhoneController
   # GET /phone/score_queries.json
   def index
      @user = current_user   
-     @score_queries = @user.score_histories
+     @score_queries = @user.score_histories.order("created_at DESC")
   end
 
   # GET /phone/score_queries/1
@@ -16,7 +16,18 @@ class Phone::ScoreQueriesController < PhoneController
 
   # GET /phone/score_queries/new
   def new
-    @score_query = ScoreQuery.new
+    @score_query = ScoreHistory.new(score_history_params)
+
+    respond_to do |format|
+      if @score_query.save
+        #扣减积分 TODO:
+
+        #扣减积分 TODO:
+        format.html { redirect_to phone_score_queries_url, notice: '积分兑换成功' }
+      else
+        format.html { redirect_to [:phone, @bonus_change], notice: '积分兑换失败' }
+      end
+    end
   end
 
   # GET /phone/score_queries/1/edit
@@ -26,17 +37,7 @@ class Phone::ScoreQueriesController < PhoneController
   # POST /phone/score_queries
   # POST /phone/score_queries.json
   def create
-    @score_query = ScoreQuery.new(score_query_params)
 
-    respond_to do |format|
-      if @score_query.save
-        format.html { redirect_to [:phone, @score_query], notice: 'Score query was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @score_query }
-      else
-        format.html { render action: 'new' }
-        format.json { render json: @score_query.errors, status: :unprocessable_entity }
-      end
-    end
   end
 
   # PATCH/PUT /phone/score_queries/1
@@ -66,11 +67,15 @@ class Phone::ScoreQueriesController < PhoneController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_score_query
-      @score_query = ScoreQuery.find(params[:id])
+      @score_query = ScoreHistory.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def score_query_params
       params[:score_query]
+    end
+
+    def score_history_params
+      params.require(:score_history).permit(:point, :object_type, :object_id, :oper, :user_id, :bonus_change_id, :red_packet)
     end
 end

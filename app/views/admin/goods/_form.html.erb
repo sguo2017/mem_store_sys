@@ -32,7 +32,7 @@
   <div class="form-group">
     <%= f.label :goods_catalog, :class => 'control-label col-lg-2' %>
     <div class="col-lg-10">
-      <%= f.text_field :goods_catalog, :class => 'form-control' %>
+      <%= f.select :goods_catalog, @goods_catalog.collect { |p| [ p.name, p.id ] }, include_blank: false, :class => 'form-control'%>
     </div>
     <%=f.error_span(:goods_catalog) %>
   </div>

@@ -188,7 +188,8 @@ a.text-primary:active {
   background: url('../images/ico-header-back.png') center center no-repeat / cover;
 }
 .ico-condition {
-  background: url('../images/ico-condition.png') center center no-repeat / cover;
+  /*background: url('../images/ico-condition.png') center center no-repeat / cover;*/
+  background: url('../images/ico-condition.png') no-repeat center center / cover;
 }
 .ico-user3,
 .ico-phone2,

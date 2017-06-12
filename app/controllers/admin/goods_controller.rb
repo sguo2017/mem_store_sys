@@ -1,10 +1,12 @@
+require 'rqrcode_png'
+
 class Admin::GoodsController < AdminController
   before_action :set_good, only: [:show, :edit, :update, :destroy]
 
   # GET /admin/goods
   # GET /admin/goods.json
   def index
-    @goods = Good.page(params[:page]).per(10)
+    @goods = Good.order("created_at DESC").page(params[:page]).per(10)
   end
 
   # GET /admin/goods/1
@@ -15,10 +17,12 @@ class Admin::GoodsController < AdminController
   # GET /admin/goods/new
   def new
     @good = Good.new
+    @goods_catalog = GoodsCatalog.page(params[:page])
   end
 
   # GET /admin/goods/1/edit
   def edit
+    @goods_catalog = GoodsCatalog.page(params[:page])
   end
 
   # POST /admin/goods
@@ -28,6 +32,10 @@ class Admin::GoodsController < AdminController
 
     respond_to do |format|
       if @good.save
+        #生成二维码
+        qr = RQRCode::QRCode.new(Const::GOODS_SHOW_ADDR+'/admin/goods/'+@good.id.to_s, :size => 8, :level => :h )
+        png = qr.to_img                      
+        png.resize(90, 90).save(Rails.root.to_s+"/public/uploads/good/qrcode/qrcode_"+@good.id.to_s+".png")
         format.html { redirect_to [:admin, @good], notice: 'Good was successfully created.' }
         format.json { render action: 'show', status: :created, location: @good }
       else

@@ -7,3 +7,4 @@ function show_hide_goods_catalog(){
 		$(".goods-catalog-cond").hide();
 	}
 };
+

@@ -18,7 +18,7 @@
         <td><%= link_to bonus_change.id, admin_bonus_change_path(bonus_change) %></td>
         <td><%= bonus_change.score %></td>
         <td><%= bonus_change.red_packet %></td>
-        <td><%=l bonus_change.created_at %></td>
+        <td><%= bonus_change.created_at.strftime('%Y-%m-%d %H:%M:%S') %></td>
         <td>
           <%= link_to t('.show', :default => t("helpers.links.show")),
                       admin_bonus_change_path(bonus_change), :class => 'btn btn-default btn-xs' %>

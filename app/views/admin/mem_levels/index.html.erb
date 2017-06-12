@@ -22,7 +22,7 @@
         <td><%= mem_level.name %></td>
         <td><%= mem_level.level %></td>
         <td><%= mem_level.score %></td>
-        <td><%=l mem_level.created_at %></td>
+        <td><%= mem_level.created_at.strftime('%Y-%m-%d %H:%M:%S') %></td>
         <td>
           <%= link_to t('.show', :default => t("helpers.links.show")),
                       admin_mem_level_path(mem_level), :class => 'btn btn-default btn-xs' %>

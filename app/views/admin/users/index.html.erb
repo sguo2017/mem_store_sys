@@ -21,7 +21,7 @@
         <td><%= user.email %></td>
         <td><%= user.score %></td>
         <td><%= user.score_total %></td>
-        <td><%=l user.created_at %></td>
+        <td><%= user.created_at.strftime('%Y-%m-%d %H:%M:%S') %></td>
         <td>
           <%= link_to t('.show', :default => t("helpers.links.show")),
                       admin_user_path(user), :class => 'btn btn-default btn-xs' %>

@@ -1,6 +1,7 @@
 <%- model_class = Good -%>
 <div class="page-header">
   <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+  <%= render 'search_form' %>
 </div>
 <table class="table table-striped">
   <thead>
@@ -36,7 +37,7 @@
         <td><img class="media-object" src="<%='/uploads/good/qrcode/qrcode_'+good.id.to_s+'.png'%>" alt="Image"></td>
         <td><img class="media-object" src="<%=good.avatar%>" alt="Image"></td>
         <td><img class="media-object" src="<%=good.info%>" alt="Image"></td>
-        <td><%= good.created_at.strftime('%Y-%m-%d %H:%M:%S')%></td>
+        <td><%=l good.created_at %></td>
         <td>
           <%= link_to t('.show', :default => t("helpers.links.show")),
                       admin_good_path(good), :class => 'btn btn-default btn-xs' %>

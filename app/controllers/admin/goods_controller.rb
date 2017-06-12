@@ -6,7 +6,23 @@ class Admin::GoodsController < AdminController
   # GET /admin/goods
   # GET /admin/goods.json
   def index
-    @goods = Good.order("created_at DESC").page(params[:page]).per(10)
+      @name = params[:name]
+      @goods_catalog = params[:goods_catalog]
+    if @name.blank? &&  @goods_catalog.blank?
+      @goods = Good.page(params[:page]).per(10)
+    else
+      if @goods_catalog.blank? 
+        @goods = Good.where('name LIKE ? ', '%'+@name+'%').order("created_at DESC").page(params[:page]).per(10)
+      else
+        if @name.blank?   ##当name字段值为空时要去掉like,否则查询不到
+           @goods = Good.where(:goods_catalog =>@goods_catalog).order("created_at DESC").page(params[:page]).per(10)
+        else
+         @goods = Good.where('name LIKE ? ', '%'+@name+'%').where(:goods_catalog =>@goods_catalog).order("created_at DESC").page(params[:page]).per(10)
+        end
+        
+      end
+    end
+    @goods_catalogs = GoodsCatalog.order("created_at DESC").page(params[:page]).per(10)
   end
 
   # GET /admin/goods/1

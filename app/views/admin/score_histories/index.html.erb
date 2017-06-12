@@ -24,7 +24,7 @@
         <td><%= score_history.object_id %></td>
         <td><%= score_history.oper %></td>
         <td><%= score_history.user.name %></td>
-        <td><%=l score_history.created_at.strftime('%Y-%m-%d %H:%M:%S') %></td>
+        <td><%= score_history.created_at.strftime('%Y-%m-%d %H:%M:%S') %></td>
         <td>
           <%= link_to t('.show', :default => t("helpers.links.show")),
                       admin_score_history_path(score_history), :class => 'btn btn-default btn-xs' %>

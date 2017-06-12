@@ -38,7 +38,7 @@
         <td><%= store.addr %></td>
         <td><%= store.linkman %></td>
         <td><%= store.contact_num %></td>
-        <td><%=l store.created_at %></td>
+        <td><%= store.created_at.strftime('%Y-%m-%d %H:%M:%S') %></td>
         <td>
           <%= link_to t('.show', :default => t("helpers.links.show")),
                       admin_store_path(store), :class => 'btn btn-default btn-xs' %>

@@ -20,7 +20,7 @@
         <td><%= mem_group.city %></td>
         <td><%= mem_group.province %></td>
         <td><%= mem_group.country %></td>
-        <td><%=l mem_group.created_at %></td>
+        <td><%= mem_group.created_at.strftime('%Y-%m-%d %H:%M:%S') %></td>
         <td>
           <%= link_to t('.show', :default => t("helpers.links.show")),
                       admin_mem_group_path(mem_group), :class => 'btn btn-default btn-xs' %>

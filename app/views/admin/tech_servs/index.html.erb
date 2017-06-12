@@ -16,7 +16,7 @@
       <tr>
         <td><%= link_to tech_serv.id, admin_tech_serv_path(tech_serv) %></td>
         <td><%= raw tech_serv.content %></td>
-        <td><%=l tech_serv.created_at %></td>
+        <td><%= tech_serv.created_at.strftime('%Y-%m-%d %H:%M:%S') %></td>
         <td>
           <%= link_to t('.show', :default => t("helpers.links.show")),
                       admin_tech_serv_path(tech_serv), :class => 'btn btn-default btn-xs' %>

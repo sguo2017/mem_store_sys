@@ -9,7 +9,7 @@
       <th><%= model_class.human_attribute_name(:id) %></th>
       <th><%= model_class.human_attribute_name(:code) %></th>
       <th><%= model_class.human_attribute_name(:name) %></th>
-      <th><%= model_class.human_attribute_name(:goods_catalog) %></th>
+      <th><%= model_class.human_attribute_name(:goods_catalog_id) %></th>
       <th><%= model_class.human_attribute_name(:spec) %></th>
       <th><%= model_class.human_attribute_name(:status) %></th>
       <th><%= model_class.human_attribute_name(:score) %></th>
@@ -28,7 +28,7 @@
         <td><%= link_to good.id, admin_good_path(good) %></td>
         <td><%= good.code %></td>
         <td><%= good.name %></td>
-        <td><%= good.goods_catalog %></td>
+        <td><%= good.goods_catalog_id %></td>
         <td><%= good.spec %></td>
         <td><%= good.status %></td>
         <td><%= good.score %></td>
@@ -37,7 +37,7 @@
         <td><img class="media-object" src="<%='/uploads/good/qrcode/qrcode_'+good.id.to_s+'.png'%>" alt="Image"></td>
         <td><img class="media-object" src="<%=good.avatar%>" alt="Image"></td>
         <td><img class="media-object" src="<%=good.info%>" alt="Image"></td>
-        <td><%= good.created_at.strftime('%Y-%m-%d %H:%M:%S') %></td>
+        <td><%=l good.created_at %></td>
         <td>
           <%= link_to t('.show', :default => t("helpers.links.show")),
                       admin_good_path(good), :class => 'btn btn-default btn-xs' %>

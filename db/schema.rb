@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170610042016) do
+ActiveRecord::Schema.define(version: 20170613080455) do
 
   create_table "bonus_changes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "score"
@@ -34,7 +34,6 @@ ActiveRecord::Schema.define(version: 20170610042016) do
   create_table "goods", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "code"
     t.string "name"
-    t.string "goods_catalog"
     t.string "spec"
     t.string "status"
     t.integer "score"
@@ -44,6 +43,7 @@ ActiveRecord::Schema.define(version: 20170610042016) do
     t.datetime "updated_at", null: false
     t.string "price"
     t.string "info"
+    t.integer "goods_catalog_id"
   end
 
   create_table "goods_catalogs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

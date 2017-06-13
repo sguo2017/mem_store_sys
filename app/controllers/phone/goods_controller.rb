@@ -9,7 +9,7 @@ class Phone::GoodsController < ApplicationController
     if @goods_catalog_id.blank?
       @goods = Good.page(params[:page]).per(10)
     else
-      @goods = Good.where(:goods_catalog=>@goods_catalog_id).page(params[:page]).per(10)
+      @goods = Good.where(:goods_catalog_id=>@goods_catalog_id).page(params[:page]).per(10)
     end
       @goods_catalogs = GoodsCatalog.page(params[:page]).per(10)
   end

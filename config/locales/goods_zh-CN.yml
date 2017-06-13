@@ -7,7 +7,7 @@ zh-CN:
       good: 
         code: "编码"
         name: "名称"
-        goods_catalog: "类型"
+        goods_catalog_id: "类型"
         spec: "规格"
         status: "状态"
         score: "积分"

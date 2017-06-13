@@ -3,8 +3,14 @@ class Admin::StoresController < AdminController
 
   # GET /admin/stores
   # GET /admin/stores.json
-  def index
-    @stores = Store.page(params[:page]).per(10)
+    def index
+      @name = params[:name]
+    if @name.blank? 
+      @stores = Store.page(params[:page]).per(10)
+    else
+        @stores = Store.where('name LIKE ? ', '%'+@name+'%').order("created_at DESC").page(params[:page]).per(10)
+        
+    end
   end
 
   # GET /admin/stores/1

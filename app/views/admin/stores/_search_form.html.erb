@@ -1,0 +1,5 @@
+<%= form_tag("/admin/stores", method: "get") do %>
+  <%= label_tag(:name, "Search for:") %>
+  <%= text_field_tag(:name,@name)  %>
+  <%= submit_tag("Search") %>
+<% end %>

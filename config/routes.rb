@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  namespace :phone do
+    resources :tech_servs
+  end
+  namespace :phone do
+    resources :activities
+  end
   namespace :admin do
     resources :score_histories
   end

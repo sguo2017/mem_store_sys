@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  namespace :admin do
+    resources :activities
+  end
   namespace :phone do
     resources :tech_servs
   end

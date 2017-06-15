@@ -15,7 +15,15 @@ class Admin::StoresController < AdminController
 
   # GET /admin/stores/1
   # GET /admin/stores/1.json
-  def show
+   def show 
+    @store=Store.find(params[:id])
+    if @store.qrcode.blank?
+      qr = RQRCode::QRCode.new(Const::STORES_SHOW_ADDR+'/admin/stores/'+@store.id.to_s, :size => 8, :level => :h )
+      png = qr.to_img                      
+      png.resize(90, 90).save(Rails.root.to_s+"/public/uploads/store/qrcode/qrcode_"+@store.id.to_s+".png")
+      @store.qrcode = "/uploads/store/qrcode/qrcode_"+@store.id.to_s+".png"
+      @store.save
+    end
   end
 
   # GET /admin/stores/new

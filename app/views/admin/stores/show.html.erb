@@ -28,6 +28,8 @@
   <dd><%= @store.linkman %></dd>
   <dt><strong><%= model_class.human_attribute_name(:contact_num) %>:</strong></dt>
   <dd><%= @store.contact_num %></dd>
+  <dt><strong>二维码:</strong></dt>
+  <dd><image src="<%= @store.qrcode %>"/></dd>
 </dl>
 
 <%= link_to t('.back', :default => t("helpers.links.back")),

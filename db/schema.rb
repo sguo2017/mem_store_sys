@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170614081449) do
+ActiveRecord::Schema.define(version: 20170615095046) do
 
   create_table "bonus_changes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "score"
@@ -105,6 +105,7 @@ ActiveRecord::Schema.define(version: 20170614081449) do
     t.string "contact_num"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "qrcode"
   end
 
   create_table "tech_servs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

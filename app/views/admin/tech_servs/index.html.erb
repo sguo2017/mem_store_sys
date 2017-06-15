@@ -6,6 +6,7 @@
   <thead>
     <tr>
       <th><%= model_class.human_attribute_name(:id) %></th>
+      <th><%= model_class.human_attribute_name(:avatar) %></th>
       <th><%= model_class.human_attribute_name(:content) %></th>
       <th><%= model_class.human_attribute_name(:created_at) %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
@@ -15,6 +16,7 @@
     <% @tech_servs.each do |tech_serv| %>
       <tr>
         <td><%= link_to tech_serv.id, admin_tech_serv_path(tech_serv) %></td>
+        <td><img class="media-object" src="<%=tech_serv.avatar%>" alt="Image"></td>
         <td><%= raw tech_serv.content %></td>
         <td><%= tech_serv.created_at.strftime('%Y-%m-%d %H:%M:%S') %></td>
         <td>

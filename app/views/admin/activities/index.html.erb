@@ -1,0 +1,283 @@
+<div class="container">
+	<div class="sub-navbar">
+<!-- 		<div class="sub-navbar-left">
+			<a class="cub-tool" href="">
+				<span class="glyphicon glyphicon-backward"></span>
+			</a>
+		</div> -->
+		<div class="sub-navbar-nav-wrap">
+			<ul class="sub-navbar-nav">
+				<li class="active" onclick="activites(this)">
+					<a>基础设置
+						<!-- <i class="glyphicon glyphicon-remove-sign"></i> -->
+					</a>
+				</li>
+				<li onclick="activites(this)">
+					<a>奖项设置
+						<!-- <i class="glyphicon glyphicon-remove-sign"></i> -->
+					</a>
+				</li>
+				<li onclick="activites(this)">
+					<a>增加奖项
+						<!-- <i class="glyphicon glyphicon-remove-sign"></i> -->
+					</a>
+				</li>
+				
+			</ul>
+		</div>
+<!-- 		<div class="sub-navbar-right">
+			<a  class="cub-tool" href="">
+				<span class="glyphicon glyphicon-forward"></span>
+			</a>
+			<div class="dropdown display-ilb">
+				<a class="dropdown-toggle cub-tool" data-toggle="dropdown" href="">设置操作
+					<span class="caret"></span>
+				</a>
+				<ul class="dropdown-menu">
+	            	<li><a href="#">商品</a></li>
+	            	<li><a href="#">商品分类</a></li>
+	            	<li><a href="#">商品属性</a></li>
+	            </ul>
+				
+			</div>
+			<a class="cub-tool" href="">
+				<span class="glyphicon glyphicon-log-out"></span>
+				退出
+			</a>
+		</div> -->
+	</div>
+	<!-- sub-navbar end -->
+</div>
+<!-- container end -->
+<!-- tab1 -->
+<div class="container" id="tab1">
+	<div class="row block-mt active-set-wrap">
+		<div class="col-xs-4">
+			<div class="panel active-set-panel">
+				<div class="phone-preview">
+					<div class="biaoti">活动标题</div>
+					<iframe src="/assets/phone/biglucky_html/1index.html" frameborder="0" height="375px" width="99%"></iframe>	
+				</div>	
+			</div>
+		</div>
+		<div class="col-xs-8">
+			<div class="panel active-set-panel">
+				<div class="panel-body">
+					<form action="" class="form-horizontal	">
+						<div class="form-group">
+							<label class="col-xs-2 control-label text-right">活动标题</label>
+							<div class="col-xs-5">
+								<input class="form-control" type="text">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-xs-2 control-label text-right">开始时间</label>
+							<div class="col-xs-5">
+								<div class="input-group">
+									<input class="form-control text-gray" type="text" value="开始时间">
+									<span class="input-group-addon">
+										<span class="glyphicon glyphicon-calendar"></span>
+									</span>
+									<!-- onfocus时请将text-gray去掉此样式控制字体为浅色 -->
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-xs-2 control-label text-right">结束时间</label>
+							<div class="col-xs-5">
+								<div class="input-group">
+									<input class="form-control text-gray" type="text" value="结束时间">
+									<span class="input-group-addon">
+										<span class="glyphicon glyphicon-calendar"></span>
+									</span>
+									<!-- onfocus时请将text-gray去掉此样式控制字体为浅色 -->
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-xs-2 control-label text-right">活动说明</label>
+							<div class="col-xs-7">
+								<textarea class="form-control" name="" id="" rows="5"></textarea>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-xs-2 control-label text-right">背景图片</label>
+							<div class="col-xs-5">
+								<input class="form-control" type="text">
+								
+							</div>
+							<div class="col-xs-5">
+								<button class="btn btn-outline-warning btn-sm ui-file" type="button">
+									上传
+									<input type="file">
+								</button>
+								<button class="btn btn-outline-success btn-sm ml10">重置</button>
+							</div>
+						</div>
+					</form>
+					<div class="text-center mt20">
+						<button class="btn btn-info">预览</button>
+						<button class="btn btn-warning ml10">确定</button>
+						<button class="btn btn-normal ml10">取消</button>
+					</div>
+				</div>
+
+			</div>
+			
+		</div>
+	</div>
+</div>
+<!-- tab2 -->
+<div class="container" id="tab2">
+	<div class="text-right mt10	">
+		<form action="" class="form-inline">
+			<select class="form-control" name="" id="">
+				<option value="">奖项一</option>
+				<option value="">奖项一</option>
+				<option value="">奖项一</option>
+			</select>
+		</form>
+		
+	</div>
+	<div class="panel block-mt ">
+		<div class="prize-set-wrap">
+			<table>
+				<tr>
+					<th class="text-top">
+						<div class="prize-list-wrap">
+							<ul class="prize-list">
+								<li class="prize-name active">
+									<a href="">积分大兑换</a>
+								</li>
+								<li class="prize-name">
+									<a href="">积分大兑换</a>
+								</li>
+								<li class="prize-name">
+									<a href="">积分满减会员进</a>
+								</li>
+								<li class="prize-name">
+									<a href="">庆祝中国电信五周年</a>
+								</li>
+								<li class="prize-name">
+									<a href="">积分大兑换</a>
+								</li>
+								
+							</ul>
+						</div>
+					</th>
+					<td class="text-top">
+						<div class="panel-body">
+							<form action="" class="form-horizontal">
+								<div class="form-group">
+									<label class="col-xs-1 control-label text-right">奖项类型</label>
+									<div class="col-xs-5">
+										<input class="form-control" type="text">
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-xs-1 control-label text-right">奖项名称</label>
+									<div class="col-xs-5">
+										<input class="form-control" type="text">
+									</div>
+									<div class="col-xs-5">
+										<button class="btn btn-outline-warning btn-sm">选择</button>
+										<span class="lh30 text-gray">
+											<span class="glyphicon glyphicon-info-sign"></span>
+											活动发布后将无法更改产品
+										</span>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-xs-1 control-label text-right">中奖率</label>
+									<div class="col-xs-5">
+										<div class="input-group">
+											<input class="form-control text-gray" type="text" value="中间率">
+											<span class="input-group-addon">%</span>
+											<!-- onfocus时请将text-gray去掉此样式控制字体为浅色 -->
+										</div>
+									</div>
+									<div class="col-xs-6">
+										<span class="lh30 text-gray">
+											<span class="glyphicon glyphicon-info-sign"></span>
+											数值在0-100间
+										</span>
+									</div>
+								</div>
+							</form>
+						</div>
+					</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+
+
+	<div class="block-mt text-center">
+		<button class="btn btn-warning">确定</button>
+		<button class="btn btn-normal ml10">取消</button>
+	</div>
+		</div>
+<!-- tab2 end -->
+<!-- tab3  -->
+<div class="container" id="tab3">
+	<div class="panel block-mt">
+		<div class="panel-heading">
+			<div class="panel-title">新增产品类别</div>
+		</div>
+		<div class="panel-body">
+			<form action="" class="form-horizontal">
+				<div class="form-group">
+					<label class="col-xs-1 control-label text-right">奖品名称</label>
+					<div class="col-xs-4">
+						<input class="form-control" type="text">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-xs-1 control-label text-right">奖品大类</label>
+					<div class="col-xs-4">
+						<select class="form-control">
+							<option value="">积分奖品</option>
+							<option value="">积分奖品2</option>
+							<option value="">积分奖品3</option>
+						</select>
+					</div>
+				</div>	
+				<div class="form-group">
+					<label class="col-xs-1 control-label text-right">积分值</label>
+					<div class="col-xs-4">
+						<div class="input-group">
+							<input class="form-control text-gray" type="text" value="请输入积分值">
+							<span class="input-group-addon">%</span>
+							<!-- onfocus时请将text-gray去掉此样式控制字体为浅色 -->
+						</div>
+						
+					</div>
+					<div class="col-xs-4 text-gray lh30">
+						<span class="glyphicon glyphicon-info-sign"></span> 数值在0-100间
+					</div>
+				</div>	
+				<div class="form-group">
+					<label class="col-xs-1 control-label text-right">奖品图标</label>
+					<div class="col-xs-4">
+						<input class="form-control text-gray" type="text" value="请选择图标文件">
+						<!-- onfocus时请将text-gray去掉 -->
+					</div>
+
+					<div class="col-xs-4">
+						<button class="btn btn-outline-warning btn-sm ui-file" type="button">
+							上传
+							<input type="file">
+						</button>
+						<button class="btn btn-outline-success btn-sm ml10" type="button">重置</button>
+					</div>
+				</div>	
+			</form>
+		</div>
+		
+	</div>
+	<div class="block-mt text-center">
+		<button class="btn btn-warning">保存</button>
+		<button class="btn btn-normal ml10">返回</button>
+	</div>
+</div>
+<!-- tab3 end -->

@@ -3,5 +3,61 @@
 			<span class="ico-header-back"></span>
 		</a>
 		<h1>技术服务</h1>
-		<button class="header-right"><span class="ico-scan"></span></button>
+	</div>
+	<!-- header end -->
+	<div class="container has-top">
+		<div class="search-wrap">
+			<input type="text" class="search-inp" placeholder="请输入要搜索的内容">
+		</div>
+<!-- 		<div class="data-list img-list">
+			<a class="data-item" href="">
+				<div class="flex-fluid1">
+					<div class="adapt-img">
+						<img src="images/img-technology1.png" alt="">
+					</div>
+				</div>
+				<div class="flex-fluid2">
+					<div class="adapt-img">
+						<img src="images/img-technology2.png" alt="">
+					</div>
+				</div>
+			</a>
+			<a class="data-item" href="">
+				<div class="flex-fluid1">
+					<div class="adapt-img">
+						<img src="images/img-technology1.png" alt="">
+					</div>
+				</div>
+				<div class="flex-fluid2">
+					<div class="adapt-img">
+						<img src="images/img-technology2.png" alt="">
+					</div>
+				</div>
+			</a>
+			<a class="data-item" href="">
+				<div class="flex-fluid1">
+					<div class="adapt-img">
+						<img src="images/img-technology3.png" alt="">
+					</div>
+				</div>
+				<div class="flex-fluid2">
+					<div class="adapt-img">
+						<img src="images/img-technology2.png" alt="">
+					</div>
+				</div>
+			</a>
+
+		</div> -->
+		<div class="data-list img-list">
+		  	<% @tech_servs.each do |tech_serv| %>
+		    <a class="data-item" href="<%= phone_tech_serv_path(tech_serv) %>">
+				<div class="flex-fluid">
+					<div class="adapt-img"> 
+						<img src="<%= tech_serv.avatar %>" alt="">
+					</div> 
+				</div>
+			</a>
+   		<% end %>
+			</div> 
+		<div class="text-center block-mt">加载完成</div>
 	</div>

@@ -1,0 +1,7 @@
+#tab2, #tab3 {
+	display: none;
+}
+
+.sub-navbar-nav li {
+	cursor: pointer;
+}

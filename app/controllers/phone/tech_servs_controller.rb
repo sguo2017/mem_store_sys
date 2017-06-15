@@ -5,6 +5,7 @@ class Phone::TechServsController < ApplicationController
   # GET /phone/tech_servs
   # GET /phone/tech_servs.json
   def index
+    @tech_servs = TechServ.page(params[:page]).per(10)
   end
 
   # GET /phone/tech_servs/1

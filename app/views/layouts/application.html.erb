@@ -32,7 +32,7 @@
       </div>
     <div class="collapse navbar-collapse" id="my-collapse">
         <ul class="nav navbar-nav navbar-right">
-            <li class="active dropdown">
+            <li class="active dropdown" onclick="navbar_active(this)">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                   商品
                   <span class="caret"></span>
@@ -42,7 +42,7 @@
                   <li><%= link_to "商品分类", admin_goods_catalogs_path  %></li>
                 </ul>
             </li>
-            <li class="dropdown">
+            <li class="dropdown" onclick="navbar_active(this)">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                   会员
                   <span class="caret"></span>
@@ -53,8 +53,8 @@
                     <li><%= link_to "会员分组", admin_mem_groups_path  %></li>
                 </ul>
             </li>
-           <li><%= link_to "门店", admin_stores_path  %></li>
-           <li class="dropdown">
+           <li onclick="navbar_active(this)"><%= link_to "门店", admin_stores_path  %></li>
+           <li class="dropdown" onclick="navbar_active(this)">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                   积分
                   <span class="caret"></span>
@@ -64,10 +64,10 @@
                     <li><%= link_to "会员积分历史", admin_score_histories_path  %></li>
                 </ul>
             </li>
-            <li><%= link_to "技术服务", admin_tech_servs_path  %></li>
+            <li onclick="navbar_active(this)"><%= link_to "技术服务", admin_tech_servs_path  %></li>
 
-            <li><%= link_to "营销活动配置", admin_activities_path  %></li>
-<!--             <li class="dropdown">
+            <li onclick="navbar_active(this)"><%= link_to "营销活动配置", admin_activities_path  %></li>
+            <li class="dropdown" onclick="navbar_active(this)">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                   前端
                   <span class="caret"></span>
@@ -82,7 +82,7 @@
                     <li><%= link_to "积分查询", phone_score_queries_path  %></li>
                     <li><%= link_to "积分兑换", phone_bonus_changes_path  %></li>
                 </ul>
-            </li> -->
+            </li>
         </ul>
     </div>
   </div>

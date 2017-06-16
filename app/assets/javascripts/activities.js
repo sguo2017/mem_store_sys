@@ -30,5 +30,16 @@ function activites_tabs_init(){
 
 $(document).ready(function(){
 	activites_tabs_init()
+	//navbar_init();
 	//activites();
 })
+
+
+// nav active 
+function navbar_active (tid){
+		var me = tid;
+	$(".navbar-nav li").each(function(){
+			$(this).removeClass("active")
+		})
+		$(me).addClass("active");
+}

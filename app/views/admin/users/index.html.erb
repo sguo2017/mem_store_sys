@@ -24,6 +24,10 @@
         <td><%= user.score_total %></td>
         <td><%= user.created_at.strftime('%Y-%m-%d %H:%M:%S') %></td>
         <td>
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-default btn-xs" data-toggle="modal" data-target="#modal-users" data-mem_group=<%= user.mem_group_id %> data-user=<%= user.id %> >
+          切换分组
+        </button>
           <%= link_to t('.show', :default => t("helpers.links.show")),
                       admin_user_path(user), :class => 'btn btn-default btn-xs' %>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
@@ -43,3 +47,8 @@
 <%= link_to t('.new', :default => t("helpers.links.new")),
             new_admin_user_path,
             :class => 'btn btn-primary' %>
+
+
+        <!--  切换分组 modal -->
+        <%= render :partial => 'modal_users' %>
+        <!--  切换分组 modal end -->

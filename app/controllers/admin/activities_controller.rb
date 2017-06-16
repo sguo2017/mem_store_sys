@@ -4,11 +4,13 @@ class Admin::ActivitiesController < ApplicationController
   # GET /admin/activities
   # GET /admin/activities.json
   def index
+    @show_page = Const::ACTIVITY_SHOW_PAGE[:cfg]    
   end
 
   # GET /admin/activities/1
   # GET /admin/activities/1.json
   def show
+
   end
 
   # GET /admin/activities/new

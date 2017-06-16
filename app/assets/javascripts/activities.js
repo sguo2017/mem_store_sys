@@ -29,7 +29,7 @@ function activites_tabs_init(){
 }
 
 $(document).ready(function(){
-	activites_tabs_init()
+	//activites_tabs_init()
 	//navbar_init();
 	//activites();
 })

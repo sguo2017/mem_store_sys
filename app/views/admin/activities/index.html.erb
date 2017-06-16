@@ -7,17 +7,18 @@
 		</div> -->
 		<div class="sub-navbar-nav-wrap">
 			<ul class="sub-navbar-nav">
-				<li class="active" onclick="activites(this)">
+
+				<li <% if @show_page == Const::ACTIVITY_SHOW_PAGE[:base] %> class="active" <% end %> onclick="activites(this)">
 					<a>基础设置
 						<!-- <i class="glyphicon glyphicon-remove-sign"></i> -->
 					</a>
 				</li>
-				<li onclick="activites(this)">
+				<li <% if @show_page == Const::ACTIVITY_SHOW_PAGE[:award]%> class="active" <% end %> onclick="activites(this)">
 					<a>奖项设置
 						<!-- <i class="glyphicon glyphicon-remove-sign"></i> -->
 					</a>
 				</li>
-				<li onclick="activites(this)">
+				<li <% if @show_page == Const::ACTIVITY_SHOW_PAGE[:cfg]%> class="active" <% end %> onclick="activites(this)">
 					<a>增加奖项
 						<!-- <i class="glyphicon glyphicon-remove-sign"></i> -->
 					</a>
@@ -50,7 +51,7 @@
 </div>
 <!-- container end -->
 <!-- tab1 -->
-<div class="container" id="tab1">
+<div class="container" id="tab1" <% if @show_page == Const::ACTIVITY_SHOW_PAGE[:base]%> f=1 style="display: block;" <% else %> style="display: none;" <% end %> >
 	<div class="row block-mt active-set-wrap">
 		<div class="col-xs-4">
 			<div class="panel active-set-panel">
@@ -128,7 +129,7 @@
 	</div>
 </div>
 <!-- tab2 -->
-<div class="container" id="tab2">
+<div class="container" id="tab2" <% if @show_page == Const::ACTIVITY_SHOW_PAGE[:award]%> f=1 style="display: block;" <% else %> style="display: none;" <% end %> >
 	<div class="text-right mt10	">
 		<form action="" class="form-inline">
 			<select class="form-control" name="" id="">
@@ -219,7 +220,7 @@
 		</div>
 <!-- tab2 end -->
 <!-- tab3  -->
-<div class="container" id="tab3">
+<div class="container" id="tab3" <% if @show_page == Const::ACTIVITY_SHOW_PAGE[:cfg]%> style="display: block;" <% else %> style="display: none;" <% end %> >
 	<div class="panel block-mt">
 		<div class="panel-heading">
 			<div class="panel-title">新增产品类别</div>

@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  catalog: MyString
+  rate: 1
+  activity_award_cfg_id: 1
+  activity_base_id: 1
+
+two:
+  catalog: MyString
+  rate: 1
+  activity_award_cfg_id: 1
+  activity_base_id: 1

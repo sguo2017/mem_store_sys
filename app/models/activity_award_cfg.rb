@@ -1,0 +1,2 @@
+class ActivityAwardCfg < ApplicationRecord
+end

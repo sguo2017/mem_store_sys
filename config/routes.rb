@@ -1,22 +1,8 @@
 Rails.application.routes.draw do
-  namespace :admin do
-    resources :activities
-  end
-  namespace :phone do
-    resources :tech_servs
-  end
-  namespace :phone do
-    resources :activities
-  end
-  namespace :admin do
-    resources :score_histories
-  end
-  namespace :admin do
-    resources :users
-  end
   get 'welcome/index'
 
   namespace :phone do
+    resources :activities
     resources :bonus_changes
     resources :score_queries
     resources :city_selections
@@ -25,9 +11,13 @@ Rails.application.routes.draw do
     resources :goods
     resources :profiles
     resources :homepages
+    resources :tech_servs
   end
 
   namespace :admin do
+    resources :activities
+    resources :activity_awards
+    resources :activity_award_cfgs
     resources :bonus_changes
     resources :mem_groups 
     resources :mem_levels 
@@ -35,12 +25,14 @@ Rails.application.routes.draw do
     resources :goods
     resources :tech_servs
     resources :goods_catalogs
+    resources :users
+    resources :score_histories
   end
 
   mount Ckeditor::Engine => '/ckeditor'
 
   devise_for :users
   
-   root 'welcome#index'
+  root 'welcome#index'
 
 end

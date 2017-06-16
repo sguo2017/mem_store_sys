@@ -4,7 +4,12 @@ class Admin::ActivitiesController < ApplicationController
   # GET /admin/activities
   # GET /admin/activities.json
   def index
-    @show_page = Const::ACTIVITY_SHOW_PAGE[:cfg]    
+    @show_page = Const::ACTIVITY_SHOW_PAGE[:base] 
+    unless params[:show_page].blank?
+        @show_page = params[:show_page]   
+    end   
+
+    @activity = Activity.new
   end
 
   # GET /admin/activities/1
@@ -15,25 +20,27 @@ class Admin::ActivitiesController < ApplicationController
 
   # GET /admin/activities/new
   def new
-    @activity = Activity.new
+    @activity_award = ActivityAward.new
   end
 
   # GET /admin/activities/1/edit
   def edit
+
   end
 
   # POST /admin/activities
   # POST /admin/activities.json
   def create
-    @activity = Activity.new(activity_params)
+    @activity_award_cfg = ActivityAwardCfg.new(activity_award_cfg_params) 
+
+
 
     respond_to do |format|
-      if @activity.save
-        format.html { redirect_to [:admin, @activity], notice: 'Activity was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @activity }
+      if @activity_award_cfg.save
+        @activity = Activity.new
+        format.html { redirect_to admin_activities_path(show_page: Const::ACTIVITY_SHOW_PAGE[:award]) }
       else
-        format.html { render action: 'new' }
-        format.json { render json: @activity.errors, status: :unprocessable_entity }
+
       end
     end
   end
@@ -41,35 +48,27 @@ class Admin::ActivitiesController < ApplicationController
   # PATCH/PUT /admin/activities/1
   # PATCH/PUT /admin/activities/1.json
   def update
-    respond_to do |format|
-      if @activity.update(activity_params)
-        format.html { redirect_to [:admin, @activity], notice: 'Activity was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: 'edit' }
-        format.json { render json: @activity.errors, status: :unprocessable_entity }
-      end
-    end
+
+
   end
 
   # DELETE /admin/activities/1
   # DELETE /admin/activities/1.json
   def destroy
-    @activity.destroy
-    respond_to do |format|
-      format.html { redirect_to admin_activities_url, notice: 'Activity was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+
+
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_activity
       @activity = Activity.find(params[:id])
+      @activity_award = ActivityAward.find(params[:id])
+      @activity_award_cfg = ActivityAwardCfg.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
-    def activity_params
-      params[:activity]
+    def activity_award_cfg_params
+      params.require(:activity_award_cfg).permit(:name, :level_I, :score)
     end
 end

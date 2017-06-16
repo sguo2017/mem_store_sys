@@ -1,2 +1,0 @@
-class ActivityBase < ApplicationRecord
-end

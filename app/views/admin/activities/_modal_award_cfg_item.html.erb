@@ -1,0 +1,35 @@
+<div class="modal fade" id="modal-award-cfg-item" tabindex="-1" role="dialog" aria-labelledby="modal-award-cfg-item-label" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h4 class="modal-title" id="modal-users-title">选择奖项</h4>
+      </div>
+      <div class="modal-body">
+        <table class="table table-bordered">
+          <thead>
+          <tr>
+            <th>ID</th>
+            <th>名称</th>
+            <th>操作</th>
+          </tr>
+          </thead>
+          <tbody>
+		    <% @activity_award_cfg = ActivityAwardCfg.all%>
+            <% @activity_award_cfg.each do |cfg| %>
+            <tr class="select" data-user_id="<%= cfg.id %>" >
+              <td><%= cfg.id %></td>
+              <td><%= cfg.name %></td>
+              <td><a onclick="selectAcceptCfgs(<%= cfg.name %>,this,false)" class="btn btn-primary btn-xs" href="javascript:void(0)">选择</a></td>
+            </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" onclick = "clearValue('#_sys_awardaccept_cfgs')">取消</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal">确定</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

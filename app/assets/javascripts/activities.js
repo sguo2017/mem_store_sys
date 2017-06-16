@@ -43,3 +43,30 @@ function navbar_active (tid){
 		})
 		$(me).addClass("active");
 }
+
+function selectAcceptCfgs(cfg_id,obj,isCancle,cfg_input_field='#_sys_awardaccept_cfgs'){
+	if(!isCancle){
+		
+		$(cfg_input_field).val(cfg_id.toString());
+		
+		$(obj).html('取消');
+		$(obj).removeClass('btn-primary');
+		$(obj).addClass('btn-danger');
+		$(obj).removeAttr('onclick');
+		$(obj).unbind();
+		$(obj).bind('click',function(){selectAcceptCfgs(cfg_id,obj,true);});
+	}else{
+		$(cfg_input_field).val();
+		
+		$(obj).html('选择');
+		$(obj).removeClass('btn-danger');
+		$(obj).addClass('btn-primary');
+		$(obj).removeAttr('onclick');
+		$(obj).unbind();
+		$(obj).bind('click',function(){selectAcceptCfgs(cfg_id,obj,false);});
+	}
+}
+
+function clearValue(identify){
+	$(identify).val('');
+}

@@ -8,44 +8,18 @@
 		<div class="sub-navbar-nav-wrap">
 			<ul class="sub-navbar-nav">
 
-				<li <% if @show_page == Const::ACTIVITY_SHOW_PAGE[:base] %> class="active" <% end %> onclick="activites(this)">
-					<a>基础设置
-						<!-- <i class="glyphicon glyphicon-remove-sign"></i> -->
-					</a>
+				<li <% if @show_page == Const::ACTIVITY_SHOW_PAGE[:base] %> class="active" <% end %>>
+					<%= link_to "基础设置", admin_activities_path(show_page: Const::ACTIVITY_SHOW_PAGE[:base])  %>
 				</li>
-				<li <% if @show_page == Const::ACTIVITY_SHOW_PAGE[:award]%> class="active" <% end %> onclick="activites(this)">
-					<a>奖项设置
-						<!-- <i class="glyphicon glyphicon-remove-sign"></i> -->
-					</a>
+				<li <% if @show_page == Const::ACTIVITY_SHOW_PAGE[:award]%> class="active" <% end %> >
+					<%= link_to "奖项设置", admin_activities_path(show_page: Const::ACTIVITY_SHOW_PAGE[:award])  %>
 				</li>
-				<li <% if @show_page == Const::ACTIVITY_SHOW_PAGE[:cfg]%> class="active" <% end %> onclick="activites(this)">
-					<a>增加奖项
-						<!-- <i class="glyphicon glyphicon-remove-sign"></i> -->
-					</a>
+				<li <% if @show_page == Const::ACTIVITY_SHOW_PAGE[:cfg]%> class="active" <% end %> >
+					<%= link_to "增加奖项", admin_activities_path(show_page: Const::ACTIVITY_SHOW_PAGE[:cfg])  %>
 				</li>
 				
 			</ul>
 		</div>
-<!-- 		<div class="sub-navbar-right">
-			<a  class="cub-tool" href="">
-				<span class="glyphicon glyphicon-forward"></span>
-			</a>
-			<div class="dropdown display-ilb">
-				<a class="dropdown-toggle cub-tool" data-toggle="dropdown" href="">设置操作
-					<span class="caret"></span>
-				</a>
-				<ul class="dropdown-menu">
-	            	<li><a href="#">商品</a></li>
-	            	<li><a href="#">商品分类</a></li>
-	            	<li><a href="#">商品属性</a></li>
-	            </ul>
-				
-			</div>
-			<a class="cub-tool" href="">
-				<span class="glyphicon glyphicon-log-out"></span>
-				退出
-			</a>
-		</div> -->
 	</div>
 	<!-- sub-navbar end -->
 </div>
@@ -132,10 +106,10 @@
 <div class="container" id="tab2" <% if @show_page == Const::ACTIVITY_SHOW_PAGE[:award]%> f=1 style="display: block;" <% else %> style="display: none;" <% end %> >
 	<div class="text-right mt10	">
 		<form action="" class="form-inline">
-			<select class="form-control" name="" id="">
-				<option value="">奖项一</option>
-				<option value="">奖项一</option>
-				<option value="">奖项一</option>
+			<select class="form-control" name="award_count" id="award_count">
+				<% ['六','五','四','三','二','一'].each_with_index  do |val, index| %>
+					<option value="<%= index %>">奖项<%= val %></option>
+				<% end %>
 			</select>
 		</form>
 		
@@ -147,22 +121,11 @@
 					<th class="text-top">
 						<div class="prize-list-wrap">
 							<ul class="prize-list">
-								<li class="prize-name active">
-									<a href="">积分大兑换</a>
-								</li>
-								<li class="prize-name">
-									<a href="">积分大兑换</a>
-								</li>
-								<li class="prize-name">
-									<a href="">积分满减会员进</a>
-								</li>
-								<li class="prize-name">
-									<a href="">庆祝中国电信五周年</a>
-								</li>
-								<li class="prize-name">
-									<a href="">积分大兑换</a>
-								</li>
-								
+								<% ['一','二','三','四','五','六'].each_with_index  do |val, index| %>
+									<li <% if index==0 %> class="prize-name active" <% else %> class="prize-name " <% end %> > 
+										<a href=""><%= val %>等奖</a>
+									</li>
+								<% end %>					
 							</ul>
 						</div>
 					</th>
@@ -178,10 +141,9 @@
 								<div class="form-group">
 									<label class="col-xs-1 control-label text-right">奖项名称</label>
 									<div class="col-xs-5">
-										<input class="form-control" type="text">
+										<input class="form-control" id="_sys_awardaccept_cfgs" type="text"  placeholder="选择" data-toggle="modal" data-target="#modal-award-cfg-item">
 									</div>
 									<div class="col-xs-5">
-										<button class="btn btn-outline-warning btn-sm">选择</button>
 										<span class="lh30 text-gray">
 											<span class="glyphicon glyphicon-info-sign"></span>
 											活动发布后将无法更改产品
@@ -192,7 +154,7 @@
 									<label class="col-xs-1 control-label text-right">中奖率</label>
 									<div class="col-xs-5">
 										<div class="input-group">
-											<input class="form-control text-gray" type="text" value="中间率">
+											<input class="form-control text-gray" type="text" placeholder="中奖率">
 											<span class="input-group-addon">%</span>
 											<!-- onfocus时请将text-gray去掉此样式控制字体为浅色 -->
 										</div>
@@ -220,6 +182,7 @@
 		</div>
 <!-- tab2 end -->
 <!-- tab3  -->
+<%= form_for [:admin, @activity], :html => { :class => "form-horizontal activity" } do |f| %>
 <div class="container" id="tab3" <% if @show_page == Const::ACTIVITY_SHOW_PAGE[:cfg]%> style="display: block;" <% else %> style="display: none;" <% end %> >
 	<div class="panel block-mt">
 		<div class="panel-heading">
@@ -230,13 +193,13 @@
 				<div class="form-group">
 					<label class="col-xs-1 control-label text-right">奖品名称</label>
 					<div class="col-xs-4">
-						<input class="form-control" type="text">
+						<input class="form-control" type="text" name="activity_award_cfg[name]" id="activity_award_cfg_code">
 					</div>
 				</div>
 				<div class="form-group">
 					<label class="col-xs-1 control-label text-right">奖品大类</label>
 					<div class="col-xs-4">
-						<select class="form-control">
+						<select class="form-control" name="activity_award_cfg[level_I]" id="activity_award_cfg_level_I">
 							<option value="">积分奖品</option>
 							<option value="">积分奖品2</option>
 							<option value="">积分奖品3</option>
@@ -247,7 +210,7 @@
 					<label class="col-xs-1 control-label text-right">积分值</label>
 					<div class="col-xs-4">
 						<div class="input-group">
-							<input class="form-control text-gray" type="text" value="请输入积分值">
+							<input class="form-control text-gray" type="text" placeholder="请输入积分值" name="activity_award_cfg[score]" id="activity_award_cfg_score">
 							<span class="input-group-addon">%</span>
 							<!-- onfocus时请将text-gray去掉此样式控制字体为浅色 -->
 						</div>
@@ -260,7 +223,7 @@
 				<div class="form-group">
 					<label class="col-xs-1 control-label text-right">奖品图标</label>
 					<div class="col-xs-4">
-						<input class="form-control text-gray" type="text" value="请选择图标文件">
+						<input class="form-control text-gray" type="text" placeholder="请选择图标文件">
 						<!-- onfocus时请将text-gray去掉 -->
 					</div>
 
@@ -277,8 +240,11 @@
 		
 	</div>
 	<div class="block-mt text-center">
-		<button class="btn btn-warning">保存</button>
+		<input type="submit" name="commit" value="保存" class="btn btn-primary" data-disable-with="保存">
 		<button class="btn btn-normal ml10">返回</button>
 	</div>
 </div>
+<% end %>
 <!-- tab3 end -->
+
+<%= render :partial => 'modal_award_cfg_item' %>

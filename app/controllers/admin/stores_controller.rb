@@ -3,25 +3,24 @@ class Admin::StoresController < AdminController
 
   # GET /admin/stores
   # GET /admin/stores.json
-    def index
-      @name = params[:name]
+  def index
+    @name = params[:name]
     if @name.blank? 
       @stores = Store.page(params[:page]).per(10)
     else
-        @stores = Store.where('name LIKE ? ', '%'+@name+'%').order("created_at DESC").page(params[:page]).per(10)
-        
+      @stores = Store.where('name LIKE ? ', '%'+@name+'%').order("created_at DESC").page(params[:page]).per(10)
     end
   end
 
   # GET /admin/stores/1
   # GET /admin/stores/1.json
-   def show 
+  def show 
     @store=Store.find(params[:id])
     if @store.qrcode.blank?
-      qr = RQRCode::QRCode.new(Const::STORES_SHOW_ADDR+'/admin/stores/'+@store.id.to_s, :size => 8, :level => :h )
+      qr = RQRCode::QRCode.new(Const::STORES_SHOW_ADDR+'/phone/mem_activations?store_id='+@store.id.to_s, :size => 8, :level => :h )
       png = qr.to_img                      
-      png.resize(90, 90).save(Rails.root.to_s+"/public/uploads/store/qrcode/qrcode_"+@store.id.to_s+".png")
-      @store.qrcode = "/uploads/store/qrcode/qrcode_"+@store.id.to_s+".png"
+      png.resize(90, 90).save(Rails.root.to_s+"/public/uploads/store/mem_activation/qrcode_"+@store.id.to_s+".png")
+      @store.qrcode = "/uploads/store/mem_activation/qrcode_"+@store.id.to_s+".png"
       @store.save
     end
   end

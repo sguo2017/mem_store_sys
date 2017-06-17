@@ -7,7 +7,11 @@ class Phone::HomepagesController < PhoneController
   # GET /phone/homepages.json
   def index
     @user = current_user 
-     
+
+    qr = RQRCode::QRCode.new(Const::STORES_SHOW_ADDR+'/phone/mem_activations?referee_id='+@user.id.to_s, :size => 8, :level => :h )
+    png = qr.to_img                      
+    png.resize(172, 172).save(Rails.root.to_s+"/public/uploads/user/mem_activation/user2code_"+@user.id.to_s+".png")
+
   end
 
   # GET /phone/homepages/1

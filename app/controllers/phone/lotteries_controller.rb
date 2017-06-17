@@ -28,11 +28,13 @@ class Phone::LotteriesController < ApplicationController
 
     respond_to do |format|
       if @lottery.save
-        format.html { redirect_to [:phone, @lottery], notice: 'Lottery was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @lottery }
+        format.json { 
+          render json: {item: 8} 
+        }
       else
-        format.html { render action: 'new' }
-        format.json { render json: @lottery.errors, status: :unprocessable_entity }
+        format.json { 
+          render json: {item: 2} 
+        }
       end
     end
   end

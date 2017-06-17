@@ -5,8 +5,10 @@ class Phone::MemActivationsController < ApplicationController
   # GET /phone/mem_activations
   # GET /phone/mem_activations.json
   def index
-    
-  end
+    @user = User.new
+    @referee_id = params[:referee_id]
+    @store_id = params[:store_id]
+ end
 
   # GET /phone/mem_activations/1
   # GET /phone/mem_activations/1.json
@@ -15,7 +17,7 @@ class Phone::MemActivationsController < ApplicationController
 
   # GET /phone/mem_activations/new
   def new
-    @mem_activation = MemActivation.new
+    #@mem_activation = MemActivation.new
   end
 
   # GET /phone/mem_activations/1/edit
@@ -25,17 +27,41 @@ class Phone::MemActivationsController < ApplicationController
   # POST /phone/mem_activations
   # POST /phone/mem_activations.json
   def create
-    @mem_activation = MemActivation.new(mem_activation_params)
-
+    # @phone_num = params[:phone_num]
+    @sms_content = params[:sms_content]
     respond_to do |format|
-      if @mem_activation.save
-        format.html { redirect_to [:phone, @mem_activation], notice: 'Mem activation was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @mem_activation }
-      else
-        format.html { render action: 'new' }
-        format.json { render json: @mem_activation.errors, status: :unprocessable_entity }
-      end
+    sms = SmsSend.where("TIMESTAMPDIFF(MINUTE,created_at ,now())<#{Const::SMS_TIME_LIMIT} and sms_type='code' and recv_num =?", mem_activation_params[:phone_num]).first
+      if sms.blank?
+        @msg = "验证码不存在"
+        format.html { redirect_to [:phone, 'mem_activations'], notice: @msg }
+        puts  @msg
+      else 
+        if sms.send_content != @sms_content
+          @msg = "验证码错误"
+          format.html { redirect_to [:phone, 'mem_activations'], notice: @msg }
+          puts  @msg
+         #return render json: {status: :created, msg: @msg}
+       else
+          @user = User.new(mem_activation_params)
+          @user.admin = 'false'
+          @user.email = mem_activation_params[:phone_num] + '@qq.com'
+          @user.mem_group_id="1"
+          @user.password='123456'
+          @user.password_confirmation='123456'
+        if @user.save
+          sign_in("user", @user)
+          @msg = "保存成功"
+          puts  @msg
+          format.html { redirect_to [:phone, 'homepages'] }
+       else
+        @msg = "保存失败"
+        puts  @msg
+        format.html { redirect_to [:phone, 'mem_activations'],notice: '保存失败.' }
+       end
+     end
+      end  
     end
+
   end
 
   # PATCH/PUT /phone/mem_activations/1
@@ -70,6 +96,7 @@ class Phone::MemActivationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def mem_activation_params
-      params[:mem_activation]
+      # params[:mem_activation]
+      params.require(:user).permit(:phone_num, :referee_id, :store_id)
     end
 end

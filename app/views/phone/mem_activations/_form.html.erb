@@ -1,0 +1,33 @@
+
+<%= form_for(phone_mem_activations_path) do |f| %> 
+
+
+  <div class="container has-top">
+    <div class="menber-card-wrap">
+      <img class="card-img" src="/assets/phone/images/menber-card.png" alt="">
+    </div>
+  
+
+    <ul class="data-list block-mt">
+      <li class="data-item">
+      <%= text_field_tag "user[phone_num]", nil, class: "flex-fluid", placeholder: "请输入手机号码", id: "recv_num" %>
+     
+      </li>
+        <%=f.error_span(:phone_num) %>
+    
+      <li class="data-item">
+      <%= text_field_tag "sms_content", nil, class: "flex-fluid", placeholder: "123456" %>
+       <a id="getSmsCode">获取随机码</a>
+      </li>
+       <%=f.error_span(:sms_content) %>
+    </ul>
+   <%= bootstrap_flash %>
+   <%= hidden_field_tag 'user[referee_id]', @referee_id %>
+   <%= hidden_field_tag 'user[store_id]', @store_id %>
+    <div class="text-center block-mt bottom-btn" id="submit_activation">
+       <%= submit_tag "激活会员卡", class: 'btn-primary flex-fluid btn-size-lg' %>
+      <!-- <button class="btn-primary flex-fluid btn-size-lg">激活会员卡</button> -->
+    </div>  
+  </div>
+ <% end %>
+

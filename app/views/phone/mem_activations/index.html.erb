@@ -6,20 +6,4 @@
 		<button class="header-right"><span class="ico-scan"></span></button>
 	</div>
 	<!-- header end -->
-	<div class="container has-top">
-		<div class="menber-card-wrap">
-			<img class="card-img" src="/assets/phone/images/menber-card.png" alt="">
-		</div>
-		<ul class="data-list block-mt">
-			<li class="data-item">
-				<input id="recv_num" class="flex-fluid" type="text" placeholder="请输入手机号码">
-			</li>
-			<li class="data-item">
-				<input class="flex-fluid" type="text" placeholder="123456">
-				<a id="getSmsCode">获取随机码</a>
-			</li>
-		</ul>
-		<div class="text-center block-mt bottom-btn">
-			<button class="btn-primary flex-fluid btn-size-lg">激活会员卡</button>
-		</div>	
-	</div>
+	<%= render 'form' %>

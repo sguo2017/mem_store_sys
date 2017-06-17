@@ -13,6 +13,7 @@ Rails.application.routes.draw do
     resources :homepages
     resources :tech_servs
     resources :sms_sends
+    resources :lotteries
   end
 
   namespace :admin do

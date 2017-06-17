@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  activity_id: 1
+  activity_name: MyString
+  winning: MyString
+  activity_award_id: 1
+  activity_award_cfg_id: 1
+  activity_award_cfg_name: MyString
+  user_id: 1
+
+two:
+  activity_id: 1
+  activity_name: MyString
+  winning: MyString
+  activity_award_id: 1
+  activity_award_cfg_id: 1
+  activity_award_cfg_name: MyString
+  user_id: 1

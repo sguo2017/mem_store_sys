@@ -7,6 +7,7 @@ class Phone::HomepagesController < PhoneController
   # GET /phone/homepages.json
   def index
     @user = current_user 
+     
   end
 
   # GET /phone/homepages/1

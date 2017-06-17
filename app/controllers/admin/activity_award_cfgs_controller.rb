@@ -71,6 +71,6 @@ class Admin::ActivityAwardCfgsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def activity_award_cfg_params
-      params.require(:activity_award_cfg).permit(:name, :level_I, :score)
+      params.require(:activity_award_cfg).permit(:name, :level_I, :score, :avatar)
     end
 end

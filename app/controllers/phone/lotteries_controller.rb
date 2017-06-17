@@ -24,22 +24,36 @@ class Phone::LotteriesController < ApplicationController
 
   # POST /phone/lotteries
   # POST /phone/lotteries.json
-  def create
-    @lottery = Lottery.new(lottery_params)
+  def create    
+    @user = current_user 
+    #抽奖次数
+    has_draw = @user.lotteries.where("created_at >= ?", Time.now.beginning_of_day).size
+    @avaliable = Const::CHANCE_DRAE_COUNT.to_i - has_draw 
+    if @avaliable < 1 
+      return render json: {status: "-1", msg: Const::LOTTERY_MSG[:no_chance] }
+    end
 
+    @activity = Activity.new
+    @lottery = Lottery.new(lottery_params)
+    #中奖名次
+    @item = -1
+    #
+    @activity_id = params[:activity_id]  
+    unless @activity_id.blank?
+      @activity = Activity.find(@activity_id)
+    end
     #中奖算法
 
-
-
+    @item = rand(@activity.award_count)   
 
     respond_to do |format|
       if @lottery.save
         format.json { 
-          render json: {item: 8} 
+          render json: {status: "0", item: @item} 
         }
       else
         format.json { 
-          render json: {item: 2} 
+          render json: {status: "-2", msg: Const::LOTTERY_MSG[:unknown]} 
         }
       end
     end

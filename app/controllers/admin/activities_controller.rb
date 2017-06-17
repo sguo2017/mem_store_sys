@@ -30,7 +30,7 @@ class Admin::ActivitiesController < ApplicationController
 
         #改变活动下多余奖项的状态begin
         $i = 1        
-        while $i <  Const::AWARD_COUNT.to_i do
+        while $i <  Const::AWARD_COUNT.to_i+1 do
           if $i > @award_count.to_i
             award = ActivityAward.where("index_of=? and activity_id=?", $i-1, @activity_id).first
             unless award.blank?

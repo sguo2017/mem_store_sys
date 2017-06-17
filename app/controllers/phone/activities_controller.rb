@@ -14,7 +14,7 @@ class Phone::ActivitiesController < ApplicationController
     @activity_id = params[:activity_id]  
     unless @activity_id.blank?
       @activity = Activity.find(@activity_id)
-      @activity_awards = @activity.activity_awards
+      @activity_awards = @activity.activity_awards.where("status='00A'")
       @restaraunts = []
       @activity_awards.each do |award|
         @activity_award_cfg = ActivityAwardCfg.find(award.activity_award_cfg_id)
@@ -24,6 +24,7 @@ class Phone::ActivitiesController < ApplicationController
 
     #抽奖次数
     has_draw = @user.lotteries.where("created_at >= ?", Time.now.beginning_of_day).size
+
     @avaliable = Const::CHANCE_DRAE_COUNT.to_i - has_draw 
 
   end

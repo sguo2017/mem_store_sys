@@ -118,7 +118,7 @@ $(document).ready(function(){
 
   $('.pointer').click(function (){
     if(<%= @avaliable %> < 0 ){
-      alert("你今天抽奖机会用完了")
+      alert("<%= Const::LOTTERY_MSG[:no_chance] %>")
       return;
     }
 
@@ -136,8 +136,13 @@ $(document).ready(function(){
           }
         },
         success: function(data, textStatus, jqXHR) {
-          var item = data.item
-          rotateFn(item, turnplate.restaraunts[item-1]);
+          var status = data.status
+          if(status == 0){
+            var item = data.item
+            rotateFn(item, turnplate.restaraunts[item-1]);
+          }else{
+            alert(data.msg)           
+          }
         },
         error: function(jqXHR, textStatus, errorThrown) {
           

@@ -16,33 +16,37 @@ class Admin::ActivitiesController < ApplicationController
     end
 
     #活动奖项数量
-    @award_count = 6 
-    unless params[:award_count] .blank?
+    @award_count = @activity.award_count 
+    unless params[:award_count].blank?
        @award_count = params[:award_count] 
     end
+    
     unless @activity.id.blank?
-      @activity.award_count = @award_count
-      @activity.save
-      #改变多设置的奖项状态
-      $i = 1        
-      while $i <  6 do
-        if $i > @award_count.to_i
-          award = ActivityAward.where("index_of=? and activity_id=?", $i-1, @activity_id).first
-          unless award.blank?
-            award.status = '00X'
-            award.save;            
+      unless params[:award_count].blank?
+        @activity.award_count = params[:award_count]
+        @activity.save
+
+        #改变活动下多余奖项的状态begin
+        $i = 1        
+        while $i <  6 do
+          if $i > @award_count.to_i
+            award = ActivityAward.where("index_of=? and activity_id=?", $i-1, @activity_id).first
+            unless award.blank?
+              award.status = '00X'
+              award.save;            
+            end
+          else
+            award = ActivityAward.where("index_of=? and activity_id=?", $i, @activity_id).first
+            unless award.blank?
+              award.status = '00A'
+              award.save;            
+            end
           end
-        else
-          award = ActivityAward.where("index_of=? and activity_id=?", $i, @activity_id).first
-          unless award.blank?
-            award.status = '00A'
-            award.save;            
-          end
+
+          $i +=1
         end
-
-        $i +=1
-      end
-
+        #改变活动下多余奖项的状态end
+      end      
     end 
 
     #@activity_awards = @activity.activity_awards

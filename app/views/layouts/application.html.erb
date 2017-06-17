@@ -67,22 +67,6 @@
             <li onclick="navbar_active(this)"><%= link_to "技术服务", admin_tech_servs_path  %></li>
 
             <li onclick="navbar_active(this)"><%= link_to "营销活动配置", admin_activities_path(activity_id: 1)  %></li>
-            <li class="dropdown" onclick="navbar_active(this)">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                  前端
-                  <span class="caret"></span>
-                </a>
-                <ul class="dropdown-menu">
-                     <li><%= link_to "首页", phone_homepages_path  %></li>
-                    <li><%= link_to "会员资料", phone_profiles_path  %></li>
-                    <li><%= link_to "商品", phone_goods_path  %></li>
-                    <li><%= link_to "商品详情", phone_goods_details_path  %></li>
-                    <li><%= link_to "会员激活", phone_mem_activations_path  %></li>
-                    <li><%= link_to "城市选择", phone_city_selections_path  %></li>
-                    <li><%= link_to "积分查询", phone_score_queries_path  %></li>
-                    <li><%= link_to "积分兑换", phone_bonus_changes_path  %></li>
-                </ul>
-            </li>
         </ul>
     </div>
   </div>

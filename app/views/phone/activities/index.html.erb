@@ -20,7 +20,7 @@
     </div>
     <div class="top_info">
      用户手机号:<span><%= @user.phone_num %></span><br />
-     抽奖剩余次数:<span>3次</span> 
+     抽奖剩余次数:<span><%= @avaliable %>次</span> 
      </div>
      <div class="line"></div>
 	<div class="banner">
@@ -108,7 +108,6 @@ $(document).ready(function(){
       animateTo:angles+1800,
       duration:8000,
       callback:function (){
-        //alert(txt);
         $("#award_result").html(txt)
         $("#lottery_result").show();
 
@@ -118,10 +117,15 @@ $(document).ready(function(){
   };
 
   $('.pointer').click(function (){
+    if(<%= @avaliable %> < 0 ){
+      alert("你今天抽奖机会用完了")
+      return;
+    }
+
     if(turnplate.bRotate)return;
     turnplate.bRotate = !turnplate.bRotate;
-    //获取随机数(奖品个数范围内)
 
+    //获取随机数(奖品个数范围内)
     $.ajax('/phone/lotteries', {
         type: 'POST',
         dataType: 'json',

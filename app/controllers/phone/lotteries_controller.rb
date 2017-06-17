@@ -4,7 +4,7 @@ class Phone::LotteriesController < ApplicationController
   # GET /phone/lotteries
   # GET /phone/lotteries.json
   def index
-    @lotteries = Lottery.all
+    @lotteries = Lottery.all   
   end
 
   # GET /phone/lotteries/1
@@ -15,6 +15,7 @@ class Phone::LotteriesController < ApplicationController
   # GET /phone/lotteries/new
   def new
     @lottery = Lottery.new
+
   end
 
   # GET /phone/lotteries/1/edit
@@ -25,6 +26,11 @@ class Phone::LotteriesController < ApplicationController
   # POST /phone/lotteries.json
   def create
     @lottery = Lottery.new(lottery_params)
+
+    #中奖算法
+
+
+
 
     respond_to do |format|
       if @lottery.save

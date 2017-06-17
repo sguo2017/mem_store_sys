@@ -22,6 +22,10 @@ class Phone::ActivitiesController < ApplicationController
       end
     end 
 
+    #抽奖次数
+    has_draw = @user.lotteries.where("created_at >= ?", Time.now.beginning_of_day).size
+    @avaliable = Const::CHANCE_DRAE_COUNT.to_i - has_draw 
+
   end
 
   # GET /phone/activities/1

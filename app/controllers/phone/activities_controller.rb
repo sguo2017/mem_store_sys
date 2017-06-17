@@ -6,6 +6,7 @@ class Phone::ActivitiesController < ApplicationController
   # GET /phone/activities.json
   def index
     @activity = Activity.new
+    @user = current_user 
     @restaraunts = ["100M省内流量包", "谢谢参与", "谢谢参与", "谢谢参与", "10M免费流量包", "20M免费流量包", "谢谢参与 ", "30M免费流量包", "100M免费流量包", "谢谢参与"]
     @colors = ["#FFF4D6", "#FFFFFF", "#FFF4D6", "#FFFFFF","#FFF4D6", "#FFFFFF", "#FFF4D6", "#FFFFFF","#FFF4D6", "#FFFFFF"];
  

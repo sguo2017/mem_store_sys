@@ -12,8 +12,8 @@ zh-CN:
   helpers:
     submit:
       mem_level:
-        create: "Create goods catalog"
-        update: "Update goods catalog"
+        create: "创建"
+        update: "修改"
   mem_levels:
     edit:
       title: "Editing of the goods catalog"

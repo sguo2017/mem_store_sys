@@ -1,24 +1,24 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Code:</strong>
+  <strong>编码:</strong>
   <%= @mem_level.code %>
 </p>
 
 <p>
-  <strong>Name:</strong>
+  <strong>名称:</strong>
   <%= @mem_level.name %>
 </p>
 
 <p>
-  <strong>District:</strong>
+  <strong>级别:</strong>
   <%= @mem_level.level %>
 </p>
 
 <p>
-  <strong>Score:</strong>
+  <strong>积分:</strong>
   <%= @mem_level.score %>
 </p>
 
-<%= link_to 'Edit', edit_admin_mem_level_path(@mem_level) %> |
-<%= link_to 'Back', admin_mem_levels_path %>
+<%= link_to '编辑', edit_admin_mem_level_path(@mem_level) %> |
+<%= link_to '返回', admin_mem_levels_path %>

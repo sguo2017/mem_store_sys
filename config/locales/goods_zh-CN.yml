@@ -2,7 +2,7 @@
 zh-CN:
   activerecord:
     models:
-      good: "商品分类"
+      good: "商品"
     attributes:
       good: 
         code: "编码"
@@ -20,18 +20,18 @@ zh-CN:
   helpers:
     submit:
       good:
-        create: "Create goods catalog"
-        update: "Update goods catalog"
+        create: "创建商品"
+        update: "更新商品"
   goods:
     edit:
-      title: "Editing of the goods catalog"
+      title: "编辑商品"
     form:
-      good: "Goods catalog"
+      good: "商品"
     index:
       confirm: "Are you sure you want to delete the goods catalog?"
       empty: "No goods catalogs found"
       new_good: "Add a new goods catalog"
-      title: "Listing of goods catalogs"
+      title: "商品列表"
     new:
       title: "Adding a new goods catalog"
     show:

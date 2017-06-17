@@ -10,11 +10,12 @@ zh-CN:
         object_id: "关联id"
         oper: "类型"
         user_id: "用户"
+        created_at: "创建时间"
   helpers:
     submit:
       score_history:
-        create: "Create goods catalog"
-        update: "Update goods catalog"
+        create: "创建"
+        update: "编辑"
   score_histories:
     edit:
       title: "Editing of the goods catalog"

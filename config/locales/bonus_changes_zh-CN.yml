@@ -7,11 +7,12 @@ zh-CN:
       bonus_change: 
         score: "积分"
         red_packet: "红包"
+        created_at: "创建时间"
   helpers:
     submit:
       bonus_change:
-        create: "Create goods catalog"
-        update: "Update goods catalog"
+        create: "创建"
+        update: "修改"
   bonus_changes:
     edit:
       title: "Editing of the goods catalog"

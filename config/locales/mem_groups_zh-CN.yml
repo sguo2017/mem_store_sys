@@ -5,12 +5,16 @@ zh-CN:
       mem_group: "会员分组"
     attributes:
       mem_group: 
-        city: "城市"
+        city: "城市" 
+        province: "省份" 
+        country: "国家"
+        created_at: "创建日期"
+        updated_at: "修改日期"
   helpers:
     submit:
       mem_group:
-        create: "Create goods catalog"
-        update: "Update goods catalog"
+        create: "创建"
+        update: "修改"
   mem_groups:
     edit:
       title: "Editing of the goods catalog"

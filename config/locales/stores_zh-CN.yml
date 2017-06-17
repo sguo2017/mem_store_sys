@@ -6,11 +6,24 @@ zh-CN:
     attributes:
       store: 
         code: "编码"
+        catalog: "分类"
+        name: "名称"
+        district: "街道"
+        city: "城市"
+        province: "省份"
+        country: "国家"
+        latitude: "精度"
+        longitude: "维度"
+        addr: "地址"
+        linkman: "联系人"
+        contact_num: "联系电话"
+        created_at: "创建时间"
+
   helpers:
     submit:
       store:
-        create: "Create goods catalog"
-        update: "Update goods catalog"
+        create: "创建"
+        update: "编辑"
   stores:
     edit:
       title: "Editing of the goods catalog"

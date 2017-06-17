@@ -12,13 +12,13 @@ zh-CN:
   helpers:
     submit:
       goods_catalog:
-        create: "Create goods catalog"
-        update: "Update goods catalog"
+        create: "新增"
+        update: "修改"
   goods_catalogs:
     edit:
-      title: "Editing of the goods catalog"
+      title: "编辑"
     form:
-      goods_catalog: "Goods catalog"
+      goods_catalog: "商品分类"
     index:
       confirm: "Are you sure you want to delete the goods catalog?"
       empty: "No goods catalogs found"

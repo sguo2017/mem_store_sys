@@ -1,6 +1,7 @@
 <%= form_tag("/admin/goods", method: "get") do %>
-  <%= label_tag(:name, "Search for:") %>
+  <%= label_tag(:name, "名称:") %>
   <%= text_field_tag(:name,@name)  %>
+  <%= label_tag(:goods_catalog_id, "商品分类:") %>
   <%= select_tag('goods_catalog_id', options_from_collection_for_select(@goods_catalogs, 'id', 'name',@goods_catalog_id),include_blank: "全部") %>
-  <%= submit_tag("Search") %>
+  <%= submit_tag("查 询") %>
 <% end %>

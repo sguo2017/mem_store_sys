@@ -41,7 +41,7 @@ class Phone::SmsSendsController < ApplicationController
 
     respond_to do |format|
       if @sms_send.save
-        @msg = "短信发送成功"
+        @msg = "短信发送成功#{send_content}"
         return render json: {status: :created, msg: @msg}  
       else
         return render json: {status: :created, msg: @msg}

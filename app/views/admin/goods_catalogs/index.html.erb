@@ -1,11 +1,11 @@
 <%- model_class = GoodsCatalog -%>
 <div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+  <h1>商品分类列表</h1>
 </div>
 <table class="table table-striped">
   <thead>
     <tr>
-      <th><%= model_class.human_attribute_name(:id) %></th>
+      <!-- <th><%= model_class.human_attribute_name(:id) %></th> -->
       <th><%= model_class.human_attribute_name(:code) %></th>
       <th><%= model_class.human_attribute_name(:name) %></th>
       <th><%= model_class.human_attribute_name(:created_at) %></th>
@@ -15,7 +15,7 @@
   <tbody>
     <% @goods_catalogs.each do |goods_catalog| %>
       <tr>
-        <td><%= link_to goods_catalog.id, admin_goods_catalog_path(goods_catalog) %></td>
+        <!-- <td><%= link_to goods_catalog.id, admin_goods_catalog_path(goods_catalog) %></td> -->
         <td><%= goods_catalog.code %></td>
         <td><%= goods_catalog.name %></td>
         <td><%= goods_catalog.created_at.strftime('%Y-%m-%d %H:%M:%S')%></td>
@@ -27,7 +27,7 @@
           <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
                       admin_goods_catalog_path(goods_catalog),
                       :method => :delete,
-                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => '您确认?')) },
                       :class => 'btn btn-xs btn-danger' %>
         </td>
       </tr>

@@ -5,26 +5,28 @@ zh-CN:
       tech_serv: "技术服务"
     attributes:
       tech_serv: 
-        content: "内容"
+        content: "内容"    
+        avatar: "小图"    
+        created_at: "创建时间"
   helpers:
     submit:
       tech_serv:
-        create: "Create goods catalog"
-        update: "Update goods catalog"
+        create: "创建"
+        update: "修改"
   tech_servs:
     edit:
-      title: "Editing of the goods catalog"
+      title: "编辑"
     form:
-      tech_serv: "Goods catalog"
+      tech_serv: "技术服务"
     index:
-      confirm: "Are you sure you want to delete the goods catalog?"
-      empty: "No goods catalogs found"
-      new_tech_serv: "Add a new goods catalog"
-      title: "Listing of goods catalogs"
+      confirm: "确认删除？"
+      empty: "数据为空"
+      new_tech_serv: "新增"
+      title: "列表"
     new:
-      title: "Adding a new goods catalog"
+      title: "新增"
     show:
-      title: "Goods catalog details"
-    was_created: "Goods catalog was successfully added"
-    was_deleted: "Goods catalog was successfully deleted"
-    was_updated: "Goods catalog was successfully updated"
+      title: "标题"
+    was_created: "新增成功"
+    was_deleted: "删除成功"
+    was_updated: "修改成功"

@@ -15,6 +15,7 @@
 //= require jquery.turbolinks
 //= require rails-ujs
 //= require bootstrap-sprockets
+//= require bootstrap-datepicker.min
 //= require turbolinks
 //= require_tree .
 //= require ckeditor/init

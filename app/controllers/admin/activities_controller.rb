@@ -128,7 +128,13 @@ class Admin::ActivitiesController < ApplicationController
   # PATCH/PUT /admin/activities/1
   # PATCH/PUT /admin/activities/1.json
   def update
-
+    respond_to do |format|
+      if @activity.update(activity_params)
+        format.html { redirect_to admin_activities_path(show_page: Const::ACTIVITY_SHOW_PAGE[:base], activity_id:@activity.id) }
+      else
+        
+      end
+    end
 
   end
 

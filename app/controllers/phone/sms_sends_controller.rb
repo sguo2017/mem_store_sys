@@ -24,15 +24,27 @@ class Phone::SmsSendsController < ApplicationController
   # POST /phone/sms_sends
   # POST /phone/sms_sends.json
   def create
+    @msg = "短信发送失败"
+
+    sms = SmsSend.where("TIMESTAMPDIFF(MINUTE,created_at ,now())<#{Const::SMS_TIME_LIMIT} and sms_type='code' and recv_num =?", sms_send_params[:recv_num]).first
+    
+    unless sms.blank?
+      @msg = "#{Const::SMS_TIME_LIMIT}分钟内不用重新发送"
+      return render json: {status: :created, msg: @msg}
+    end    
+
     @sms_send = SmsSend.new(sms_send_params)
+    @sms_send.sms_type='code'
+
+    send_content = rand(9999)     
+    @sms_send.send_content = send_content   
 
     respond_to do |format|
       if @sms_send.save
-        format.html { redirect_to [:phone, @sms_send], notice: 'Sms send was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @sms_send }
+        @msg = "短信发送成功"
+        return render json: {status: :created, msg: @msg}  
       else
-        format.html { render action: 'new' }
-        format.json { render json: @sms_send.errors, status: :unprocessable_entity }
+        return render json: {status: :created, msg: @msg}
       end
     end
   end

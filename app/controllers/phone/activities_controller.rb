@@ -5,6 +5,21 @@ class Phone::ActivitiesController < ApplicationController
   # GET /phone/activities
   # GET /phone/activities.json
   def index
+    @activity = Activity.new
+    @restaraunts = ["100M省内流量包", "谢谢参与", "谢谢参与", "谢谢参与", "10M免费流量包", "20M免费流量包", "谢谢参与 ", "30M免费流量包", "100M免费流量包", "谢谢参与"]
+    @colors = ["#FFF4D6", "#FFFFFF", "#FFF4D6", "#FFFFFF","#FFF4D6", "#FFFFFF", "#FFF4D6", "#FFFFFF","#FFF4D6", "#FFFFFF"];
+ 
+    #活动ID
+    @activity_id = params[:activity_id]  
+    unless @activity_id.blank?
+      @activity = Activity.find(@activity_id)
+      @activity_awards = @activity.activity_awards
+      @restaraunts = []
+      @activity_awards.each do |award|
+        @activity_award_cfg = ActivityAwardCfg.find(award.activity_award_cfg_id)
+        @restaraunts.push(@activity_award_cfg.name)
+      end
+    end 
 
   end
 

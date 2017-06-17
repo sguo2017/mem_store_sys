@@ -20,7 +20,7 @@
             <tr class="select" data-user_id="<%= cfg.id %>" >
               <td><%= cfg.id %></td>
               <td><%= cfg.name %></td>
-              <td><a onclick="selectAcceptCfgs(<%= cfg.name %>,this,false)" class="btn btn-primary btn-xs" href="javascript:void(0)">选择</a></td>
+              <td><a onclick="selectAcceptCfgs(<%= cfg.id %>,'<%= cfg.name %>',this,false)" class="btn btn-primary btn-xs" href="javascript:void(0)">选择</a></td>
             </tr>
             <% end %>
           </tbody>

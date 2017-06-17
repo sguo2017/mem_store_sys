@@ -10,9 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
-ActiveRecord::Schema.define(version: 20170617040504) do
-
+ActiveRecord::Schema.define(version: 20170617101015) do
 
   create_table "activities", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "title"
@@ -46,6 +44,7 @@ ActiveRecord::Schema.define(version: 20170617040504) do
     t.integer "activity_id"
     t.integer "index_of"
     t.string "status", default: "00A"
+    t.string "activity_award_cfg_name"
   end
 
   create_table "activity_bases", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

@@ -40,11 +40,9 @@ class Admin::ActivityAwardsController < ApplicationController
   def update
     respond_to do |format|
       if @activity_award.update(activity_award_params)
-        format.html { redirect_to [:admin, @activity_award], notice: 'Activity award was successfully updated.' }
-        format.json { head :no_content }
+        format.html { redirect_to admin_activities_path(show_page: Const::ACTIVITY_SHOW_PAGE[:award], activity_id: @activity_award.activity_id) }
       else
-        format.html { render action: 'edit' }
-        format.json { render json: @activity_award.errors, status: :unprocessable_entity }
+        
       end
     end
   end
@@ -67,7 +65,7 @@ class Admin::ActivityAwardsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def activity_award_params
-      params[:activity_award].permit(:catalog, :rate, :activity_award_cfg_id, :activity_id, :index_of)
+      params[:activity_award].permit(:catalog, :rate, :activity_id, :index_of, :activity_award_cfg_name, :activity_award_cfg_id)
     end
 
 end

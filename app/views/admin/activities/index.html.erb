@@ -91,7 +91,7 @@
 	<div class="text-right mt10	">
 		<form action="" class="form-inline">
 			<select class="form-control" name="award_count" id="award_count" onchange="window.location.href='/admin/activities?activity_id=<%= @activity_id %>&show_activity_award_id=<%= @show_activity_award_id %>&show_page=award&award_count='+this.value;">
-				<% ['一','二','三','四','五','六'].each_with_index  do |val, index| %>
+				<% ['一','二','三','四','五','六','七','八','九','十'].each_with_index  do |val, index| %>
 					<option value="<%= index+1 %>" <% if index+1==@award_count.to_i %>  selected = "selected" <% end %>>奖项<%= val %></option>
 				<% end %>
 			</select>
@@ -105,8 +105,8 @@
 					<th class="text-top">
 						<div class="prize-list-wrap">
 							<ul class="prize-list">
-								<% ['一','二','三','四','五','六'].each_with_index  do |val, index| %>
-									<% if index < @award_count.to_i %>
+								<% ['一','二','三','四','五','六','七','八','九','十'].each_with_index  do |val, index| %>
+									<% if index < @award_count.to_i && index < Const::AWARD_COUNT.to_i %>
 
 										<li <% if index==@show_activity_award_id.to_i %> class="prize-name active" <% else %> class="prize-name " <% end %> > 
 						                    <%= link_to val+"等奖", admin_activities_path(show_page: Const::ACTIVITY_SHOW_PAGE[:award],activity_id: @activity_id,  show_activity_award_id: index)  %>		
@@ -128,7 +128,9 @@
 								<div class="form-group">
 									<label class="col-xs-1 control-label text-right">奖项名称</label>
 									<div class="col-xs-5">
-										<input class="form-control" name="activity_award[activity_award_cfg_id]"  id="_sys_awardaccept_cfgs" type="text"  placeholder="选择" data-toggle="modal" data-target="#modal-award-cfg-item">
+										<input class="form-control" name="activity_award[activity_award_cfg_name]"  id="_sys_awardaccept_cfg_name" type="text"  placeholder="选择" data-toggle="modal" data-target="#modal-award-cfg-item" value="<%=  @activity_award.activity_award_cfg_name %>">
+
+										<input class="form-control" name="activity_award[activity_award_cfg_id]"  id="_sys_awardaccept_cfg_id" type="hidden"  placeholder="选择" data-toggle="modal" data-target="#modal-award-cfg-item" value="<%=  @activity_award.activity_award_cfg_id %>">
 									</div>
 									<div class="col-xs-5">
 										<span class="lh30 text-gray">

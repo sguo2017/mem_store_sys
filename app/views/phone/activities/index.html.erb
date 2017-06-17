@@ -9,14 +9,12 @@
 	</div>
 
 	<div class="container has-top">
-		<!-- <iframe src="/assets/phone/biglucky_html/1index.html" frameborder="0" height="100%" width="99%"></iframe>	 -->
 		    <img src="/assets/phone/images/1.png" id="shan-img" style="display:none;" />
     <img src="/assets/phone/images/2.png" id="sorry-img" style="display:none;" />
     
     <div class="top_caidan">
        <ul>
          <li class="cd1 select"><a href="#">我要抽奖</a></li>
-        <!-- <li class="cd2  "><a href="#">我的奖品</a></li>-->
          <li class="cd3 "><a href="#">我的奖品</a></li>
        </ul>
     </div>
@@ -84,8 +82,9 @@ var turnplate={
 
 $(document).ready(function(){
   //动态添加大转盘的奖品与奖品区域背景颜色
-  turnplate.restaraunts = ["100M省内流量包", "谢谢参与", "谢谢参与", "谢谢参与", "10M免费流量包", "20M免费流量包", "谢谢参与 ", "30M免费流量包", "100M免费流量包", "谢谢参与"];
-  turnplate.colors = ["#FFF4D6", "#FFFFFF", "#FFF4D6", "#FFFFFF","#FFF4D6", "#FFFFFF", "#FFF4D6", "#FFFFFF","#FFF4D6", "#FFFFFF"];
+
+  turnplate.restaraunts = [<% @restaraunts.each do |restaraunt| %> "<%= restaraunt %>", <% end %>];
+  turnplate.colors = [<% @colors.each do |color| %> "<%= color %>", <% end %>];
 
   
   var rotateTimeOut = function (){

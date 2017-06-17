@@ -8,27 +8,29 @@ class Admin::ActivitiesController < ApplicationController
     @activity_award = ActivityAward.new
     @activity_award_cfg = ActivityAwardCfg.new
     @all_level_I = [["积分奖品1", "积分奖品1"], ["积分奖品2", "积分奖品2"], ["积分奖品3", "积分奖品3"]]   
+    @award_count = Const::AWARD_COUNT.to_i    #活动奖项数量 初始化缺省值
 
     #活动ID
     @activity_id = params[:activity_id]  
     unless @activity_id.blank?
       @activity = Activity.find(@activity_id)
+      @award_count = @activity.award_count 
     end
 
-    #活动奖项数量
-    @award_count = @activity.award_count 
+    #设置奖项数量
     unless params[:award_count].blank?
        @award_count = params[:award_count] 
     end
     
     unless @activity.id.blank?
       unless params[:award_count].blank?
+        #保存奖项数量
         @activity.award_count = params[:award_count]
-        @activity.save
+        @activity.save    
 
         #改变活动下多余奖项的状态begin
         $i = 1        
-        while $i <  6 do
+        while $i <  Const::AWARD_COUNT.to_i do
           if $i > @award_count.to_i
             award = ActivityAward.where("index_of=? and activity_id=?", $i-1, @activity_id).first
             unless award.blank?

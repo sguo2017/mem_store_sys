@@ -12,6 +12,7 @@ Rails.application.routes.draw do
     resources :profiles
     resources :homepages
     resources :tech_servs
+    resources :sms_sends
   end
 
   namespace :admin do

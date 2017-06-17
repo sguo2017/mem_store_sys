@@ -59,7 +59,7 @@
           </a>
         </li>
         <li class="float-item">
-          <a href="">
+          <a id="showUser2Code">
             <img class="ico-img" src="/assets/phone/images/ico-index5.png" alt="">
             <div class="ico-name">邀请好友</div>  
           </a>
@@ -74,9 +74,9 @@
     </div>
   </div>
   <!-- container end -->
-  <div class="popup-wrap" style="display: none">
+  <div class="popup-wrap" id="user2code" style="display: none">
     <div class="popup">
-      <button class="close" type="button">
+      <button class="close" type="button" id="hideUser2Code">
         <i class="ico-close"></i>
       </button>
       <div class="user-img-wrap">
@@ -84,12 +84,12 @@
           <img src="/assets/phone/images/img-user.png" alt="">
         </div>
         <div class="flex-fluid">
-          <div class="user-name">PeterPan小飞侠</div>
+          <div class="user-name"><%= @user.name %></div>
           <div class="f12">广东&nbsp;&nbsp;海珠<i class="ico-user3 ml10"></i></div>
         </div>
       </div>
       <div class="code-2d-wrap">
-        <img class="img-2dcode" src="/assets/phone/images/img-2code.png" alt="">
+        <img class="img-2dcode" src="/uploads/user/mem_activation/user2code_<%= @user.id %>.png" alt="">
         <div class="text-center text-danger code-btm-tips">扫一扫二维码加入会员</div>
       </div>
       

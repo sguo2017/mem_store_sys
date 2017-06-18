@@ -1,1 +1,0 @@
-json.extract! @bonus_change, :score, :red_packet, :created_at, :updated_at

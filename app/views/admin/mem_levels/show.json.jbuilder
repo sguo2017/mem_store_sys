@@ -1,1 +1,0 @@
-json.extract! @mem_level, :code, :name, :district, :score, :created_at, :updated_at

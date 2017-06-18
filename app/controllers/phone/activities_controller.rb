@@ -1,4 +1,5 @@
-class Phone::ActivitiesController < ApplicationController
+class Phone::ActivitiesController < PhoneController
+  before_action :authenticate_user!
   layout "phone"
   before_action :set_activity, only: [:show, :edit, :update, :destroy]
 

@@ -1,4 +1,5 @@
 class Phone::BonusChangesController < PhoneController
+  before_action :authenticate_user!
   layout "phone"
   before_action :set_bonus_change, only: [:show, :edit, :update, :destroy]
 

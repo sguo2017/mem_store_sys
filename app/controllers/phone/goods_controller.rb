@@ -1,4 +1,5 @@
-class Phone::GoodsController < ApplicationController
+class Phone::GoodsController < PhoneController
+  before_action :authenticate_user!
   layout "phone"
   before_action :set_good, only: [:show, :edit, :update, :destroy]
 

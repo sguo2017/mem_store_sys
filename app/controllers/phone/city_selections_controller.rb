@@ -1,4 +1,5 @@
 class Phone::CitySelectionsController < PhoneController
+  before_action :authenticate_user!
   layout "phone"
   before_action :set_city_selection, only: [:show, :edit, :update, :destroy]
 

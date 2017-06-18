@@ -1,4 +1,4 @@
-class Phone::MemActivationsController < ApplicationController
+class Phone::MemActivationsController < PhoneController
   layout "phone"
   before_action :set_mem_activation, only: [:show, :edit, :update, :destroy]
 
@@ -42,23 +42,32 @@ class Phone::MemActivationsController < ApplicationController
           puts  @msg
          #return render json: {status: :created, msg: @msg}
        else
+          #存量用户
+          @user = User.where("phone_num=?", mem_activation_params[:phone_num]).first
+          unless @user.blank?
+            sign_in("user", @user)
+            @msg = "登录成功"
+            puts  @msg
+            format.html { redirect_to [:phone, 'homepages'] }
+          end
+          #新增用户
           @user = User.new(mem_activation_params)
           @user.admin = 'false'
           @user.email = mem_activation_params[:phone_num] + '@qq.com'
           @user.mem_group_id="1"
           @user.password='123456'
           @user.password_confirmation='123456'
-        if @user.save
-          sign_in("user", @user)
-          @msg = "保存成功"
-          puts  @msg
-          format.html { redirect_to [:phone, 'homepages'] }
-       else
-        @msg = "保存失败"
-        puts  @msg
-        format.html { redirect_to [:phone, 'mem_activations'],notice: '保存失败.' }
-       end
-     end
+          if @user.save
+            sign_in("user", @user)
+            @msg = "保存成功"
+            puts  @msg
+            format.html { redirect_to [:phone, 'homepages'] }
+          else
+            @msg = "保存失败"
+            puts  @msg
+            format.html { redirect_to [:phone, 'mem_activations'],notice: '保存失败.' }
+          end
+      end
       end  
     end
 

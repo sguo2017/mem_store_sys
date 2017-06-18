@@ -1,4 +1,5 @@
 class AdminController < ApplicationController
+	before_action :authenticate_user!
 	before_action :phone_access_admin
 
   def phone_access_admin  	

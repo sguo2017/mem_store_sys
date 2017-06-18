@@ -1,4 +1,5 @@
-class Phone::SmsSendsController < ApplicationController
+class Phone::SmsSendsController < PhoneController
+  
   before_action :set_sms_send, only: [:show, :edit, :update, :destroy]
 
   # GET /phone/sms_sends

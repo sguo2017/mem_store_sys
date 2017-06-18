@@ -1,4 +1,5 @@
-class Phone::LotteriesController < ApplicationController
+class Phone::LotteriesController < PhoneController
+  before_action :authenticate_user!
   before_action :set_lottery, only: [:show, :edit, :update, :destroy]
 
   # GET /phone/lotteries

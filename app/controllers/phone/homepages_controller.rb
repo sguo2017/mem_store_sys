@@ -1,4 +1,5 @@
 class Phone::HomepagesController < PhoneController
+  before_action :authenticate_user!
   layout "phone"
 
   before_action :set_homepage, only: [:show, :edit, :update, :destroy]

@@ -1,4 +1,5 @@
 class Phone::ScoreQueriesController < PhoneController
+  before_action :authenticate_user!
   layout "phone" 
   before_action :set_score_query, only: [:show, :edit, :update, :destroy]
 

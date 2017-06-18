@@ -1,4 +1,5 @@
-class Phone::TechServsController < ApplicationController
+class Phone::TechServsController < PhoneController
+  before_action :authenticate_user!
   layout "phone"
   before_action :set_tech_serv, only: [:show, :edit, :update, :destroy]
 

@@ -1,0 +1,39 @@
+---
+zh-CN:
+  activerecord:
+    models:
+      lottery: "会员中奖纪录"
+    attributes:
+      lottery: 
+        code: "编码"
+        activity_id: "活动ID"
+        activity_name: "活动名称"
+        winning: "是否中奖"
+        activity_award_id: "奖项ID"
+        activity_award_cfg_id: "奖项配置ID"
+        activity_award_cfg_name: "奖项配置名称"
+        user_id: "会员"
+        created_at: "创建日期"
+        updated_at: "修改日期"
+  helpers:
+    submit:
+      lottery:
+        create: "创建"
+        update: "更新"
+  lotteries:
+    edit:
+      title: "编辑"
+    form:
+      lottery: "会员中奖纪录"
+    index:
+      confirm: "Are you sure you want to delete the lotteries catalog?"
+      empty: "No lotteries catalogs found"
+      new_lottery: "Add a new lotteries catalog"
+      title: "会员中奖纪录列表"
+    new:
+      title: "Adding a new lotteries catalog"
+    show:
+      title: "lotteries catalog details"
+    was_created: "lotteries catalog was successfully added"
+    was_deleted: "lotteries catalog was successfully deleted"
+    was_updated: "lotteries catalog was successfully updated"

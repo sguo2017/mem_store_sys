@@ -49,7 +49,8 @@
                 </a>
                 <ul class="dropdown-menu">
                     <li><%= link_to "会员", admin_users_path  %></li>
-                    <li><%= link_to "会员等级", admin_mem_levels_path  %></li>
+                    <li><%= link_to "中奖纪录", admin_lotteries_path  %></li>                    
+                    <li><%= link_to "会员积分历史", admin_score_histories_path  %></li>
                     <li><%= link_to "会员分组", admin_mem_groups_path  %></li>
                 </ul>
             </li>
@@ -61,7 +62,7 @@
                 </a>
                 <ul class="dropdown-menu">
                     <li><%= link_to "积分兑红包规则", admin_bonus_changes_path  %></li>
-                    <li><%= link_to "会员积分历史", admin_score_histories_path  %></li>
+                    <li><%= link_to "积分等级", admin_mem_levels_path  %></li>
                 </ul>
             </li>
             <li onclick="navbar_active(this)"><%= link_to "技术服务", admin_tech_servs_path  %></li>
@@ -71,120 +72,7 @@
     </div>
   </div>
 </div>
-<!-- navbar end -->
-<!-- <div class="container">
-  <div class="sub-navbar">
-    <div class="sub-navbar-left">
-      <a class="cub-tool" href="">
-        <span class="glyphicon glyphicon-backward"></span>
-      </a>
-    </div>
-    <div class="sub-navbar-nav-wrap">
-      <ul class="sub-navbar-nav">
-        <li class="active">
-          <a href="">基础设置
-            <i class="glyphicon glyphicon-remove-sign"></i>
-          </a>
-        </li>
-        <li>
-          <a href="">我的定制
-            <i class="glyphicon glyphicon-remove-sign"></i>
-          </a>
-        </li>
-        <li>
-          <a href="">网络营销
-            <i class="glyphicon glyphicon-remove-sign"></i>
-          </a>
-        </li>
-        <li>
-          <a href="">任务分解
-            <i class="glyphicon glyphicon-remove-sign"></i>
-          </a>
-        </li>
-        <li>
-          <a href="">成本资源
-            <i class="glyphicon glyphicon-remove-sign"></i>
-          </a>
-        </li>
-        <li>
-          <a href="">薪酬管理
-            <i class="glyphicon glyphicon-remove-sign"></i>
-          </a>
-        </li>
-        <li>
-          <a href="">任务分解
-            <i class="glyphicon glyphicon-remove-sign"></i>
-          </a>
-        </li>
-        <li>
-          <a href="">成本资源
-            <i class="glyphicon glyphicon-remove-sign"></i>
-          </a>
-        </li>
-        <li>
-          <a href="">薪酬管理
-            <i class="glyphicon glyphicon-remove-sign"></i>
-          </a>
-        </li>
-        <li>
-          <a href="">任务分解
-            <i class="glyphicon glyphicon-remove-sign"></i>
-          </a>
-        </li>
-        <li>
-          <a href="">成本资源
-            <i class="glyphicon glyphicon-remove-sign"></i>
-          </a>
-        </li>
-        <li>
-          <a href="">薪酬管理
-            <i class="glyphicon glyphicon-remove-sign"></i>
-          </a>
-        </li>
-      </ul>
-    </div> -->
- <!--    <div class="sub-navbar-right">
-      <a  class="cub-tool" href="">
-        <span class="glyphicon glyphicon-forward"></span>
-      </a>
-      <div class="dropdown display-ilb">
-        <a class="dropdown-toggle cub-tool" data-toggle="dropdown" href="">设置操作
-          <span class="caret"></span>
-        </a>
-        <ul class="dropdown-menu">
-                <li><a href="#">商品</a></li>
-                <li><a href="#">商品分类</a></li>
-                <li><a href="#">商品属性</a></li>
-              </ul>
-        
-      </div>
-      <a class="cub-tool" href="">
-        <span class="glyphicon glyphicon-log-out"></span>
-        退出
-      </a>
-    </div> 
-  </div>-->
- 
-  <!-- sub-navbar end -->
-<!-- </div> -->
-<!-- container end -->
-
-<!--     <div class="container">
-      <div class="row">
-        <div class="col-lg-9">
-        //this place yield
-        bootstrap_flash
-        yield
-       
-        </div>
-      </div> --><!--/row-->
     <%= bootstrap_flash %>
           <%= yield %>
-<!--       <footer>
-        <p>&copy; Company 2017</p>
-      </footer> -->
-
-    </div> <!-- /container -->
-
   </body>
 </html>

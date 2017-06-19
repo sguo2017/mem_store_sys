@@ -8,7 +8,8 @@
   <!-- header end -->
   <div class="container has-top">
     <div class="sub-title">账户与安全</div>
-    <ul class="data-list form-list">
+    <%=  form_tag(@action, method: :patch) do %>
+    <ul class="data-list form-list profile_form_list">
       <li class="data-item">
         <div><i class="ico-user2"></i>头像</div>
         <div class="user-pic-upload">
@@ -21,22 +22,31 @@
           <i class="ico-nickname"></i>
           昵称  
         </div>
-        
-        <input class="flex-fluid" type="text" placeholder="<%= @user.name %>">
+        <%= text_field_tag "user[name]", @user.name, class: "flex-fluid" %>
       </li>
       <li class="data-item">
         <div>
           <i class="ico-sex"></i>
           性别  
         </div>
-        <input class="flex-fluid" type="text" placeholder="<%= @user.sex %>">
-      </li>
+
+        <select name="user[sex]" id="user_sex">
+          <% if @user.sex == "0" %>
+          <option value="0" selected>男</option>
+          <option value="1">女</option>
+           <% else @user.sex == "1"  %>
+            <option value="0">男</option>
+          <option value="1" selected>女</option>
+          <% end %>
+        </select>
+
+       </li>
       <li class="data-item">
         <div>
           <i class="ico-birth"></i>
           生日  
         </div>
-        <input class="flex-fluid" type="text" placeholder="<%= @user.birthday %>">
+        <%= text_field_tag "user[birthday]", @user.birthday, class: "flex-fluid" %>
       </li>
     </ul>
     <ul class="data-list block-mt form-list">
@@ -45,15 +55,29 @@
           <i class="ico-email"></i>
           邮箱  
         </div>
-        <input class="flex-fluid" type="text" placeholder="<%= @user.email %>">
+        <%= text_field_tag "email", @user.email, class: "flex-fluid" %>
       </li>
       <li class="data-item">
         <div>
           <i class="ico-phone"></i>
           电话  
         </div>
-        <input class="flex-fluid" type="text" placeholder="<%= @user.phone_num %>">
+        <%= text_field_tag "user[phone_num]", @user.phone_num, class: "flex-fluid" %>
       </li>
+      <!-- 传递id --> 
+      <%= hidden_field_tag 'user_id', @user.id %>
 
+        <%= hidden_field_tag 'notice', flash.now[:notice] %>
     </ul>
+    <div class="text-center block-mt bottom-btn">
+     <%= submit_tag "保存", class: 'btn-primary flex-fluid btn-size-lg profile_submit_button' %>
+    </div>
+  <% end %>
+  <script type="text/javascript">
+    $(document).ready(function(){
+      var notice = $("#notice").val()
+      if(notice != "" && notice != null) alert(notice)
+    })
+  </script>
+
   </div>

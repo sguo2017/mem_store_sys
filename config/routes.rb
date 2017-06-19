@@ -1,7 +1,4 @@
 Rails.application.routes.draw do
-  namespace :admin do
-    resources :lotteries
-  end
   get 'welcome/index'
 
   namespace :phone do
@@ -31,7 +28,8 @@ Rails.application.routes.draw do
     resources :tech_servs
     resources :goods_catalogs
     resources :users
-    resources :score_histories
+    resources :score_histories    
+    resources :lotteries
   end
 
   mount Ckeditor::Engine => '/ckeditor'

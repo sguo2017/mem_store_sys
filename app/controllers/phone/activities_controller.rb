@@ -12,16 +12,25 @@ class Phone::ActivitiesController < PhoneController
     @colors = ["#FFF4D6", "#FFFFFF", "#FFF4D6", "#FFFFFF","#FFF4D6", "#FFFFFF", "#FFF4D6", "#FFFFFF","#FFF4D6", "#FFFFFF"];
  
     #活动ID
-    @activity_id = params[:activity_id]  
-    unless @activity_id.blank?
-      @activity = Activity.find(@activity_id)
-      @activity_awards = @activity.activity_awards.where("status='00A'")
-      @restaraunts = []
-      @activity_awards.each do |award|
-        @activity_award_cfg = ActivityAwardCfg.find(award.activity_award_cfg_id)
-        @restaraunts.push(@activity_award_cfg.name)
-      end
-    end 
+    # @activity_id = params[:activity_id]  
+    # unless @activity_id.blank?
+    #   @activity = Activity.find(@activity_id)
+    #   @activity_awards = @activity.activity_awards.where("status='00A'")
+    #   @restaraunts = []
+    #   @activity_awards.each do |award|
+    #     @activity_award_cfg = ActivityAwardCfg.find(award.activity_award_cfg_id)
+    #     @restaraunts.push(@activity_award_cfg.name)
+    #   end
+    # end 
+
+    #只有唯一有效
+    @activity = Activity.where("status='00A'").first
+    @activity_awards = @activity.activity_awards.where("status='00A'")
+    @restaraunts = []
+    @activity_awards.each do |award|
+      @activity_award_cfg = ActivityAwardCfg.find(award.activity_award_cfg_id)
+      @restaraunts.push(@activity_award_cfg.name)
+    end
 
     #抽奖次数
     has_draw = @user.lotteries.where("created_at >= ?", Time.now.beginning_of_day).size

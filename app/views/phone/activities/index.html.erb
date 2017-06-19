@@ -1,4 +1,4 @@
-<div class="lottery">
+<div  class="lottery" <% if @activity.avatar.blank? %> <% else%> style="background:url('<%= @activity.avatar %>') " <% end %> >
 	<div class="header">
 		<a class="header-left" href="/phone/homepages">
 			<span class="ico-header-back"></span>
@@ -12,14 +12,14 @@
 		    <img src="/assets/phone/images/1.png" id="shan-img" style="display:none;" />
     <img src="/assets/phone/images/2.png" id="sorry-img" style="display:none;" />
     
-    <div class="top_caidan">
+<!--     <div class="top_caidan">
        <ul>
          <li class="cd1 select"><a href="#">我要抽奖</a></li>
          <li class="cd3 "><a href="#">我的奖品</a></li>
        </ul>
-    </div>
+    </div> -->
     <div class="top_info">
-     用户手机号:<span><%= @user.phone_num %></span><br />
+     <!-- 用户手机号:<span><%= @user.phone_num %></span><br /> -->
      抽奖剩余次数:<span><%= @avaliable %>次</span> 
      </div>
      <div class="line"></div>

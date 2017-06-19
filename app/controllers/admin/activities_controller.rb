@@ -51,9 +51,12 @@ class Admin::ActivitiesController < AdminController
     #@activity_id = params[:activity_id]  
     @activity_id = params[:id] 
 
+
     unless @activity_id.blank?
-      @activity = Activity.find(@activity_id)
-      @award_count = @activity.award_count 
+      unless params[:id].to_i == -1
+        @activity = Activity.find(@activity_id)
+        @award_count = @activity.award_count
+      end 
     else
     	@activity_id = -1
     end
@@ -178,9 +181,11 @@ class Admin::ActivitiesController < AdminController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_activity
-      @activity = Activity.find(params[:id])
-      @activity_award = ActivityAward.find(params[:id])
-      @activity_award_cfg = ActivityAwardCfg.find(params[:id])
+      unless params[:id].to_i == -1
+        @activity =  ActivityAward.find(params[:id])
+        @activity_award = ActivityAward.find(params[:id])
+        @activity_award_cfg = ActivityAwardCfg.find(params[:id])
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

@@ -1,4 +1,4 @@
-<div class="lottery">
+<div  class="lottery" <% if @activity.avatar.blank? %> <% else%> style="background:url('<%= @activity.avatar %>') " <% end %> >
 	<div class="header">
 		<a class="header-left" href="/phone/homepages">
 			<span class="ico-header-back"></span>

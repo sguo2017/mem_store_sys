@@ -182,7 +182,7 @@ class Admin::ActivitiesController < AdminController
     # Use callbacks to share common setup or constraints between actions.
     def set_activity
       unless params[:id].to_i == -1
-        @activity =  ActivityAward.find(params[:id])
+        @activity =  Activity.find(params[:id])
         @activity_award = ActivityAward.find(params[:id])
         @activity_award_cfg = ActivityAwardCfg.find(params[:id])
       end

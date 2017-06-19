@@ -1,234 +1,50 @@
-<div class="container">
-	<div class="sub-navbar">
-<!-- 		<div class="sub-navbar-left">
-			<a class="cub-tool" href="">
-				<span class="glyphicon glyphicon-backward"></span>
-			</a>
-		</div> -->
-		<div class="sub-navbar-nav-wrap">
-			<ul class="sub-navbar-nav">
-
-				<li <% if @show_page == Const::ACTIVITY_SHOW_PAGE[:base] %> class="active" <% end %>>
-					<%= link_to "基础设置", admin_activities_path(show_page: Const::ACTIVITY_SHOW_PAGE[:base], activity_id: @activity_id, show_activity_award_id: @show_activity_award_id, activity_award_id: @activity_award_id, activity_award_cfg_id: @activity_award_cfg_id, award_count: @award_count)  %>
-				</li>
-				<li <% if @show_page == Const::ACTIVITY_SHOW_PAGE[:award]%> class="active" <% end %> >
-					<%= link_to "奖项设置", admin_activities_path(show_page: Const::ACTIVITY_SHOW_PAGE[:award], activity_id: @activity_id, show_activity_award_id: @show_activity_award_id, activity_award_id: @activity_award_id, activity_award_cfg_id: @activity_award_cfg_id, award_count: @award_count)  %>
-				</li>
-				<li <% if @show_page == Const::ACTIVITY_SHOW_PAGE[:cfg]%> class="active" <% end %> >
-					<%= link_to "增加奖项", admin_activities_path(show_page: Const::ACTIVITY_SHOW_PAGE[:cfg], activity_id: @activity_id, show_activity_award_id: @show_activity_award_id, activity_award_id: @activity_award_id, activity_award_cfg_id: @activity_award_cfg_id, award_count: @award_count)  %>
-				</li>
-				
-			</ul>
-		</div>
-	</div>
-	<!-- sub-navbar end -->
+<%- model_class = Activity -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
 </div>
-<!-- container end -->
-<!-- tab1 -->
-<%= form_for [:admin, @activity], :html => { :class => "form-horizontal activity" } do |f| %>
-<div class="container" id="tab1" <% if @show_page == Const::ACTIVITY_SHOW_PAGE[:base]%> f=1 style="display: block;" <% else %> style="display: none;" <% end %> >
-	<div class="row block-mt active-set-wrap">
-		<div class="col-xs-4">
-			<div class="panel active-set-panel">
-				<div class="phone-preview">
-					<iframe src="/phone/activities" frameborder="0" height="375px" width="99%"></iframe>	
-				</div>	
-			</div>
-		</div>
-		<div class="col-xs-8">
-			<div class="panel active-set-panel">
-				<div class="panel-body">
-					<form action="" class="form-horizontal	">
-						<div class="form-group">
-							<label class="col-xs-2 control-label text-right">活动标题</label>
-							<div class="col-xs-5">
-								<%= f.text_field :title, :class => 'form-control' %>
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="col-xs-2 control-label text-right">开始时间</label>
-							<div class="col-xs-5">
-								<%= f.text_field :begin_time, :class => 'form-control date-picker', :placeholder => '开始时间' %>
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="col-xs-2 control-label text-right">结束时间</label>
-							<div class="col-xs-5">
-								<%= f.text_field :end_time, :class => 'form-control text-gray  date-picker', :placeholder => '结束时间' %>
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="col-xs-2 control-label text-right">活动说明</label>
-							<div class="col-xs-7">
-								<%= f.text_area :desc, :class => 'form-control', :rows => 5 %>
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="col-xs-2 control-label text-right">背景图片</label>
-							<div class="col-xs-5">
-								<%= f.file_field :avatar, :class => 'form-control text-gray'%>
-							</div>
-						</div>
-					</form>
-					<div class="text-center mt20">
-						<button class="btn btn-info">预览</button>
-						<input type="submit" name="commit" value="确定" class="btn btn-primary" data-disable-with="确定">
-						<button class="btn btn-normal ml10">取消</button>
-					</div>
-				</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <!-- <th><%= model_class.human_attribute_name(:id) %></th> -->
+      <th><%= model_class.human_attribute_name(:title) %></th>
+      <th><%= model_class.human_attribute_name(:begin_time) %></th>
+      <th><%= model_class.human_attribute_name(:end_time) %></th>
+      <!-- <th><%= model_class.human_attribute_name(:desc) %></th> -->
+      <!-- <th><%= model_class.human_attribute_name(:avatar) %></th> -->
+      <th><%= model_class.human_attribute_name(:status) %></th>
+      <th><%= model_class.human_attribute_name(:created_at) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @activities.each do |activity| %>
+      <tr>
+        <!-- <td><%= link_to activity.id, admin_activity_path(activity) %></td> -->
+        <td><%= activity.title %></td>
+        <td><%= activity.begin_time %></td>
+        <td><%= activity.end_time %></td>
+        <!-- <td><%= activity.desc %></td> -->
+        <!-- <td><%= activity.avatar %></td> -->
+        <td><%= activity.status %></td>
+        <td><%= activity.created_at.strftime('%Y-%m-%d %H:%M:%S')  %></td>
+        <td>
+          <%= link_to t('.show', :default => t("helpers.links.show")),
+                      admin_activity_path(activity), :class => 'btn btn-default btn-xs' %>
+          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                      edit_admin_activity_path(activity), :class => 'btn btn-default btn-xs' %>
+          <%= link_to t('.destroy', :default => "生效"),
+                      admin_activity_path(activity),
+                      :method => :delete,
+                      :data => { },
+                      :class => 'btn btn-xs btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
 
-			</div>
-			
-		</div>
-	</div>
-</div>
-<% end %>
-<!-- tab2 -->
-<%= form_for [:admin, @activity_award], :html => { :class => "form-horizontal activity" } do |f| %>
- <input type="hidden" name="activity_award[activity_id]" value="<%= @activity_id %>" />
-  <input type="hidden" name="activity_award[index_of]" value="<%= @show_activity_award_id %>" />
-<div class="container" id="tab2" <% if @show_page == Const::ACTIVITY_SHOW_PAGE[:award]%> f=1 style="display: block;" <% else %> style="display: none;" <% end %> >
-	<div class="text-right mt10	">
-		<form action="" class="form-inline">
-			<select class="form-control" name="award_count" id="award_count" onchange="window.location.href='/admin/activities?activity_id=<%= @activity_id %>&show_activity_award_id=<%= @show_activity_award_id %>&show_page=award&award_count='+this.value;">
-				<% ['一','二','三','四','五','六','七','八','九','十'].each_with_index  do |val, index| %>
-					<option value="<%= index+1 %>" <% if index+1==@award_count.to_i %>  selected = "selected" <% end %>>奖项<%= val %></option>
-				<% end %>
-			</select>
-		</form>
-		
-	</div>
-	<div class="panel block-mt ">
-		<div class="prize-set-wrap">
-			<table>
-				<tr>
-					<th class="text-top">
-						<div class="prize-list-wrap">
-							<ul class="prize-list">
-								<% ['一','二','三','四','五','六','七','八','九','十'].each_with_index  do |val, index| %>
-									<% if index < @award_count.to_i && index < Const::AWARD_COUNT.to_i %>
+<%= paginate @activities %>
 
-										<li <% if index==@show_activity_award_id.to_i %> class="prize-name active" <% else %> class="prize-name " <% end %> > 
-						                    <%= link_to val+"等奖", admin_activities_path(show_page: Const::ACTIVITY_SHOW_PAGE[:award],activity_id: @activity_id,  show_activity_award_id: index)  %>		
-										</li>
-									<% end %>
-								<% end %>					
-							</ul>
-						</div>
-					</th>
-					<td class="text-top">
-						<div class="panel-body">
-							<div class="form-horizontal">
-								<div class="form-group">
-									<label class="col-xs-1 control-label text-right">奖项类型</label>
-									<div class="col-xs-5">
-										<%= f.text_field :catalog, :class => 'form-control' %>
-									</div>
-								</div>
-								<div class="form-group">
-									<label class="col-xs-1 control-label text-right">奖项名称</label>
-									<div class="col-xs-5">
-										<input class="form-control" name="activity_award[activity_award_cfg_name]"  id="_sys_awardaccept_cfg_name" type="text"  placeholder="选择" data-toggle="modal" data-target="#modal-award-cfg-item" value="<%=  @activity_award.activity_award_cfg_name %>">
-
-										<input class="form-control" name="activity_award[activity_award_cfg_id]"  id="_sys_awardaccept_cfg_id" type="hidden"  placeholder="选择" data-toggle="modal" data-target="#modal-award-cfg-item" value="<%=  @activity_award.activity_award_cfg_id %>">
-									</div>
-									<div class="col-xs-5">
-										<span class="lh30 text-gray">
-											<span class="glyphicon glyphicon-info-sign"></span>
-											活动发布后将无法更改产品
-										</span>
-									</div>
-								</div>
-								<div class="form-group">
-									<label class="col-xs-1 control-label text-right">中奖率</label>
-									<div class="col-xs-5">
-										<div class="input-group">
-											<%= f.text_field :rate, :class => 'form-control', :placeholder => "中奖率"  %>
-											<span class="input-group-addon">%</span>
-										</div>
-									</div>
-									<div class="col-xs-6">
-										<span class="lh30 text-gray">
-											<span class="glyphicon glyphicon-info-sign"></span>
-											数值在0-100间
-										</span>
-									</div>
-								</div>
-							</div>
-						</div>
-					</td>
-				</tr>
-			</table>
-		</div>
-	</div>
-
-
-	<div class="block-mt text-center">
-		<input type="submit" name="commit" value="保存" class="btn btn-primary" data-disable-with="确定">
-		<button class="btn btn-normal ml10">取消</button>
-	</div>
-		</div>
-<% end %>		
-<!-- tab2 end -->
-<!-- tab3  -->
-<%= form_for [:admin, @activity_award_cfg], :html => { :class => "form-horizontal activity" } do |f| %>
-<div class="container" id="tab3" <% if @show_page == Const::ACTIVITY_SHOW_PAGE[:cfg]%> style="display: block;" <% else %> style="display: none;" <% end %> >
-	<div class="panel block-mt">
-		<div class="panel-heading">
-			<div class="panel-title">新增产品类别</div>
-		</div>
-		<div class="panel-body">
-			<form action="" class="form-horizontal">
-				<div class="form-group">
-					<label class="col-xs-1 control-label text-right">奖品名称</label>
-					<div class="col-xs-4">
-						<%= f.text_field :name, :class => 'form-control' %>
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="col-xs-1 control-label text-right">奖品大类</label>
-					<div class="col-xs-4">
-						<%= select_tag :level_I, options_for_select(@all_level_I, params[:level_I]), class: "form-control" %>
-					</div>
-				</div>	
-				<div class="form-group">
-					<label class="col-xs-1 control-label text-right">积分值</label>
-					<div class="col-xs-4">
-						<div class="input-group">							
-							<%= f.text_field :score, :class => 'form-control', :placeholder => "请输入积分值" %>
-							<span class="input-group-addon">%</span>
-							<!-- onfocus时请将text-gray去掉此样式控制字体为浅色 -->
-						</div>
-						
-					</div>
-					<div class="col-xs-4 text-gray lh30">
-						<span class="glyphicon glyphicon-info-sign"></span> 数值在0-100间
-					</div>
-				</div>	
-				<div class="form-group">
-					<label class="col-xs-1 control-label text-right">奖品图标</label>
-					<div class="col-xs-4">
-						<%= f.file_field :avatar, :class => 'form-control', :placeholder => "请选择图标文件" %>
-					</div>
-
-				<!-- 	<div class="col-xs-4">
-						<button class="btn btn-outline-warning btn-sm ui-file" type="button">
-							上传
-							<input type="file">
-						</button>
-						<button class="btn btn-outline-success btn-sm ml10" type="button">重置</button>
-					</div> -->
-				</div>	
-			</form>
-		</div>
-		
-	</div>
-	<div class="block-mt text-center">
-		<input type="submit" name="commit" value="保存" class="btn btn-primary" data-disable-with="保存">
-		<button class="btn btn-normal ml10">返回</button>
-	</div>
-</div>
-<% end %>
-<!-- tab3 end -->
-
-<%= render :partial => 'modal_award_cfg_item' %>
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_admin_activity_path,
+            :class => 'btn btn-primary' %>

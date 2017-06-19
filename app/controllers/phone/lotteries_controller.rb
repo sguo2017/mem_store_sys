@@ -36,16 +36,29 @@ class Phone::LotteriesController < PhoneController
 
     @activity = Activity.new
     @lottery = Lottery.new(lottery_params)
-    #中奖名次
+    #中奖奖项
     @item = -1
     #
-    @activity_id = params[:activity_id]  
+    @activity_id = params[:lottery][:activity_id]  
     unless @activity_id.blank?
       @activity = Activity.find(@activity_id)
     end
     #中奖算法
 
-    @item = rand(@activity.award_count)   
+    pdf = [] 
+    @activity_awards = @activity.activity_awards.where("status='00A'").order("index_of ASC")
+    #logger.debug "50 #{@activity_awards.to_json}"
+    @activity_awards.each do |award|        
+      rate = award.rate.to_f
+      pdf.push(rate/100.00)
+    end
+
+    logger.debug "#{pdf.to_s}"
+    cdf = pdf2cdf(pdf);
+    logger.debug "#{cdf.to_s}"
+
+    @item = discreteSampling(cdf)  
+
 
     respond_to do |format|
       if @lottery.save
@@ -85,6 +98,41 @@ class Phone::LotteriesController < PhoneController
   end
 
   private
+    #离散概率算法
+    def pdf2cdf(pdf)
+      cdf = pdf;
+      cdf.each_with_index do |item, index|
+        unless index == 0 
+          cdf[index] += cdf[index-1]
+        end        
+      end
+
+      #Force set last cdf to 1, preventing floating-point summing error in the loop.
+      cdf[cdf.size - 1] = 1.00;
+
+      return cdf;
+
+    end
+
+    #根据概率出序列
+    def discreteSampling(cdf)
+      item = -1
+
+      y = rand(100)/100.to_f;
+
+      logger.debug "您中奖概率#{y.to_s}"
+
+      cdf.each_with_index do |p, i|
+        #logger.debug "i #{i.to_s} y  #{y.to_s} p #{p.to_s} y < p.to_f #{y < p.to_f}"
+        if y < p.to_f
+          item = i+1
+          break
+        end
+      end
+      logger.debug "您中了#{item.to_s}等奖"
+      return item # should never runs here, assuming last element in cdf is 1
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_lottery
       @lottery = Lottery.find(params[:id])

@@ -1,15 +1,21 @@
 <%- model_class = GoodsCatalog -%>
-<div class="page-header">
-  <h1>商品分类列表</h1>
-</div>
-<table class="table table-striped">
-  <thead>
+<div class="container">
+  <div class="panel">
+    <div class="panel-heading">
+      <div class="panel-title">商品分类列表</div>
+    </div>
+    <div class="panel-body">
+<div class="table-responsive block-mt">
+        <table class="table table-striped">
+          <colgroup>
+            <col width="20%">
+          </colgroup>
     <tr>
       <!-- <th><%= model_class.human_attribute_name(:id) %></th> -->
-      <th><%= model_class.human_attribute_name(:code) %></th>
-      <th><%= model_class.human_attribute_name(:name) %></th>
-      <th><%= model_class.human_attribute_name(:created_at) %></th>
-      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+      <th class="text-nowrap"><%= model_class.human_attribute_name(:code) %></th>
+      <th class="text-nowrap"><%= model_class.human_attribute_name(:name) %></th>
+      <th class="text-nowrap"><%= model_class.human_attribute_name(:created_at) %></th>
+      <th class="text-nowrap"><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
   <tbody>
@@ -28,15 +34,21 @@
                       admin_goods_catalog_path(goods_catalog),
                       :method => :delete,
                       :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => '您确认?')) },
-                      :class => 'btn btn-xs btn-danger' %>
+                      :class => 'btn btn-warning btn-xs mr5' %>
         </td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
+</div>
+<div>
+  <%= link_to t('.new', :default => t("helpers.links.new")),
+            new_admin_goods_catalog_path,
+            :class => 'btn btn-warning' %>
+  </div>
+                </div>
+            </div>
+        </div>
 <%= paginate @goods_catalogs %>
 
-<%= link_to t('.new', :default => t("helpers.links.new")),
-            new_admin_goods_catalog_path,
-            :class => 'btn btn-primary' %>
+

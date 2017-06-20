@@ -1,7 +1,9 @@
-<%= form_tag("/admin/users", method: "get") do %>
+<%= form_tag("/admin/users", method: "get",class: "form-inline") do %>
   <%= label_tag(:name, "姓名:") %>
-  <%= text_field_tag(:name,@name)  %>
+  <%= text_field_tag(:name,@name,class: "form-control")  %>
   <%= label_tag(:mem_group_id, "分组:") %>
-  <%= select_tag('mem_group_id', options_from_collection_for_select(@mem_groups, 'id', 'city',@mem_group_id),include_blank: "全部") %>
-  <%= submit_tag("查 询") %>
+  <%= select_tag('mem_group_id', options_from_collection_for_select(@mem_groups, 'id', 'city',@mem_group_id),include_blank: "全部",class: "form-control") %>
+    <div class="form-group">
+  <%= submit_tag("查 询",class: "btn btn-warning") %>
+  </div>
 <% end %>

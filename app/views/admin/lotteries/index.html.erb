@@ -1,23 +1,37 @@
 <%- model_class = Lottery -%>
-<div class="page-header">
-  <h1>会员中奖列表</h1>
-  <%= render 'search_form' %>
-</div>
-<table class="table table-striped">
-  <thead>
+<div class="container">
+  <div class="panel">
+    <div class="panel-heading">
+      <div class="panel-title">会员中奖列表</div>
+    </div>
+    <div class="panel-body">
+    <%= render 'search_form' %>
+<div class="table-responsive block-mt">
+        <table class="table table-striped">
+          <colgroup>
+            <col width="20%">
+          </colgroup>
     <tr>
       <!-- <th><%= model_class.human_attribute_name(:id) %></th> -->
-      <th><%= model_class.human_attribute_name(:activity_id) %></th>
-      <th><%= model_class.human_attribute_name(:activity_name) %></th>
-      <th><%= model_class.human_attribute_name(:winning) %></th>
-      <th><%= model_class.human_attribute_name(:activity_award_id) %></th>
-      <th><%= model_class.human_attribute_name(:activity_award_cfg_id) %></th>
-      <th><%= model_class.human_attribute_name(:activity_award_cfg_name) %></th>
-      <th><%= model_class.human_attribute_name(:user_id) %></th>
-      <th><%= model_class.human_attribute_name(:created_at) %></th>
-      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+      <th class="text-nowrap">
+      <%= model_class.human_attribute_name(:activity_id) %></th>
+      <th class="text-nowrap">
+      <%= model_class.human_attribute_name(:activity_name) %></th>
+      <th class="text-nowrap">
+      <%= model_class.human_attribute_name(:winning) %></th>
+      <th class="text-nowrap">
+      <%= model_class.human_attribute_name(:activity_award_id) %></th>
+      <th class="text-nowrap">
+      <%= model_class.human_attribute_name(:activity_award_cfg_id) %></th>
+      <th class="text-nowrap">
+      <%= model_class.human_attribute_name(:activity_award_cfg_name) %></th>
+      <th class="text-nowrap">
+      <%= model_class.human_attribute_name(:user_id) %></th>
+      <th class="text-nowrap">
+      <%= model_class.human_attribute_name(:created_at) %></th>
+      <th class="text-nowrap">
+      <%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
-  </thead>
   <tbody>
     <% @lotteries.each do |lottery| %>
       <tr>
@@ -39,15 +53,21 @@
                       admin_lottery_path(lottery),
                       :method => :delete,
                       :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => '您确认?')) },
-                      :class => 'btn btn-xs btn-danger' %>
+                      :class => 'btn btn-warning btn-xs mr5' %>
         </td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
+</div>
+<div>
+  <%= link_to t('.new', :default => t("helpers.links.new")),
+            new_admin_lottery_path,
+            :class => 'btn btn-warning' %>
+</div>
+</div>
+            </div>
+        </div>
 <%= paginate @lotteries %>
 
-<%= link_to t('.new', :default => t("helpers.links.new")),
-            new_admin_lottery_path,
-            :class => 'btn btn-primary' %>
+

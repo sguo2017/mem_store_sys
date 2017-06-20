@@ -62,12 +62,12 @@
                 </a>
                 <ul class="dropdown-menu">
                     <li><%= link_to "积分兑红包规则", admin_bonus_changes_path  %></li>
-                    <li><%= link_to "积分等级", admin_mem_levels_path  %></li>
+                    <li><%= link_to "会员等级", admin_mem_levels_path  %></li>
                 </ul>
             </li>
             <li onclick="navbar_active(this)"><%= link_to "技术服务", admin_tech_servs_path  %></li>
 
-            <li onclick="navbar_active(this)"><%= link_to "营销活动配置", admin_activities_path()  %></li>
+            <li onclick="navbar_active(this)"><%= link_to "营销活动配置", admin_activities_path(activity_id: 1)  %></li>
         </ul>
     </div>
   </div>

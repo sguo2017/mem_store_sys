@@ -21,7 +21,7 @@ class Phone::ScoreQueriesController < PhoneController
 
     respond_to do |format|
         @user = current_user
-
+        
         @user.score = @user.score - params[:score_history][:point].presence.to_i
         if(@user.score > 0)
           @user.save               #会员扣减积分 

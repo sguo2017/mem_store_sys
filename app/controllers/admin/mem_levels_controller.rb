@@ -5,6 +5,8 @@ class Admin::MemLevelsController < AdminController
   # GET /admin/mem_levels.json
   def index
     @mem_levels = MemLevel.page(params[:page]).per(10)
+    #显示积分范围初始值
+    @init_score =  0
   end
 
   # GET /admin/mem_levels/1

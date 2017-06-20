@@ -12,5 +12,7 @@ class Const
   LOTTERY_MSG = {:no_chance => "您今天抽奖机会用完了，改天再来吧！", :unknown => "未知错误，请联系管理员"}
   #活动状态
   ACTIVITY_STATUS = {:effect => "00A", :expiration => "00X"}
+  #门店类型
+  BOOLEAN_LIST = [['自营', 'self'], ['社会', 'social']]
 
 end

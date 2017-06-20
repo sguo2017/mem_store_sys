@@ -24,6 +24,7 @@
     </tr>
   </thead>
   <tbody>
+    <% prev_score = @init_score %>
     <% @mem_levels.each do |mem_level| %>
       <tr>
       <!-- <td>
@@ -31,7 +32,8 @@
         <td><%= mem_level.code %></td>
         <td><%= mem_level.name %></td>
         <td><%= mem_level.level %></td>
-        <td><%= mem_level.score %></td>
+        <td><%= prev_score %>-<%= mem_level.score %></td>
+        <% prev_score = mem_level.score %>
         <td><%= mem_level.created_at.strftime('%Y-%m-%d %H:%M:%S') %></td>
         <td>
           <%= link_to t('.show', :default => t("helpers.links.show")),

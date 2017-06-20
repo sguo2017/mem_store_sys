@@ -46,7 +46,7 @@ class Admin::LotteriesController < AdminController
 
     respond_to do |format|
       if @lottery.save
-        format.html { redirect_to [:admin, @lottery], notice: 'Lottery was successfully created.' }
+        format.html { redirect_to [:admin, @lottery], notice: '会员中奖记录创建成功.' }
         format.json { render action: 'show', status: :created, location: @lottery }
       else
         format.html { render action: 'new' }
@@ -60,7 +60,7 @@ class Admin::LotteriesController < AdminController
   def update
     respond_to do |format|
       if @lottery.update(lottery_params)
-        format.html { redirect_to [:admin, @lottery], notice: 'Lottery was successfully updated.' }
+        format.html { redirect_to [:admin, @lottery], notice: '会员中奖记录更新成功.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -74,7 +74,7 @@ class Admin::LotteriesController < AdminController
   def destroy
     @lottery.destroy
     respond_to do |format|
-      format.html { redirect_to admin_lotteries_url, notice: 'Lottery was successfully destroyed.' }
+      format.html { redirect_to admin_lotteries_url, notice: '会员中奖记录删除成功.' }
       format.json { head :no_content }
     end
   end

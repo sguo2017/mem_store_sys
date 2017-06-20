@@ -52,7 +52,7 @@ class Admin::ActivityAwardsController < AdminController
   def destroy
     @activity_award.destroy
     respond_to do |format|
-      format.html { redirect_to admin_activity_awards_url, notice: 'Activity award was successfully destroyed.' }
+      format.html { redirect_to admin_activity_awards_url, notice: '奖项成功删除.' }
       format.json { head :no_content }
     end
   end

@@ -28,7 +28,7 @@ class Admin::BonusChangesController < AdminController
 
     respond_to do |format|
       if @bonus_change.save
-        format.html { redirect_to [:admin, @bonus_change], notice: 'Bonus change was successfully created.' }
+        format.html { redirect_to [:admin, @bonus_change], notice: '积分兑换红包规则成功创建.' }
         format.json { render action: 'show', status: :created, location: @bonus_change }
       else
         format.html { render action: 'new' }
@@ -42,7 +42,7 @@ class Admin::BonusChangesController < AdminController
   def update
     respond_to do |format|
       if @bonus_change.update(bonus_change_params)
-        format.html { redirect_to [:admin, @bonus_change], notice: 'Bonus change was successfully updated.' }
+        format.html { redirect_to [:admin, @bonus_change], notice: '积分兑换红包规则成功更新.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -56,7 +56,7 @@ class Admin::BonusChangesController < AdminController
   def destroy
     @bonus_change.destroy
     respond_to do |format|
-      format.html { redirect_to admin_bonus_changes_url, notice: 'Bonus change was successfully destroyed.' }
+      format.html { redirect_to admin_bonus_changes_url, notice: '积分兑换红包规则成功删除.' }
       format.json { head :no_content }
     end
   end

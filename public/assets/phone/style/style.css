@@ -423,7 +423,7 @@ a.text-primary:active {
   border-bottom: 1px solid #f1f1f1;
 }
 .img-list .data-item {
-  padding: 5px !important;
+  padding: 8px 15px !important;
 }
 .img-list .data-item .flex-fluid1 {
   -webkit-box-flex: 1;
@@ -1062,12 +1062,22 @@ a.text-primary:active {
   background: #fff;
   padding: 15px;
 }
+.code-reload {
+  display: inline-block;
+  padding: 3px 5px;
+  background: #f1f1f1;
+  font-size: 12px;
+  color: #999;
+}
 /*=============================== 大转盘样式 ===============================*/
 .lottery {
   background: #c12e2e;
   /*我的奖品*/
   /* 置灰样式*/
   /* 弹出框*/
+}
+.lottery .container {
+  padding-bottom: 30px;
 }
 .lottery .banner {
   display: block;
@@ -1154,7 +1164,7 @@ a.text-primary:active {
 }
 .lottery .shuoming {
   width: 80%;
-  margin: 10px auto;
+  margin: 0px auto 0;
   background: #fff;
   border-radius: 5px;
   padding: 20px 5%;
@@ -1367,7 +1377,7 @@ a.text-primary:active {
 }
 .lottery .search_button {
   width: 28%;
-  background: #f05050;
+  background: #c12e2e;
   height: 43px;
   line-height: 43px;
   text-align: center;
@@ -1397,7 +1407,7 @@ a.text-primary:active {
 }
 .lottery .sure_button {
   width: 43%;
-  background: #f05050;
+  background: #c12e2e;
   height: 43px;
   line-height: 43px;
   text-align: center;

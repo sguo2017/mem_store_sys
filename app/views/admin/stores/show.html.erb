@@ -1,43 +1,80 @@
 <%- model_class = Store -%>
-<div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
-</div>
-
-<dl class="dl-horizontal">
-  <dt><strong><%= model_class.human_attribute_name(:code) %>:</strong></dt>
-  <dd><%= @store.code %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:catalog) %>:</strong></dt>
-  <dd><%= @store.catalog %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:name) %>:</strong></dt>
-  <dd><%= @store.name %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:district) %>:</strong></dt>
-  <dd><%= @store.district %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:city) %>:</strong></dt>
-  <dd><%= @store.city %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:province) %>:</strong></dt>
-  <dd><%= @store.province %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:country) %>:</strong></dt>
-  <dd><%= @store.country %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:latitude) %>:</strong></dt>
-  <dd><%= @store.latitude %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:longitude) %>:</strong></dt>
-  <dd><%= @store.longitude %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:addr) %>:</strong></dt>
-  <dd><%= @store.addr %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:linkman) %>:</strong></dt>
-  <dd><%= @store.linkman %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:contact_num) %>:</strong></dt>
-  <dd><%= @store.contact_num %></dd>
-  <dt><strong>二维码:</strong></dt>
-  <dd><image src="<%= @store.qrcode %>"/></dd>
-</dl>
-
-<%= link_to t('.back', :default => t("helpers.links.back")),
+<div class="container">
+  <div class="panel">
+    <div class="panel-heading">
+      <div class="panel-title">门店详情</div>
+    </div>
+    <div class="panel-body">
+      <div class="row lh24">
+        <div class="col-xs-3">
+          <span class="text-gray"><%= model_class.human_attribute_name(:code) %>:</span>
+          <%= @store.code %>
+        </div>
+        <div class="col-xs-3">
+          <span class="text-gray"><%= model_class.human_attribute_name(:catalog) %>:</span>
+          <%= @store.catalog %>
+        </div>
+        <div class="col-xs-3">
+          <span class="text-gray"><%= model_class.human_attribute_name(:name) %>:</span>
+          <%= @store.name %>
+        </div>
+        <div class="col-xs-3">
+          <span class="text-gray"><%= model_class.human_attribute_name(:district) %>:</span>
+          <%= @store.district %>
+        </div>
+        <div class="col-xs-3">
+          <span class="text-gray"><%= model_class.human_attribute_name(:city) %>:</span>
+          <%= @store.city %>
+        </div>
+        <div class="col-xs-3">
+          <span class="text-gray"><%= model_class.human_attribute_name(:province) %>:</span>
+          <%= @store.province %>
+        </div>
+        <div class="col-xs-3">
+          <span class="text-gray"><%= model_class.human_attribute_name(:country) %>:</span>
+          <%= @store.country %>
+        </div>
+        <div class="col-xs-3">
+          <span class="text-gray"><%= model_class.human_attribute_name(:latitude) %>:</span>
+          <%= @store.latitude %>
+        </div>
+        <div class="col-xs-3">
+          <span class="text-gray"><%= model_class.human_attribute_name(:longitude) %>:</span>
+          <%= @store.longitude %>
+        </div>
+        <div class="col-xs-3">
+          <span class="text-gray"><%= model_class.human_attribute_name(:addr) %>:</span>
+          <%= @store.addr %>
+        </div>
+        <div class="col-xs-3">
+          <span class="text-gray"><%= model_class.human_attribute_name(:linkman) %>:</span>
+          <%= @store.linkman %>
+        </div>
+        <div class="col-xs-3">
+          <span class="text-gray"><%= model_class.human_attribute_name(:contact_num) %>:</span>
+          <%= @store.contact_num %>
+        </div>
+      </div>
+      <div class="row block-mt">
+        <div class="col-xs-1">
+          <span class="text-gray">二维码: </span>
+        </div>
+        <div class="col-xs-3">
+          <img src="<%= @store.qrcode %>" alt="QR code">
+        </div>
+      </div>
+      <div class="text-left block-mt">
+        <%= link_to t('.edit', :default => t("helpers.links.edit")),
+              edit_admin_store_path(@store), :class => 'btn btn-warning mr10' %>
+        <%= link_to t('.back', :default => t("helpers.links.back")),
               admin_stores_path, :class => 'btn btn-default'  %>
-<%= link_to t('.edit', :default => t("helpers.links.edit")),
-              edit_admin_store_path(@store), :class => 'btn btn-default' %>
-<%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+        <!--<%= link_to t('.destroy', :default => t("helpers.links.destroy")),
               admin_store_path(@store),
               :method => 'delete',
               :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-              :class => 'btn btn-danger' %>
+              :class => 'btn btn-danger' %> -->
+      </div>
+    </div>
+  </div>
+  
+</div>

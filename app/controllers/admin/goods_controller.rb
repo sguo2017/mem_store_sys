@@ -52,7 +52,7 @@ class Admin::GoodsController < AdminController
         qr = RQRCode::QRCode.new(Const::GOODS_SHOW_ADDR+'/admin/goods/'+@good.id.to_s, :size => 8, :level => :h )
         png = qr.to_img                      
         png.resize(90, 90).save(Rails.root.to_s+"/public/uploads/good/qrcode/qrcode_"+@good.id.to_s+".png")
-        format.html { redirect_to [:admin, @good], notice: 'Good was successfully created.' }
+        format.html { redirect_to [:admin, @good], notice: '商品成功创建' }
         format.json { render action: 'show', status: :created, location: @good }
       else
         format.html { render action: 'new' }
@@ -66,7 +66,7 @@ class Admin::GoodsController < AdminController
   def update
     respond_to do |format|
       if @good.update(good_params)
-        format.html { redirect_to [:admin, @good], notice: 'Good was successfully updated.' }
+        format.html { redirect_to [:admin, @good], notice: '商品成功更新.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -80,7 +80,7 @@ class Admin::GoodsController < AdminController
   def destroy
     @good.destroy
     respond_to do |format|
-      format.html { redirect_to admin_goods_url, notice: 'Good was successfully destroyed.' }
+      format.html { redirect_to admin_goods_url, notice: '商品删除成功.' }
       format.json { head :no_content }
     end
   end

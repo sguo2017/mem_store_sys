@@ -28,7 +28,7 @@ class Admin::TechServsController < AdminController
 
     respond_to do |format|
       if @tech_serv.save
-        format.html { redirect_to [:admin, @tech_serv], notice: 'Tech serv was successfully created.' }
+        format.html { redirect_to [:admin, @tech_serv], notice: '技术服务创建成功.' }
         format.json { render action: 'show', status: :created, location: @tech_serv }
       else
         format.html { render action: 'new' }
@@ -42,7 +42,7 @@ class Admin::TechServsController < AdminController
   def update
     respond_to do |format|
       if @tech_serv.update(tech_serv_params)
-        format.html { redirect_to [:admin, @tech_serv], notice: 'Tech serv was successfully updated.' }
+        format.html { redirect_to [:admin, @tech_serv], notice: '技术服务更新成功.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -56,7 +56,7 @@ class Admin::TechServsController < AdminController
   def destroy
     @tech_serv.destroy
     respond_to do |format|
-      format.html { redirect_to admin_tech_servs_url, notice: 'Tech serv was successfully destroyed.' }
+      format.html { redirect_to admin_tech_servs_url, notice: '技术服务删除成功.' }
       format.json { head :no_content }
     end
   end

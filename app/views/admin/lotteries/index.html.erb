@@ -12,9 +12,11 @@
             <col width="20%">
           </colgroup>
     <tr>
-      <!-- <th><%= model_class.human_attribute_name(:id) %></th> -->
-      <th class="text-nowrap">
+      <!-- <th><%= model_class.human_attribute_name(:id) %></th>
+        <th class="text-nowrap">
       <%= model_class.human_attribute_name(:activity_id) %></th>
+       -->
+      
       <th class="text-nowrap">
       <%= model_class.human_attribute_name(:activity_name) %></th>
       <th class="text-nowrap">
@@ -35,8 +37,8 @@
   <tbody>
     <% @lotteries.each do |lottery| %>
       <tr>
-        <!-- <td><%= link_to lottery.id, admin_lottery_path(lottery) %></td> -->
-        <td><%= lottery.activity_id %></td>
+        <!-- <td><%= link_to lottery.id, admin_lottery_path(lottery) %></td>
+        <td><%= lottery.activity_id %></td> -->
         <td><%= lottery.activity_name %></td>
         <td><%= lottery.winning %></td>
         <td><%= lottery.activity_award_id %></td>
@@ -65,9 +67,10 @@
             new_admin_lottery_path,
             :class => 'btn btn-warning' %>
 </div>
+<%= paginate @lotteries %>
 </div>
             </div>
         </div>
-<%= paginate @lotteries %>
+
 
 

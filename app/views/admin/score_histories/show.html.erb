@@ -1,27 +1,44 @@
 <%- model_class = ScoreHistory -%>
-<div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
-</div>
-
-<dl class="dl-horizontal">
-  <dt><strong><%= model_class.human_attribute_name(:point) %>:</strong></dt>
-  <dd><%= @score_history.point %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:object_type) %>:</strong></dt>
-  <dd><%= @score_history.object_type %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:object_id) %>:</strong></dt>
-  <dd><%= @score_history.object_id %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:oper) %>:</strong></dt>
-  <dd><%= @score_history.oper %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:user_id) %>:</strong></dt>
-  <dd><%= @score_history.user_id %></dd>
-</dl>
-
-<%= link_to t('.back', :default => t("helpers.links.back")),
-              admin_score_histories_path, :class => 'btn btn-default'  %>
-<%= link_to t('.edit', :default => t("helpers.links.edit")),
-              edit_admin_score_history_path(@score_history), :class => 'btn btn-default' %>
-<%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+<div class="container">
+  <div class="panel">
+    <div class="panel-heading">
+      <div class="panel-title">积分历史详情</div>
+    </div>
+    <div class="panel-body">
+      <div class="row lh24">
+        <div class="col-xs-3">
+          <span class="text-gray"><%= model_class.human_attribute_name(:point) %>:</span>
+          <%= @score_history.point %>
+        </div>
+        <div class="col-xs-3">
+          <span class="text-gray"><%= model_class.human_attribute_name(:object_type) %>:</span>
+          <%= @score_history.object_type %>
+        </div>
+        <div class="col-xs-3">
+          <span class="text-gray"><%= model_class.human_attribute_name(:object_id) %>:</span>
+          <%= @score_history.object_id %>
+        </div>
+        <div class="col-xs-3">
+          <span class="text-gray"><%= model_class.human_attribute_name(:oper) %>:</span>
+          <%= @score_history.oper %>
+        </div>
+        <div class="col-xs-3">
+          <span class="text-gray"><%= model_class.human_attribute_name(:user_id) %>:</span>
+          <%= @score_history.user_id %>
+        </div>
+      </div>
+      <div class="text-left block-mt">
+        <%= link_to t('.edit', :default => t("helpers.links.edit")),
+              edit_admin_score_history_path(@score_history), :class => 'btn btn-warning mr10' %>
+        <%= link_to t('.back', :default => t("helpers.links.back")),
+              admin_score_histories_path, :class => 'btn btn-default'  %>   
+        <!-- <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
               admin_score_history_path(@score_history),
               :method => 'delete',
               :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-              :class => 'btn btn-danger' %>
+              :class => 'btn btn-danger' %> -->
+      </div>
+    </div>
+  </div>
+</div>
+

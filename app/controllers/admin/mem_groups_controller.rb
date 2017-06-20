@@ -28,7 +28,7 @@ class Admin::MemGroupsController < AdminController
 
     respond_to do |format|
       if @mem_group.save
-        format.html { redirect_to [:admin, @mem_group], notice: 'Mem group was successfully created.' }
+        format.html { redirect_to [:admin, @mem_group], notice: '会员分组创建成功.' }
         format.json { render action: 'show', status: :created, location: @mem_group }
       else
         format.html { render action: 'new' }
@@ -42,7 +42,7 @@ class Admin::MemGroupsController < AdminController
   def update
     respond_to do |format|
       if @mem_group.update(mem_group_params)
-        format.html { redirect_to [:admin, @mem_group], notice: 'Mem group was successfully updated.' }
+        format.html { redirect_to [:admin, @mem_group], notice: '会员分组信息更新成功.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -56,7 +56,7 @@ class Admin::MemGroupsController < AdminController
   def destroy
     @mem_group.destroy
     respond_to do |format|
-      format.html { redirect_to admin_mem_groups_url, notice: 'Mem group was successfully destroyed.' }
+      format.html { redirect_to admin_mem_groups_url, notice: '会员分组成功删除.' }
       format.json { head :no_content }
     end
   end

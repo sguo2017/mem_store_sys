@@ -1,19 +1,29 @@
 <%- model_class = Activity -%>
-<div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
-</div>
-<table class="table table-striped">
-  <thead>
+<div class="container">
+  <div class="panel">
+    <div class="panel-heading">
+      <div class="panel-title">活动列表</div>
+    </div>
+    <div class="panel-body">
+<div class="table-responsive block-mt">
+        <table class="table table-striped">
+          <colgroup>
+            <col width="20%">
+          </colgroup>
     <tr>
       <!-- <th><%= model_class.human_attribute_name(:id) %></th> -->
-      <th><%= model_class.human_attribute_name(:title) %></th>
-      <th><%= model_class.human_attribute_name(:begin_time) %></th>
-      <th><%= model_class.human_attribute_name(:end_time) %></th>
+      <th lass="text-nowrap"><%= model_class.human_attribute_name(:title) %></th>
+      <th lass="text-nowrap">
+      <%= model_class.human_attribute_name(:begin_time) %></th>
+      <th lass="text-nowrap">
+      <%= model_class.human_attribute_name(:end_time) %></th>
       <!-- <th><%= model_class.human_attribute_name(:desc) %></th> -->
       <!-- <th><%= model_class.human_attribute_name(:avatar) %></th> -->
-      <th><%= model_class.human_attribute_name(:status) %></th>
-      <th><%= model_class.human_attribute_name(:created_at) %></th>
-      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+      <th lass="text-nowrap"><%= model_class.human_attribute_name(:status) %></th>
+      <th lass="text-nowrap">
+      <%= model_class.human_attribute_name(:created_at) %></th>
+      <th lass="text-nowrap">
+      <%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
   <tbody>
@@ -36,15 +46,22 @@
                       admin_activity_path(activity),
                       :method => :delete,
                       :data => { },
-                      :class => 'btn btn-xs btn-danger' %>
+                      :class => 'btn btn-warning btn-xs mr5' %>
         </td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
-<%= paginate @activities %>
-
-<%= link_to t('.new', :default => t("helpers.links.new")),
+</div>
+<div>
+  <%= link_to t('.new', :default => t("helpers.links.new")),
             new_admin_activity_path,
-            :class => 'btn btn-primary' %>
+            :class => 'btn btn-warning' %>
+</div>
+<%= paginate @activities %>
+    </div>
+            </div>
+        </div>
+
+
+

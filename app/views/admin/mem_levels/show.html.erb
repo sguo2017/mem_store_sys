@@ -1,24 +1,32 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>编码:</strong>
-  <%= @mem_level.code %>
-</p>
-
-<p>
-  <strong>名称:</strong>
-  <%= @mem_level.name %>
-</p>
-
-<p>
-  <strong>级别:</strong>
-  <%= @mem_level.level %>
-</p>
-
-<p>
-  <strong>积分:</strong>
-  <%= @mem_level.score %>
-</p>
-
-<%= link_to '编辑', edit_admin_mem_level_path(@mem_level) %> |
-<%= link_to '返回', admin_mem_levels_path %>
+<div class="container">
+	<div class="panel">
+		<div class="panel-heading">
+			<div class="panel-title">会员等级详情</div>
+		</div>
+		<div class="panel-body">
+			<div class="row lh24">
+				<div class="col-xs-3">
+					<span class="text-gray">编码：</span>
+					<%= @mem_level.code %>
+				</div>
+				<div class="col-xs-3">
+					<span class="text-gray">名称：</span>
+					<%= @mem_level.name %>
+				</div>
+				<div class="col-xs-3">
+					<span class="text-gray">级别:</span>
+					<%= @mem_level.level %>
+				</div>
+				<div class="col-xs-3">
+					<span class="text-gray">积分:</span>
+					<%= @mem_level.score %>
+				</div>
+			</div>
+			<div class="text-left block-mt">
+				<%= link_to '编辑', edit_admin_mem_level_path(@mem_level),:class=>'btn btn-warning mr10'%>
+				<%= link_to '返回', admin_mem_levels_path,:class=>'btn btn-default mr10' %>
+					
+			</div>
+		</div>
+	</div>
+</div>

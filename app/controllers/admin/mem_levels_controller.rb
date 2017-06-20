@@ -28,7 +28,7 @@ class Admin::MemLevelsController < AdminController
 
     respond_to do |format|
       if @mem_level.save
-        format.html { redirect_to [:admin, @mem_level], notice: 'Mem level was successfully created.' }
+        format.html { redirect_to [:admin, @mem_level], notice: '会员等级创建成功.' }
         format.json { render action: 'show', status: :created, location: @mem_level }
       else
         format.html { render action: 'new' }
@@ -42,7 +42,7 @@ class Admin::MemLevelsController < AdminController
   def update
     respond_to do |format|
       if @mem_level.update(mem_level_params)
-        format.html { redirect_to [:admin, @mem_level], notice: 'Mem level was successfully updated.' }
+        format.html { redirect_to [:admin, @mem_level], notice: '会员等级信息更新成功.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -56,7 +56,7 @@ class Admin::MemLevelsController < AdminController
   def destroy
     @mem_level.destroy
     respond_to do |format|
-      format.html { redirect_to admin_mem_levels_url, notice: 'Mem level was successfully destroyed.' }
+      format.html { redirect_to admin_mem_levels_url, notice: '会员等级成功删除.' }
       format.json { head :no_content }
     end
   end

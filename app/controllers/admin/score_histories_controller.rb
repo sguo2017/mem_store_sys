@@ -45,7 +45,7 @@ class Admin::ScoreHistoriesController < AdminController
 
     respond_to do |format|
       if @score_history.save
-        format.html { redirect_to [:admin, @score_history], notice: 'Score history was successfully created.' }
+        format.html { redirect_to [:admin, @score_history], notice: '积分历史创建成功.' }
         format.json { render action: 'show', status: :created, location: @score_history }
       else
         format.html { render action: 'new' }
@@ -59,7 +59,7 @@ class Admin::ScoreHistoriesController < AdminController
   def update
     respond_to do |format|
       if @score_history.update(score_history_params)
-        format.html { redirect_to [:admin, @score_history], notice: 'Score history was successfully updated.' }
+        format.html { redirect_to [:admin, @score_history], notice: '积分历史更新成功.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -73,7 +73,7 @@ class Admin::ScoreHistoriesController < AdminController
   def destroy
     @score_history.destroy
     respond_to do |format|
-      format.html { redirect_to admin_score_histories_url, notice: 'Score history was successfully destroyed.' }
+      format.html { redirect_to admin_score_histories_url, notice: '积分历史删除成功.' }
       format.json { head :no_content }
     end
   end

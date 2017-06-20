@@ -1,19 +1,28 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>城市:</strong>
-  <%= @mem_group.city %>
-</p>
-
-<p>
-  <strong>省份:</strong>
-  <%= @mem_group.province %>
-</p>
-
-<p>
-  <strong>国家:</strong>
-  <%= @mem_group.country %>
-</p>
-
-<%= link_to '编辑', edit_admin_mem_group_path(@mem_group) %> |
-<%= link_to '返回', admin_mem_groups_path %>
+<div class="container">
+	<div class="panel">
+		<div class="panel-heading">
+			<div class="panel-title">会员分组详情</div>
+		</div>
+		<div class="panel-body">
+			<div class="row lh24">
+				<div class="col-xs-3">
+					<span class="text-gray">城市:</span>
+					<%= @mem_group.city %>
+				</div>
+				<div class="col-xs-3">
+					<span class="text-gray">省份:</span>
+					<%= @mem_group.province %>
+				</div>
+				<div class="col-xs-3">
+					<span class="text-gray">国家:</span>
+					<%= @mem_group.country %>
+				</div>
+			</div>
+			<div class="text-left block-mt">
+				<%= link_to '编辑', edit_admin_mem_group_path(@mem_group),:class=>'btn btn-warning mr10'%>
+				<%= link_to '返回', admin_mem_groups_path,:class=>'btn btn-default mr10' %>
+				
+			</div>
+		</div>
+	</div>
+</div>

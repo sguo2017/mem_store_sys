@@ -62,8 +62,9 @@
 <div><%= link_to t('.new', :default => t("helpers.links.new")),
             new_admin_store_path,
             :class => 'btn btn-warning' %></div>
+            <%= paginate @stores %>
             </div>
             </div>
         </div>
-<%= paginate @stores %>
+
 

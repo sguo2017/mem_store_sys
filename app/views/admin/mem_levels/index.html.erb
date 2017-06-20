@@ -11,7 +11,8 @@
             <col width="20%">
           </colgroup>
     <tr>
-      <th class="text-nowrap"><%= model_class.human_attribute_name(:id) %></th>
+    <!--
+    <th class="text-nowrap"><%= model_class.human_attribute_name(:id) %></th> -->
       <th class="text-nowrap"><%= model_class.human_attribute_name(:code) %></th>
       <th class="text-nowrap"><%= model_class.human_attribute_name(:name) %></th>
       <th class="text-nowrap"><%= model_class.human_attribute_name(:level) %></th>
@@ -25,7 +26,8 @@
   <tbody>
     <% @mem_levels.each do |mem_level| %>
       <tr>
-        <td><%= link_to mem_level.id, admin_mem_level_path(mem_level) %></td>
+      <!-- <td>
+      <%= link_to mem_level.id, admin_mem_level_path(mem_level) %></td> -->
         <td><%= mem_level.code %></td>
         <td><%= mem_level.name %></td>
         <td><%= mem_level.level %></td>
@@ -53,4 +55,7 @@
             :class => 'btn btn-warning' %>
 </div>
 <%= paginate @mem_levels %>
+</div>
+            </div>
+        </div>
 

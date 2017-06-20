@@ -28,7 +28,7 @@ class Admin::GoodsCatalogsController < AdminController
 
     respond_to do |format|
       if @goods_catalog.save
-        format.html { redirect_to [:admin, @goods_catalog], notice: 'Goods catalog was successfully created.' }
+        format.html { redirect_to [:admin, @goods_catalog], notice: '商品分类创建成功.' }
         format.json { render action: 'show', status: :created, location: @goods_catalog }
       else
         format.html { render action: 'new' }
@@ -42,7 +42,7 @@ class Admin::GoodsCatalogsController < AdminController
   def update
     respond_to do |format|
       if @goods_catalog.update(goods_catalog_params)
-        format.html { redirect_to [:admin, @goods_catalog], notice: 'Goods catalog was successfully updated.' }
+        format.html { redirect_to [:admin, @goods_catalog], notice: '商品分类更新成功.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -56,7 +56,7 @@ class Admin::GoodsCatalogsController < AdminController
   def destroy
     @goods_catalog.destroy
     respond_to do |format|
-      format.html { redirect_to admin_goods_catalogs_url, notice: 'Goods catalog was successfully destroyed.' }
+      format.html { redirect_to admin_goods_catalogs_url, notice: '商品分类删除成功.' }
       format.json { head :no_content }
     end
   end

@@ -15,83 +15,76 @@
     </div>
   <% end %>
 
-  <div class="form-group">
-    <%= f.label :code, :class => 'control-label col-lg-2' %>
-    <div class="col-lg-10">
-      <%= f.text_field :code, :class => 'form-control' %>
+<div class="container">
+  <div class="panel">
+    <div class="panel-heading">
+      <div class="panel-title">新增商品</div>
     </div>
-    <%=f.error_span(:code) %>
-  </div>
-  <div class="form-group">
-    <%= f.label :name, :class => 'control-label col-lg-2' %>
-    <div class="col-lg-10">
-      <%= f.text_field :name, :class => 'form-control' %>
-    </div>
-    <%=f.error_span(:name) %>
-  </div>
-  <div class="form-group">
-    <%= f.label :goods_catalog_id, :class => 'control-label col-lg-2' %>
-    <div class="col-lg-10">
-      <%= f.select :goods_catalog_id, @goods_catalog.collect { |p| [ p.name, p.id ] }, include_blank: false, :class => 'form-control'%>
-    </div>
-    <%=f.error_span(:goods_catalog_id) %>
-  </div>
-  <div class="form-group">
-    <%= f.label :spec, :class => 'control-label col-lg-2' %>
-    <div class="col-lg-10">
-      <%= f.text_field :spec, :class => 'form-control' %>
-    </div>
-    <%=f.error_span(:spec) %>
-  </div>
-  <div class="form-group">
-    <%= f.label :status, :class => 'control-label col-lg-2' %>
-    <div class="col-lg-10">
-      <%= f.text_field :status, :class => 'form-control' %>
-    </div>
-    <%=f.error_span(:status) %>
-  </div>
-  <div class="form-group">
-    <%= f.label :score, :class => 'control-label col-lg-2' %>
-    <div class="col-lg-10">
-      <%= f.text_field :score, :class => 'form-control' %>
-    </div>
-    <%=f.error_span(:score) %>
-  </div>
-  <div class="form-group">
-    <%= f.label :price, :class => 'control-label col-lg-2' %>
-    <div class="col-lg-10">
-      <%= f.text_field :price, :class => 'form-control' %>
-    </div>
-    <%=f.error_span(:price) %>
-  </div>
-    <div class="form-group">
-    <%= f.label :ispromotion, :class => 'control-label col-lg-2' %>
-    <div class="col-lg-10">
-      <%= f.text_field :ispromotion, :class => 'form-control' %>
-    </div>
-    <%=f.error_span(:ispromotion) %>
-  </div>
-  <div class="form-group">
-    <%= f.label :avatar, :class => 'control-label col-lg-2' %>
-    <div class="col-lg-10">
-      <%= f.file_field :avatar, :class => 'form-control' %>
-    </div>
-    <%=f.error_span(:avatar) %>
-  </div>
-    <div class="form-group">
-    <%= f.label :info, :class => 'control-label col-lg-2' %>
-    <div class="col-lg-10">
-      <%= f.file_field :info, :class => 'form-control' %>
-    </div>
-    <%=f.error_span(:info) %>
-  </div>
-
-  <div class="form-group">
-    <div class="col-lg-offset-2 col-lg-10">
-      <%= f.submit nil, :class => 'btn btn-warning' %>
-      <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+    <div class="panel-body">
+      <form action="" class="form-horizontal">
+        <div class="clearfix form-list">
+          <label class="col-xs-2 control-label" for=""><%= f.label :code %></label>
+          <div class="col-xs-4">
+            <%= f.text_field :code, :class => 'form-control' %>
+            <%=f.error_span(:code) %>
+          </div>
+          <label class="col-xs-2 control-label" for=""><%= f.label :name %></label>
+          <div class="col-xs-4">
+            <%= f.text_field :name, :class => 'form-control' %>
+            <%=f.error_span(:name) %>
+          </div>
+          <label class="col-xs-2 control-label" for=""><%= f.label :goods_catalog_id %></label>
+          <div class="col-xs-4">
+            <%= f.select :goods_catalog_id, @goods_catalog.collect { |p| [ p.name, p.id ] }, {include_blank: false}, {:class => 'form-control'} %>
+            <%=f.error_span(:goods_catalog_id) %>
+          </div>
+          <label class="col-xs-2 control-label" for=""><%= f.label :spec%></label>
+          <div class="col-xs-4">
+            <%= f.text_field :spec, :class => 'form-control' %>
+            <%=f.error_span(:spec) %>
+          </div>
+          <label class="col-xs-2 control-label" for=""><%= f.label :status %></label>
+          <div class="col-xs-4">
+            <%= f.text_field :status, :class => 'form-control' %>
+            <%=f.error_span(:status) %>
+          </div>
+          <label class="col-xs-2 control-label" for=""><%= f.label :score %></label>
+          <div class="col-xs-4">
+            <%= f.text_field :score, :class => 'form-control' %>
+            <%=f.error_span(:score) %>
+          </div>
+          <label class="col-xs-2 control-label" for=""><%= f.label :price %></label>
+          <div class="col-xs-4">
+            <%= f.text_field :price, :class => 'form-control' %>
+            <%=f.error_span(:price) %>
+          </div>
+          <label class="col-xs-2 control-label" for=""><%= f.label :ispromotion %></label>
+          <div class="col-xs-4">
+            <%= f.text_field :ispromotion, :class => 'form-control' %>
+            <%=f.error_span(:ispromotion) %>
+          </div>
+          <label class="col-xs-2 control-label" for="">
+          <%= f.label :avatar %></label>
+          <div class="col-xs-4">
+            <%= f.file_field :avatar, :class => 'form-control' %>
+            <%=f.error_span(:avatar) %>
+          </div>
+          <label class="col-xs-2 control-label" for="">
+          <%= f.label :info %>    
+          </label>
+          <div class="col-xs-4">
+            <%= f.file_field :info, :class => 'form-control' %>
+            <%=f.error_span(:info) %>
+          </div>
+        </div>
+      </form>
+      <div class="block-mt">
+        <%= f.submit nil, :class => 'btn btn-warning' %>
+        <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
                 admin_goods_path, :class => 'btn btn-default' %>
+      </div>
     </div>
   </div>
+</div>
 
 <% end %>

@@ -6,7 +6,8 @@ class Phone::ProfilesController < PhoneController
   # GET /phone/profiles
   # GET /phone/profiles.json
   def index
-     @user = current_user    
+     @user = current_user 
+     @action = "/phone/profiles/" +  @user.id.to_s
   end
 
   # GET /phone/profiles/1
@@ -43,12 +44,13 @@ class Phone::ProfilesController < PhoneController
   # PATCH/PUT /phone/profiles/1.json
   def update
     respond_to do |format|
-      if @profile.update(profile_params)
-        format.html { redirect_to [:phone, @profile], notice: 'Profile was successfully updated.' }
-        format.json { head :no_content }
+      if @user.update(profile_params)
+        format.html { redirect_to [:phone, "profiles"], notice: '保存成功' }
+        #format.json { head :no_content,msg: @msg }
       else
-        format.html { render action: 'edit' }
-        format.json { render json: @profile.errors, status: :unprocessable_entity }
+
+        format.html { redirect_to [:phone, "profiles"], notice: '保存成败' }
+        #format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -66,11 +68,13 @@ class Phone::ProfilesController < PhoneController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_profile
-      @profile = Profile.find(params[:id])
+      #@profile = Profile.find(params[:id])
+      @user = User.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def profile_params
-      params[:profile]
+      #params[:profile]
+      params.require(:user).permit(:name, :sex, :birthday, :phone_num)
     end
 end

@@ -1,50 +1,60 @@
 <%- model_class = Activity -%>
-<div class="page-header">
-  <h1>营销活动列表</h1>
+<div class="container">
+  <div class="panel">
+    <div class="panel-heading">
+      <div class="panel-title">营销活动列表</div>
+    </div>
+
+    <div class="panel-body">
+      <div class="table-responsive block-mt">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <!-- <th><%= model_class.human_attribute_name(:id) %></th> -->
+              <th><%= model_class.human_attribute_name(:title) %></th>
+              <th><%= model_class.human_attribute_name(:begin_time) %></th>
+              <th><%= model_class.human_attribute_name(:end_time) %></th>
+              <!-- <th><%= model_class.human_attribute_name(:desc) %></th> -->
+              <!-- <th><%= model_class.human_attribute_name(:avatar) %></th> -->
+              <th><%= model_class.human_attribute_name(:status) %></th>
+              <th><%= model_class.human_attribute_name(:created_at) %></th>
+              <th><%=t '.actions', :default => t("helpers.actions") %></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @activities.each do |activity| %>
+              <tr>
+                <!-- <td><%= link_to activity.id, admin_activity_path(activity) %></td> -->
+                <td><%= activity.title %></td>
+                <td><%= activity.begin_time %></td>
+                <td><%= activity.end_time %></td>
+                <!-- <td><%= activity.desc %></td> -->
+                <!-- <td><%= activity.avatar %></td> -->
+                <td><%= activity.status %></td>
+                <td><%= activity.created_at.strftime('%Y-%m-%d %H:%M:%S')  %></td>
+                <td>
+                  <%= link_to t('.show', :default => t("helpers.links.show")),
+                              admin_activity_path(activity), :class => 'btn btn-default btn-xs' %>
+                  <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                              edit_admin_activity_path(activity), :class => 'btn btn-default btn-xs' %>
+                  <%= link_to t('.destroy', :default => "生效"),
+                              admin_activity_path(activity),
+                              :method => :delete,
+                              :data => { },
+                              :class => 'btn btn-xs btn-warning' %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+
+      <%= paginate @activities %>
+
+      <%= link_to t('.new', :default => t("helpers.links.new")),
+              new_admin_activity_path,
+              :class => 'btn btn-warning' %>
+
+    </div>
+  </div>
 </div>
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <!-- <th><%= model_class.human_attribute_name(:id) %></th> -->
-      <th><%= model_class.human_attribute_name(:title) %></th>
-      <th><%= model_class.human_attribute_name(:begin_time) %></th>
-      <th><%= model_class.human_attribute_name(:end_time) %></th>
-      <!-- <th><%= model_class.human_attribute_name(:desc) %></th> -->
-      <!-- <th><%= model_class.human_attribute_name(:avatar) %></th> -->
-      <th><%= model_class.human_attribute_name(:status) %></th>
-      <th><%= model_class.human_attribute_name(:created_at) %></th>
-      <th><%=t '.actions', :default => t("helpers.actions") %></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @activities.each do |activity| %>
-      <tr>
-        <!-- <td><%= link_to activity.id, admin_activity_path(activity) %></td> -->
-        <td><%= activity.title %></td>
-        <td><%= activity.begin_time %></td>
-        <td><%= activity.end_time %></td>
-        <!-- <td><%= activity.desc %></td> -->
-        <!-- <td><%= activity.avatar %></td> -->
-        <td><%= activity.status %></td>
-        <td><%= activity.created_at.strftime('%Y-%m-%d %H:%M:%S')  %></td>
-        <td>
-          <%= link_to t('.show', :default => t("helpers.links.show")),
-                      admin_activity_path(activity), :class => 'btn btn-default btn-xs' %>
-          <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                      edit_admin_activity_path(activity), :class => 'btn btn-default btn-xs' %>
-          <%= link_to t('.destroy', :default => "生效"),
-                      admin_activity_path(activity),
-                      :method => :delete,
-                      :data => { },
-                      :class => 'btn btn-xs btn-danger' %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<%= paginate @activities %>
-
-<%= link_to t('.new', :default => t("helpers.links.new")),
-            new_admin_activity_path,
-            :class => 'btn btn-primary' %>

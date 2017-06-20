@@ -67,7 +67,7 @@
       <!-- 传递id --> 
       <%= hidden_field_tag 'user_id', @user.id %>
 
-        <%= hidden_field_tag 'notice', flash.now[:notice] %>
+      <%= hidden_field_tag 'notice', flash.now[:notice] %>
     </ul>
     <div class="text-center block-mt bottom-btn">
      <%= submit_tag "保存", class: 'btn-primary flex-fluid btn-size-lg profile_submit_button' %>

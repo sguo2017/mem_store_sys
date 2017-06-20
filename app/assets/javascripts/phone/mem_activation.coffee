@@ -18,8 +18,17 @@ $ ->
 	    data: sms_send: {recv_num: $('#recv_num').val()}
 
 	    success: (data, textStatus, jqXHR) ->
-	        alert(data.msg)
+	    	$('#getSmsCode').hide()
+	    	$('.countdown_wrap').show()
+	    	$('.countdown_num').countdown({until: '+60',compact:true, format: 's',onExpiry: liftOff})
+	    	alert(data.msg)
 
 	    error: (jqXHR, textStatus, errorThrown) ->
 	        alert(textStatus)	  	
+
+	     liftOff = () -> $('.countdown_wrap').hide(); $('#getSmsCode').show(); 
+		 
+
+  $('.notice_close_btn').click -> $('.activation_popup_wrap').hide()
+  
 

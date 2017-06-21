@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery.turbolinks
+//= require jquery.countdown
 //= require rails-ujs
 //= require bootstrap-sprockets
 //= require bootstrap-datepicker.min

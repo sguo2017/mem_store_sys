@@ -17,7 +17,9 @@
     
       <li class="data-item">
       <%= text_field_tag "sms_content", nil, class: "flex-fluid", placeholder: "123456" %>
-       <a id="getSmsCode">获取随机码</a>
+      <a id="getSmsCode">获取随机码</a>
+      <span class="code-reload countdown_wrap" style="display: none"><span class="countdown_num">60</span>s后重新获取</span>
+       
       </li>
        <%=f.error_span(:sms_content) %>
     </ul>
@@ -30,4 +32,31 @@
     </div>  
   </div>
  <% end %>
+  <!-- 积分退换提示弹窗 -->
+   
+  <div class="popup-wrap activation_popup_wrap" <% if flash[:notice].blank? %> style="display:none;" <% end %> >  
+    <div class="popup has-title">
+      <div class="popup-title">
+        <button class="close" type="button">
+          <i class="ico-close notice_close_btn"></i>
+        </button>
+        温馨提示
+      </div>
+      <div class="popup-main text-center">
+        <div class="text-import f16 mb5">
+        <i class="ico-error mr5"></i><%= flash[:notice] %>
+        </div>
+        <!-- <div class="text-import f16 mb5">
+        <i class="ico-right mr5"></i>积分兑换成功！
+        </div> -->
+        <!-- 选择上面其中一个提示 -->
+        <!-- <div class="f12">积分余额不足</div> -->
+      </div>
+      <div class="popup-foot flex-wrap">
+        <a class="flex-fluid a-button notice_close_btn" href="">确定</a>
+      </div>
+      
+    </div>
+    <div class="popup-bg"></div>
+  </div>
 

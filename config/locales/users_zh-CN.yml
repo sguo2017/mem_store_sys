@@ -7,7 +7,7 @@ zh-CN:
       user:
         id: "ID"
         email: "邮箱"
-        name: "姓名"
+        name: "会员"
         admin: "管理员"
         level: "等级"
         avatar: "头像"

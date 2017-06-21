@@ -16,7 +16,7 @@
         <%=f.error_span(:phone_num) %>
     
       <li class="data-item">
-      <%= text_field_tag "sms_content", nil, class: "flex-fluid", placeholder: "123456" %>
+      <%= text_field_tag "sms_content", nil, class: "flex-fluid", placeholder: "请输入验证码" %>
       <a id="getSmsCode">获取随机码</a>
       <span class="code-reload countdown_wrap" style="display: none"><span class="countdown_num">60</span>s后重新获取</span>
        

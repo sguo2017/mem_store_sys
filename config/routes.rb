@@ -14,6 +14,7 @@ Rails.application.routes.draw do
     resources :tech_servs
     resources :sms_sends
     resources :lotteries
+    resources :wxes
   end
 
   namespace :admin do

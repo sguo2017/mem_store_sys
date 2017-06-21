@@ -9,7 +9,6 @@ class Phone::MemActivationsController < PhoneController
     @referee_id = params[:referee_id]
     @store_id = params[:store_id]
  end
-
   # GET /phone/mem_activations/1
   # GET /phone/mem_activations/1.json
   def show

@@ -7,11 +7,14 @@
   </div>
   <!-- header end -->
   <div class="container has-top">
-    <a class="user-info-header" href="/phone/profiles">
+    <!-- <a class="user-info-header" href="/phone/profiles"> -->
+    <div class="user-info-header">
       <div class="user-img-wrap">
+      <a  href="/phone/profiles">
         <div class="user-img">
           <img src="/assets/phone/images/img-user.png" alt="">
         </div>
+        </a>  
         <div class="flex-fluid">
           <div class="user-name"><%= @user.name %></div>
           <div class="mt10">
@@ -31,7 +34,8 @@
           积分:<%= @user.score %>
         </div>
       </div>
-    </a>  
+      </div>
+   <!--  </a>   -->
     <div class="block-mt">
       <ul class="float-ul wu3 clearfix ico-list">
         <li class="float-item">

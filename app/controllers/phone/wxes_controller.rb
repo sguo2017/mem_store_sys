@@ -1,4 +1,5 @@
 class Phone::WxesController < ApplicationController
+  layout "wx"
   before_action :set_wx, only: [:show, :edit, :update, :destroy]
 
   # GET /phone/wxes

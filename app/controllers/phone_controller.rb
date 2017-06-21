@@ -10,4 +10,5 @@ class PhoneController < ApplicationController
 			authenticate_user!
 		end
 	end
+
 end

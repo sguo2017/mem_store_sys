@@ -15,97 +15,83 @@
     </div>
   <% end %>
 
-  <div class="form-group">
-    <%= f.label :code, :class => 'control-label col-lg-2' %>
-    <div class="col-lg-10">
-      <%= f.text_field :code, :class => 'form-control' %>
+  <div class="container">
+  <div class="panel">
+    <div class="panel-heading">
+      <div class="panel-title">新增门店</div>
     </div>
-    <%=f.error_span(:code) %>
-  </div>
-  <div class="form-group">
-    <%= f.label :catalog, :class => 'control-label col-lg-2' %>
-    <div class="col-lg-10">
-      <%= select_tag(:catalog, options_for_select(Const::BOOLEAN_LIST), :class => 'form-control') %>
-    </div>
-    <%=f.error_span(:catalog) %>
-  </div>
-  <div class="form-group">
-    <%= f.label :name, :class => 'control-label col-lg-2' %>
-    <div class="col-lg-10">
-      <%= f.text_field :name, :class => 'form-control' %>
-    </div>
-    <%=f.error_span(:name) %>
-  </div>
-  <div class="form-group">
-    <%= f.label :district, :class => 'control-label col-lg-2' %>
-    <div class="col-lg-10">
-      <%= f.text_field :district, :class => 'form-control' %>
-    </div>
-    <%=f.error_span(:district) %>
-  </div>
-  <div class="form-group">
-    <%= f.label :city, :class => 'control-label col-lg-2' %>
-    <div class="col-lg-10">
-      <%= f.text_field :city, :class => 'form-control' %>
-    </div>
-    <%=f.error_span(:city) %>
-  </div>
-  <div class="form-group">
-    <%= f.label :province, :class => 'control-label col-lg-2' %>
-    <div class="col-lg-10">
-      <%= f.text_field :province, :class => 'form-control' %>
-    </div>
-    <%=f.error_span(:province) %>
-  </div>
-  <div class="form-group">
-    <%= f.label :country, :class => 'control-label col-lg-2' %>
-    <div class="col-lg-10">
-      <%= f.text_field :country, :class => 'form-control' %>
-    </div>
-    <%=f.error_span(:country) %>
-  </div>
-  <div class="form-group">
-    <%= f.label :latitude, :class => 'control-label col-lg-2' %>
-    <div class="col-lg-10">
-      <%= f.text_field :latitude, :class => 'form-control' %>
-    </div>
-    <%=f.error_span(:latitude) %>
-  </div>
-  <div class="form-group">
-    <%= f.label :longitude, :class => 'control-label col-lg-2' %>
-    <div class="col-lg-10">
-      <%= f.text_field :longitude, :class => 'form-control' %>
-    </div>
-    <%=f.error_span(:longitude) %>
-  </div>
-  <div class="form-group">
-    <%= f.label :addr, :class => 'control-label col-lg-2' %>
-    <div class="col-lg-10">
-      <%= f.text_field :addr, :class => 'form-control' %>
-    </div>
-    <%=f.error_span(:addr) %>
-  </div>
-  <div class="form-group">
-    <%= f.label :linkman, :class => 'control-label col-lg-2' %>
-    <div class="col-lg-10">
-      <%= f.text_field :linkman, :class => 'form-control' %>
-    </div>
-    <%=f.error_span(:linkman) %>
-  </div>
-  <div class="form-group">
-    <%= f.label :contact_num, :class => 'control-label col-lg-2' %>
-    <div class="col-lg-10">
-      <%= f.text_field :contact_num, :class => 'form-control' %>
-    </div>
-    <%=f.error_span(:contact_num) %>
-  </div>
-
-  <div class="form-group">
-    <div class="col-lg-offset-2 col-lg-10">
-      <%= f.submit nil, :class => 'btn btn-warning' %>
-      <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+    <div class="panel-body">
+      <form action="" class="form-horizontal">
+        <div class="clearfix form-list">
+          <label class="col-xs-1 control-label" for=""><%= f.label :code%></label>
+          <div class="col-xs-3">
+            <%= f.text_field :code, :class => 'form-control' %>
+            <%=f.error_span(:code) %>
+          </div>
+          <label class="col-xs-1 control-label" for=""><%= f.label :catalog %></label>
+          <div class="col-xs-3">
+            <%= f.text_field :catalog, :class => 'form-control' %>
+            <%=f.error_span(:catalog) %>
+          </div>
+          <label class="col-xs-1 control-label" for=""><%= f.label :name %></label>
+          <div class="col-xs-3">
+            <%= f.text_field :name, :class => 'form-control' %>
+            <%=f.error_span(:name) %>
+          </div>
+          <label class="col-xs-1 control-label" for=""><%= f.label :district %></label>
+          <div class="col-xs-3">
+            <%= f.text_field :district, :class => 'form-control' %>
+            <%=f.error_span(:district) %>
+          </div>
+          <label class="col-xs-1 control-label" for=""><%= f.label :city%></label>
+          <div class="col-xs-3">
+            <%= f.text_field :city, :class => 'form-control' %>
+            <%=f.error_span(:city) %>
+          </div>
+          <label class="col-xs-1 control-label" for=""><%= f.label :province %></label>
+          <div class="col-xs-3">
+            <%= f.text_field :province, :class => 'form-control' %>
+            <%=f.error_span(:province) %>
+          </div>
+          <label class="col-xs-1 control-label" for=""><%= f.label :country %></label>
+          <div class="col-xs-3">
+            <%= f.text_field :country, :class => 'form-control' %>
+            <%=f.error_span(:country) %>
+          </div>
+          <label class="col-xs-1 control-label" for=""><%= f.label :latitude %></label>
+          <div class="col-xs-3">
+            <%= f.text_field :latitude, :class => 'form-control' %>
+            <%=f.error_span(:latitude) %>
+          </div>
+          <label class="col-xs-1 control-label" for=""><%= f.label :longitude %></label>
+          <div class="col-xs-3">
+            <%= f.text_field :longitude, :class => 'form-control' %>
+            <%=f.error_span(:longitude) %>
+          </div>
+          <label class="col-xs-1 control-label" for=""><%= f.label :addr%></label>
+          <div class="col-xs-3">
+            <%= f.text_field :addr, :class => 'form-control' %>
+            <%=f.error_span(:addr) %>
+          </div>
+          <label class="col-xs-1 control-label" for=""><%= f.label :linkman%></label>
+          <div class="col-xs-3">
+            <%= f.text_field :linkman, :class => 'form-control' %>
+            <%=f.error_span(:linkman) %>
+          </div>
+          <label class="col-xs-1 control-label" for=""><%= f.label :contact_num %></label>
+          <div class="col-xs-3">
+            <%= f.text_field :contact_num, :class => 'form-control' %>
+            <%=f.error_span(:contact_num) %>
+          </div>
+        </div>
+      </form>
+      <div class="block-mt">
+        <%= f.submit nil, :class => 'btn btn-warning' %>
+        <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
                 admin_stores_path, :class => 'btn btn-default' %>
+      </div>
     </div>
   </div>
+</div>
 
 <% end %>

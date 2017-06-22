@@ -1,5 +1,6 @@
 GEM
   remote: https://rubygems.org/
+  remote: https://rails-assets.org/
   specs:
     actioncable (5.1.1)
       actionpack (= 5.1.1)
@@ -98,6 +99,7 @@ GEM
     et-orbi (1.0.4)
       tzinfo
     execjs (2.7.0)
+    ffaker (2.5.0)
     ffi (1.9.18)
     font-awesome-rails (4.7.0.2)
       railties (>= 3.2, < 5.2)
@@ -109,7 +111,6 @@ GEM
       activesupport (>= 4.2.0)
       multi_json (>= 1.2)
     jquery-countdown-rails (2.0.2)
-    jquery-datetimepicker-rails (2.4.1.0)
     jquery-rails (4.3.1)
       rails-dom-testing (>= 1, < 3)
       railties (>= 4.2.0)
@@ -179,6 +180,14 @@ GEM
       sprockets-rails (>= 2.0.0)
     rails-admin-scaffold (0.1.0)
       rails (>= 4.0)
+    rails-assets-datetimepicker (2.5.4)
+      rails-assets-jquery (>= 1.7.2)
+      rails-assets-jquery-mousewheel (>= 3.1.13)
+      rails-assets-php-date-formatter (>= 1.3.3)
+    rails-assets-jquery (3.2.1)
+    rails-assets-jquery-mousewheel (3.1.13)
+      rails-assets-jquery (>= 1.2.2)
+    rails-assets-php-date-formatter (1.3.4)
     rails-dom-testing (2.0.3)
       activesupport (>= 4.2.0)
       nokogiri (>= 1.6)
@@ -283,11 +292,11 @@ DEPENDENCIES
   devise-bootstrap-views
   devise-i18n
   devise-i18n-views
+  ffaker
   font-awesome-rails
   i18n_scaffold_generator
   jbuilder (~> 2.5)
   jquery-countdown-rails
-  jquery-datetimepicker-rails
   jquery-rails
   jquery-turbolinks
   kaminari
@@ -298,6 +307,7 @@ DEPENDENCIES
   puma (~> 3.7)
   rails (~> 5.1.1)
   rails-admin-scaffold
+  rails-assets-datetimepicker!
   rails-i18n
   rqrcode_png
   rucaptcha

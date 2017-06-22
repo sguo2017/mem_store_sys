@@ -1,3 +1,6 @@
+require 'net/http'  
+require 'uri'
+
 class Phone::SmsSendsController < PhoneController
   before_action :set_sms_send, only: [:show, :edit, :update, :destroy]
 
@@ -39,9 +42,31 @@ class Phone::SmsSendsController < PhoneController
     send_content = rand(9999)     
     @sms_send.send_content = send_content   
 
+
+
     respond_to do |format|
       if @sms_send.save
-        @msg = "短信发送成功#{send_content}"
+          add = "#{Const::SMS_SEND_URL}"
+          logger.debug "48 #{add}"
+          uri = URI.parse(add)
+          http = Net::HTTP.new(uri.host)
+          request = Net::HTTP::Post.new(uri.request_uri)
+          tpl_val = URI.encode("#code#")  + "=" + URI.encode("#{send_content}");
+          data = {apikey:Const::SMS_SEND_API_KEY, 
+                  mobile:sms_send_params[:recv_num],
+                  tpl_id:Const::TPL_ID,
+                  tpl_value:tpl_val
+                }
+          request.set_form_data(data)
+          #request['Content-Type'] = 'application/json;charset=utf-8'
+          #request['User-Agent'] = 'Mozilla/5.0 (Windows NT 5.1; rv:29.0) Gecko/20100101 Firefox/29.0'
+          #request.body = params.to_json
+          response = http.start { |http| http.request(request) }
+          # puts response.body.inspect
+          # puts JSON.parse response.body
+
+
+        @msg = "短信发送成功"
         return render json: {status: :created, msg: @msg}  
       else
         return render json: {status: :created, msg: @msg}

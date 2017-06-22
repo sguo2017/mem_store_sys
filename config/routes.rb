@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  namespace :phone do
+    resources :stores
+  end
   get 'welcome/index'
 
   namespace :phone do

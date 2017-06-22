@@ -30,5 +30,11 @@ $ ->
 		 
 
   $('.notice_close_btn').click -> $('.activation_popup_wrap').hide()
-  
+
+  $('.ico-scan').click -> wx.scanQRCode({
+        	needResult: 0,
+        	scanType: ["qrCode","barCode"],
+        	success: (res) ->
+              		alert(res.resultStr)          
+	  	});  
 

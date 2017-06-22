@@ -1,4 +1,5 @@
 class Phone::MemActivationsController < PhoneController
+  require 'net/http'
   layout "phone"
   before_action :set_mem_activation, only: [:show, :edit, :update, :destroy]
 
@@ -8,6 +9,15 @@ class Phone::MemActivationsController < PhoneController
     @user = User.new
     @referee_id = params[:referee_id]
     @store_id = params[:store_id]
+
+    @code = params[:code]
+
+    # logger.debug "15 #{@code}"
+    # @code = "LWJd+7k3A5bp9ggsh4T0JUGl1iE1iFN7cemXeB2iAjGsMCnkzyC4ptNGg8fytyAehSZc9miaRkLEniQNoqmMpA=="
+
+    # getAccessToken(@code)
+
+    # getJSAccessToken(@code)
  end
   # GET /phone/mem_activations/1
   # GET /phone/mem_activations/1.json
@@ -94,6 +104,33 @@ class Phone::MemActivationsController < PhoneController
       format.html { redirect_to phone_mem_activations_url, notice: 'Mem activation was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def getAccessToken(code)
+    # uri = URI.parse(Const::WXConfig::ACCESS_TOKEN + "appid=#{Const::WXConfig::APPID}&secret=#{Const::WXConfig::SECRET}&code=#{code}&grant_type=#{Const::WXConfig::GRANT_TYPE}")
+    uri = URI.parse(Const::WXConfig::ACCESS_TOKEN + "grant_type=#{Const::WXConfig::GRANT_TYPE}&appid=#{Const::WXConfig::APPID}&secret=#{Const::WXConfig::SECRET}")
+    logger.debug "106 #{uri}"
+    http = Net::HTTP.new(uri.host)
+    request = Net::HTTP::Post.new(uri.request_uri)
+    #request['Content-Type'] = 'application/json;charset=utf-8'
+    #request['User-Agent'] = 'Mozilla/5.0 (Windows NT 5.1; rv:29.0) Gecko/20100101 Firefox/29.0'
+    #request.body = params.to_json
+    response = http.start { |http| http.request(request) }
+    logger.debug "112 #{response.body.inspect}"
+    logger.debug "113 #{response.body.to_json}"
+  end
+
+  def getJSAccessToken(code)
+    uri = URI.parse(Const::WXConfig::JS_ACCESS_TOKEN + "access_token=#{code}&type=jsapi")
+    logger.debug "106 #{uri}"
+    http = Net::HTTP.new(uri.host)
+    request = Net::HTTP::Post.new(uri.request_uri)
+    #request['Content-Type'] = 'application/json;charset=utf-8'
+    #request['User-Agent'] = 'Mozilla/5.0 (Windows NT 5.1; rv:29.0) Gecko/20100101 Firefox/29.0'
+    #request.body = params.to_json
+    response = http.start { |http| http.request(request) }
+    logger.debug "112 #{response.body.inspect}"
+    logger.debug "113 #{response.body.to_json}"
   end
 
   private

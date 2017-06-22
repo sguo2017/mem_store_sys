@@ -80,4 +80,11 @@ gem 'ckeditor'
 gem 'mini_magick'
 gem 'rqrcode_png'
 gem 'jquery-countdown-rails'
-gem 'jquery-datetimepicker-rails'
+#gem 'jquery-datetimepicker-rails'
+source 'https://rails-assets.org' do
+  gem 'rails-assets-datetimepicker'
+end
+gem 'ffaker'
+#gem 'amcharts.rb'
+#gem 'compendium'
+

@@ -10,8 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170619005160) do
-  #活动基本信息
+ActiveRecord::Schema.define(version: 20170622101626) do
+
   create_table "activities", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "title"
     t.date "begin_time"
@@ -24,7 +24,6 @@ ActiveRecord::Schema.define(version: 20170619005160) do
     t.string "status", default: "00X"
   end
 
-  #奖项配置表
   create_table "activity_award_cfgs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
     t.string "level_I"
@@ -34,8 +33,7 @@ ActiveRecord::Schema.define(version: 20170619005160) do
     t.datetime "updated_at", null: false
     t.string "status", default: "00A"
   end
- 
-  #活动奖项表
+
   create_table "activity_awards", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "catalog"
     t.integer "rate"
@@ -49,7 +47,6 @@ ActiveRecord::Schema.define(version: 20170619005160) do
     t.string "activity_award_cfg_name"
   end
 
-  #del
   create_table "activity_bases", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "title"
     t.date "begin_time"
@@ -59,7 +56,6 @@ ActiveRecord::Schema.define(version: 20170619005160) do
     t.datetime "updated_at", null: false
   end
 
-  #积分兑换
   create_table "bonus_changes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "score"
     t.integer "red_packet"
@@ -67,7 +63,6 @@ ActiveRecord::Schema.define(version: 20170619005160) do
     t.datetime "updated_at", null: false
   end
 
-  #富媒体编辑器
   create_table "ckeditor_assets", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "data_file_name", null: false
     t.string "data_content_type"
@@ -79,8 +74,7 @@ ActiveRecord::Schema.define(version: 20170619005160) do
     t.datetime "updated_at", null: false
     t.index ["type"], name: "index_ckeditor_assets_on_type"
   end
-  
-  #商品
+
   create_table "goods", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "code"
     t.string "name"
@@ -95,8 +89,7 @@ ActiveRecord::Schema.define(version: 20170619005160) do
     t.string "info"
     t.integer "goods_catalog_id"
   end
- 
-  #商品分类
+
   create_table "goods_catalogs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "code"
     t.string "name"
@@ -104,7 +97,6 @@ ActiveRecord::Schema.define(version: 20170619005160) do
     t.datetime "updated_at", null: false
   end
 
-  #商品分类
   create_table "lotteries", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "activity_id"
     t.string "activity_name"
@@ -116,8 +108,7 @@ ActiveRecord::Schema.define(version: 20170619005160) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
- 
-  #会员分组
+
   create_table "mem_groups", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "city"
     t.string "province"
@@ -126,7 +117,6 @@ ActiveRecord::Schema.define(version: 20170619005160) do
     t.datetime "updated_at", null: false
   end
 
-  #会员级别
   create_table "mem_levels", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "code"
     t.string "name"
@@ -136,7 +126,6 @@ ActiveRecord::Schema.define(version: 20170619005160) do
     t.string "level"
   end
 
-  #del
   create_table "posts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "title"
     t.text "content"
@@ -145,7 +134,6 @@ ActiveRecord::Schema.define(version: 20170619005160) do
     t.datetime "updated_at", null: false
   end
 
-  #积分历史
   create_table "score_histories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "point"
     t.string "object_type"
@@ -158,7 +146,6 @@ ActiveRecord::Schema.define(version: 20170619005160) do
     t.string "red_packet"
   end
 
-  #短信
   create_table "sms_sends", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "recv_num"
     t.string "send_content"
@@ -169,7 +156,6 @@ ActiveRecord::Schema.define(version: 20170619005160) do
     t.datetime "updated_at", null: false
   end
 
-  #门店
   create_table "stores", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "code"
     t.string "catalog"
@@ -188,7 +174,6 @@ ActiveRecord::Schema.define(version: 20170619005160) do
     t.string "qrcode"
   end
 
-  #技术服务
   create_table "tech_servs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.text "content"
     t.datetime "created_at", null: false
@@ -196,7 +181,6 @@ ActiveRecord::Schema.define(version: 20170619005160) do
     t.string "avatar"
   end
 
-  #用户
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -228,6 +212,7 @@ ActiveRecord::Schema.define(version: 20170619005160) do
     t.string "longitude"
     t.integer "referee_id"
     t.integer "store_id"
+    t.string "status", default: "00A"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

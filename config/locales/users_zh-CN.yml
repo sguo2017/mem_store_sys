@@ -13,11 +13,23 @@ zh-CN:
         avatar: "头像"
         score: "当前积分"
         score_total: "累计积分"
+        mem_group_id: "用户组"
+        birthday: "生日"
+        phone_num: "电话号码"
+        code: "用户编码"
+        district: "区"
+        city: "城市"
+        province: "省"
+        country: "国家"
+        referee_id: "推荐人"
+        store_id: "门店"
+        status: "状态"
         password: "密码"
         password_confirmation: "确认密码"
         created_at: "创建时间"
         updated_at: "更新时间"
         actions: "操作"
+
   helpers:
     links:
       show: "查看"

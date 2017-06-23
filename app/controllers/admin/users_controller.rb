@@ -7,15 +7,15 @@ class Admin::UsersController < AdminController
       @name = params[:name]
       @mem_group_id = params[:mem_group_id]
     if @name.blank? &&  @mem_group_id.blank?
-      @users = User.where(:admin =>0).page(params[:page]).per(10)
+      @users = User.where(:admin =>0).where("status <> '00H'").page(params[:page]).per(10)
     else
       if @mem_group_id.blank? 
-        @users = User.where('name LIKE ? ', '%'+@name+'%').where(:admin =>0).page(params[:page]).per(10)
+        @users = User.where('name LIKE ? ', '%'+@name+'%').where(:admin =>0).where("status <> '00H'").page(params[:page]).per(10)
       else
         if @name.blank?   ##当name字段值为空时要去掉like,否则查询不到
-           @users = User.where(:admin =>0).where(:mem_group_id =>@mem_group_id).page(params[:page]).per(10)
+           @users = User.where(:admin =>0).where("status <> '00H'").where(:mem_group_id =>@mem_group_id).page(params[:page]).per(10)
         else
-         @users = User.where('name LIKE ? ', '%'+@name+'%').where(:admin =>0).where(:mem_group_id =>@mem_group_id).page(params[:page]).per(10)
+         @users = User.where('name LIKE ? ', '%'+@name+'%').where(:admin =>0).where("status <> '00H'").where(:mem_group_id =>@mem_group_id).page(params[:page]).per(10)
         end
         
       end
@@ -61,7 +61,9 @@ class Admin::UsersController < AdminController
     respond_to do |format|
       if @user.update(user_params)
         format.html { redirect_to admin_users_url, notice: '会员信息已成功更新.' }
-        format.json { head :no_content }
+        @code = 200
+        @msg = "success"
+        format.json { render json: {status: :update, code: @code, msg: @msg} }
       else
         format.html { render action: 'edit' }
         format.json { render json: @user.errors, status: :unprocessable_entity }
@@ -87,7 +89,8 @@ class Admin::UsersController < AdminController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:mem_group_id)
+      #params.require(:user).permit(:mem_group_id,:status,:name)
+      params.require(:user).permit(:email, :level, :admin, :score, :name, :code, :sex, :birthday, :phone_num, :score_total, :mem_group_id, :district, :city, :province, :country, :latitude, :longitude, :referee_id, :store_id, :status)
       #params[:user]
     end
 end

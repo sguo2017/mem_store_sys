@@ -1,9 +1,14 @@
 Rails.application.routes.draw do
+
   namespace :admin do
     namespace :report do
       resources :flow_analyses
+      resources :page_analyses
+      resources :mem_analyses
+      resources :region_analyses
     end
   end
+  
   get 'welcome/index'
 
   namespace :phone do

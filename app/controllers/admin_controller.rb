@@ -16,9 +16,9 @@ class AdminController < ApplicationController
     @current_uri = request.fullpath
     @current_nav = @current_uri[/^\/admin\/([a-z_]+)[\?\/]{0,1}.?*/,1].to_s
     if @current_nav.blank?
-         logger.debug "error! current_nav is blank!!!"
+        logger.debug "error! current_nav is blank!!!"
     else
-        logger.debug "@current_nav #{@current_nav}"
+        logger.debug "@current_nav  #{@current_nav}"
     end
     @goods_menu = ["goods_catalogs"]
     @user_menu = ["lotteries", "score_histories", "mem_groups"]

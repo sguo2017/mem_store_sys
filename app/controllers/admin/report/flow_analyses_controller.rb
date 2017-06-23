@@ -1,4 +1,4 @@
-class Admin::Report::FlowAnalysesController < ApplicationController
+class Admin::Report::FlowAnalysesController < AdminController
   def index
   end
 end

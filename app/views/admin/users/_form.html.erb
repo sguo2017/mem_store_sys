@@ -11,7 +11,112 @@
     </div>
   <% end %>
 
-  <div class="actions">
-    <%= f.submit %>
+ <div class="container">
+  <div class="panel">
+    <div class="panel-heading">
+      <div class="panel-title">新增编辑用户</div>
+    </div>
+    <div class="panel-body">
+      <!-- <form action="" class="form-horizontal"> -->
+        <div class="clearfix form-list">
+          <label class="col-xs-2 control-label" for=""><%= f.label :name %></label>
+          <div class="col-xs-4">
+            <%= f.text_field :name, :class => 'form-control' %>
+            <%=f.error_span(:name) %>
+          </div>
+          <label class="col-xs-2 control-label" for=""><%= f.label :email %></label>
+          <div class="col-xs-4">
+            <%= f.text_field :email, :class => 'form-control' %>
+            <%=f.error_span(:email) %>
+          </div>
+          <label class="col-xs-2 control-label" for=""><%= f.label :level%></label>
+          <div class="col-xs-4">
+            <%= f.text_field :level, :class => 'form-control' %>
+            <%=f.error_span(:level) %>
+          </div>
+          <label class="col-xs-2 control-label" for=""><%= f.label :score %></label>
+          <div class="col-xs-4">
+            <%= f.text_field :score, :class => 'form-control' %>
+            <%=f.error_span(:score) %>
+          </div>
+          <label class="col-xs-2 control-label" for=""><%= f.label '性别' %></label>
+          <div class="col-xs-4">
+            <%= f.text_field :sex, :class => 'form-control' %>
+            <%=f.error_span(:sex) %>
+          </div>
+          <label class="col-xs-2 control-label" for=""><%= f.label '生日' %></label>
+          <div class="col-xs-4">
+            <%= f.text_field :birthday, :class => 'form-control date-picker' %>
+            <%=f.error_span(:birthday) %>
+          </div>
+          <label class="col-xs-2 control-label" for=""><%= f.label '电话号码' %></label>
+          <div class="col-xs-4">
+            <%= f.text_field :phone_num, :class => 'form-control' %>
+            <%=f.error_span(:phone_num) %>
+          </div>
+          <label class="col-xs-2 control-label" for=""><%= f.label :code %></label>
+          <div class="col-xs-4">
+            <%= f.text_field :code, :class => 'form-control' %>
+            <%=f.error_span(:code) %>
+          </div>
+          <label class="col-xs-2 control-label" for=""><%= f.label :score_total %></label>
+          <div class="col-xs-4">
+            <%= f.text_field :score_total, :class => 'form-control' %>
+            <%=f.error_span(:score_total) %>
+          </div>
+           <label class="col-xs-2 control-label" for=""><%= f.label :用户组 %></label>
+          <div class="col-xs-4">
+            <%= f.text_field :mem_group_id, :class => 'form-control' %>
+            <%=f.error_span(:mem_group_id) %>
+          </div>
+           <label class="col-xs-2 control-label" for=""><%= f.label :是否管理员 %></label>
+          <div class="col-xs-4">
+            <%= f.text_field :admin, :class => 'form-control' %>
+            <%=f.error_span(:admin) %>
+          </div>
+         <label class="col-xs-2 control-label" for=""><%= f.label :district %></label>
+          <div class="col-xs-4">
+            <%= f.text_field :district, :class => 'form-control' %>
+            <%=f.error_span(:district) %>
+          </div> 
+          <label class="col-xs-2 control-label" for=""><%= f.label :city %></label>
+          <div class="col-xs-4">
+            <%= f.text_field :city, :class => 'form-control' %>
+            <%=f.error_span(:city) %>
+          </div>
+         <label class="col-xs-2 control-label" for=""><%= f.label :province %></label>
+          <div class="col-xs-4">
+            <%= f.text_field :province, :class => 'form-control' %>
+            <%=f.error_span(:province) %>
+          </div>
+         <label class="col-xs-2 control-label" for=""><%= f.label :country %></label>
+          <div class="col-xs-4">
+            <%= f.text_field :country, :class => 'form-control' %>
+            <%=f.error_span(:country) %>
+          </div>
+           <label class="col-xs-2 control-label" for=""><%= f.label :referee_id %></label>
+          <div class="col-xs-4">
+            <%= f.text_field :referee_id, :class => 'form-control' %>
+            <%=f.error_span(:referee_id) %>
+          </div>
+          <label class="col-xs-2 control-label" for=""><%= f.label :store_id %></label>
+          <div class="col-xs-4">
+            <%= f.text_field :store_id, :class => 'form-control' %>
+            <%=f.error_span(:store_id) %>
+          </div>
+          <label class="col-xs-2 control-label" for=""><%= f.label :状态 %></label>
+          <div class="col-xs-4">
+            <%= f.text_field :status, :class => 'form-control' %>
+            <%=f.error_span(:status) %>
+          </div>
+        <!-- </form> -->
+      <div class="block-mt">
+        <%= f.submit nil, :class => 'btn btn-warning' %>
+        <a  class="btn btn-default" href="javascript:void(0);" 
+        onclick=window.location.href="<%= admin_users_path%>;" >取消
+        </a>
+      </div>
+    </div>
   </div>
+</div>
 <% end %>

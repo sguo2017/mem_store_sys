@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
-  namespace :phone do
-    resources :stores
+  namespace :admin do
+    namespace :report do
+      resources :flow_analyses
+    end
   end
   get 'welcome/index'
 
@@ -18,6 +20,7 @@ Rails.application.routes.draw do
     resources :sms_sends
     resources :lotteries
     resources :wxes
+    resources :stores
   end
 
   namespace :admin do

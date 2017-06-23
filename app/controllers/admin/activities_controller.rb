@@ -4,7 +4,7 @@ class Admin::ActivitiesController < AdminController
   # GET /admin/activities
   # GET /admin/activities.json
   def index
-      @activities = Activity.order("created_at DESC").page(params[:page]).per(10)
+      
   end
 
   # GET /admin/activities/1

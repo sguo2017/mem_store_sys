@@ -1,7 +1,6 @@
 class AdminController < ApplicationController
 	before_action :authenticate_user!
-	before_action :phone_access_admin    
-    before_action :menu_active
+	before_action :phone_access_admin
 
   def phone_access_admin  	
     @user = current_user 
@@ -9,25 +8,21 @@ class AdminController < ApplicationController
     unless @user.admin 
      	redirect_to [:phone, 'homepages'] 
     end
-
-  end
-
-  def menu_active    
     @current_uri = request.fullpath
     @current_nav = @current_uri[/^\/admin\/([a-z_]+)[\?\/]{0,1}.?*/,1].to_s
     if @current_nav.blank?
-         puts "error! current_nav is blank!!!"
+    	 puts "error! current_nav is blank!!!"
     end
     @goods_menu = ["goods_catalogs"]
     @user_menu = ["lotteries", "score_histories", "mem_groups"]
     @bonus = ["bonus_changes", "mem_levels"]
     if @goods_menu.include?(@current_nav) 
-        @current_nav = "goods"
+    	@current_nav = "goods"
     elsif @user_menu.include?(@current_nav)
-        @current_nav = "users"
+    	@current_nav = "users"
     elsif @bonus.include?(@current_nav)
-        @current_nav = "bonus"
+    	@current_nav = "bonus"
     end
-  end
 
+	end
 end

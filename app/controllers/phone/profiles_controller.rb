@@ -47,11 +47,11 @@ class Phone::ProfilesController < PhoneController
     respond_to do |format|
       @msg = ''
       if @user.update(profile_params)
-        @msg = '保存成功'
+        @msg = 'profile_save_success'
         format.html { redirect_to [:phone, "profiles"], notice:  @msg }
         #format.json { head :no_content,msg: @msg }
       else
-         @msg = '保存成败'
+         @msg = 'profile_save_fail'
         format.html { redirect_to [:phone, "profiles"], notice:  @msg }
         #format.json { render json: @user.errors, status: :unprocessable_entity }
       end

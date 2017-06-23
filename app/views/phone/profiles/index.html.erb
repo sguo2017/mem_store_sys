@@ -91,9 +91,12 @@
       function show_notice(){
         var notice = $("#notice").val()
           if(notice != "" && notice != null) {
-            alert(notice)
-            $("#notice").val("");       
+            if(notice == 'profile_save_success')
+              alert("保存成功")
+            else if(notice == 'profile_save_fail')
+              alert("保存失败 ")
           }
+          $("#notice").val(""); 
       }
 
     $(document).ready(function(){

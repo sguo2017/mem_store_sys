@@ -57,7 +57,8 @@
 </div>
 <div>
   <%= link_to t('.new', :default => t("helpers.links.new")),
-            new_admin_user_path,
+            'javascript:void(0);',
+            :disabled => true,
             :class => 'btn btn-warning' %>
         <!--  切换分组 modal -->
         <%= render :partial => 'modal_users' %>

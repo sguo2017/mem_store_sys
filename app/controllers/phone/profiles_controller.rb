@@ -43,13 +43,16 @@ class Phone::ProfilesController < PhoneController
   # PATCH/PUT /phone/profiles/1
   # PATCH/PUT /phone/profiles/1.json
   def update
+
     respond_to do |format|
+      @msg = ''
       if @user.update(profile_params)
-        format.html { redirect_to [:phone, "profiles"], notice: '保存成功' }
+        @msg = '保存成功'
+        format.html { redirect_to [:phone, "profiles"], notice:  @msg }
         #format.json { head :no_content,msg: @msg }
       else
-
-        format.html { redirect_to [:phone, "profiles"], notice: '保存成败' }
+         @msg = '保存成败'
+        format.html { redirect_to [:phone, "profiles"], notice:  @msg }
         #format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end

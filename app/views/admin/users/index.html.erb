@@ -57,6 +57,7 @@
 </div>
 <div>
   <%= link_to t('.new', :default => t("helpers.links.new")),
+            #new_admin_good_path
             'javascript:void(0);',
             :disabled => true,
             :class => 'btn btn-warning' %>
@@ -68,6 +69,75 @@
             </div>
 
         </div>
+<script type="text/javascript">
+  $(document).ready(function(){
+        (function() {
+      $(function() {
+        $('.lock-user-btn').click(function() {
+          var status, that, url, user_id;
+          that = $(this);
+          user_id = $(this).data('user');
+          status = $(this).data('status');
+          if (status === '00A') {
+            status = '00X';
+          } else if (status === '00X') {
+            status = '00A';
+          }
+          url = '/admin/users/' + user_id + '.json';
+          return $.ajax(url, {
+            type: 'patch',
+            dataType: 'json',
+            data: {
+              user: {
+                status: status
+              }
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+              return console.log("AJAX Error: " + textStatus);
+            },
+            success: function(data, textStatus, jqXHR) {
+              that.data('status', status);
+              if (status === '00A') {
+                that.children('.unlock-text').hide();
+                return that.children('.lock-text').show();
+              } else if (status === '00X') {
+                that.children('.lock-text').hide();
+                return that.children('.unlock-text').show();
+              }
+            }
+          });
+        });
+        return $('.close-user-btn').click(function() {
+          var status, url, user_id;
+          if (confirm("确定注销?")) {
+            user_id = $(this).data('user');
+            status = '00H';
+            url = '/admin/users/' + user_id + '.json';
+            return $.ajax(url, {
+              type: 'patch',
+              dataType: 'json',
+              data: {
+                user: {
+                  status: status
+                }
+              },
+              error: function(jqXHR, textStatus, errorThrown) {
+                return console.log("AJAX Error: " + textStatus);
+              },
+              success: function(data, textStatus, jqXHR) {
+                alert("注销成功");
+                console.log("AJAX success: " + data.msg);
+                return window.location.reload();
+              }
+            });
+          }
+        });
+      });
 
+    }).call(this);
+
+    
+  })
+</script>
 
         <!--  切换分组 modal end -->

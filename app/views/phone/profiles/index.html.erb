@@ -1,4 +1,4 @@
-  <div class="header">
+    <div class="header">
     <a class="header-left" href="/phone/homepages">
       <span class="ico-header-back"></span>
     </a>
@@ -8,7 +8,7 @@
   <!-- header end -->
   <div class="container has-top">
     <div class="sub-title">账户与安全</div>
-    <%=  form_tag(@action, method: :patch) do %>
+      <%=  form_tag(@action, method: :patch) do %>
     <ul class="data-list form-list profile_form_list">
       <li class="data-item">
         <div><i class="ico-user2"></i>头像</div>
@@ -46,7 +46,9 @@
           <i class="ico-birth"></i>
           生日  
         </div>
-        <%= text_field_tag "user[birthday]", @user.birthday, class: "flex-fluid" %>
+        <div>
+        <%= text_field_tag "user[birthday]", @user.birthday, class: "flex-fluid datetimepicker" %>
+        </div>
       </li>
     </ul>
     <ul class="data-list block-mt form-list">
@@ -74,10 +76,36 @@
     </div>
   <% end %>
   <script type="text/javascript">
+     function check_input(){
+
+             $('.profile_submit_button').click(function() {
+                if (!/^1\d{10}$/.test($('#user_phone_num').val())) {
+                  alert("号码格式不对");
+                  return false;
+                } else {
+                  return true;
+                }
+              });
+
+      }
+      function show_notice(){
+        var notice = $("#notice").val()
+          if(notice != "" && notice != null) {
+            alert(notice)
+            $("#notice").val("");       
+          }
+      }
+
     $(document).ready(function(){
-      var notice = $("#notice").val()
-      if(notice != "" && notice != null) alert(notice)
+        show_notice()
+        //日期控件初始化
+        $.datetimepicker.setLocale('zh');
+        $('.datetimepicker').datetimepicker({timepicker:false,format:'Y-m-d'});
+        //检查手机格式
+        check_input()
     })
+
+   
   </script>
 
   </div>

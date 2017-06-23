@@ -46,7 +46,7 @@
           </div>
           <label class="col-xs-2 control-label" for=""><%= f.label '生日' %></label>
           <div class="col-xs-4">
-            <%= f.text_field :birthday, :class => 'form-control date-picker' %>
+            <%= f.text_field :birthday, :class => 'form-control datetimepicker' %>
             <%=f.error_span(:birthday) %>
           </div>
           <label class="col-xs-2 control-label" for=""><%= f.label '电话号码' %></label>
@@ -113,10 +113,17 @@
       <div class="block-mt">
         <%= f.submit nil, :class => 'btn btn-warning' %>
         <a  class="btn btn-default" href="javascript:void(0);" 
-        onclick=window.location.href="<%= admin_users_path%>;" >取消
+        onclick=window.location.href="<%= admin_users_path%>" >取消
         </a>
       </div>
     </div>
   </div>
 </div>
 <% end %>
+  <script type="text/javascript">
+  $(document).ready(function(){
+    $.datetimepicker.setLocale('zh');
+    $('.datetimepicker').datetimepicker({timepicker:false,format:'Y-m-d'});
+  })
+  </script>
+

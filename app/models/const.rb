@@ -8,7 +8,7 @@ class Const
   #初始化奖项
   AWARD_COUNT=10
   #抽奖机会
-  CHANCE_DRAE_COUNT = 50
+  CHANCE_DRAE_COUNT = 5
   #抽奖返回信息提示
   LOTTERY_MSG = {:no_chance => "您今天抽奖机会用完了，改天再来吧！", :unknown => "未知错误，请联系管理员"}
   #活动状态

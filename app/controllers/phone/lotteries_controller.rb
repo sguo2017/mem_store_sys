@@ -63,7 +63,7 @@ class Phone::LotteriesController < PhoneController
     respond_to do |format|
       if @lottery.save
         format.json { 
-          render json: {status: "0", item: @item} 
+          render json: {status: "0", item: @item, avaliable:@avaliable-1} 
         }
       else
         format.json { 

@@ -20,7 +20,7 @@
     </div> -->
     <div class="top_info">
      <!-- 用户手机号:<span><%= @user.phone_num %></span><br /> -->
-     抽奖剩余次数:<span><%= @avaliable %>次</span> 
+     抽奖剩余次数:<span id="avaliable_span"><%= @avaliable %></span>次 
      </div>
      <div class="line"></div>
 	<div class="banner">
@@ -80,6 +80,8 @@ $(document).ready(function(){
   //动态添加大转盘的奖品与奖品区域背景颜色
 
   turnplate.restaraunts = [<% @restaraunts.each do |restaraunt| %> "<%= restaraunt %>", <% end %>];
+
+
   turnplate.colors = [<% @colors.each do |color| %> "<%= color %>", <% end %>];
 
   
@@ -117,7 +119,8 @@ $(document).ready(function(){
   };
 
   $('.pointer').click(function (){
-    if(<%= @avaliable %> < 0 ){
+    var avaliable = $("#avaliable_span").html()
+    if(avaliable < 0){
       alert("<%= Const::LOTTERY_MSG[:no_chance] %>")
       return;
     }
@@ -139,6 +142,8 @@ $(document).ready(function(){
           var status = data.status
           if(status == 0){
             var item = data.item
+            var avaliable = data.avaliable
+            $("#avaliable_span").html(avaliable)
             rotateFn(item, turnplate.restaraunts[item-1]);
           }else{
             alert(data.msg)           
@@ -150,15 +155,17 @@ $(document).ready(function(){
     });
     
   });
+
+   drawRouletteWheel();
 });
 
 //页面所有元素加载完毕后执行drawRouletteWheel()方法对转盘进行渲染
 window.onload=function(){
-  drawRouletteWheel();
+  // drawRouletteWheel();
 };
 
 function drawRouletteWheel() {    
-  var canvas = document.getElementById("wheelcanvas");    
+  var canvas = document.getElementById("wheelcanvas");  
   if (canvas.getContext) {
     //根据奖品个数计算圆周角度
     var arc = Math.PI / (turnplate.restaraunts.length/2);
@@ -168,7 +175,7 @@ function drawRouletteWheel() {
     //strokeStyle 属性设置或返回用于笔触的颜色、渐变或模式  
     ctx.strokeStyle = "#FFBE04";
     //font 属性设置或返回画布上文本内容的当前字体属性
-    ctx.font = '16px Microsoft YaHei';      
+    ctx.font = '16px Microsoft YaHei';  
     for(var i = 0; i < turnplate.restaraunts.length; i++) {       
       var angle = turnplate.startAngle + i * arc;
       ctx.fillStyle = turnplate.colors[i];

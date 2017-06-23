@@ -74,7 +74,7 @@
 			width: 12px;
 		}	
 	</style>
-	<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=A4749739227af1618f7b0d1b588c0e85"></script>
+	<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=UkGlS1os9PpxMQ7l38Ov11AiWXHZrzOR"></script>
 	<!-- 加载百度地图样式信息窗口 -->
 	<script type="text/javascript" src="http://api.map.baidu.com/library/SearchInfoWindow/1.5/src/SearchInfoWindow_min.js"></script>
 	<link rel="stylesheet" href="http://api.map.baidu.com/library/SearchInfoWindow/1.5/src/SearchInfoWindow_min.css" />
@@ -88,7 +88,7 @@
 		<button id="open">打开</button><button id="close">关闭</button>
 	</div>
 	<!--城市列表-->
-	<div class="sel_container"><strong id="curCity">北京市</strong> [<a id="curCityText" href="javascript:void(0)">更换城市</a>]</div>
+	<div class="sel_container"><strong id="curCity">广州</strong> [<a id="curCityText" href="javascript:void(0)">更换城市</a>]</div>
 	<div class="map_popup" id="cityList" style="display:none;">
 		<div class="popup_main">
 			<div class="title">城市列表</div>
@@ -101,7 +101,7 @@
 <script type="text/javascript">
 	// 百度地图API功能
 	var map = new BMap.Map("l-map");          // 创建地图实例
-	var point = new BMap.Point(116.403694,39.927552);  // 创建点坐标
+	var point = new BMap.Point(113.331315,23.124922);  // 创建点坐标
 	map.centerAndZoom(point, 15);                 // 初始化地图，设置中心点坐标和地图级别
 	map.enableScrollWheelZoom();
 	map.addControl(new BMap.NavigationControl());  //添加默认缩放平移控件
@@ -111,7 +111,7 @@
 			map.removeTileLayer(customLayer);
 		}
 		customLayer=new BMap.CustomLayer({
-			geotableId: 30960,
+			geotableId: 170620,
 			q: '', //检索关键字
 			tags: '', //空格分隔的多字符串
 			filter: '' //过滤条件,参考http://developer.baidu.com/map/lbs-geosearch.htm#.search.nearby
@@ -123,7 +123,7 @@
 	{
 			var customPoi = e.customPoi;//poi的默认字段
 			var contentPoi=e.content;//poi的自定义字段
-			var content = '<p style="width:280px;margin:0;line-height:20px;">地址：' + customPoi.address + '<br/>价格:'+contentPoi.dayprice+'元'+'</p>';
+			var content = '<p style="width:280px;margin:0;line-height:20px;">地址：' + customPoi.address + '<br/>联系人:'+contentPoi.link_man+ '<br/>联系电话:'+contentPoi.num+'</p>';
 			var searchInfoWindow = new BMapLib.SearchInfoWindow(map, content, {
 				title: customPoi.title, //标题
 				width: 290, //宽度

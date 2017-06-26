@@ -51,9 +51,9 @@
             <div class="org">恭喜您获得<span id="award_result">100M</span>！</div>
 			<div class="search_bar">
                 <p>
-                  小提示：中奖啦，当天未领取奖品作废哦。还有抽奖次数，再来一次吧！
+                  恭喜：您抽中<span id="award_result_desc"></span>！
 				</p>
-                <input style=" margin-right:8%;" class="sure_button cricle" type="button" value="兑换" />
+                <!-- <input style=" margin-right:8%;" class="sure_button cricle" type="button" value="兑换" /> -->
                 <input class="sure_button cricle" onclick="close_div();" type="button" value="再来一次~" />
        		</div>
                
@@ -110,7 +110,7 @@ $(document).ready(function(){
       animateTo:angles+1800,
       duration:8000,
       callback:function (){
-        $("#award_result").html(txt)
+        // $("#award_result").html(txt)
         $("#lottery_result").show();
 
         turnplate.bRotate = !turnplate.bRotate;
@@ -143,8 +143,14 @@ $(document).ready(function(){
           if(status == 0){
             var item = data.item
             var avaliable = data.avaliable
+            var award = turnplate.restaraunts[item-1];
+            var idx = award.indexOf("#")
             $("#avaliable_span").html(avaliable)
-            rotateFn(item, turnplate.restaraunts[item-1]);
+            
+            $("#award_result").html(award.substring(0,idx))
+            $("#award_result_desc").html(award.substring(idx+1))
+
+            rotateFn(item, item);
           }else{
             alert(data.msg)           
           }
@@ -199,17 +205,17 @@ function drawRouletteWheel() {
       ctx.rotate(angle + arc / 2 + Math.PI / 2);
       
       /** 下面代码根据奖品类型、奖品名称长度渲染不同效果，如字体、颜色、图片效果。(具体根据实际情况改变) **/
-      if(text.indexOf("M")>0){//流量包
-        var texts = text.split("M");
+      if(text.indexOf("#")>0){//流量包
+        var texts = text.split("#");
         for(var j = 0; j<texts.length; j++){
           ctx.font = j == 0?'bold 20px Microsoft YaHei':'16px Microsoft YaHei';
           if(j == 0){
-            ctx.fillText(texts[j]+"M", -ctx.measureText(texts[j]+"M").width / 2, j * line_height);
+            ctx.fillText(texts[j], -ctx.measureText(texts[j]+"#").width / 2, j * line_height);
           }else{
             ctx.fillText(texts[j], -ctx.measureText(texts[j]).width / 2, j * line_height);
           }
         }
-      }else if(text.indexOf("M") == -1 && text.length>6){//奖品名称长度超过一定范围 
+      }else if(text.indexOf("#") == -1 && text.length>6){//奖品名称长度超过一定范围 
         text = text.substring(0,6)+"||"+text.substring(6);
         var texts = text.split("||");
         for(var j = 0; j<texts.length; j++){

@@ -27,9 +27,10 @@ class Phone::ActivitiesController < PhoneController
     @activity = Activity.where("status='00A'").first
     @activity_awards = @activity.activity_awards.where("status='00A'")
     @restaraunts = []
-    @activity_awards.each do |award|
+    @restaraunts_idx = ["一","二","三","四","五","六","七","八","九","十"]    
+    @activity_awards.each_with_index do |award,index|
       @activity_award_cfg = ActivityAwardCfg.find(award.activity_award_cfg_id)
-      @restaraunts.push(@activity_award_cfg.name)
+      @restaraunts.push(@restaraunts_idx[index]+"等奖#"+@activity_award_cfg.name)
     end
     logger.debug "#{@restaraunts.to_json}"
 

@@ -39,7 +39,7 @@ class Phone::SmsSendsController < PhoneController
     @sms_send = SmsSend.new(sms_send_params)
     @sms_send.sms_type='code'
 
-    send_content = rand(9999)     
+    send_content = rand(1001..9999)     
     @sms_send.send_content = send_content   
 
 

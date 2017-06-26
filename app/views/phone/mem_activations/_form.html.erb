@@ -1,5 +1,5 @@
 
-<%= form_for(phone_mem_activations_path) do |f| %> 
+<%= form_for(phone_mem_activations_path,html: { class: "mem-avctivate-form" })   do |f| %> 
 
 
   <div class="container has-top">
@@ -27,14 +27,18 @@
    <%= hidden_field_tag 'user[referee_id]', @referee_id %>
    <%= hidden_field_tag 'user[store_id]', @store_id %>
     <div class="text-center block-mt bottom-btn" id="submit_activation">
-       <%= submit_tag "激活会员卡", class: 'btn-primary flex-fluid btn-size-lg' %>
+
+    <button type="button" class="btn-primary flex-fluid btn-size-lg mem-avctivate-btn">激活会员卡<button> 
+
       <!-- <button class="btn-primary flex-fluid btn-size-lg">激活会员卡</button> -->
     </div>  
   </div>
  <% end %>
   <!-- 积分退换提示弹窗 -->
    
-  <div class="popup-wrap activation_popup_wrap" <% if flash[:notice].blank? %> style="display:none;" <% end %> >  
+  <div class="popup-wrap activation_popup_wrap" <% if (flash[:notice] == "ma_smscode_not_exist") || 
+  (flash[:notice] == "ma_smscode_error")  || (flash[:notice] == "ma_save_fail") %> style="display:;" 
+  <% else %> style="display:none;"  <% end %> >  
     <div class="popup has-title">
       <div class="popup-title">
         <button class="close" type="button">
@@ -44,7 +48,11 @@
       </div>
       <div class="popup-main text-center">
         <div class="text-import f16 mb5">
-        <i class="ico-error mr5"></i><%= flash[:notice] %>
+        <i class="ico-error mr5"></i>
+        <% if flash[:notice] == "ma_smscode_not_exist" %>验证码不存在
+        <% elsif  flash[:notice] == "ma_smscode_error" %>验证码错误
+        <% elsif  flash[:notice] == "ma_save_fail" %>保存失败
+         <% end %> 
         </div>
         <!-- <div class="text-import f16 mb5">
         <i class="ico-right mr5"></i>积分兑换成功！
@@ -59,4 +67,87 @@
     </div>
     <div class="popup-bg"></div>
   </div>
+
+  <script type="text/javascript">
+  function valid_form (){
+          if ('' === $('#recv_num').val()) {
+            alert("接受号码不能为空");
+            return false;
+          }
+          if (!/^1\d{10}$/.test($('#recv_num').val())) {
+            alert("号码格式不对");
+            return false;
+          }
+         
+          return true;
+        }
+  $(document).ready(function(){
+      //     (function() {
+      // $(function() {
+        $('#getSmsCode').click(function() {
+          var liftOff;
+          if(!valid_form()) return 
+
+          $.ajax('/phone/sms_sends', {
+            type: 'POST',
+            dataType: 'json',
+            data: {
+              sms_send: {
+                recv_num: $('#recv_num').val()
+              }
+            },
+            success: function(data, textStatus, jqXHR) {
+              if ('200' === data.retcode) {
+                $('#getSmsCode').hide();
+                $('.countdown_wrap').show();
+                $('.countdown_num').countdown({
+                  until: '+60',
+                  compact: true,
+                  format: 's',
+                  onExpiry: liftOff
+                });
+              } else {
+
+              }
+              return alert(data.msg);
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+              return alert(textStatus);
+            }
+          });
+          liftOff = function() {
+            $('.countdown_wrap').hide();
+            $('#getSmsCode').show();
+            return $('.countdown_num').countdown('destroy');
+          };
+        });
+        $('.notice_close_btn').click(function() {
+          return $('.activation_popup_wrap').hide();
+        });
+        $('.ico-scan').click(function() {
+          return wx.scanQRCode({
+            needResult: 0,
+            scanType: ["qrCode", "barCode"],
+            success: function(res) {
+              return alert(res.resultStr);
+            }
+          });
+        });
+        $('.mem-avctivate-btn').click(function() {
+            if(valid_form() == true){
+              if ('' === $('#sms_content').val()) {
+                  alert("验证码不能为空");
+                  return false;
+                }
+              $(".mem-avctivate-form").submit();
+            }
+            else {
+              return false
+            }
+        })
+        
+      });
+
+    
+  </script>
 

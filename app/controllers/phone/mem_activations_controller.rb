@@ -38,16 +38,17 @@ class Phone::MemActivationsController < PhoneController
   def create
     # @phone_num = params[:phone_num]
     @sms_content = params[:sms_content]
+    @msg = "test"
     respond_to do |format|
     sms = SmsSend.where("TIMESTAMPDIFF(MINUTE,created_at ,now())<#{Const::SMS_TIME_LIMIT} and sms_type='code' and recv_num =?", mem_activation_params[:phone_num]).first
       if sms.blank?
         @msg = "验证码不存在"
-        format.html { redirect_to [:phone, 'mem_activations'], notice: @msg }
+        format.html { redirect_to [:phone, 'mem_activations'], notice: "ma_smscode_not_exist" }
         puts  @msg
       else 
         if sms.send_content != @sms_content
           @msg = "验证码错误"
-          format.html { redirect_to [:phone, 'mem_activations'], notice: @msg }
+          format.html { redirect_to [:phone, 'mem_activations'], notice: "ma_smscode_error" }
           puts  @msg
          #return render json: {status: :created, msg: @msg}
        else
@@ -55,8 +56,8 @@ class Phone::MemActivationsController < PhoneController
           @user = User.where("phone_num=?", mem_activation_params[:phone_num]).first
           unless @user.blank?
             sign_in("user", @user)
-            @msg = "登录成功"
-            puts  @msg
+            # @msg = "登录成功"
+            # puts  @msg
             format.html { redirect_to [:phone, 'homepages'] }
           end
           #新增用户
@@ -68,13 +69,13 @@ class Phone::MemActivationsController < PhoneController
           @user.password_confirmation='123456'
           if @user.save
             sign_in("user", @user)
-            @msg = "保存成功"
-            puts  @msg
+            # @msg = "保存成功"
+            # puts  @msg
             format.html { redirect_to [:phone, 'homepages'] }
           else
             @msg = "保存失败"
             puts  @msg
-            format.html { redirect_to [:phone, 'mem_activations'],notice: '保存失败.' }
+            format.html { redirect_to [:phone, 'mem_activations'],notice: 'ma_save_fail' }
           end
       end
       end  

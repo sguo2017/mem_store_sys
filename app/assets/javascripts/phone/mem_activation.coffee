@@ -1,6 +1,7 @@
 # Place all the behaviors and hooks related to the matching controller here.
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
+###
 $ ->
   $('#getSmsCode').click ->  
 	    
@@ -21,7 +22,7 @@ $ ->
 	    	if '200' == data.retcode 
 		    	$('#getSmsCode').hide(); 
 		    	$('.countdown_wrap').show(); 
-		    	$('.countdown_num').countdown({until: '+10',compact:true, format: 's',onExpiry: liftOff});
+		    	$('.countdown_num').countdown({until: '+60',compact:true, format: 's',onExpiry: liftOff});
 	    	else
 
 	    	alert(data.msg)
@@ -40,4 +41,5 @@ $ ->
         	success: (res) ->
               		alert(res.resultStr)          
 	  	});  
+###
 

@@ -1,0 +1,34 @@
+---
+zh-CN:
+  activerecord:
+    models:
+      good_instance: "商品实例"
+    attributes:
+      good_instance: 
+        code: "编码"
+        good_id: "商品id"
+        status: "状态"
+        created_at: "创建日期"
+        updated_at: "修改日期"
+  helpers:
+    submit:
+      good_instance:
+        create: "新增"
+        update: "修改"
+  good_instances:
+    edit:
+      title: "编辑"
+    form:
+      goods_catalog: "商品分类"
+    index:
+      confirm: "Are you sure you want to delete the goods catalog?"
+      empty: "No goods catalogs found"
+      new_good_instance: "Add a new goods catalog"
+      title: "Listing of goods catalogs"
+    new:
+      title: "Adding a new goods catalog"
+    show:
+      title: "Goods catalog details"
+    was_created: "Goods catalog was successfully added"
+    was_deleted: "Goods catalog was successfully deleted"
+    was_updated: "Goods catalog was successfully updated"

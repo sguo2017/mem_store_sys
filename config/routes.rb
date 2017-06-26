@@ -42,6 +42,7 @@ Rails.application.routes.draw do
     resources :users
     resources :score_histories    
     resources :lotteries
+    resources :good_instances
   end
 
   mount Ckeditor::Engine => '/ckeditor'

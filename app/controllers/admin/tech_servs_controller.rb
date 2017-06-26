@@ -69,6 +69,6 @@ class Admin::TechServsController < AdminController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def tech_serv_params
-      params.require(:tech_serv).permit(:content, :avatar)
+      params.require(:tech_serv).permit(:content, :avatar, :title)
     end
 end

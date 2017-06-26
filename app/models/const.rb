@@ -36,4 +36,8 @@ class Const
 
   #新用户注册，系统自动生成邮箱，非空字段
   SYSTEM_EMAIL = "system_generation_email@domain.com"
+  #商品发布状态
+  GOODS_STATUS =  [["否", "0"], ["是", "1"]]
+  #用户性别
+  USER_SEX = [["男", "0"], ["女", "1"]]
 end

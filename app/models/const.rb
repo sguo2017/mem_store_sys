@@ -33,4 +33,7 @@ class Const
     ACCESS_TOKEN = "https://api.weixin.qq.com/cgi-bin/token?"
     JS_ACCESS_TOKEN = "https://api.weixin.qq.com/cgi-bin/ticket/getticket?"
   end
+
+  #新用户注册，系统自动生成邮箱，非空字段
+  SYSTEM_EMAIL = "system_generation_email@domain.com"
 end

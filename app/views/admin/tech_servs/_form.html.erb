@@ -16,6 +16,14 @@
   <% end %>
 
   <div class="form-group">
+    <%= f.label :title, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :title, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:title) %>
+  </div>
+
+  <div class="form-group">
     <%= f.label :content, :class => 'control-label col-lg-2' %>
     <div class="col-lg-10">
       <%= f.cktext_area :content, :class => 'form-control' %>

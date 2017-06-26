@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170622101626) do
+ActiveRecord::Schema.define(version: 20170626090414) do
 
   create_table "activities", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "title"
@@ -179,6 +179,7 @@ ActiveRecord::Schema.define(version: 20170622101626) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "avatar"
+    t.string "title"
   end
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -213,6 +214,7 @@ ActiveRecord::Schema.define(version: 20170622101626) do
     t.integer "referee_id"
     t.integer "store_id"
     t.string "status", default: "00A"
+    t.string "mem_email", default: ""
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

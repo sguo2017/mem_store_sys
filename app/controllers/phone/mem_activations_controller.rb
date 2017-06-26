@@ -38,7 +38,6 @@ class Phone::MemActivationsController < PhoneController
   def create
     # @phone_num = params[:phone_num]
     @sms_content = params[:sms_content]
-    @msg = "test"
     respond_to do |format|
     sms = SmsSend.where("TIMESTAMPDIFF(MINUTE,created_at ,now())<#{Const::SMS_TIME_LIMIT} and sms_type='code' and recv_num =?", mem_activation_params[:phone_num]).first
       if sms.blank?
@@ -63,7 +62,9 @@ class Phone::MemActivationsController < PhoneController
           #新增用户
           @user = User.new(mem_activation_params)
           @user.admin = 'false'
-          @user.email = mem_activation_params[:phone_num] + '@qq.com'
+          @user.email =  Const::SYSTEM_EMAIL #设置默认邮箱，邮箱为非空必须，否则报错
+          #@user.email = mem_activation_params[:phone_num] + '@qq.com'
+
           @user.mem_group_id="1"
           @user.password='123456'
           @user.password_confirmation='123456'

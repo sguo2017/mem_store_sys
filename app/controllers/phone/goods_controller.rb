@@ -8,9 +8,9 @@ class Phone::GoodsController < PhoneController
   def index
     @goods_catalog_id = params[:goods_catalog_id]
     if @goods_catalog_id.blank?
-      @goods = Good.page(params[:page]).per(10)
+      @goods = Good.where(:status=>"1").page(params[:page]).per(10)
     else
-      @goods = Good.where(:goods_catalog_id=>@goods_catalog_id).page(params[:page]).per(10)
+      @goods = Good.where(:status=>"1").where(:goods_catalog_id=>@goods_catalog_id).page(params[:page]).per(10)
     end
       @goods_catalogs = GoodsCatalog.page(params[:page]).per(10)
   end

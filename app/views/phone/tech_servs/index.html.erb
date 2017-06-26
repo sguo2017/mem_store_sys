@@ -6,48 +6,13 @@
 	</div>
 	<!-- header end -->
 	<div class="container has-top">
+	<%= form_tag(@phone_tech_serv_path, method: "get") do %>
 		<div class="search-wrap">
-			<input type="text" class="search-inp" placeholder="请输入要搜索的内容">
+		 <%= text_field_tag(:title,@title,class: "search-inp", placeholder:  '请输入要搜索的内容' )  %>
+			<!-- <input type="text" class="search-inp" placeholder="请输入要搜索的内容"> -->
 		</div>
-<!-- 		<div class="data-list img-list">
-			<a class="data-item" href="">
-				<div class="flex-fluid1">
-					<div class="adapt-img">
-						<img src="images/img-technology1.png" alt="">
-					</div>
-				</div>
-				<div class="flex-fluid2">
-					<div class="adapt-img">
-						<img src="images/img-technology2.png" alt="">
-					</div>
-				</div>
-			</a>
-			<a class="data-item" href="">
-				<div class="flex-fluid1">
-					<div class="adapt-img">
-						<img src="images/img-technology1.png" alt="">
-					</div>
-				</div>
-				<div class="flex-fluid2">
-					<div class="adapt-img">
-						<img src="images/img-technology2.png" alt="">
-					</div>
-				</div>
-			</a>
-			<a class="data-item" href="">
-				<div class="flex-fluid1">
-					<div class="adapt-img">
-						<img src="images/img-technology3.png" alt="">
-					</div>
-				</div>
-				<div class="flex-fluid2">
-					<div class="adapt-img">
-						<img src="images/img-technology2.png" alt="">
-					</div>
-				</div>
-			</a>
-
-		</div> -->
+	<% end %>
+		
 		<div class="data-list img-list">
 		  	<% @tech_servs.each do |tech_serv| %>
 		    <a class="data-item" href="<%= phone_tech_serv_path(tech_serv) %>">

@@ -33,7 +33,7 @@ class Phone::SmsSendsController < PhoneController
     
     unless sms.blank?
       @msg = "#{Const::SMS_TIME_LIMIT}分钟内不用重新发送"
-      return render json: {status: :created, msg: @msg}
+      return render json: {status: :created, msg: @msg, retcode: '101'}
     end    
 
     @sms_send = SmsSend.new(sms_send_params)
@@ -67,9 +67,9 @@ class Phone::SmsSendsController < PhoneController
 
 
         @msg = "短信发送成功"
-        return render json: {status: :created, msg: @msg}  
+        return render json: {status: :created, msg: @msg, retcode: "200"}  
       else
-        return render json: {status: :created, msg: @msg}
+        return render json: {status: :created, msg: @msg, retcode: "102"}
       end
     end
   end

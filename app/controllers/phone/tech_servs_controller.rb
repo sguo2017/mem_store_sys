@@ -6,7 +6,12 @@ class Phone::TechServsController < PhoneController
   # GET /phone/tech_servs
   # GET /phone/tech_servs.json
   def index
-    @tech_servs = TechServ.page(params[:page]).per(10)
+    @title = params[:title]
+    if @title.blank?
+      @tech_servs = TechServ.page(params[:page]).per(10)
+    else
+       @tech_servs = TechServ.where('title LIKE ? ', '%'+@title+'%').page(params[:page]).per(10)
+    end
   end
 
   # GET /phone/tech_servs/1

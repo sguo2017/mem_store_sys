@@ -78,6 +78,6 @@ class Phone::ProfilesController < PhoneController
     # Never trust parameters from the scary internet, only allow the white list through.
     def profile_params
       #params[:profile]
-      params.require(:user).permit(:name, :sex, :birthday, :phone_num)
+      params.require(:user).permit(:name, :sex, :birthday, :phone_num, :mem_email)
     end
 end

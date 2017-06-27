@@ -23,9 +23,9 @@
               等级LV<%= @user.level %>
             </div>
             <div class="progress-wrap ml5">
-              <div class="small">60%</div>
+              <div class="small"><%=  @level_up_per %>%</div>
               <div class="progress">
-                <div class="progress-bar" style="width:60%;"></div>
+                <div class="progress-bar" style="width:<%=  @level_up_per %>%;"></div>
               </div>
             </div>
           </div>

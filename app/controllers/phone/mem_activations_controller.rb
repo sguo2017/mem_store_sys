@@ -55,29 +55,35 @@ class Phone::MemActivationsController < PhoneController
           @user = User.where("phone_num=?", mem_activation_params[:phone_num]).first
           unless @user.blank?
             sign_in("user", @user)
-            # @msg = "登录成功"
-            # puts  @msg
-            format.html { redirect_to [:phone, 'homepages'] }
-          end
-          #新增用户
-          @user = User.new(mem_activation_params)
-          @user.admin = 'false'
-          @user.email =  Const::SYSTEM_EMAIL #设置默认邮箱，邮箱为非空必须，否则报错
-          #@user.email = mem_activation_params[:phone_num] + '@qq.com'
-
-          @user.mem_group_id="1"
-          @user.password='123456'
-          @user.password_confirmation='123456'
-          if @user.save
-            sign_in("user", @user)
-            # @msg = "保存成功"
-            # puts  @msg
+            @msg = "登录成功"
+            puts  @msg
             format.html { redirect_to [:phone, 'homepages'] }
           else
-            @msg = "保存失败"
-            puts  @msg
-            format.html { redirect_to [:phone, 'mem_activations'],notice: 'ma_save_fail' }
+          #新增用户
+            @user = User.new(mem_activation_params)
+            @user.admin = 'false'
+            #curr_time = Time.new.to_s
+            curr_time = rand(100000..999999)  
+            @user.email =  Const::SYSTEM_EMAIL + "."+ mem_activation_params[:phone_num] +"."+ curr_time.to_s  #设置默认邮箱，邮箱为非空必须，否则报错
+            #@user.email = mem_activation_params[:phone_num] + '@qq.com'
+
+            @user.mem_group_id="1"
+            @user.password='123456'
+            @user.password_confirmation='123456'
+            if @user.save
+              sign_in("user", @user)
+              @msg = "保存成功"
+              puts  @msg
+              format.html { redirect_to [:phone, 'homepages'] }
+            else
+              @msg = "保存失败"
+              puts  @msg
+              format.html { redirect_to [:phone, 'mem_activations'],notice: 'ma_save_fail' }
+            end
+
+
           end
+         
       end
       end  
     end

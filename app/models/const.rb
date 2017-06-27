@@ -25,13 +25,13 @@ class Const
   #WX
   module WXConfig
     APPID = "wx649eb094afb490f5"
-    SECRET = "0a517e7833a360b634a9b90850ae96b1"
-    GRANT_TYPE = "client_credential"
+    SECRET = "86f9b7bc167aa6cd07ce068f3a905c13"
+    # GRANT_TYPE = "client_credential"
+    GRANT_TYPE = "authorization_code"
     SIGNATURE = ""
 
-    #ACCESS_TOKEN = "https://api.weixin.qq.com/sns/oauth2/access_token?"
-    ACCESS_TOKEN = "https://api.weixin.qq.com/cgi-bin/token?"
-    JS_ACCESS_TOKEN = "https://api.weixin.qq.com/cgi-bin/ticket/getticket?"
+    ACCESS_TOKEN_ADDR = "https://api.weixin.qq.com/sns/oauth2/access_token?"
+    USER_INFO_ADDR = "https://api.weixin.qq.com/sns/userinfo?"
   end
 
   #新用户注册，系统自动生成邮箱，非空字段

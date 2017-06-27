@@ -1,5 +1,7 @@
 class Phone::MemActivationsController < PhoneController
   require 'net/http'
+  require 'net/https'
+  require "json"
   layout "phone"
   before_action :set_mem_activation, only: [:show, :edit, :update, :destroy]
 
@@ -9,15 +11,13 @@ class Phone::MemActivationsController < PhoneController
     @user = User.new
     @referee_id = params[:referee_id]
     @store_id = params[:store_id]
-
     @code = params[:code]
+    #获取access_tocken
+    access_tocken = getAccessToken(@code)
+    #获取用户信息
+    getUserInfo(access_tocken)
 
-    # logger.debug "15 #{@code}"
-    # @code = "LWJd+7k3A5bp9ggsh4T0JUGl1iE1iFN7cemXeB2iAjGsMCnkzyC4ptNGg8fytyAehSZc9miaRkLEniQNoqmMpA=="
 
-    # getAccessToken(@code)
-
-    # getJSAccessToken(@code)
  end
   # GET /phone/mem_activations/1
   # GET /phone/mem_activations/1.json
@@ -55,35 +55,29 @@ class Phone::MemActivationsController < PhoneController
           @user = User.where("phone_num=?", mem_activation_params[:phone_num]).first
           unless @user.blank?
             sign_in("user", @user)
-            @msg = "登录成功"
-            puts  @msg
+            # @msg = "登录成功"
+            # puts  @msg
+            format.html { redirect_to [:phone, 'homepages'] }
+          end
+          #新增用户
+          @user = User.new(mem_activation_params)
+          @user.admin = 'false'
+          @user.email =  Const::SYSTEM_EMAIL #设置默认邮箱，邮箱为非空必须，否则报错
+          #@user.email = mem_activation_params[:phone_num] + '@qq.com'
+
+          @user.mem_group_id="1"
+          @user.password='123456'
+          @user.password_confirmation='123456'
+          if @user.save
+            sign_in("user", @user)
+            # @msg = "保存成功"
+            # puts  @msg
             format.html { redirect_to [:phone, 'homepages'] }
           else
-          #新增用户
-            @user = User.new(mem_activation_params)
-            @user.admin = 'false'
-            #curr_time = Time.new.to_s
-            curr_time = rand(100000..999999)  
-            @user.email =  Const::SYSTEM_EMAIL + "."+ mem_activation_params[:phone_num] +"."+ curr_time.to_s  #设置默认邮箱，邮箱为非空必须，否则报错
-            #@user.email = mem_activation_params[:phone_num] + '@qq.com'
-
-            @user.mem_group_id="1"
-            @user.password='123456'
-            @user.password_confirmation='123456'
-            if @user.save
-              sign_in("user", @user)
-              @msg = "保存成功"
-              puts  @msg
-              format.html { redirect_to [:phone, 'homepages'] }
-            else
-              @msg = "保存失败"
-              puts  @msg
-              format.html { redirect_to [:phone, 'mem_activations'],notice: 'ma_save_fail' }
-            end
-
-
+            @msg = "保存失败"
+            puts  @msg
+            format.html { redirect_to [:phone, 'mem_activations'],notice: 'ma_save_fail' }
           end
-         
       end
       end  
     end
@@ -115,30 +109,33 @@ class Phone::MemActivationsController < PhoneController
   end
 
   def getAccessToken(code)
-    # uri = URI.parse(Const::WXConfig::ACCESS_TOKEN + "appid=#{Const::WXConfig::APPID}&secret=#{Const::WXConfig::SECRET}&code=#{code}&grant_type=#{Const::WXConfig::GRANT_TYPE}")
-    uri = URI.parse(Const::WXConfig::ACCESS_TOKEN + "grant_type=#{Const::WXConfig::GRANT_TYPE}&appid=#{Const::WXConfig::APPID}&secret=#{Const::WXConfig::SECRET}")
-    logger.debug "106 #{uri}"
-    http = Net::HTTP.new(uri.host)
-    request = Net::HTTP::Post.new(uri.request_uri)
-    #request['Content-Type'] = 'application/json;charset=utf-8'
-    #request['User-Agent'] = 'Mozilla/5.0 (Windows NT 5.1; rv:29.0) Gecko/20100101 Firefox/29.0'
-    #request.body = params.to_json
-    response = http.start { |http| http.request(request) }
-    logger.debug "112 #{response.body.inspect}"
-    logger.debug "113 #{response.body.to_json}"
+    uri = URI.parse(Const::WXConfig::ACCESS_TOKEN_ADDR + "appid=#{Const::WXConfig::APPID}&secret=#{Const::WXConfig::SECRET}&code=#{code}&grant_type=#{Const::WXConfig::GRANT_TYPE}")
+    # logger.debug "113 #{uri}"
+    http = Net::HTTP.new(uri.host, uri.port)
+    http.use_ssl = true
+    http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+    request = Net::HTTP::Get.new(uri.request_uri)
+    response = http.request(request)
+    @data = response.body
+    logger.debug "120 #{@data.to_json}"
+
+    return @data #"{\"access_token\":\"SZ3gWcxf7NexY6J4hYTnAVJUeHcKaZPIiQh6BTubFh6fem1rsNCVojMDzIBwGCQW2jB7FLBG4s3JoGvsoBDg8eBnRWwD6DEGnpzvVRy-fJA\",\"expires_in\":7200,\"refresh_token\":\"GUAHQErwGVYw_8WdBdM7HeH0_aMTVbOZZq7WmiKwy4NbOotLplqaon--djMzYLBVxohptcAsJ_t5C0yLmdMR7829tL5OCJjPPfZ_CQHdt4M\",\"openid\":\"oZs6bs43YJNrCDLO5jD6paTg5-5c\",\"scope\":\"snsapi_userinfo\"}"
   end
 
-  def getJSAccessToken(code)
-    uri = URI.parse(Const::WXConfig::JS_ACCESS_TOKEN + "access_token=#{code}&type=jsapi")
-    logger.debug "106 #{uri}"
-    http = Net::HTTP.new(uri.host)
-    request = Net::HTTP::Post.new(uri.request_uri)
-    #request['Content-Type'] = 'application/json;charset=utf-8'
-    #request['User-Agent'] = 'Mozilla/5.0 (Windows NT 5.1; rv:29.0) Gecko/20100101 Firefox/29.0'
-    #request.body = params.to_json
-    response = http.start { |http| http.request(request) }
-    logger.debug "112 #{response.body.inspect}"
-    logger.debug "113 #{response.body.to_json}"
+  def getUserInfo(params)
+    param = JSON.parse(params)
+    logger.debug "125 #{param['access_token']}"
+    uri = URI.parse(Const::WXConfig::USER_INFO_ADDR + "access_token=#{param['access_token']}&openid=#{param['openid']}&lang=zh_CN")
+    logger.debug "127 #{uri}"
+    http = Net::HTTP.new(uri.host, uri.port)
+    http.use_ssl = true
+    http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+    request = Net::HTTP::Get.new(uri.request_uri)
+    response = http.request(request)
+    @data = response.body
+    @data.force_encoding('UTF-8')
+    logger.debug "134 #{@data.to_json}"
+    return @data   
   end
 
   private

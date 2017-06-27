@@ -7,6 +7,8 @@ class Phone::WxesController < ApplicationController
   def index  
     #微信 服务器配置(已启用)  
     @echostr  = params[:echostr]
+
+    
   end
 
   # GET /phone/wxes/1

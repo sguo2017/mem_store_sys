@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170626105022) do
+ActiveRecord::Schema.define(version: 20170627071717) do
 
   create_table "activities", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "title"
@@ -223,6 +223,10 @@ ActiveRecord::Schema.define(version: 20170626105022) do
     t.integer "store_id"
     t.string "status", default: "00A"
     t.string "mem_email", default: ""
+    t.string "openid"
+    t.string "nickname"
+    t.string "language"
+    t.string "headimgurl"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

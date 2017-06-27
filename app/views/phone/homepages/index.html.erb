@@ -12,7 +12,7 @@
       <div class="user-img-wrap">
       <a  href="/phone/profiles">
         <div class="user-img">
-          <img src="/assets/phone/images/img-user.png" alt="">
+          <img <% if @user.headimgurl.blank? %> src="/assets/phone/images/img-user.png" <%else%> src="<%= @user.headimgurl %>" <% end %> alt="">
         </div>
         </a>  
         <div class="flex-fluid">
@@ -23,9 +23,9 @@
               等级LV<%= @user.level %>
             </div>
             <div class="progress-wrap ml5">
-              <div class="small"><%=  @level_up_per %>%</div>
+              <div class="small">60%</div>
               <div class="progress">
-                <div class="progress-bar" style="width:<%=  @level_up_per %>%;"></div>
+                <div class="progress-bar" style="width:60%;"></div>
               </div>
             </div>
           </div>

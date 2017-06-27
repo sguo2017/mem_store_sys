@@ -15,8 +15,24 @@ class Phone::MemActivationsController < PhoneController
     #获取access_tocken
     access_tocken = getAccessToken(@code)
     #获取用户信息
-    getUserInfo(access_tocken)
-
+    userInfo = JSON.parse(getUserInfo(access_tocken))
+    #存量用户
+    user = User.where("openid=?",userInfo["openid"]).first
+    # logger.debug "21:user #{user.to_json}"
+    if user.blank?
+      session[:userInfo] = userInfo
+    else 
+      #
+      user.headimgurl = userInfo["headimgurl"]
+      user.nickname = userInfo["nickname"]
+      user.language = userInfo["language"]
+      user.save
+      #
+      sign_in("user", user)
+      respond_to do |format|
+        format.html { redirect_to [:phone, 'homepages'] }
+      end
+    end  
 
  end
   # GET /phone/mem_activations/1
@@ -36,49 +52,63 @@ class Phone::MemActivationsController < PhoneController
   # POST /phone/mem_activations
   # POST /phone/mem_activations.json
   def create
+    logger.debug "userInfo 55:#{session[:userInfo]} openid:#{session[:userInfo]["openid"]}"                      
+            
     # @phone_num = params[:phone_num]
     @sms_content = params[:sms_content]
     respond_to do |format|
-    sms = SmsSend.where("TIMESTAMPDIFF(MINUTE,created_at ,now())<#{Const::SMS_TIME_LIMIT} and sms_type='code' and recv_num =?", mem_activation_params[:phone_num]).first
+      sms = SmsSend.where("TIMESTAMPDIFF(MINUTE,created_at ,now())<#{Const::SMS_TIME_LIMIT} and sms_type='code' and recv_num =?", mem_activation_params[:phone_num]).first
       if sms.blank?
-        @msg = "验证码不存在"
-        format.html { redirect_to [:phone, 'mem_activations'], notice: "ma_smscode_not_exist" }
-        puts  @msg
-      else 
-        if sms.send_content != @sms_content
-          @msg = "验证码错误"
-          format.html { redirect_to [:phone, 'mem_activations'], notice: "ma_smscode_error" }
+          @msg = "验证码不存在"
+          format.html { redirect_to [:phone, 'mem_activations'], notice: "ma_smscode_not_exist" }
           puts  @msg
-         #return render json: {status: :created, msg: @msg}
-       else
-          #存量用户
-          @user = User.where("phone_num=?", mem_activation_params[:phone_num]).first
-          unless @user.blank?
-            sign_in("user", @user)
-            # @msg = "登录成功"
-            # puts  @msg
-            format.html { redirect_to [:phone, 'homepages'] }
-          end
-          #新增用户
-          @user = User.new(mem_activation_params)
-          @user.admin = 'false'
-          @user.email =  Const::SYSTEM_EMAIL #设置默认邮箱，邮箱为非空必须，否则报错
-          #@user.email = mem_activation_params[:phone_num] + '@qq.com'
-
-          @user.mem_group_id="1"
-          @user.password='123456'
-          @user.password_confirmation='123456'
-          if @user.save
-            sign_in("user", @user)
-            # @msg = "保存成功"
-            # puts  @msg
-            format.html { redirect_to [:phone, 'homepages'] }
-          else
-            @msg = "保存失败"
+      else 
+          if sms.send_content != @sms_content
+            @msg = "验证码错误"
+            format.html { redirect_to [:phone, 'mem_activations'], notice: "ma_smscode_error" }
             puts  @msg
-            format.html { redirect_to [:phone, 'mem_activations'],notice: 'ma_save_fail' }
-          end
-      end
+           #return render json: {status: :created, msg: @msg}
+         else
+            #存量用户
+            @user = User.where("phone_num=?", mem_activation_params[:phone_num]).first
+            logger.debug "74"
+            unless @user.blank?
+              @user.openid = session[:userInfo]["openid"]
+              @user.headimgurl = session[:userInfo]["headimgurl"]
+              @user.nickname = session[:userInfo]["nickname"]
+              @user.language = session[:userInfo]["language"] 
+              @user.save
+              sign_in("user", @user)
+      
+              format.html { redirect_to [:phone, 'homepages'] }
+            else
+              logger.debug "87"
+              #新增用户
+              @user = User.new(mem_activation_params)
+              @user.admin = 'false'
+              @user.email =  Const::SYSTEM_EMAIL #设置默认邮箱，邮箱为非空必须，否则报错
+              #@user.email = mem_activation_params[:phone_num] + '@qq.com'
+
+              @user.mem_group_id="1"
+              @user.password='123456'
+              @user.password_confirmation='123456'
+
+              @user.openid = session[:userInfo]["openid"]
+              @user.headimgurl = session[:userInfo]["headimgurl"]
+              @user.nickname = session[:userInfo]["nickname"]
+              @user.language = session[:userInfo]["language"]  
+              if @user.save
+                sign_in("user", @user)
+                # @msg = "保存成功"
+                # puts  @msg
+                format.html { redirect_to [:phone, 'homepages'] }
+              else
+                @msg = "保存失败"
+                puts  @msg
+                format.html { redirect_to [:phone, 'mem_activations'],notice: 'ma_save_fail' }
+              end
+            end
+        end
       end  
     end
 

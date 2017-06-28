@@ -183,8 +183,8 @@ class Admin::ActivitiesController < AdminController
     def set_activity
       unless params[:id].to_i == -1
         @activity =  Activity.find(params[:id])
-        @activity_award = ActivityAward.find(params[:id])
-        @activity_award_cfg = ActivityAwardCfg.find(params[:id])
+        @activity_award #= ActivityAward.find(params[:id])
+        @activity_award_cfg #= ActivityAwardCfg.find(params[:id])
       end
     end
 

@@ -42,6 +42,8 @@ class Phone::LotteriesController < PhoneController
     @activity_id = params[:lottery][:activity_id]  
     unless @activity_id.blank?
       @activity = Activity.find(@activity_id)
+      @lottery.activity_id = @activity.id
+      @lottery.activity_name = @activity.title
     end
     #中奖算法
 
@@ -59,6 +61,11 @@ class Phone::LotteriesController < PhoneController
 
     @item = discreteSampling(cdf)  
 
+    @lottery.winning = "false"
+    @lottery.activity_award_id = @activity_awards[@item.to_i-1].id
+    @activity_award_cfg = ActivityAwardCfg.find(@activity_awards[@item.to_i-1].activity_award_cfg_id)
+    @lottery.activity_award_cfg_id = @activity_award_cfg.id
+    @lottery.activity_award_cfg_name = @activity_award_cfg.name
 
     respond_to do |format|
       if @lottery.save

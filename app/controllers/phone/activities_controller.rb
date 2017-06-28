@@ -30,7 +30,7 @@ class Phone::ActivitiesController < PhoneController
     @restaraunts_idx = ["一","二","三","四","五","六","七","八","九","十"]    
     @activity_awards.each_with_index do |award,index|
       @activity_award_cfg = ActivityAwardCfg.find(award.activity_award_cfg_id)
-      @restaraunts.push(@restaraunts_idx[index]+"等奖#"+@activity_award_cfg.name)
+      @restaraunts.push(award.catalog+"#"+@activity_award_cfg.name)
     end
     logger.debug "#{@restaraunts.to_json}"
 

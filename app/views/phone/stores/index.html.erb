@@ -7,6 +7,9 @@
 	body, html,#allmap {width: 100%;height: 100%;overflow: hidden;margin:0;font-family:"微软雅黑";}
 	</style>
 	<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=UkGlS1os9PpxMQ7l38Ov11AiWXHZrzOR"></script>
+	<!-- 加载百度地图样式信息窗口 -->
+	<script type="text/javascript" src="http://api.map.baidu.com/library/SearchInfoWindow/1.5/src/SearchInfoWindow_min.js"></script>
+	<link rel="stylesheet" href="http://api.map.baidu.com/library/SearchInfoWindow/1.5/src/SearchInfoWindow_min.css" />
 	<title>附近门店</title>
 </head>
 <body>
@@ -22,27 +25,50 @@
         if (this.getStatus() == BMAP_STATUS_SUCCESS) {
             // alert(r.point.lng + " ， " + r.point.lat);
             lng = r.point.lng;
-            lat = r.point.lat;
-            map.centerAndZoom(new BMap.Point(lng+0.00374531687912, lat+0.008774687519), 14);  // 初始化地图,设置中心点坐标和地图级别
-			map.addControl(new BMap.MapTypeControl());   //添加地图类型控件
-			// map.setCurrentCity("北京");          // 设置地图显示的城市 此项是必须设置的
-			map.enableScrollWheelZoom(true);     //开启鼠标滚轮缩放
-
-			var local = new BMap.LocalSearch(map, {
-			  renderOptions:{map: map}
-			});   
+            lat = r.point.lat;          
+			var point = new BMap.Point(lng, lat);
+            map.centerAndZoom(point, 14);  // 初始化地图,设置中心点坐标和地图级别
+			map.addControl(new BMap.MapTypeControl());   //添加地图类型控件此项是必须设置的
+			map.enableScrollWheelZoom(true);     //开启鼠标滚轮缩放		
 			
-			local.searchInBounds("联通", map.getBounds());
 
-			map.addEventListener("dragend",function(){
-			    map.clearOverlays();
-			    local.searchInBounds("银行", map.getBounds());
-			});
+			customLayer=new BMap.CustomLayer({
+				geotableId: 170620,
+				q: '', //检索关键字
+				tags: '', //空格分隔的多字符串
+				filter: '' //过滤条件,参考http://developer.baidu.com/map/lbs-geosearch.htm#.search.nearby
+				}
+			);
+
+			customLayer.addEventListener('hotspotclick',callback);
+
+			map.addTileLayer(customLayer);
         }
     });
 	
 
-
+	function callback(e)//单击热点图层
+	{
+		alert(1)
+			var customPoi = e.customPoi;//poi的默认字段
+			var contentPoi=e.content;//poi的自定义字段
+			var content = '<p style="width:280px;margin:0;line-height:20px;">地址：' + customPoi.address + '</p>';
+			var searchInfoWindow = new BMapLib.SearchInfoWindow(map, content, {
+				title: customPoi.title, //标题
+				width: 290, //宽度
+				height: 40, //高度
+				panel : "panel", //检索结果面板
+				enableAutoPan : true, //自动平移
+				enableSendToPhone: true, //是否显示发送到手机按钮
+				searchTypes :[
+					BMAPLIB_TAB_SEARCH,   //周边检索
+					BMAPLIB_TAB_TO_HERE,  //到这里去
+					BMAPLIB_TAB_FROM_HERE //从这里出发
+				]
+			});
+			var point = new BMap.Point(customPoi.point.lng, customPoi.point.lat);
+			searchInfoWindow.open(point);
+	}
 
 
 

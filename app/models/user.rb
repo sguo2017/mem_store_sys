@@ -31,6 +31,8 @@ class User < ApplicationRecord
       self.openid = params["openid"]
       self.headimgurl = params["headimgurl"]
       self.nickname = params["nickname"]
+      self.name = params["nickname"]
+      self.sex = params["sex"] 
       self.language = params["language"]
       self.district = params["district"]
       self.city = params["city"]

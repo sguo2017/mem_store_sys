@@ -66,10 +66,11 @@ class Phone::MemActivationsController < PhoneController
             puts  @msg
            #return render json: {status: :created, msg: @msg}
          else
+            userInfo = session[:userInfo];
             #存量用户
             @user = User.where("phone_num=?", mem_activation_params[:phone_num]).first
             unless @user.blank?
-              user.saveWxUserInfo(session[:userInfo])
+              @user.saveWxUserInfo(userInfo)
               sign_in("user", @user)
               @msg = "登录成功"
               format.html { redirect_to [:phone, 'homepages'] }
@@ -79,12 +80,14 @@ class Phone::MemActivationsController < PhoneController
               @user.admin = 'false'
               curr_time = rand(100000..999999)  
               @user.email =  Const::SYSTEM_EMAIL + "."+ mem_activation_params[:phone_num] +"."+ curr_time.to_s  #设置默认邮箱，邮箱为非空必须，否则报错
-
-              @user.mem_group_id = session[:userInfo].params["city"]
+              
+              logger.debug "83 #{session[:userInfo]} city #{userInfo["city"]}"
+              mg = MemGroup.find_by_city(userInfo["city"])
+              @user.mem_group_id = mg.id
               @user.password = '123456'
               @user.password_confirmation='123456'
               if @user.save
-                user.saveWxUserInfo(session[:userInfo]) 
+                @user.saveWxUserInfo(userInfo) 
                 sign_in("user", @user)
                 @msg = "保存成功"
                 puts  @msg

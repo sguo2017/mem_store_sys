@@ -32,6 +32,7 @@ class Const
 
     ACCESS_TOKEN_ADDR = "https://api.weixin.qq.com/sns/oauth2/access_token?"
     USER_INFO_ADDR = "https://api.weixin.qq.com/sns/userinfo?"
+    JS_TIKET_ADDR = "https://api.weixin.qq.com/cgi-bin/ticket/getticket?"
   end
 
   #新用户注册，系统自动生成邮箱，非空字段

@@ -23,9 +23,9 @@
               等级LV<%= @user.level %>
             </div>
             <div class="progress-wrap ml5">
-              <div class="small">60%</div>
+              <div class="small"><%=  @level_up_per %>%</div>
               <div class="progress">
-                <div class="progress-bar" style="width:60%;"></div>
+                <div class="progress-bar" style="width:<%=  @level_up_per %>%;"></div>
               </div>
             </div>
           </div>
@@ -78,6 +78,12 @@
           <a href="/phone/stores">
             <img class="ico-img" src="/assets/phone/images/ico-index6.png" alt="">
             <div class="ico-name">门店查询</div>  
+          </a>
+        </li>
+        <li class="float-item">
+          <a href=<%= new_phone_score_query_path(:score_history => {:user_id => @user.id,:object_type => "商品扫码",:oper => "获得"}, :fun_type => "goods_scan",:code => "12") %>>
+            <img class="ico-img" src="/assets/phone/images/ico-index6.png" alt="">
+            <div class="ico-name">商品扫码</div>  
           </a>
         </li>
       </ul>

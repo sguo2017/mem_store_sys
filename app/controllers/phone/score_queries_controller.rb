@@ -17,21 +17,56 @@ class Phone::ScoreQueriesController < PhoneController
 
   # GET /phone/score_queries/new
   def new
+    score_changed = 0 #是否已兑换过
+    fun_type = ""   #功能类型用于是否更新商品实例
+    #增加商品扫码判断
+    @user = current_user 
+    unless params[:fun_type].blank?
+        if  params[:fun_type] == "goods_scan"
+           fun_type = "goods_scan"
+           #获取当前商品
+           @good_instance = GoodInstance.where(:code =>params[:code]).first
+           if @good_instance.status == '00A'
+               good = Good.where(:id =>@good_instance.good_id).first
+               params[:score_history][:point] = good.score
+               @user.score =  @user.score + good.score
+               params[:score_history][:bonus_change_id] = "1"
+           else
+            score_changed = 1
+          end
+        else
+        end
+      else
+        @user.score = @user.score - params[:score_history][:point].presence.to_i
+     end 
     @score_query = ScoreHistory.new(score_history_params)
 
     respond_to do |format|
-        @user = current_user
-        
-        @user.score = @user.score - params[:score_history][:point].presence.to_i
-        if(@user.score > 0)
-          @user.save               #会员扣减积分 
-          User.transaction do
-            @score_query.save        #积分兑换记录 
+         if score_changed == 0
+            if(@user.score > 0)
+              #更新用户等级
+              mem_levels =  MemLevel.select(:level,:score).order("score ASC")
+              mem_levels.each_with_index do |mem_level, index|
+                if  @user.score < mem_level.score
+                    @user.level = mem_level.level
+                    break
+                end
+              end
+              @user.save               #会员扣减积分 
+              User.transaction do
+                @score_query.save        #积分兑换记录
+                if fun_type == "goods_scan"
+                  @good_instance.status =  '00X'  #更新实例状态
+                  @good_instance.save
+                end
+              end
+              format.html { redirect_to phone_score_queries_url, notice: '积分兑换成功' }
+            else
+              format.html { redirect_to phone_bonus_changes_url, notice: '积分兑换失败:积分余额不足' }
+            end
+          else
+             format.html { redirect_to phone_score_queries_url, notice: '商品积分已兑换过' }
           end
-          format.html { redirect_to phone_score_queries_url, notice: '积分兑换成功' }
-        else
-          format.html { redirect_to phone_bonus_changes_url, notice: '积分兑换失败:积分余额不足' }
-        end
     end
   end
 

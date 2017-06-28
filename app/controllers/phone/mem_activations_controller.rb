@@ -78,14 +78,15 @@ class Phone::MemActivationsController < PhoneController
               @user.nickname = session[:userInfo]["nickname"]
               @user.language = session[:userInfo]["language"] 
               @user.save
-              sign_in("user", @user)      
+              sign_in("user", @user)
+              @msg = "登录成功"
               format.html { redirect_to [:phone, 'homepages'] }
             else
               #新增用户
               @user = User.new(mem_activation_params)
               @user.admin = 'false'
-              @user.email =  Const::SYSTEM_EMAIL #设置默认邮箱，邮箱为非空必须，否则报错
-              #@user.email = mem_activation_params[:phone_num] + '@qq.com'
+              curr_time = rand(100000..999999)  
+              @user.email =  Const::SYSTEM_EMAIL + "."+ mem_activation_params[:phone_num] +"."+ curr_time.to_s  #设置默认邮箱，邮箱为非空必须，否则报错
 
               @user.mem_group_id="1"
               @user.password='123456'
@@ -97,8 +98,8 @@ class Phone::MemActivationsController < PhoneController
               @user.language = session[:userInfo]["language"]  
               if @user.save
                 sign_in("user", @user)
-                # @msg = "保存成功"
-                # puts  @msg
+                @msg = "保存成功"
+                puts  @msg
                 format.html { redirect_to [:phone, 'homepages'] }
               else
                 @msg = "保存失败"

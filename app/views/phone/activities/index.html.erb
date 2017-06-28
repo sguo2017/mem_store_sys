@@ -48,14 +48,12 @@
     <div id="lottery_result" class="submit_box yuanjiao" style="display: none;">
 		<a class="close" href="javascript:void(0);" onclick="close_div();"><img src="/assets/phone/images/close.png" width="33" /></a>
 		<div class="submit_box_text ">
-            <div class="org">恭喜您获得<span id="award_result">100M</span>！</div>
+      <div class="org" id="award_result">恭喜您获得<span ></span>！</div>
 			<div class="search_bar">
-                <p>
-                  恭喜：您抽中<span id="award_result_desc"></span>！
-				</p>
-                <!-- <input style=" margin-right:8%;" class="sure_button cricle" type="button" value="兑换" /> -->
-                <input class="sure_button cricle" onclick="close_div();" type="button" value="再来一次~" />
-       		</div>
+          <p id="award_result_desc" class="text-center">恭喜：您抽中<span></span>！</p>
+          <!-- <input style=" margin-right:8%;" class="sure_button cricle" type="button" value="兑换" /> -->
+          <input class="sure_button cricle" onclick="close_div();" type="button" value="再来一次~" />
+      </div>
                
 		</div>
 	</div>  
@@ -147,9 +145,13 @@ $(document).ready(function(){
             var idx = award.indexOf("#")
             $("#avaliable_span").html(avaliable)
             
-            $("#award_result").html(award.substring(0,idx))
-            $("#award_result_desc").html(award.substring(idx+1))
-
+            if(data.score == '0'){
+              $("#award_result").html("谢谢参与")
+              $("#award_result_desc").html("欢迎下次再来")
+            }else{
+              $("#award_result").html("恭喜您获得<span >"+award.substring(0,idx)+"</span>！")
+              $("#award_result_desc").html("恭喜：您抽中<span>"+award.substring(idx+1)+"</span>！")
+            }
             rotateFn(item, item);
           }else{
             alert(data.msg)           

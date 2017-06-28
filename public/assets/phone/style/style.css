@@ -1305,7 +1305,7 @@ a.text-primary:active {
   width: 80%;
   color: #666;
   margin: 15px auto;
-  text-align: left;
+  /*text-align: left;*/
   line-height: 25px;
 }
 .lottery .submit_box_text a {

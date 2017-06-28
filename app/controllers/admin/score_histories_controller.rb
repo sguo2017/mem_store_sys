@@ -20,7 +20,7 @@ class Admin::ScoreHistoriesController < AdminController
         
       end
     end
-    @score_histories = ScoreHistory.page(params[:page]).per(10)
+    @score_histories = ScoreHistory.page(params[:page]).order("created_at DESC").per(10)
     @mem_groups = MemGroup.page(params[:page]).per(10)
   end
 

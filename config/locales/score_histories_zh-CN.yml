@@ -5,7 +5,7 @@ zh-CN:
       score_history: "商品分类"
     attributes:
       score_history: 
-        point: "编码"
+        point: "变动积分"
         object_type: "类型"
         object_id: "关联id"
         oper: "类型"

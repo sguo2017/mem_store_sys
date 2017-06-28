@@ -24,7 +24,7 @@
 		<ul class="data-list">
 			<% @score_queries.each_with_index do |score_query, index| %>
 				<li class="data-item">
-					<div class="flex-fluid"><%= score_query.created_at %></div>
+					<div class="flex-fluid"><%= score_query.created_at.strftime('%Y-%m-%d %H:%M:%S') %></div>
 					<div><%= score_query.oper %><span class="text-info"><%= score_query.point %></span>积分</div>
 				</li>
 			<% end %>

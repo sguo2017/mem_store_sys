@@ -67,8 +67,11 @@ class Phone::LotteriesController < PhoneController
     @lottery.activity_award_cfg_id = @activity_award_cfg.id
     @lottery.activity_award_cfg_name = @activity_award_cfg.name
 
+
     respond_to do |format|
       if @lottery.save
+        @user.changeScore(@activity_award_cfg.score)
+
         format.json { 
           render json: {status: "0", item: @item, avaliable:@avaliable-1} 
         }

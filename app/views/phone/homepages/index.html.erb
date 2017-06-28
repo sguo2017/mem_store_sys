@@ -20,12 +20,12 @@
           <div class="mt10">
             <div class="lever-bar">
               <i class="ico-lever"></i>
-              等级LV<%= @user.level %>
+              等级<%= @user.level %>
             </div>
             <div class="progress-wrap ml5">
               <div class="small"><%=  @level_up_per %>%</div>
               <div class="progress">
-                <div class="progress-bar" style="width:<%=  @level_up_per %>%;"></div>
+                <div class="progress-bar" style="width:60%;"></div>
               </div>
             </div>
           </div>
@@ -63,7 +63,7 @@
           </a>
         </li>
         <li class="float-item">
-          <a href="/phone/invitations">
+          <a id="showUser2Code">
             <img class="ico-img" src="/assets/phone/images/ico-index5.png" alt="">
             <div class="ico-name">邀请好友</div>  
           </a>
@@ -80,17 +80,11 @@
             <div class="ico-name">门店查询</div>  
           </a>
         </li>
-        <li class="float-item">
-          <a href=<%= new_phone_score_query_path(:score_history => {:user_id => @user.id,:object_type => "商品扫码",:oper => "获得"}, :fun_type => "goods_scan",:code => "12") %>>
-            <img class="ico-img" src="/assets/phone/images/ico-index6.png" alt="">
-            <div class="ico-name">商品扫码</div>  
-          </a>
-        </li>
       </ul>
     </div>
   </div>
   <!-- container end -->
-  <!-- <div class="popup-wrap" id="user2code" style="display: none">
+  <div class="popup-wrap" id="user2code" style="display: none">
     <div class="popup">
       <button class="close" type="button" id="hideUser2Code">
         <i class="ico-close"></i>
@@ -111,4 +105,4 @@
       
     </div>
     <div class="popup-bg"></div>
-  </div> -->
+  </div>

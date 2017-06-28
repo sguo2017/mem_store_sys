@@ -12,21 +12,26 @@ class Phone::HomepagesController < PhoneController
     qr = RQRCode::QRCode.new(Const::STORES_SHOW_ADDR+'/phone/mem_activations?referee_id='+@user.id.to_s, :size => 8, :level => :h )
     png = qr.to_img                      
     png.resize(172, 172).save(Rails.root.to_s+"/public/uploads/user/mem_activation/user2code_"+@user.id.to_s+".png")
-    if (@user.level.blank?) || (@user.level.to_i <= 1)
-      @user.level = "1";
-      mem_level =  MemLevel.where("level=? ", @user.level).first
-      @level_up_per  =  (@user.score.to_f / mem_level.score.to_f * 100).to_i
+    #计算会员升级的百分比<<
+    if @user.level.blank?
+      @user.level = "LV1"
+      @user.save
     else
-      down_level  =  @user.level.to_i - 1 
-      mem_levels =  MemLevel.where("level=? or level = ?", @user.level, down_level).order("score ASC")
-      curr_scope_num = mem_levels.second.score.to_i - mem_levels.first.score.to_i + 1
-      curr_level_num = @user.score.to_i - mem_levels.first.score.to_i
-      @level_up_per = (curr_level_num.to_f / curr_scope_num.to_f * 100).to_i
-      if @level_up_per >= 100 
-          @level_up_per = 100
-          puts "等级溢出错误，超出100%, 查看用户积分与等级是否相符。"
+      @mem_levels = MemLevel.all.order("score ASC")
+      @mem_levels.each_with_index do |l,index|
+        if @user.level < l.code          
+          next_level = @mem_levels[index]
+          # logger.debug "28 @user.score #{@user.score} next_level.score #{next_level.score} rate #{@user.score.to_f / next_level.score.to_f}"
+          @level_up_per = (@user.score.to_f / next_level.score.to_f * 100).to_i
+          break 
+        end
+      end
+
+      if @level_up_per>99
+        @level_up_per = 100
       end
     end
+    #计算会员升级的百分比<<  
   end
 
   # GET /phone/homepages/1

@@ -20,8 +20,8 @@ class Phone::HomepagesController < PhoneController
       @mem_levels = MemLevel.all.order("score ASC")
       @mem_levels.each_with_index do |l,index|
         if @user.level < l.code          
-          next_level = @mem_levels[index]
-          # logger.debug "28 @user.score #{@user.score} next_level.score #{next_level.score} rate #{@user.score.to_f / next_level.score.to_f}"
+          next_level = @mem_levels[index-1]
+          logger.debug "28 @user.score #{@user.score} next_level.score #{next_level.score} rate #{@user.score.to_f / next_level.score.to_f}"
           @level_up_per = (@user.score.to_f / next_level.score.to_f * 100).to_i
           break 
         end

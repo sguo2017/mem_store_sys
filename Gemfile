@@ -87,4 +87,4 @@ end
 gem 'ffaker'
 #gem 'amcharts.rb'
 #gem 'compendium'
-
+#gem 'ckeditor', github: 'galetahub/ckeditor' 

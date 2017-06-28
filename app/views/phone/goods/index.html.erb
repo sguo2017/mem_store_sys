@@ -25,23 +25,16 @@
 		</div>
 	</div>
 	<!-- header end -->
-	<div class="container has-top">
-		<div class="data-list block-mt provide-list">
-    	<% @goods.each do |good| %>
-    		<a class="data-item" href="<%= phone_good_path(good) %>">
-				<img class="provide-img" src="<%= good.avatar %>" alt="">
+			<div class="data-list img-list">
+		  	<% @goods.each do |good| %>
+		    <a class="data-item" href="<%= phone_good_path(good) %>">
 				<div class="flex-fluid">
-					<div class="mt10">
-						<%= good.name %>
-					</div>
-					<!-- 请控制字数 -->
-					<div class="mt10">
-						<span class="text-gray f12">市场价：</span>
-						<span class="price"><%= good.price %></span>
-					</div>
+					<div class="adapt-img"> 
+						<img src="<%= good.avatar %>" alt="">
+					</div> 
 				</div>
 			</a>
-		<% end %>
-		</div>
-		<div class="text-center block-mt">加载完成</div>
-	</div>
+   			<% end %>
+			</div> 
+			<div class="text-center block-mt">加载完成</div>
+

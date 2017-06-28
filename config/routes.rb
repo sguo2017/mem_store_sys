@@ -26,6 +26,7 @@ Rails.application.routes.draw do
     resources :lotteries
     resources :wxes
     resources :stores
+    resources :invitations
   end
 
   namespace :admin do

@@ -1,0 +1,24 @@
+<div class="header">
+    <a class="header-left" href="/phone/homepages">
+      <span class="ico-header-back"></span>
+    </a>
+    <h1>邀请好友</h1>
+  </div>
+  <!-- header end -->
+  <div class="container has-top">
+      <div class="invite-friend-wrap">
+        <div class="user-img-wrap">
+          <div class="user-img">
+            <img <% if @user.headimgurl.blank? %> src="/assets/phone/images/img-user.png" <%else%> src="<%= @user.headimgurl %>" <% end %> alt="">
+          </div>
+          <div class="flex-fluid">
+            <div class="user-name"><%= @user.name %></div>
+            <div class="f12">广东&nbsp;&nbsp;海珠<i class="ico-user3 ml10"></i></div>
+          </div>
+        </div>
+        <div class="code-2d-wrap">
+          <img class="img-2dcode" src="/uploads/user/mem_activation/user2code_<%= @user.id %>.png" alt="">
+          <div class="text-center text-danger code-btm-tips">扫一扫二维码加入会员</div>
+        </div>
+      </div>
+  </div>

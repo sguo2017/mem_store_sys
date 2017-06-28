@@ -77,6 +77,7 @@ class Phone::MemActivationsController < PhoneController
               @user.headimgurl = session[:userInfo]["headimgurl"]
               @user.nickname = session[:userInfo]["nickname"]
               @user.language = session[:userInfo]["language"] 
+              
               @user.save
               sign_in("user", @user)
               @msg = "登录成功"

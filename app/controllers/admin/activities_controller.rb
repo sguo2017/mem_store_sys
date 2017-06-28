@@ -44,7 +44,7 @@ class Admin::ActivitiesController < AdminController
     @activity = Activity.new
     @activity_award = ActivityAward.new
     @activity_award_cfg = ActivityAwardCfg.new
-    @all_level_I = [["积分奖品1", "积分奖品1"], ["积分奖品2", "积分奖品2"], ["积分奖品3", "积分奖品3"]]   
+    @all_level_I = Const::SelectOption::AWARD_CFG_LIST
     @award_count = Const::AWARD_COUNT.to_i    #活动奖项数量 初始化缺省值
 
     #活动ID

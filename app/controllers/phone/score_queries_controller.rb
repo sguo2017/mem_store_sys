@@ -17,7 +17,7 @@ class Phone::ScoreQueriesController < PhoneController
 
   # GET /phone/score_queries/new
   def new
-    score_changed = 0 #是否已兑换过
+    score_changed = 0 #商品是否已兑换过
     fun_type = ""   #功能类型用于是否更新商品实例
     #增加商品扫码判断
     @user = current_user 
@@ -28,8 +28,7 @@ class Phone::ScoreQueriesController < PhoneController
            @good_instance = GoodInstance.where(:code =>params[:code]).first
            if @good_instance.status == '00A'
                good = Good.where(:id =>@good_instance.good_id).first
-               params[:score_history][:point] = good.score
-               @user.score =  @user.score + good.score
+               @add_score = params[:score_history][:point] = good.score
                params[:score_history][:bonus_change_id] = "1"
            else
             score_changed = 1
@@ -45,14 +44,8 @@ class Phone::ScoreQueriesController < PhoneController
          if score_changed == 0
             if(@user.score > 0)
               #更新用户等级
-              mem_levels =  MemLevel.select(:level,:score).order("score ASC")
-              mem_levels.each_with_index do |mem_level, index|
-                if  @user.score < mem_level.score
-                    @user.level = mem_level.level
-                    break
-                end
-              end
-              @user.save               #会员扣减积分 
+              @user.changeScore(@add_score)
+              # @user.save               #会员扣减积分 
               User.transaction do
                 @score_query.save        #积分兑换记录
                 if fun_type == "goods_scan"

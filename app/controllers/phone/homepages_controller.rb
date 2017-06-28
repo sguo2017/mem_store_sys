@@ -12,11 +12,15 @@ class Phone::HomepagesController < PhoneController
     qr = RQRCode::QRCode.new(Const::STORES_SHOW_ADDR+'/phone/mem_activations?referee_id='+@user.id.to_s, :size => 8, :level => :h )
     png = qr.to_img                      
     png.resize(172, 172).save(Rails.root.to_s+"/public/uploads/user/mem_activation/user2code_"+@user.id.to_s+".png")
+    
     #计算会员升级的百分比<<
     if @user.level.blank?
-      @user.level = "LV1"
+      @user.level = "V1"
       @user.save
-    else
+    end
+
+    #计算会员升级的百分比<<
+    if @user.score > 0
       @mem_levels = MemLevel.all.order("score ASC")
       @mem_levels.each_with_index do |l,index|
         if @user.level < l.code          
@@ -30,7 +34,10 @@ class Phone::HomepagesController < PhoneController
       if @level_up_per>99
         @level_up_per = 100
       end
+    else
+      @level_up_per = 0   
     end
+
     #计算会员升级的百分比<<  
   end
 

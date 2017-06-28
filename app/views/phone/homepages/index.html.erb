@@ -25,7 +25,7 @@
             <div class="progress-wrap ml5">
               <div class="small"><%=  @level_up_per %>%</div>
               <div class="progress">
-                <div class="progress-bar" style="width:60%;"></div>
+                <div class="progress-bar" style="width:<%=  @level_up_per %>%;"></div>
               </div>
             </div>
           </div>
@@ -63,7 +63,7 @@
           </a>
         </li>
         <li class="float-item">
-          <a id="showUser2Code">
+          <a id="/phone/invitations">
             <img class="ico-img" src="/assets/phone/images/ico-index5.png" alt="">
             <div class="ico-name">邀请好友</div>  
           </a>
@@ -80,29 +80,12 @@
             <div class="ico-name">门店查询</div>  
           </a>
         </li>
+        <li class="float-item">
+           <a href=<%= new_phone_score_query_path(:score_history => {:user_id => @user.id,:object_type => "商品扫码",:oper => "获得"}, :fun_type => "goods_scan",:code => "12") %>>
+             <img class="ico-img" src="/assets/phone/images/ico-index6.png" alt="">
+             <div class="ico-name">商品扫码</div>
+           </a>
+         </li>
       </ul>
     </div>
-  </div>
-  <!-- container end -->
-  <div class="popup-wrap" id="user2code" style="display: none">
-    <div class="popup">
-      <button class="close" type="button" id="hideUser2Code">
-        <i class="ico-close"></i>
-      </button>
-      <div class="user-img-wrap">
-        <div class="user-img">
-          <img src="/assets/phone/images/img-user.png" alt="">
-        </div>
-        <div class="flex-fluid">
-          <div class="user-name"><%= @user.name %></div>
-          <div class="f12">广东&nbsp;&nbsp;海珠<i class="ico-user3 ml10"></i></div>
-        </div>
-      </div>
-      <div class="code-2d-wrap">
-        <img class="img-2dcode" src="/uploads/user/mem_activation/user2code_<%= @user.id %>.png" alt="">
-        <div class="text-center text-danger code-btm-tips">扫一扫二维码加入会员</div>
-      </div>
-      
-    </div>
-    <div class="popup-bg"></div>
-  </div>
+  </div>  

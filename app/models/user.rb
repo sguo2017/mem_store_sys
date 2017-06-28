@@ -26,4 +26,17 @@ class User < ApplicationRecord
   end
   #加积分 变级别>>
 
+  #保存微信信息<<
+  def saveWxUserInfo(params)
+      self.openid = params["openid"]
+      self.headimgurl = params["headimgurl"]
+      self.nickname = params["nickname"]
+      self.language = params["language"]
+      self.district = params["district"]
+      self.city = params["city"]
+      self.province = params["province"]
+      self.country = params["country"]
+      self.save    
+  end
+  #保存微信信息>>
 end

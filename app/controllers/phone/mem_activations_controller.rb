@@ -24,12 +24,8 @@ class Phone::MemActivationsController < PhoneController
     if user.blank?
       session[:userInfo] = userInfo
     else 
-      #
-      user.headimgurl = userInfo["headimgurl"]
-      user.nickname = userInfo["nickname"]
-      user.language = userInfo["language"]
-      user.save
-      #
+      user.saveWxUserInfo(userInfo)
+
       sign_in("user", user)
       respond_to do |format|
         format.html { redirect_to [:phone, 'homepages'] }
@@ -73,12 +69,7 @@ class Phone::MemActivationsController < PhoneController
             #存量用户
             @user = User.where("phone_num=?", mem_activation_params[:phone_num]).first
             unless @user.blank?
-              @user.openid = session[:userInfo]["openid"]
-              @user.headimgurl = session[:userInfo]["headimgurl"]
-              @user.nickname = session[:userInfo]["nickname"]
-              @user.language = session[:userInfo]["language"] 
-              
-              @user.save
+              user.saveWxUserInfo(session[:userInfo])
               sign_in("user", @user)
               @msg = "登录成功"
               format.html { redirect_to [:phone, 'homepages'] }
@@ -89,15 +80,11 @@ class Phone::MemActivationsController < PhoneController
               curr_time = rand(100000..999999)  
               @user.email =  Const::SYSTEM_EMAIL + "."+ mem_activation_params[:phone_num] +"."+ curr_time.to_s  #设置默认邮箱，邮箱为非空必须，否则报错
 
-              @user.mem_group_id="1"
-              @user.password='123456'
+              @user.mem_group_id = session[:userInfo].params["city"]
+              @user.password = '123456'
               @user.password_confirmation='123456'
-
-              @user.openid = session[:userInfo]["openid"]
-              @user.headimgurl = session[:userInfo]["headimgurl"]
-              @user.nickname = session[:userInfo]["nickname"]
-              @user.language = session[:userInfo]["language"]  
               if @user.save
+                user.saveWxUserInfo(session[:userInfo]) 
                 sign_in("user", @user)
                 @msg = "保存成功"
                 puts  @msg

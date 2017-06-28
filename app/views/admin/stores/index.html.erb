@@ -46,8 +46,8 @@
         <td>
           <%= link_to t('.show', :default => t("helpers.links.show")),
                       admin_store_path(store), :class => 'btn btn-default btn-xs' %>
-          <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                      edit_admin_store_path(store), :class => 'btn btn-default btn-xs' %>
+<!--           <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                      edit_admin_store_path(store), :class => 'btn btn-default btn-xs' %> -->
 <!--           <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
                       admin_store_path(store),
                       :method => :delete,
@@ -59,9 +59,9 @@
   </tbody>
 </table>
 </div>
-<div><%= link_to t('.new', :default => t("helpers.links.new")),
+<!-- <div><%= link_to t('.new', :default => t("helpers.links.new")),
             new_admin_store_path,
-            :class => 'btn btn-warning' %></div>
+            :class => 'btn btn-warning' %></div> -->
             <%= paginate @stores %>
             </div>
             </div>

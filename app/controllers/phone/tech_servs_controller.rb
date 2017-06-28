@@ -8,9 +8,9 @@ class Phone::TechServsController < PhoneController
   def index
     @title = params[:title]
     if @title.blank?
-      @tech_servs = TechServ.page(params[:page]).per(10)
+      @tech_servs = TechServ.where("status <> '00H'").page(params[:page]).per(10)
     else
-       @tech_servs = TechServ.where('title LIKE ? ', '%'+@title+'%').page(params[:page]).per(10)
+       @tech_servs = TechServ.where("status <> '00H'").where('title LIKE ? ', '%'+@title+'%').page(params[:page]).per(10)
     end
   end
 

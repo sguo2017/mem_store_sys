@@ -34,7 +34,6 @@ class Const
     SIGNATURE = ""
 
     ACCESS_TOKEN_ADDR = "https://api.weixin.qq.com/sns/oauth2/access_token?"
-    USER_INFO_ADDR = "https://api.weixin.qq.com/sns/userinfo?"
     JS_TIKET_ADDR = "https://api.weixin.qq.com/cgi-bin/ticket/getticket?"
   end
   #WX>>  
@@ -43,6 +42,8 @@ class Const
   module SelectOption
     #商品发布状态
     GOODS_STATUS =  [["否", "0"], ["是", "1"]]
+    #商品是否状态
+    GOODS_PROMOTION_STATUS =  [["否", false], ["是", true]]
     #用户性别
     USER_SEX = [["男", "0"], ["女", "1"]]
     #门店类型

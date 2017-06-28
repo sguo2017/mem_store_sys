@@ -25,6 +25,7 @@
 		</div>
 	</div>
 	<!-- header end -->
+	<div class="container has-top">
 			<div class="data-list img-list">
 		  	<% @goods.each do |good| %>
 		    <a class="data-item" href="<%= phone_good_path(good) %>">
@@ -36,5 +37,6 @@
 			</a>
    			<% end %>
 			</div> 
+	</div>
 			<div class="text-center block-mt">加载完成</div>
 

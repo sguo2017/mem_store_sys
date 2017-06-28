@@ -30,7 +30,7 @@
           </div>
           <label class="col-xs-1 control-label" for=""><%= f.label :catalog %></label>
           <div class="col-xs-3">
-            <%= select_tag(:catalog, options_for_select(Const::BOOLEAN_LIST), :class => 'form-control') %>
+            <%= select_tag(:catalog, options_for_select(Const::SelectOption::BOOLEAN_LIST), :class => 'form-control') %>
             
             <%=f.error_span(:catalog) %>
           </div>

@@ -4,7 +4,7 @@ class Admin::TechServsController < AdminController
   # GET /admin/tech_servs
   # GET /admin/tech_servs.json
   def index
-    @tech_servs = TechServ.page(params[:page]).per(10)
+    @tech_servs = TechServ.where("status <> '00H'").page(params[:page]).per(10)
   end
 
   # GET /admin/tech_servs/1
@@ -41,9 +41,12 @@ class Admin::TechServsController < AdminController
   # PATCH/PUT /admin/tech_servs/1.json
   def update
     respond_to do |format|
-      if @tech_serv.update(tech_serv_params)
+       if @tech_serv.update(tech_serv_params)
+        @code = 200
+        @msg = "success"
         format.html { redirect_to [:admin, @tech_serv], notice: '技术服务更新成功.' }
-        format.json { head :no_content }
+        format.json { render json: {status: :update, code: @code, msg: @msg} }
+        #format.json { head :no_content }
       else
         format.html { render action: 'edit' }
         format.json { render json: @tech_serv.errors, status: :unprocessable_entity }
@@ -69,6 +72,6 @@ class Admin::TechServsController < AdminController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def tech_serv_params
-      params.require(:tech_serv).permit(:content, :avatar, :title)
+      params.require(:tech_serv).permit(:content, :avatar, :title,:status)
     end
 end

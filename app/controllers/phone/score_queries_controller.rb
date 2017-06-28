@@ -36,7 +36,8 @@ class Phone::ScoreQueriesController < PhoneController
         else
         end
       else
-        @user.score = @user.score - params[:score_history][:point].presence.to_i
+        @add_score = -(params[:score_history][:point].presence.to_i)
+        #@user.score = @user.score - params[:score_history][:point].presence.to_i
      end 
     @score_query = ScoreHistory.new(score_history_params)
 

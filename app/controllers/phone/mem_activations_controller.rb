@@ -2,6 +2,7 @@ class Phone::MemActivationsController < PhoneController
   require 'net/http'
   require 'net/https'
   require "json"
+  # require "Wxinterface"
   layout "phone"
   before_action :set_mem_activation, only: [:show, :edit, :update, :destroy]
 
@@ -13,11 +14,11 @@ class Phone::MemActivationsController < PhoneController
     @store_id = params[:store_id]
     @code = params[:code]
     #获取access_tocken
-    access_tocken = getAccessToken(@code)
+    access_tocken = Wxinterface.getAccessToken(@code)
     #请求获得jsapi_ticket
-    getjsapi_ticket(access_tocken)
+    # getjsapi_ticket(access_tocken)
     #获取用户信息
-    userInfo = JSON.parse(getUserInfo(access_tocken))
+    userInfo = JSON.parse(Wxinterface.getUserInfo(access_tocken))
     #存量用户
     user = User.where("openid=?",userInfo["openid"]).first
     # logger.debug "21:user #{user.to_json}"
@@ -128,49 +129,6 @@ class Phone::MemActivationsController < PhoneController
     end
   end
 
-  def getAccessToken(code)
-    uri = URI.parse(Const::WXConfig::ACCESS_TOKEN_ADDR + "appid=#{Const::WXConfig::APPID}&secret=#{Const::WXConfig::SECRET}&code=#{code}&grant_type=#{Const::WXConfig::GRANT_TYPE}")
-    # logger.debug "113 #{uri}"
-    http = Net::HTTP.new(uri.host, uri.port)
-    http.use_ssl = true
-    http.verify_mode = OpenSSL::SSL::VERIFY_NONE
-    request = Net::HTTP::Get.new(uri.request_uri)
-    response = http.request(request)
-    @data = response.body
-    # logger.debug "148 #{@data.to_json}"
-    return @data #"{\"access_token\":\"SZ3gWcxf7NexY6J4hYTnAVJUeHcKaZPIiQh6BTubFh6fem1rsNCVojMDzIBwGCQW2jB7FLBG4s3JoGvsoBDg8eBnRWwD6DEGnpzvVRy-fJA\",\"expires_in\":7200,\"refresh_token\":\"GUAHQErwGVYw_8WdBdM7HeH0_aMTVbOZZq7WmiKwy4NbOotLplqaon--djMzYLBVxohptcAsJ_t5C0yLmdMR7829tL5OCJjPPfZ_CQHdt4M\",\"openid\":\"oZs6bs43YJNrCDLO5jD6paTg5-5c\",\"scope\":\"snsapi_userinfo\"}"
-  end
-
-  def getUserInfo(params)
-    param = JSON.parse(params)
-    uri = URI.parse(Const::WXConfig::USER_INFO_ADDR + "access_token=#{param['access_token']}&openid=#{param['openid']}&lang=zh_CN")
-    http = Net::HTTP.new(uri.host, uri.port)
-    http.use_ssl = true
-    http.verify_mode = OpenSSL::SSL::VERIFY_NONE
-    request = Net::HTTP::Get.new(uri.request_uri)
-    response = http.request(request)
-    @data = response.body
-    @data.force_encoding('UTF-8')
-    # logger.debug "162 #{@data.to_json}"
-    return @data   
-  end
-
-  def getjsapi_ticket(params)
-    param = JSON.parse(params)
-    uri = URI.parse(Const::WXConfig::JS_TIKET_ADDR + "access_token=#{param['access_token']}&type=jsapi")
-    logger.debug "169: #{uri}"
-    http = Net::HTTP.new(uri.host, uri.port)
-    http.use_ssl = true
-    http.verify_mode = OpenSSL::SSL::VERIFY_NONE
-    request = Net::HTTP::Post.new(uri.request_uri)
-    response = http.request(request)
-    @data = response.body
-    @data.force_encoding('UTF-8')
-    logger.debug "173 #{@data.to_json}"
-    session[:jsapi_ticket] = JSON.parse(@data)['ticket']    
-    logger.debug "176 #{session[:jsapi_ticket]}"
-    # return @data 
-  end
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_mem_activation

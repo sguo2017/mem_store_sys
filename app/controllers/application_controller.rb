@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
 
 	def add_cors_headers
 	  origin = request.headers["Origin"]
-	  logger.debug "17 #{origin}"
+	  # logger.debug "17 #{origin}"
 	  unless (not origin.nil?) and (origin == "http://gzb.davco.cn" or origin.starts_with? "http://localhost:")
 	    origin = "http://127.0.0.1"
 	  end

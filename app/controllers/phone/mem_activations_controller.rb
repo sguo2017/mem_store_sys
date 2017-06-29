@@ -71,10 +71,17 @@ class Phone::MemActivationsController < PhoneController
             #存量用户
             @user = User.where("phone_num=?", mem_activation_params[:phone_num]).first
             unless @user.blank?
-              @user.saveWxUserInfo(userInfo)
-              sign_in("user", @user)
-              @msg = "登录成功"
-              format.html { redirect_to [:phone, 'homepages'] }
+              #冻结和注销用户不允许进入首页
+              if @user.status ==  '00H' || @user.status ==  '00X'
+                @msg = "用户禁止登录"
+                puts  @msg
+                format.html { redirect_to [:phone, 'mem_activations'],notice: 'ma_deny_user' }
+              else
+                @user.saveWxUserInfo(userInfo)
+                sign_in("user", @user)
+                @msg = "登录成功"
+                format.html { redirect_to [:phone, 'homepages'] }
+              end
             else
               #新增用户
               @user = User.new(mem_activation_params)

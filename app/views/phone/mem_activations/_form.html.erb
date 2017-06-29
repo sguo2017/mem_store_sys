@@ -36,7 +36,7 @@
   <!-- 积分退换提示弹窗 -->
    
   <div class="popup-wrap activation_popup_wrap" <% if (flash[:notice] == "ma_smscode_not_exist") || 
-  (flash[:notice] == "ma_smscode_error")  || (flash[:notice] == "ma_save_fail") %> style="display:;" 
+  (flash[:notice] == "ma_smscode_error")  || (flash[:notice] == "ma_save_fail") || (flash[:notice] == "ma_deny_user") %>style="display:;" 
   <% else %> style="display:none;"  <% end %> >  
     <div class="popup has-title">
       <div class="popup-title">
@@ -51,6 +51,7 @@
         <% if flash[:notice] == "ma_smscode_not_exist" %>验证码不存在
         <% elsif  flash[:notice] == "ma_smscode_error" %>验证码错误
         <% elsif  flash[:notice] == "ma_save_fail" %>保存失败
+        <% elsif  flash[:notice] == "ma_deny_user" %>用户禁止登录
          <% end %> 
         </div>
         <!-- <div class="text-import f16 mb5">

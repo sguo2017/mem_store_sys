@@ -35,7 +35,9 @@
         </div>
       </div>
       </div>
-   <!--  </a>   -->
+
+    <%= bootstrap_flash %>
+    
     <div class="block-mt">
       <ul class="float-ul wu3 clearfix ico-list">
         <li class="float-item">
@@ -63,7 +65,7 @@
           </a>
         </li>
         <li class="float-item">
-          <a href="/phone/invitations">
+          <a id="/phone/invitations">
             <img class="ico-img" src="/assets/phone/images/ico-index5.png" alt="">
             <div class="ico-name">邀请好友</div>  
           </a>
@@ -81,7 +83,7 @@
           </a>
         </li>
         <li class="float-item">
-           <a href=<%= new_phone_score_query_path(:score_history => {:user_id => @user.id,:object_type => "商品扫码",:oper => "获得"}, :fun_type => "goods_scan",:code => "12") %>>
+           <a href=<%= new_phone_score_query_path(:score_history => {:user_id => @user.id,:object_type => "商品扫码",:fun_type => "goods_scan",:oper => "获得", :code => "12"}) %>>
              <img class="ico-img" src="/assets/phone/images/ico-index6.png" alt="">
              <div class="ico-name">商品扫码</div>
            </a>

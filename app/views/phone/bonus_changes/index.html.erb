@@ -37,7 +37,7 @@
 						</div>
 						<div class="coupon-right">
 							<%= link_to "立即兑换",
-		                      new_phone_score_query_path(:score_history => {:bonus_change_id => bonus_change.id,:user_id => @user.id, :object_type => "积分兑换", :object_id => bonus_change.id, :point => bonus_change.score, :red_packet => bonus_change.red_packet, :oper => "扣减"}),
+		                      new_phone_score_query_path(:score_history => {:bonus_change_id => bonus_change.id,:user_id => @user.id, :object_type => "积分兑换", :fun_type => "bonus_change", :object_id => bonus_change.id, :point => bonus_change.score, :red_packet => bonus_change.red_packet, :oper => "扣减"}),
 		                      :class => 'btn-similar-hollow' %>
 						</div>
 					</li>

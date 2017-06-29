@@ -13,8 +13,9 @@
       <li class="data-item">
         <div><i class="ico-user2"></i>头像</div>
         <div class="user-pic-upload">
-          <img src="/assets/phone/images/ico-user.png" alt="">
-          <input type="file" accept="image/*" capture="camera">
+            <img <% if @user.headimgurl.blank? %> src="/assets/phone/images/img-user.png" <%else%> src="<%= @user.headimgurl %>" <% end %> alt="">
+          <!-- <img src="/assets/phone/images/ico-user.png" alt="">
+          <input type="file" accept="image/*" capture="camera"> -->
         </div>
       </li>
       <li class="data-item">

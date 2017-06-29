@@ -13,54 +13,61 @@ class Phone::ScoreQueriesController < PhoneController
   # GET /phone/score_queries/1
   # GET /phone/score_queries/1.json
   def show
+
   end
 
   # GET /phone/score_queries/new
-  def new
-    score_changed = 0 #商品是否已兑换过
-    fun_type = ""   #功能类型用于是否更新商品实例
-    #增加商品扫码判断
+  # 两种场景：
+  # 1、积分兑换           fun_type == "bonus_change"
+  # 2、商品实例扫码送积分 fun_type == "goods_scan"
+  def new  
     @user = current_user 
-    unless params[:fun_type].blank?
-        if  params[:fun_type] == "goods_scan"
-           fun_type = "goods_scan"
-           #获取当前商品
-           @good_instance = GoodInstance.where(:code =>params[:code]).first
-           if @good_instance.status == '00A'
-               good = Good.where(:id =>@good_instance.good_id).first
-               @add_score = params[:score_history][:point] = good.score
-               params[:score_history][:bonus_change_id] = "1"
-           else
-            score_changed = 1
-          end
-        else
-        end
-      else
-        @add_score = -(params[:score_history][:point].presence.to_i)
-     end 
-    @score_query = ScoreHistory.new(score_history_params)
+    fun_type = params[:score_history][:fun_type] #必填字段，不允许为空
+    logger.debug "25 fun_type #{fun_type}"
 
-    respond_to do |format|
-         if score_changed == 0
-            if(@user.score > 0)
-              #更新用户等级
-              @user.changeScore(@add_score)
-              # @user.save               #会员扣减积分 
-              User.transaction do
-                @score_query.save        #积分兑换记录
-                if fun_type == "goods_scan"
-                  @good_instance.status =  '00X'  #更新实例状态
-                  @good_instance.save
-                end
-              end
-              format.html { redirect_to phone_score_queries_url, notice: '积分兑换成功' }
-            else
-              format.html { redirect_to phone_bonus_changes_url, notice: '积分兑换失败:积分余额不足' }
-            end
-          else
-             format.html { redirect_to phone_score_queries_url, notice: '商品积分已兑换过' }
-          end
+
+    case fun_type
+    when "goods_scan" #商品实例->商品->积分
+      logger.debug "27"
+      @good_instance = GoodInstance.where(:code =>params[:score_history][:code]).first
+      if @good_instance.status == '00A'
+        good = Good.where(:id =>@good_instance.good_id).first
+        @add_score = params[:score_history][:point] = good.score
+        params[:score_history][:bonus_change_id] = "1"
+        @user.changeScore(@add_score)
+        @score_query = ScoreHistory.new(score_history_params)
+        @score_query.save
+        @good_instance.status = '00X' 
+        @good_instance.save
+        @msg = "扫码送积分操作成功"
+        @go_url = phone_score_queries_url
+      else
+        @msg = "商品积分已兑换过"
+        @go_url = phone_homepages_url
+      end      
+    when "bonus_change" #积分扣减送红包
+      logger.debug "42"
+      @add_score = -(params[:score_history][:point].presence.to_i)
+      #扣减积分不够
+      if @user.score + @add_score > 0
+        @user.changeScore(@add_score)        
+        @score_query = ScoreHistory.new(score_history_params)
+        @score_query.save
+        @msg = "积分兑换成功" 
+        @go_url = phone_score_queries_url
+      else        
+        @msg = "积分兑换失败:积分余额不足"
+        @go_url = phone_bonus_changes_url
+      end
+    else
+      @msg = "未知错误"
+      @go_url = phone_homepages_url
     end
+
+    respond_to do |format|  
+      format.html { redirect_to @go_url, notice: @msg }    
+    end
+
   end
 
   # GET /phone/score_queries/1/edit

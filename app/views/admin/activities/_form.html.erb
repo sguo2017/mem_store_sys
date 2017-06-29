@@ -43,13 +43,13 @@
             <div class="form-group">
               <label class="col-xs-2 control-label text-right">开始时间</label>
               <div class="col-xs-5">
-                <%= f.text_field :begin_time, :class => 'form-control datetimepicker', :placeholder => '开始时间' %>
+                <%= f.text_field :begin_time, :class => 'form-control date-picker', :placeholder => '开始时间' %>
               </div>
             </div>
             <div class="form-group">
               <label class="col-xs-2 control-label text-right">结束时间</label>
               <div class="col-xs-5">
-                <%= f.text_field :end_time, :class => 'form-control text-gray  datetimepicker', :placeholder => '结束时间' %>
+                <%= f.text_field :end_time, :class => 'form-control text-gray  date-picker', :placeholder => '结束时间' %>
               </div>
             </div>
             <div class="form-group">
@@ -199,7 +199,7 @@
           </div>
         </div>  
         <div class="form-group">
-          <label class="col-xs-1 control-label text-right">奖品图标</label>
+<!--           <label class="col-xs-1 control-label text-right">奖品图标</label>
           <div class="col-xs-4">
             <%= f.file_field :avatar, :class => 'form-control', :placeholder => "请选择图标文件" %>
           </div>
@@ -208,15 +208,8 @@
                     <span class="glyphicon glyphicon-info-sign"></span>
                     80x80
               </span>
-           </div>          
-  
-        <!--  <div class="col-xs-4">
-            <button class="btn btn-outline-warning btn-sm ui-file" type="button">
-              上传
-              <input type="file">
-            </button>
-            <button class="btn btn-outline-success btn-sm ml10" type="button">重置</button>
-          </div> -->
+           </div>   -->
+        
         </div>  
       </form>
     </div>
@@ -230,10 +223,4 @@
 <% end %>
 <!-- tab3 end -->
 
-<%= render :partial => 'modal_award_cfg_item' 
-<script type="text/javascript">
-    $(document).ready(function(){
-      $.datetimepicker.setLocale('zh');
-      $('.datetimepicker').datetimepicker({timepicker:false,format:'Y-m-d'});
-    })
-</script>
+<%= render :partial => 'modal_award_cfg_item' %>

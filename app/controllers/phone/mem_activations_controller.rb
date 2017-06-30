@@ -16,7 +16,7 @@ class Phone::MemActivationsController < PhoneController
     #获取access_tocken
     access_tocken = Wxinterface.getAccessToken(@code)
     #请求获得jsapi_ticket
-    # getjsapi_ticket(access_tocken)
+    session[:jsapi_ticket] = Wxinterface.getjsapi_ticket()
     #获取用户信息
     userInfo = JSON.parse(Wxinterface.getUserInfo(access_tocken))
     #存量用户

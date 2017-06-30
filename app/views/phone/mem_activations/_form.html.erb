@@ -61,7 +61,7 @@
         <!-- <div class="f12">积分余额不足</div> -->
       </div>
       <div class="popup-foot flex-wrap">
-        <a class="flex-fluid a-button notice_close_btn">确定</a>
+        <a class="flex-fluid a-button notice_close_btn" href="">确定</a>
       </div>
       
     </div>
@@ -129,7 +129,7 @@
             needResult: 0,
             scanType: ["qrCode", "barCode"],
             success: function(res) {
-              return alert(res.resultStr);
+              // return alert(res.resultStr);
             }
           });
         });

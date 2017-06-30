@@ -39,7 +39,7 @@ $ ->
         	needResult: 0,
         	scanType: ["qrCode","barCode"],
         	success: (res) ->
-              		alert(res.resultStr)          
+              		console.log(res.resultStr)          
 	  	});  
 ###
 

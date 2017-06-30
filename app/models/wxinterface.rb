@@ -1,6 +1,7 @@
 class Wxinterface
   require 'net/http'
   require 'net/https'
+  require "json"
 
   def Wxinterface.getAccessToken(code)
   	# puts "wxinterface.getAccessToken call"
@@ -31,10 +32,9 @@ class Wxinterface
     return @data   
   end
 
-  def Wxinterface.getjsapi_ticket(params)
-  	puts "wxinterface.getjsapi_ticket call"
-    param = JSON.parse(params)
-    uri = URI.parse(Const::WXConfig::JS_TIKET_ADDR + "access_token=#{param['access_token']}&type=jsapi")
+  def Wxinterface.global_access_token
+    puts "wxinterface.getjsapi_ticket call"
+    uri = URI.parse("https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=#{Const::WXConfig::APPID}&secret=#{Const::WXConfig::SECRET}")
     puts "169: #{uri}"
     http = Net::HTTP.new(uri.host, uri.port)
     http.use_ssl = true
@@ -44,9 +44,25 @@ class Wxinterface
     @data = response.body
     @data.force_encoding('UTF-8')
     puts "173 #{@data.to_json}"
-    session[:jsapi_ticket] = JSON.parse(@data)['ticket']    
-    puts "176 #{session[:jsapi_ticket]}"
-    # return @data 
+    $access_token = JSON.parse(@data)['access_token']   
+    # session[:jsapi_ticket] = JSON.parse(@data)['ticket']    
+    # puts "176 #{session[:jsapi_ticket]}"
+    # return @data    
+  end
+
+  def Wxinterface.getjsapi_ticket()
+    Wxinterface.global_access_token()
+    uri = URI.parse(Const::WXConfig::JS_TIKET_ADDR + "access_token=#{$access_token}&type=jsapi")
+    puts "169: #{uri}"
+    http = Net::HTTP.new(uri.host, uri.port)
+    http.use_ssl = true
+    http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+    request = Net::HTTP::Post.new(uri.request_uri)
+    response = http.request(request)
+    @data = response.body
+    @data.force_encoding('UTF-8')
+    puts "173 #{@data.to_json}" #"{\"errcode\":0,\"errmsg\":\"ok\",\"ticket\":\"sM4AOVdWfPE4DxkXGEs8VPHC6PkRrUTMm9L913Q0hTlkYsOYfpAjf9VQaukqSypUrVsU3cDmzApPUAL_DSE7AA\",\"expires_in\":7200}"
+    return JSON.parse(@data)['ticket'] 
   end
 
 end

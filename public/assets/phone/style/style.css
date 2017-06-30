@@ -61,10 +61,19 @@ select {
   color: #555;
   font-family: "Helvetica Neue", Helvetica, Arial, 'Microsoft YaHei', SimSun;
   border: 0;
+}
+input[type='text'],
+input[type='password'],
+button,
+textarea,
+select {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
   background: #fff;
+}
+input[type='date'] {
+  margin-left: 20px;
 }
 input,
 textarea,
@@ -1305,7 +1314,7 @@ a.text-primary:active {
   width: 80%;
   color: #666;
   margin: 15px auto;
-  /*text-align: left;*/
+  text-align: left;
   line-height: 25px;
 }
 .lottery .submit_box_text a {

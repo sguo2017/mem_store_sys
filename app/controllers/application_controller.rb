@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-	protect_from_forgery with: :exception
+	#protect_from_forgery with: :exception
 	before_action :add_cors_headers
 
 	def add_cors_headers

@@ -10,8 +10,10 @@
       </div>
       <div class="popup-main text-center">
         <div class="text-import f16 mb5">
-        <% if flash[:notice].include?("成功") %>
-          <i class="ico-right mr5"></i>
+        <% unless flash[:notice].blank? 
+          if flash[:notice].include?("成功") %>
+            <i class="ico-right mr5"></i>
+          <% end %> 
         <% else %>
           <i class="ico-error mr5"></i>
         <% end %> 

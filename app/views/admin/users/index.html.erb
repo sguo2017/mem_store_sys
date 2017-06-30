@@ -29,6 +29,7 @@
         <td><%= user.score %></td>
         <td><%= user.score_total %></td>
         <td><%= user.created_at.strftime('%Y-%m-%d %H:%M:%S') %></td>
+        <% if user.status != "00H" %>
         <td>
         <!-- Button trigger modal -->
         <button type="button" class="btn btn-default btn-xs" data-toggle="modal" data-target="#modal-users" data-mem_group=<%= user.mem_group_id %> data-user=<%= user.id %> >
@@ -50,6 +51,14 @@
          <button type="button" class="btn btn-warning btn-xs mr5 close-user-btn"  data-user=<%= user.id %>  >注销
         </button>
         </td>
+        <% else %>
+        <td>
+           <%= link_to t('.show', :default => t("helpers.links.show")),
+                      admin_user_path(user), :class => 'btn btn-default btn-xs' %>
+            <button type="button" class="btn btn-warning btn-xs mr5 " > 已注销
+        </button>
+        </td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>

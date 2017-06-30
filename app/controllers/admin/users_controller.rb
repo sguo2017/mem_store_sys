@@ -7,15 +7,15 @@ class Admin::UsersController < AdminController
       @name = params[:name]
       @mem_group_id = params[:mem_group_id]
     if @name.blank? &&  @mem_group_id.blank?
-      @users = User.where(:admin =>0).where("status <> '00H'").page(params[:page]).per(10)
+      @users = User.where(:admin =>0).page(params[:page]).per(10)
     else
       if @mem_group_id.blank? 
-        @users = User.where('name LIKE ? ', '%'+@name+'%').where(:admin =>0).where("status <> '00H'").page(params[:page]).per(10)
+        @users = User.where('name LIKE ? ', '%'+@name+'%').where(:admin =>0).page(params[:page]).per(10)
       else
         if @name.blank?   ##当name字段值为空时要去掉like,否则查询不到
-           @users = User.where(:admin =>0).where("status <> '00H'").where(:mem_group_id =>@mem_group_id).page(params[:page]).per(10)
+           @users = User.where(:admin =>0).where(:mem_group_id =>@mem_group_id).page(params[:page]).per(10)
         else
-         @users = User.where('name LIKE ? ', '%'+@name+'%').where(:admin =>0).where("status <> '00H'").where(:mem_group_id =>@mem_group_id).page(params[:page]).per(10)
+         @users = User.where('name LIKE ? ', '%'+@name+'%').where(:admin =>0).where(:mem_group_id =>@mem_group_id).page(params[:page]).per(10)
         end
         
       end

@@ -11,12 +11,12 @@
       <div class="popup-main text-center">
         <div class="text-import f16 mb5">
         <i class="ico-error mr5"></i>
-			<%= flash[:notice] %>
+			 <%= flash[:notice] %>
         </div>
 
       </div>
       <div class="popup-foot flex-wrap">
-        <a class="flex-fluid a-button sq_notice_close_btn" href="">确定</a>
+        <a class="flex-fluid a-button cursor-p sq_notice_close_btn">确定</a>
       </div>
       
     </div>
@@ -27,7 +27,6 @@
    $(document).ready(function(){
       $('.sq_notice_close_btn').click(function() {
           $('.sq_popup_wrap').hide();
-          return
         });
    })
    </script>

@@ -335,6 +335,9 @@ a.text-primary:active {
 .text-danger {
   color: #d80605;
 }
+.cursor-p {
+  cursor: pointer;
+}
 .f12 {
   font-size: 12px;
 }
@@ -938,7 +941,7 @@ a.text-primary:active {
   position: relative;
   background: #fff;
   overflow: hidden;
-  padding-right: 40px;
+  padding-right: 20px;
   margin-bottom: 12px;
   display: -webkit-box;
   display: -moz-box;
@@ -991,10 +994,13 @@ a.text-primary:active {
   -webkit-flex-grow: 1;
   flex-grow: 1;
   flex: auto;
-  margin: 5px 10px;
+  margin: 5px 0 5px 10px;
+}
+.coupon-list .coupon-item .coupon-right {
+  text-align: right;
 }
 .coupon-list .coupon-item .coupon-right .btn-similar-hollow {
-  margin-top: 50px;
+  margin-top: 15px;
 }
 .coupon-list .dot-line {
   position: absolute;

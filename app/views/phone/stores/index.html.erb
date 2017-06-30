@@ -27,6 +27,8 @@
 		if(this.getStatus() == BMAP_STATUS_SUCCESS){
 			mypoint = r.point;
 			var mk = new BMap.Marker(r.point);
+			var latCurrent = r.point.lat;  
+            var lngCurrent = r.point.lng;  
 			// map.addOverlay(mk);//您的位置加标注
 			map.panTo(r.point);
 			// alert('您的位置：'+r.point.lng+','+r.point.lat);
@@ -54,8 +56,10 @@
 
 			function attribute1(){
 				var p = marker_china_unicom_gz_1.getPosition();  //
-				var driving = new BMap.DrivingRoute(map, {renderOptions:{map: map, autoViewport: true}});
-				driving.search(mypoint, p );				
+				// var driving = new BMap.DrivingRoute(map, {renderOptions:{map: map, autoViewport: true}});
+				// driving.search(mypoint, p );	
+
+				location.href="http://api.map.baidu.com/direction?origin="+latCurrent+","+lngCurrent+"&destination="+p.lat+","+p.lng+"&mode=driving&region=广州&output=html";  			
 
 			}
 
@@ -69,8 +73,10 @@
 
 			function attribute2(){
 				var p = marker_china_unicom_gz_2.getPosition();  //
-				var driving = new BMap.DrivingRoute(map, {renderOptions:{map: map, autoViewport: true}});
-				driving.search(mypoint, p);				
+				// var driving = new BMap.DrivingRoute(map, {renderOptions:{map: map, autoViewport: true}});
+				// driving.search(mypoint, p);	
+
+				location.href="http://api.map.baidu.com/direction?origin="+latCurrent+","+lngCurrent+"&destination="+p.lat+","+p.lng+"&mode=driving&region=广州&output=html";  				
 
 			}			
 		}

@@ -33,8 +33,10 @@ class Phone::ScoreQueriesController < PhoneController
       if @good_instance.status == '00A'
         good = Good.where(:id =>@good_instance.good_id).first
         @add_score = params[:score_history][:point] = good.score
+        @user.changeScore(@add_score) #会员积分变化
+        params[:score_history][:user_id] = @user.id
+        params[:score_history][:oper] = "获得"
         params[:score_history][:bonus_change_id] = "1"
-        @user.changeScore(@add_score)
         @score_query = ScoreHistory.new(score_history_params)
         @score_query.save
         @good_instance.status = '00X' 
@@ -50,7 +52,8 @@ class Phone::ScoreQueriesController < PhoneController
       @add_score = -(params[:score_history][:point].presence.to_i)
       #扣减积分不够
       if @user.score + @add_score > 0
-        @user.changeScore(@add_score)        
+        @user.changeScore(@add_score) #会员积分变化    
+        params[:score_history][:user_id] = @user.id    
         @score_query = ScoreHistory.new(score_history_params)
         @score_query.save
         @msg = "积分兑换成功" 

@@ -48,7 +48,7 @@
           生日  
         </div>
         <div>
-        <%= text_field_tag "user[birthday]", @user.birthday, class: "flex-fluid datetimepicker" %>
+        <%= date_field_tag "user[birthday]", @user.birthday, class: "flex-fluid" %>
         </div>
       </li>
     </ul>
@@ -103,8 +103,8 @@
     $(document).ready(function(){
         show_notice()
         //日期控件初始化
-        $.datetimepicker.setLocale('zh');
-        $('.datetimepicker').datetimepicker({timepicker:false,format:'Y-m-d'});
+        // $.datetimepicker.setLocale('zh');
+        // $('.datetimepicker').datetimepicker({timepicker:false,format:'Y-m-d'});
         //检查手机格式
         check_input()
     })

@@ -91,6 +91,10 @@ class Phone::MemActivationsController < PhoneController
               
               logger.debug "83 #{session[:userInfo]} city #{userInfo["city"]}"
               mg = MemGroup.find_by_city(userInfo["city"])
+              if mg.blank?
+                mg = MemGroup.new(city: userInfo["city"],province: userInfo["province"],country: userInfo["country"])
+                mg.save
+              end
               @user.mem_group_id = mg.id
               @user.password = '123456'
               @user.password_confirmation='123456'

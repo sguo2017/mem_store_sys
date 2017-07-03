@@ -13,13 +13,17 @@ class User < ApplicationRecord
     end         
 
     #加积分 变级别<<
+    # score       积分余额
+    # score_total 累计积分:累计积分主要是一直累加的，用来计算等级
     def changeScore(param)
     	self.score = self.score + param
-    	self.score_total = self.score_total + param
+        if param > 0
+    	   self.score_total = self.score_total + param
+        end
     	@mem_levels = MemLevel.all.order("score ASC")
     	@mem_levels.each do |l|
     		# logger.debug "18 l.score #{l.score} l.level #{l.level}"
-    		if self.score < l.score
+    		if self.score_total < l.score
     			# logger.debug "20 user.score #{self.score} l.score #{l.score} l.level #{l.level}"
     			self.level = l.code
     			break 

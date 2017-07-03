@@ -14,7 +14,7 @@ class AdminController < ApplicationController
 
   def menu_active    
     @current_uri = request.fullpath
-    @current_nav = @current_uri[/^\/admin\/([a-z_]+)[\?\/]{0,1}.?*/,1].to_s
+    @current_nav = @current_uri[/^\/admin\/([a-z_]+)[\?\/]{0,1}.*/,1].to_s
     if @current_nav.blank?
         logger.debug "error! current_nav is blank!!!"
     else

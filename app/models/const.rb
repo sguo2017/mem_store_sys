@@ -49,6 +49,8 @@ class Const
     AWARD_CFG_LIST = [["积分", "积分"]]
     #用户性别
     USER_SEX = [["男", "1"], ["女", "0"]]
+    #用户状态
+    USER_STATUS = [["正常", "00A"], ["已冻结", "00X"], ["已注销", "00H"]]
     #商品是否状态
     GOODS_PROMOTION_STATUS =  [["否", false], ["是", true]]
   end

@@ -124,15 +124,6 @@
         $('.notice_close_btn').click(function() {
           return $('.activation_popup_wrap').hide();
         });
-        $('.ico-scan').click(function() {
-          return wx.scanQRCode({
-            needResult: 0,
-            scanType: ["qrCode", "barCode"],
-            success: function(res) {
-              // return alert(res.resultStr);
-            }
-          });
-        });
         $('.mem-avctivate-btn').click(function() {
             if(valid_form() == true){
               if ('' === $('#sms_content').val()) {

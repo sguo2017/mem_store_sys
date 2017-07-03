@@ -8,11 +8,14 @@ class Phone::HomepagesController < PhoneController
   # GET /phone/homepages.json
   def index
     @user = current_user 
-
-    qr = RQRCode::QRCode.new(Const::STORES_SHOW_ADDR+'/phone/mem_activations?referee_id='+@user.id.to_s, :size => 8, :level => :h )
-    png = qr.to_img                      
-    png.resize(172, 172).save(Rails.root.to_s+"/public/uploads/user/mem_activation/user2code_"+@user.id.to_s+".png")
-    
+    if @user.qrcode.blank?
+      go_url = "#{Const::WXConfig::AUTH_ADDR}appid=#{Const::WXConfig::APPID}&redirect_uri=#{Const::STORES_SHOW_ADDR}/phone/mem_activations?referee_id=#{@user.id.to_s}&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect"   
+      qr = RQRCode::QRCode.new(go_url, :size => 16, :level => :h )
+      png = qr.to_img                      
+      @user.qrcode = "uploads/user/mem_activation/user2code_"+@user.id.to_s+".png"
+      png.resize(172, 172).save(Rails.root.to_s + "/public/" + @user.qrcode)
+      @user.save
+    end  
     #计算会员升级的百分比<<
     if @user.level.blank?
       @user.level = "V1"

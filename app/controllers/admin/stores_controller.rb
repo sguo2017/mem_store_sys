@@ -17,10 +17,12 @@ class Admin::StoresController < AdminController
   def show 
     @store=Store.find(params[:id])
     if @store.qrcode.blank?
-      qr = RQRCode::QRCode.new(Const::STORES_SHOW_ADDR+'/phone/mem_activations?store_id='+@store.id.to_s, :size => 8, :level => :h )
-      png = qr.to_img                      
-      png.resize(90, 90).save(Rails.root.to_s+"/public/uploads/store/mem_activation/qrcode_"+@store.id.to_s+".png")
-      @store.qrcode = "/uploads/store/mem_activation/qrcode_"+@store.id.to_s+".png"
+      go_url = "#{Const::WXConfig::AUTH_ADDR}appid=#{Const::WXConfig::APPID}&redirect_uri=#{Const::STORES_SHOW_ADDR}/phone/mem_activations?store_id=#{@store.id.to_s}&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect"   
+      logger.debug "21  #{go_url}"
+      qr = RQRCode::QRCode.new(go_url, :size => 16, :level => :h )
+      png = qr.to_img     
+      @store.qrcode = "/uploads/store/mem_activation/qrcode_"+@store.id.to_s+".png";                 
+      png.resize(172, 172).save(Rails.root.to_s + "/public/" + @store.qrcode)
       @store.save
     end
   end

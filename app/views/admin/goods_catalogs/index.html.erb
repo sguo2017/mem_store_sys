@@ -40,6 +40,7 @@
     <% end %>
   </tbody>
 </table>
+  <%= hidden_field_tag 'goods_catalog_notice', flash[:notice] %>
 </div>
 <div>
   <%= link_to t('.new', :default => t("helpers.links.new")),
@@ -51,5 +52,17 @@
             </div>
         </div>
 
+<script type="text/javascript">
+ function goods_catalog_show_notice(){
+        var notice = $("#goods_catalog_notice").val()
+          if(notice != "" && notice != null) {
+            alert(notice)
+          }
+          $("#goods_catalog_notice").val(""); 
+      }
 
+    $(document).ready(function(){
+        goods_catalog_show_notice()
+    })
 
+</script>

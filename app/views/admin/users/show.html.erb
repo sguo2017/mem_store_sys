@@ -10,9 +10,9 @@
           <span class="text-gray"><%= model_class.human_attribute_name(:name) %>:</span>
           <%= @user.name %>
         </div>
-        <div class="col-xs-3">
+        <div class="col-xs-3" style="overflow: hidden">
           <span class="text-gray"><%= model_class.human_attribute_name(:email) %>:</span>
-          <%= @user.email %>
+          <span> <%= @user.email %> </span>
         </div>
         <div class="col-xs-3">
           <span class="text-gray"><%= model_class.human_attribute_name(:level) %>:</span>
@@ -32,7 +32,12 @@
         </div>
         <div class="col-xs-3">
           <span class="text-gray"><%= model_class.human_attribute_name(:sex) %>:</span>
-          <%= @user.sex %>
+        <%  Const::SelectOption::USER_SEX.each_with_index do |(key,value), index| %>
+        <% if @user.sex== value %>
+           <%= key %>
+           <% end  %>
+        <% end %>
+          <!-- <%= @user.sex %> -->
         </div>
         <div class="col-xs-3">
           <span class="text-gray"><%= model_class.human_attribute_name(:birthday) %>:</span>
@@ -75,8 +80,12 @@
           <%= @user.store_id %>
         </div>
         <div class="col-xs-3">
-          <span class="text-gray"><%= model_class.human_attribute_name(:status) %>:</span>
-          <%= @user.status %>
+        <span class="text-gray"><%= model_class.human_attribute_name(:status) %>:</span>
+        <%  Const::SelectOption::USER_STATUS.each_with_index do |(key,value), index| %>
+        <% if @user.status == value %>
+           <%= key %>
+           <% end  %>
+        <% end %>
         </div>
       </div>
       <div class="text-left block-mt">

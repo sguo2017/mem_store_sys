@@ -54,10 +54,16 @@ class Admin::GoodsCatalogsController < AdminController
   # DELETE /admin/goods_catalogs/1
   # DELETE /admin/goods_catalogs/1.json
   def destroy
-    @goods_catalog.destroy
+    #查询此分类是否有商品存在，如存在则不允许删除
+    @good = Good.where(goods_catalog_id: params["id"]).first
     respond_to do |format|
-      format.html { redirect_to admin_goods_catalogs_url, notice: '商品分类删除成功.' }
-      format.json { head :no_content }
+      unless @good.blank?
+        format.html { redirect_to admin_goods_catalogs_url, notice: '商品分类删除失败,此分类有数据存在.' }
+      else
+        @goods_catalog.destroy
+        format.html { redirect_to admin_goods_catalogs_url, notice: '商品分类删除成功.' }
+        format.json { head :no_content }
+      end
     end
   end
 

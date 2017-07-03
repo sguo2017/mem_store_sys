@@ -59,6 +59,10 @@ class Admin::UsersController < AdminController
   # PATCH/PUT /admin/users/1.json
   def update
     respond_to do |format|
+      unless user_params[:mem_group_id].blank?
+        m = MemGroup.find(user_params[:mem_group_id])
+        @user.city = m.city
+      end
       if @user.update(user_params)
         format.html { redirect_to admin_users_url, notice: '会员信息已成功更新.' }
         @code = 200

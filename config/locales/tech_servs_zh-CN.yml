@@ -8,6 +8,7 @@ zh-CN:
         content: "内容"    
         avatar: "小图"    
         created_at: "创建时间"
+        title: "标题"
   helpers:
     submit:
       tech_serv:

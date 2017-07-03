@@ -1,10 +1,11 @@
 class Admin::TechServsController < AdminController
+  protect_from_forgery :except => [:update, :delete, :create]
   before_action :set_tech_serv, only: [:show, :edit, :update, :destroy]
 
   # GET /admin/tech_servs
   # GET /admin/tech_servs.json
   def index
-    @tech_servs = TechServ.where("status <> '00H'").page(params[:page]).per(10)
+    @tech_servs = TechServ.page(params[:page]).per(10)
   end
 
   # GET /admin/tech_servs/1

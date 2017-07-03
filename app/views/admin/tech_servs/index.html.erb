@@ -1,46 +1,55 @@
 <%- model_class = TechServ -%>
+<div class="container">
 <div class="page-header">
   <h1>技术服务列表</h1>
 </div>
 <table class="table table-striped">
   <thead>
     <tr>
-      <!-- <%= model_class.human_attribute_name(:id) %></th> --><th>
-      <th><%= model_class.human_attribute_name(:avatar) %></th>
+      <th><%= model_class.human_attribute_name(:title) %></th>
+      <!-- <th><%= model_class.human_attribute_name(:avatar) %></th>
       <th><%= model_class.human_attribute_name(:content) %></th>
-      <th><%= model_class.human_attribute_name(:created_at) %></th>
+      <th><%= model_class.human_attribute_name(:created_at) %></th> -->
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
   <tbody>
     <% @tech_servs.each do |tech_serv| %>
       <tr>
-        <!-- <td><%= link_to tech_serv.id, admin_tech_serv_path(tech_serv) %></td> -->
-        <td><img class="media-object" src="<%=tech_serv.avatar%>" alt="Image">
+        <td><%= tech_serv.title %></td>
+       <!--  <td><img class="media-object" src="<%=tech_serv.avatar%>" alt="Image">
         </td>
         <td><%= raw tech_serv.content %></td>
-        <td><%= tech_serv.created_at.strftime('%Y-%m-%d %H:%M:%S') %></td>
-        <td>
-          <%= link_to t('.show', :default => t("helpers.links.show")),
-                      admin_tech_serv_path(tech_serv), :class => 'btn btn-default btn-xs' %>
-          <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                      edit_admin_tech_serv_path(tech_serv), :class => 'btn btn-default btn-xs' %>
-<!--           <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-                      admin_tech_serv_path(tech_serv),
-                      :method => :delete,
-                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => '您确定?')) },
-                      :class => 'btn btn-warning btn-xs mr5' %> -->
-         <button type="button" class="btn btn-warning btn-xs mr5 close-tech-btn"  data-tech-id=<%= tech_serv.id %>  >注销
-        </button>
-        </td>
+        <td><%= tech_serv.created_at.strftime('%Y-%m-%d %H:%M:%S') %></td> -->
+        <% if tech_serv.status != "00H" %>
+          <td>
+            <%= link_to t('.show', :default => t("helpers.links.show")),
+                        admin_tech_serv_path(tech_serv), :class => 'btn btn-default btn-xs' %>
+            <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                        edit_admin_tech_serv_path(tech_serv), :class => 'btn btn-default btn-xs' %>
+  <!--           <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                        admin_tech_serv_path(tech_serv),
+                        :method => :delete,
+                        :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => '您确定?')) },
+                        :class => 'btn btn-warning btn-xs mr5' %> -->
+             <button type="button" class="btn btn-warning btn-xs mr5 close-tech-btn"  data-tech-id=<%= tech_serv.id %>  >注销
+            </button>
+          </td>
+        <% else %>
+          <td>
+             <button type="button" class="btn btn-warning btn-xs mr5 " > 已注销  </button>
+          </td>
+          <% end %>
       </tr>
     <% end %>
   </tbody>
 </table>
+
 <%= paginate @tech_servs %>
 <%= link_to t('.new', :default => t("helpers.links.new")),
             new_admin_tech_serv_path,
             :class => 'btn btn-warning' %>
+</div>
 
 <script type="text/javascript">
   $(document).ready(function(){

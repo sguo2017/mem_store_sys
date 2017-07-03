@@ -100,3 +100,14 @@
 
 
 </script>
+<script type="text/javascript">
+$(document).ready(function(){  
+  var needRefresh = sessionStorage.getItem("sub-need-refresh");
+  if(needRefresh){
+      sessionStorage.removeItem("sub-need-refresh");
+      location.reload();
+  }
+
+  sessionStorage.setItem("need-refresh", true);  
+})
+</script>	

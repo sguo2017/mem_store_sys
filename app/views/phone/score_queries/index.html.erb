@@ -1,9 +1,9 @@
 	<div class="header">
-		<a class="header-left" href="/phone/homepages">
+		<a class="header-left" href="javascript:void(0)" onclick="window.location.href='/phone/homepages';">
 			<span class="ico-header-back"></span>
 		</a>
 		<h1>积分查询</h1>
-		<button class="header-right"><span class="ico-scan"></span></button>
+		<button class="header-right"><span class="ico-scan" onclick="wxScanQRCode();"></span></button>
 	</div>
 	<!-- header end -->
 	<div class="container has-top">
@@ -30,5 +30,3 @@
 			<% end %>
 		</ul>
 	</div>
-
-    <%= render 'popup' %>

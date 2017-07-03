@@ -1,9 +1,9 @@
     <div class="header">
-    <a class="header-left" href="/phone/homepages">
+    <a class="header-left" href="javascript:void(0)" onclick="window.location.href='/phone/homepages';">
       <span class="ico-header-back"></span>
     </a>
     <h1>会员资料</h1>
-    <button class="header-right"><span class="ico-scan"></span></button>
+    <button class="header-right"><span class="ico-scan" onclick="wxScanQRCode();"></span></button>
   </div>
   <!-- header end -->
   <div class="container has-top">
@@ -48,7 +48,7 @@
           生日  
         </div>
         <div>
-        <%= date_field_tag "user[birthday]", @user.birthday, class: "flex-fluid" %>
+        <%= text_field_tag "user[birthday]", @user.birthday, class: "flex-fluid datetimepicker" %>
         </div>
       </li>
     </ul>
@@ -103,8 +103,8 @@
     $(document).ready(function(){
         show_notice()
         //日期控件初始化
-        // $.datetimepicker.setLocale('zh');
-        // $('.datetimepicker').datetimepicker({timepicker:false,format:'Y-m-d'});
+        $.datetimepicker.setLocale('zh');
+        $('.datetimepicker').datetimepicker({timepicker:false,format:'Y-m-d'});
         //检查手机格式
         check_input()
     })

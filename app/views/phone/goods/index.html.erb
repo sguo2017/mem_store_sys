@@ -1,5 +1,5 @@
 	<div class="header">
-		<a class="header-left" href="/phone/homepages">
+		<a class="header-left" href="javascript:void(0)" onclick="window.location.href='/phone/homepages';">
 			<span class="ico-header-back"></span>
 		</a>
 		<h1>产品介绍</h1>
@@ -39,4 +39,15 @@
 			</div> 
 	</div>
 			<div class="text-center block-mt">加载完成</div>
+<script type="text/javascript">
+$(document).ready(function(){  
+  var needRefresh = sessionStorage.getItem("sub-need-refresh");
+  if(needRefresh){
+      sessionStorage.removeItem("sub-need-refresh");
+      location.reload();
+  }
+
+  sessionStorage.setItem("need-refresh", true);  
+})
+</script>				
 

@@ -1,10 +1,10 @@
 <div  class="lottery" <% if @activity.avatar.blank? %> <% else%> style="background: #000 url('<%= @activity.avatar %>') center center ; background-size: cover;" <% end %> >
 	<div class="header">
-		<a class="header-left" href="/phone/homepages">
+		<a class="header-left" href="javascript:void(0)" onclick="window.location.href='/phone/homepages';">
 			<span class="ico-header-back"></span>
 		</a>
 		<h1>营销活动</h1>
-		<button class="header-right"><span class="ico-scan"></span></button>
+		<button class="header-right"><span class="ico-scan" onclick="wxScanQRCode();"></span></button>
 		
 	</div>
 
@@ -74,7 +74,14 @@ var turnplate={
     bRotate:false       //false:停止;ture:旋转
 };
 
-$(document).ready(function(){
+$(document).ready(function(){  
+  var needRefresh = sessionStorage.getItem("need-refresh");
+  if(needRefresh){
+      sessionStorage.removeItem("need-refresh");
+      location.reload();
+  }
+
+  sessionStorage.setItem("need-refresh", true);  
   //动态添加大转盘的奖品与奖品区域背景颜色
 
   turnplate.restaraunts = [<% @restaraunts.each do |restaraunt| %> "<%= restaraunt %>", <% end %>];

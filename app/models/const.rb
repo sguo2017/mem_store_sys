@@ -35,6 +35,7 @@ class Const
     ACCESS_TOKEN_ADDR = "https://api.weixin.qq.com/sns/oauth2/access_token?"
     USER_INFO_ADDR = "https://api.weixin.qq.com/sns/userinfo?"
     JS_TIKET_ADDR = "https://api.weixin.qq.com/cgi-bin/ticket/getticket?"
+    AUTH_ADDR = "https://open.weixin.qq.com/connect/oauth2/authorize?"
   end
   #WX>>  
 

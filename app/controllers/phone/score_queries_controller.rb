@@ -1,5 +1,5 @@
 class Phone::ScoreQueriesController < PhoneController
-  before_action :authenticate_user!
+  # before_action :authenticate_user!
   layout "phone" 
   before_action :set_score_query, only: [:show, :edit, :update, :destroy]
 
@@ -20,15 +20,16 @@ class Phone::ScoreQueriesController < PhoneController
   # 两种场景：
   # 1、积分兑换           fun_type == "bonus_change"
   # 2、商品实例扫码送积分 fun_type == "goods_scan"
-  def new  
-    @user = current_user 
+  # 3、未登录             fun_type == "no_login"
+  def new
     fun_type = params[:score_history][:fun_type] #必填字段，不允许为空
-    logger.debug "25 fun_type #{fun_type}"
-
+    @user = current_user 
+    if @user.blank?
+      fun_type = "no_login"
+    end
 
     case fun_type
     when "goods_scan" #商品实例->商品->积分
-      logger.debug "27"
       @good_instance = GoodInstance.where(:code =>params[:score_history][:code]).first
       if @good_instance.status == '00A'
         good = Good.where(:id =>@good_instance.good_id).first
@@ -48,7 +49,6 @@ class Phone::ScoreQueriesController < PhoneController
         @go_url = phone_homepages_url
       end      
     when "bonus_change" #积分扣减送红包
-      logger.debug "42"
       @add_score = -(params[:score_history][:point].presence.to_i)
       #扣减积分不够
       if @user.score + @add_score > 0
@@ -62,6 +62,9 @@ class Phone::ScoreQueriesController < PhoneController
         @msg = "积分兑换失败:积分余额不足"
         @go_url = phone_bonus_changes_url
       end
+    when "no_login"
+       @msg = "必须先授权登录"
+       @go_url = "#{Const::WXConfig::AUTH_ADDR}appid=#{Const::WXConfig::APPID}&redirect_uri=http://gzb.davco.cn/phone/mem_activations?method=wxCfgEntrance&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect"   
     else
       @msg = "未知错误"
       @go_url = phone_homepages_url
@@ -86,25 +89,25 @@ class Phone::ScoreQueriesController < PhoneController
   # PATCH/PUT /phone/score_queries/1
   # PATCH/PUT /phone/score_queries/1.json
   def update
-    respond_to do |format|
-      if @score_query.update(score_query_params)
-        format.html { redirect_to [:phone, @score_query], notice: 'Score query was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: 'edit' }
-        format.json { render json: @score_query.errors, status: :unprocessable_entity }
-      end
-    end
+    # respond_to do |format|
+    #   if @score_query.update(score_query_params)
+    #     format.html { redirect_to [:phone, @score_query], notice: 'Score query was successfully updated.' }
+    #     format.json { head :no_content }
+    #   else
+    #     format.html { render action: 'edit' }
+    #     format.json { render json: @score_query.errors, status: :unprocessable_entity }
+    #   end
+    # end
   end
 
   # DELETE /phone/score_queries/1
   # DELETE /phone/score_queries/1.json
   def destroy
-    @score_query.destroy
-    respond_to do |format|
-      format.html { redirect_to phone_score_queries_url, notice: 'Score query was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    # @score_query.destroy
+    # respond_to do |format|
+    #   format.html { redirect_to phone_score_queries_url, notice: 'Score query was successfully destroyed.' }
+    #   format.json { head :no_content }
+    # end
   end
 
   private

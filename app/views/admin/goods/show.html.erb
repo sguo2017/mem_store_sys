@@ -1,72 +1,96 @@
 <%- model_class = Good -%>
 <div class="container">
-  <div class="panel">
-    <div class="panel-heading">
-      <div class="panel-title">商品详情</div>
-    </div>
-    <div class="panel-body">
-      <div class="row lh24">
-        <div class="col-xs-3">
-          <span class="text-gray"><%= model_class.human_attribute_name(:code) %>:</span>
-          <%= @good.code %>
+    <div class="panel">
+        <div class="panel-heading">
+            <div class="panel-title">商品详情</div>
         </div>
-        <div class="col-xs-3">
-          <span class="text-gray"><%= model_class.human_attribute_name(:name) %>:</span>
-          <%= @good.name %>
-        </div>
-        <div class="col-xs-3">
-          <span class="text-gray"><%= model_class.human_attribute_name(:goods_catalog_id) %>:</span>
-          <%= @good.goods_catalog_id %>
-        </div>
-        <div class="col-xs-3">
-          <span class="text-gray"><%= model_class.human_attribute_name(:spec) %>:</span>
-          <%= @good.spec %>
-        </div>
-        <div class="col-xs-3">
-          <span class="text-gray"><%= model_class.human_attribute_name(:status) %>:</span>
-          <%= @good.status %>
-        </div>
-        <div class="col-xs-3">
-          <span class="text-gray"><%= model_class.human_attribute_name(:score) %>:</span>
-          <%= @good.score %>
-        </div>
-        <div class="col-xs-3">
-          <span class="text-gray"><%= model_class.human_attribute_name(:price) %>:</span>
-          <%= @good.price %>
-        </div>
-        <div class="col-xs-3">
-          <span class="text-gray"><%= model_class.human_attribute_name(:ispromotion) %>:</span>
-          <%= @good.ispromotion %>
-        </div>
-      </div>
-      <div class="row block-mt">
-        <div class="col-xs-1">
-          <span class="text-gray">
-          <%= model_class.human_attribute_name(:avatar) %>:</span>
-        </div>
-        <div class="col-xs-3">
-          <img src="<%= @good.avatar %>" alt="Image" class="media-object">
-        </div>
-        <div class="col-xs-1">
-          <span class="text-gray"><%= model_class.human_attribute_name(:info) %>:</span>
-        </div>
-        <div class="col-xs-5">
-          <img src="<%= @good.info %>" alt="Image" class="media-object">
-        </div>
-      </div>
-      <div class="text-left block-mt">
-        <%= link_to t('.edit', :default => t("helpers.links.edit")),
-              edit_admin_good_path(@good), :class => 'btn btn-warning mr10' %>
-        <%= link_to t('.back', :default => t("helpers.links.back")),
-              admin_goods_path, :class => 'btn btn-default mr10'  %>
-              <!-- <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-              admin_good_path(@good),
-              :method => 'delete',
-              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-              :class => 'btn btn-warning mr10' %> -->
+        <div class="panel-body">
+            <div>
+                <table class="table table-show-data">
+                    <tr>
+                        <th>
+                            <%= model_class.human_attribute_name(:code) %>:
+                        </th>
+                        <td>
+                            <%= @good.code %>
+                        </td>
+                        <th>
+                            <%= model_class.human_attribute_name(:name) %>:
+                        </th>
+                        <td>
+                            <%= @good.name %>
+                        </td>
+                    </tr>
 
-      </div>
+                    <tr>
+                        <th>
+                            <%= model_class.human_attribute_name(:goods_catalog_id) %>:
+                        </th>
+                        <td>
+                            <%= @good.goods_catalog_id %>
+                        </td>
+                        <th>
+                            <%= model_class.human_attribute_name(:spec) %>:
+                        </th>
+                        <td>
+                            <%= @good.spec %>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th>
+                            <%= model_class.human_attribute_name(:status) %>:
+                        </th>
+                        <td>
+                            <%= @good.status %>
+                        </td>
+                        <th>
+                            <%= model_class.human_attribute_name(:score) %>:
+                        </th>
+                        <td>
+                            <%= @good.score %>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th>
+                            <%= model_class.human_attribute_name(:price) %>:
+                        </th>
+                        <td>
+                            <%= @good.price %>
+                        </td>
+                        <th>
+                            <%= model_class.human_attribute_name(:ispromotion) %>:
+                        </th>
+                        <td>
+                            <%= @good.ispromotion %>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th>
+                            <%= model_class.human_attribute_name(:avatar) %>:
+                        </th>
+                        <td>
+                            <img src="<%= @good.avatar %>" alt="Image" class="media-object">
+                        </td>
+                        <th>
+                            <%= model_class.human_attribute_name(:info) %>:
+                        </th>
+                        <td>
+                            <img src="<%= @good.info %>" alt="Image" class="media-object">
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="text-left block-mt">
+                <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                edit_admin_good_path(@good), :class => 'btn btn-warning mr10' %>
+                <%= link_to t('.back', :default => t("helpers.links.back")),
+                admin_goods_path, :class => 'btn btn-default mr10'  %>
+            </div>
+        </div>
     </div>
-  </div>
-  
+
 </div>
+

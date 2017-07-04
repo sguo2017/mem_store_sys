@@ -1,26 +1,34 @@
-  <div class="container">
-	<div class="panel">
-		<div class="panel-heading">
-			<div class="panel-title">商品分类详情</div>
-		</div>
-		<div class="panel-body">
-			<div class="row lh24">
-				<div class="col-xs-3">
-					<span class="text-gray">编码：</span>
-					<%= @goods_catalog.code %>
-				</div>
-				<div class="col-xs-3">
-					<span class="text-gray">名称：</span>
-					<%= @goods_catalog.name %>
-				</div>
-			</div>
-			<div class="text-left block-mt">
-				<%= link_to '编辑', edit_admin_goods_catalog_path(@goods_catalog),:class=>'btn btn-warning mr10'%>
-				<%= link_to '返回', admin_goods_catalogs_path ,
-				:class=>'btn btn-default mr10'%>
-				 
-			</div>
-		</div>
-	</div>
-	
+<div class="container">
+    <div class="panel">
+        <div class="panel-heading">
+            <div class="panel-title">商品分类详情</div>
+        </div>
+        <div class="panel-body">
+            <div>
+                <table class="table table-show-data">
+                    <tr>
+                        <th>
+                            编码:
+                        </th>
+                        <td>
+                            <%= @goods_catalog.code %>
+                        </td>
+                        <th>
+                            名称:
+                        </th>
+                        <td>
+                            <%= @goods_catalog.name %>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="text-left block-mt">
+                <%= link_to '编辑', edit_admin_goods_catalog_path(@goods_catalog),:class=>'btn btn-warning mr10'%>
+                <%= link_to '返回', admin_goods_catalogs_path ,
+                :class=>'btn btn-default mr10'%>
+            </div>
+        </div>
+    </div>
+
 </div>
+

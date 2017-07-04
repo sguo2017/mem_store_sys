@@ -1,33 +1,36 @@
 <%- model_class = BonusChange -%>
 <div class="container">
-  <div class="panel">
-    <div class="panel-heading">
-      <div class="panel-title">积分兑换详情</div>
-    </div>
-    <div class="panel-body">
-      <div class="row lh24">
-        <div class="col-xs-3">
-          <span class="text-gray"><%= model_class.human_attribute_name(:score) %>:</span>
-          <%= @bonus_change.score %>
+    <div class="panel">
+        <div class="panel-heading">
+            <div class="panel-title">积分兑换详情</div>
         </div>
-        <div class="col-xs-3">
-          <span class="text-gray"><%= model_class.human_attribute_name(:red_packet) %>:</span>
-          <%= @bonus_change.red_packet %>
-        </div>
-      </div>
-      <div class="text-left block-mt">
+        <div class="panel-body">
+            <div>
+                <table class="table table-show-data">
+                    <tr>
+                        <th>
+                            <%= model_class.human_attribute_name(:score) %>:
+                        </th>
+                        <td>
+                            <%= @bonus_change.score %>
+                        </td>
+                        <th>
+                            <%= model_class.human_attribute_name(:red_packet) %>:
+                        </th>
+                        <td>
+                            <%= @bonus_change.red_packet %>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+             <div class="text-left block-mt">
         <%= link_to t('.edit', :default => t("helpers.links.edit")),
               edit_admin_bonus_change_path(@bonus_change), :class => 'btn btn-warning mr10' %>
         <%= link_to t('.back', :default => t("helpers.links.back")),
               admin_bonus_changes_path, :class => 'btn btn-default mr10'  %>
-        
-        <!-- <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-              admin_bonus_change_path(@bonus_change),
-              :method => 'delete',
-              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-              :class => 'btn btn-danger' %> -->
-      </div>
+            </div>
+        </div>
     </div>
-  </div>
+
 </div>
 

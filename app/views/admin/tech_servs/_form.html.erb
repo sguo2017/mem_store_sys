@@ -1,3 +1,4 @@
+<%- model_class = TechServ -%>
 <%= form_for [:admin, @tech_serv], :html => { :class => "form-horizontal tech_serv" } do |f| %>
 
   <% if @tech_serv.errors.any? %>
@@ -15,36 +16,47 @@
     </div>
   <% end %>
 
-  <div class="form-group">
-    <%= f.label :title, :class => 'control-label col-lg-2' %>
-    <div class="col-lg-10">
-      <%= f.text_field :title, :class => 'form-control' %>
-    </div>
-    <%=f.error_span(:title) %>
-  </div>
+ <div class="container">
+    <div class="panel">
+        <div class="panel-heading">
+            <div class="panel-title">
+                <%=t '.title', :default => [:'helpers.titles.edit', '编辑%{model}'], :model => model_class.model_name.human.titleize %>
+            </div>
+        </div>
+        <div class="panel-body">
+            <div class="form-group">
+                <%= f.label :title, :class => 'control-label col-lg-2' %>
+                <div class="col-lg-10">
+                    <%= f.text_field :title, :class => 'form-control' %>
+                </div>
+                <%=f.error_span(:title) %>
+            </div>
 
-  <div class="form-group">
-    <%= f.label :content, :class => 'control-label col-lg-2' %>
-    <div class="col-lg-10">
-      <%= f.cktext_area :content, :class => 'form-control' %>
-    </div>
-    <%=f.error_span(:content) %>
-  </div>
+            <div class="form-group">
+                <%= f.label :content, :class => 'control-label col-lg-2' %>
+                <div class="col-lg-10">
+                    <%= f.cktext_area :content, :class => 'form-control' %>
+                </div>
+                <%=f.error_span(:content) %>
+            </div>
 
-  <div class="form-group">
-    <%= f.label :avatar, :class => 'control-label col-lg-2' %>
-    <div class="col-lg-10">
-      <%= f.file_field :avatar, :class => 'form-control' %>
-      <span>图片尺寸:300x100</span>
+            <div class="form-group">
+                <%= f.label :avatar, :class => 'control-label col-lg-2' %>
+                <div class="col-lg-10">
+                    <%= f.file_field :avatar, :class => 'form-control' %>
+                    <span>图片尺寸:300x100</span>
+                </div>
+                <%=f.error_span(:avatar) %>
+            </div>
+            <div class="form-group">
+                <div class="col-lg-offset-2 col-lg-10">
+                    <%= f.submit nil, :class => 'btn btn-warning' %>
+                    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                    admin_tech_servs_path, :class => 'btn btn-default' %>
+                </div>
+            </div>
+        </div>
     </div>
-    <%=f.error_span(:avatar) %>
-  </div>
-  <div class="form-group">
-    <div class="col-lg-offset-2 col-lg-10">
-      <%= f.submit nil, :class => 'btn btn-warning' %>
-      <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-                admin_tech_servs_path, :class => 'btn btn-default' %>
-    </div>
-  </div>
+</div>
 
 <% end %>

@@ -1,82 +1,87 @@
 <%- model_class = TechServ -%>
 <div class="container">
-<div class="page-header">
-  <h1>技术服务列表</h1>
-</div>
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th><%= model_class.human_attribute_name(:title) %></th>
-      <!-- <th><%= model_class.human_attribute_name(:avatar) %></th>
-      <th><%= model_class.human_attribute_name(:content) %></th>
-      <th><%= model_class.human_attribute_name(:created_at) %></th> -->
-      <th><%=t '.actions', :default => t("helpers.actions") %></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @tech_servs.each do |tech_serv| %>
-      <tr>
-        <td><%= tech_serv.title %></td>
-       <!--  <td><img class="media-object" src="<%=tech_serv.avatar%>" alt="Image">
-        </td>
-        <td><%= raw tech_serv.content %></td>
-        <td><%= tech_serv.created_at.strftime('%Y-%m-%d %H:%M:%S') %></td> -->
-        <% if tech_serv.status != "00H" %>
-          <td>
-            <%= link_to t('.show', :default => t("helpers.links.show")),
-                        admin_tech_serv_path(tech_serv), :class => 'btn btn-default btn-xs' %>
-            <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                        edit_admin_tech_serv_path(tech_serv), :class => 'btn btn-default btn-xs' %>
-  <!--           <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-                        admin_tech_serv_path(tech_serv),
-                        :method => :delete,
-                        :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => '您确定?')) },
-                        :class => 'btn btn-warning btn-xs mr5' %> -->
-             <button type="button" class="btn btn-warning btn-xs mr5 close-tech-btn"  data-tech-id=<%= tech_serv.id %>  >注销
-            </button>
-          </td>
-        <% else %>
-          <td>
-             <button type="button" class="btn btn-warning btn-xs mr5 " > 已注销  </button>
-          </td>
-          <% end %>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+    <div class="panel">
+        <div class="panel-heading">
+            <div class="panel-title">技术服务列表</div>
+        </div>
+        <div class="panel-body">
+            <div class="table-responsive block-mt">
+                <table class="table table-striped">
+                    <colgroup>
+                        <col width="20%">
+                    </colgroup>
+                    <tr>
+                        <!-- <th><%= model_class.human_attribute_name(:id) %></th> -->
+                        <th class="text-nowrap"><%= model_class.human_attribute_name(:title) %></th>
+                        <th class="text-nowrap"><%= model_class.human_attribute_name(:created_at) %></th>
+                        <th class="text-nowrap"><%=t '.actions', :default => t("helpers.actions") %></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <% @tech_servs.each do |tech_serv| %>
+                    <tr>
+                        <td><%= tech_serv.title %></td>
+                        <td><%= tech_serv.created_at.strftime('%Y-%m-%d %H:%M:%S')%></td>
+                        <% if tech_serv.status != "00H" %>
+                        <td>
+                            <%= link_to t('.show', :default => t("helpers.links.show")),
+                            admin_tech_serv_path(tech_serv), :class => 'btn btn-default btn-xs' %>
+                            <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                            edit_admin_tech_serv_path(tech_serv), :class => 'btn btn-default btn-xs' %>
+                            <!--           <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                                                  admin_tech_serv_path(tech_serv),
+                                                  :method => :delete,
+                                                  :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => '您确定?')) },
+                                                  :class => 'btn btn-warning btn-xs mr5' %> -->
+                            <button type="button" class="btn btn-warning btn-xs mr5 close-tech-btn"  data-tech-id=<%= tech_serv.id %>  >注销
+                            </button>
+                        </td>
+                        <% else %>
+                        <td>
+                            <button type="button" class="btn btn-warning btn-xs mr5 " > 已注销  </button>
+                        </td>
+                        <% end %>
+                    </tr>
+                    <% end %>
+                    </tbody>
+                </table>
 
-<%= paginate @tech_servs %>
-<%= link_to t('.new', :default => t("helpers.links.new")),
-            new_admin_tech_serv_path,
-            :class => 'btn btn-warning' %>
+            </div>
+            <div>
+                <%= link_to t('.new', :default => t("helpers.links.new")),
+                new_admin_tech_serv_path,
+                :class => 'btn btn-warning' %>
+            </div>
+            <%= paginate @tech_servs %>
+        </div>
+    </div>
 </div>
-
 <script type="text/javascript">
-  $(document).ready(function(){
-       return $('.close-tech-btn').click(function() {
-          var status, url, tech_id;
-          if (confirm("确定注销?")) {
-            tech_id = $(this).data('tech-id');
-            status = '00H';
-            url = '/admin/tech_servs/' + tech_id + '.json';
-            return $.ajax(url, {
-              type: 'patch',
-              dataType: 'json',
-              data: {
-                tech_serv: {
-                  status: status
-                }
-              },
-              error: function(jqXHR, textStatus, errorThrown) {
-                return console.log("AJAX Error: " + textStatus);
-              },
-              success: function(data, textStatus, jqXHR) {
-                alert("注销成功");
-                console.log("AJAX success: " + data.msg);
-                return window.location.reload();
-              }
-            });
-          }
+    $(document).ready(function(){
+        return $('.close-tech-btn').click(function() {
+            var status, url, tech_id;
+            if (confirm("确定注销?")) {
+                tech_id = $(this).data('tech-id');
+                status = '00H';
+                url = '/admin/tech_servs/' + tech_id + '.json';
+                return $.ajax(url, {
+                    type: 'patch',
+                    dataType: 'json',
+                    data: {
+                        tech_serv: {
+                            status: status
+                        }
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        return console.log("AJAX Error: " + textStatus);
+                    },
+                    success: function(data, textStatus, jqXHR) {
+                        alert("注销成功");
+                        console.log("AJAX success: " + data.msg);
+                        return window.location.reload();
+                    }
+                });
+            }
         });
-  })
-  </script>
+    })
+</script>

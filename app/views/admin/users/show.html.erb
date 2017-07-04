@@ -1,102 +1,165 @@
 <%- model_class = User -%>
 <div class="container">
-  <div class="panel">
-    <div class="panel-heading">
-      <div class="panel-title">用户详情</div>
+    <div class="panel">
+        <div class="panel-heading">
+            <div class="panel-title">用户详情</div>
+        </div>
+        <div class="panel-body">
+            <div>
+                <table class="table table-show-data">
+                    <tr>
+                        <th>
+                            <%= model_class.human_attribute_name(:name) %>:
+                        </th>
+                        <td>
+                            <%= @user.name %>
+                        </td>
+                        <th>
+                            <%= model_class.human_attribute_name(:email) %>:
+                        </th>
+                        <td>
+                            <%= @user.email %>
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <th>
+                            <%= model_class.human_attribute_name(:level) %>:
+                        </th>
+                        <td>
+                            <%= @user.level %>
+                        </td>
+                        <th>
+                            <%= model_class.human_attribute_name(:admin) %>:
+                        </th>
+                        <td>
+                            <%= @user.admin %>
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <th>
+                            <%= model_class.human_attribute_name(:score) %>:
+                        </th>
+                        <td>
+                            <%= @user.score %>
+                        </td>
+                        <th>
+                            <%= model_class.human_attribute_name(:code) %>:
+                        </th>
+                        <td>
+                            <%= @user.code %>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th>
+                            <%= model_class.human_attribute_name(:sex) %>:
+                        </th>
+                        <td>
+                            <% Const::SelectOption::USER_SEX.each_with_index do |(key,value), index| %>
+                            <% if @user.sex== value %>
+                            <%= key %>
+                            <% end %>
+                            <% end %>
+                        </td>
+                        <th>
+                            <%= model_class.human_attribute_name(:birthday) %>:
+                        </th>
+                        <td>
+                            <%= @user.birthday %>
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <th>
+                            <%= model_class.human_attribute_name(:phone_num) %>:
+                        </th>
+                        <td>
+                            <%= @user.phone_num %>
+                        </td>
+                        <th>
+                            <%= model_class.human_attribute_name(:score_total) %>:
+                        </th>
+                        <td>
+                            <%= @user.score_total %>
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <th>
+                            <%= model_class.human_attribute_name(:mem_group_id) %>:
+                        </th>
+                        <td>
+                            <%= @user.mem_group_id %>
+                        </td>
+                        <th>
+                            <%= model_class.human_attribute_name(:district) %>:
+                        </th>
+                        <td>
+                            <%= @user.district %>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th>
+                            <%= model_class.human_attribute_name(:city) %>:
+                        </th>
+                        <td>
+                            <%= @user.city %>
+                        </td>
+                        <th>
+                            <%= model_class.human_attribute_name(:province) %>:
+                        </th>
+                        <td>
+                            <%= @user.province %>
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <th>
+                            <%= model_class.human_attribute_name(:country) %>:
+                        </th>
+                        <td>
+                            <%= @user.country %>
+                        </td>
+                        <th>
+                            <%= model_class.human_attribute_name(:referee_id) %>:
+                        </th>
+                        <td>
+                            <%= @user.referee_id %>
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <th>
+                            <%= model_class.human_attribute_name(:store_id) %>:
+                        </th>
+                        <td>
+                            <%= @user.store_id %>
+                        </td>
+                        <th>
+                            <%= model_class.human_attribute_name(:status) %>:
+                        </th>
+                        <td>
+                            <% Const::SelectOption::USER_STATUS.each_with_index do |(key,value), index| %>
+                            <% if @user.status == value %>
+                            <%= key %>
+                            <% end %>
+                            <% end %>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="text-left block-mt">
+                <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                edit_admin_user_path(@user), :class => 'btn btn-warning mr10' %>
+                <a class="btn btn-default mr10" href="javascript:void(0);"
+                   onclick=window.location.href="<%= admin_users_path%>" >返回
+                </a>
+            </div>
+        </div>
     </div>
-    <div class="panel-body">
-      <div class="row lh24">
-        <div class="col-xs-3">
-          <span class="text-gray"><%= model_class.human_attribute_name(:name) %>:</span>
-          <%= @user.name %>
-        </div>
-        <div class="col-xs-3" style="overflow: hidden">
-          <span class="text-gray"><%= model_class.human_attribute_name(:email) %>:</span>
-          <span> <%= @user.email %> </span>
-        </div>
-        <div class="col-xs-3">
-          <span class="text-gray"><%= model_class.human_attribute_name(:level) %>:</span>
-          <%= @user.level %>
-        </div>
-        <div class="col-xs-3">
-          <span class="text-gray"><%= model_class.human_attribute_name(:admin) %>:</span>
-          <%= @user.admin %>
-        </div>
-        <div class="col-xs-3">
-          <span class="text-gray"><%= model_class.human_attribute_name(:score) %>:</span>
-          <%= @user.score %>
-        </div>
-        <div class="col-xs-3">
-          <span class="text-gray"><%= model_class.human_attribute_name(:code) %>:</span>
-          <%= @user.code %>
-        </div>
-        <div class="col-xs-3">
-          <span class="text-gray"><%= model_class.human_attribute_name(:sex) %>:</span>
-        <%  Const::SelectOption::USER_SEX.each_with_index do |(key,value), index| %>
-        <% if @user.sex== value %>
-           <%= key %>
-           <% end  %>
-        <% end %>
-          <!-- <%= @user.sex %> -->
-        </div>
-        <div class="col-xs-3">
-          <span class="text-gray"><%= model_class.human_attribute_name(:birthday) %>:</span>
-          <%= @user.birthday %>
-        </div>
-         <div class="col-xs-3">
-          <span class="text-gray"><%= model_class.human_attribute_name(:phone_num) %>:</span>
-          <%= @user.phone_num %>
-        </div>
-         <div class="col-xs-3">
-          <span class="text-gray"><%= model_class.human_attribute_name(:score_total) %>:</span>
-          <%= @user.score_total %>
-        </div> 
-         <div class="col-xs-3">
-          <span class="text-gray"><%= model_class.human_attribute_name(:mem_group_id) %>:</span>
-          <%= @user.mem_group_id %>
-        </div>
-        <div class="col-xs-3">
-          <span class="text-gray"><%= model_class.human_attribute_name(:district) %>:</span>
-          <%= @user.district %>
-        </div>
-        <div class="col-xs-3">
-          <span class="text-gray"><%= model_class.human_attribute_name(:city) %>:</span>
-          <%= @user.city %>
-        </div>
-        <div class="col-xs-3">
-          <span class="text-gray"><%= model_class.human_attribute_name(:province) %>:</span>
-          <%= @user.province %>
-        </div>
-       <div class="col-xs-3">
-          <span class="text-gray"><%= model_class.human_attribute_name(:country) %>:</span>
-          <%= @user.country %>
-        </div>
-      <div class="col-xs-3">
-          <span class="text-gray"><%= model_class.human_attribute_name(:referee_id) %>:</span>
-          <%= @user.referee_id %>
-        </div>
-       <div class="col-xs-3">
-          <span class="text-gray"><%= model_class.human_attribute_name(:store_id) %>:</span>
-          <%= @user.store_id %>
-        </div>
-        <div class="col-xs-3">
-        <span class="text-gray"><%= model_class.human_attribute_name(:status) %>:</span>
-        <%  Const::SelectOption::USER_STATUS.each_with_index do |(key,value), index| %>
-        <% if @user.status == value %>
-           <%= key %>
-           <% end  %>
-        <% end %>
-        </div>
-      </div>
-      <div class="text-left block-mt">
-        <%= link_to t('.edit', :default => t("helpers.links.edit")),
-              edit_admin_user_path(@user), :class => 'btn btn-warning mr10' %>
-       <a  class="btn btn-default mr10" href="javascript:void(0);" 
-        onclick=window.location.href="<%= admin_users_path%>" >返回
-        </a>
-      </div>
-    </div>
-  </div>
-  
+
 </div>
 

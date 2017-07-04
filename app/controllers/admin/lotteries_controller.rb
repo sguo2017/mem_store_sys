@@ -11,14 +11,14 @@ class Admin::LotteriesController < AdminController
       @lotteries = Lottery.order("created_at DESC").page(params[:page]).per(10)
     else
       if @mem_group_id.blank? 
-        @score_histories = ScoreHistory.joins("INNER JOIN users ON users.admin =0 and users.id = lotteries.user_id AND users.name like '%#{@name}%'")
+        @lotteries = Lottery.joins("INNER JOIN users ON users.admin =0 and users.id = lotteries.user_id AND users.name like '%#{@name}%'")
         .page(params[:page]).per(10)
       else
         if @name.blank?   ##当name字段值为空时要去掉like,否则查询不到
-           @score_histories = ScoreHistory.joins("INNER JOIN users ON users.admin =0 and users.id = lotteries.user_id AND users.mem_group_id='#{@mem_group_id}'")
+           @lotteries = Lottery.joins("INNER JOIN users ON users.admin =0 and users.id = lotteries.user_id AND users.mem_group_id=#{@mem_group_id} ")
         .page(params[:page]).per(10)
         else
-         @score_histories = ScoreHistory.joins("INNER JOIN users ON users.admin =0 and users.id = lotteries.user_id AND users.mem_group_id=#{@mem_group_id} AND users.name like '%#{@name}%'")
+         @lotteries = Lottery.joins("INNER JOIN users ON users.admin =0 and users.id = lotteries.user_id AND users.mem_group_id=#{@mem_group_id} AND users.name like '%#{@name}%'")
         .page(params[:page]).per(10)
         end
         

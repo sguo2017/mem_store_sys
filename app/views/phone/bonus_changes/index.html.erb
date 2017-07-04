@@ -34,11 +34,11 @@
 						<div class="coupon-center">
 							<div class="f16 text-tit">扣积分:</div>
 							<span class="label label-similar mt5"><%= bonus_change.score %></span>
-						</div>
-						<div class="coupon-right">
-							<%= link_to "立即兑换",
-		                      new_phone_score_query_path(:score_history => {:bonus_change_id => bonus_change.id,:user_id => @user.id, :object_type => "积分兑换", :fun_type => "bonus_change", :object_id => bonus_change.id, :point => bonus_change.score, :red_packet => bonus_change.red_packet, :oper => "扣减"}),
-		                      :class => 'btn-similar-hollow' %>
+							<div class="coupon-right">
+								<%= link_to "立即兑换",
+			                      new_phone_score_query_path(:score_history => {:bonus_change_id => bonus_change.id,:user_id => @user.id, :object_type => "积分兑换", :fun_type => "bonus_change", :object_id => bonus_change.id, :point => bonus_change.score, :red_packet => bonus_change.red_packet, :oper => "扣减"}),
+			                      :class => 'btn-similar-hollow' %>
+							</div>
 						</div>
 					</li>
 				<% end %>
@@ -53,10 +53,11 @@
 						<div class="coupon-center">
 							<div class="f16 text-tit">扣积分:</div>
 							<span class="label label-warning mt5"><%= bonus_change.score %></span>
+							<div class="coupon-right">
+								<button class="btn-similar-hollow">立即兑换</button>
+							</div>
 						</div>
-						<div class="coupon-right">
-							<button class="btn-similar-hollow">立即兑换</button>
-						</div>
+						
 					</li>
 				<% end %>
 
@@ -70,9 +71,9 @@
 						<div class="coupon-center">
 							<div class="f16 text-tit">扣积分:</div>
 							<span class="label label-info mt5"><%= bonus_change.score %></span>
-						</div>
-						<div class="coupon-right">
-							<button class="btn-similar-hollow">立即兑换</button>
+							<div class="coupon-right">
+								<button class="btn-similar-hollow">立即兑换</button>
+							</div>
 						</div>
 					</li>
 				<% end %>

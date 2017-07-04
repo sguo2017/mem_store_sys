@@ -12,7 +12,6 @@ class Admin::ScoreHistoriesController < AdminController
     @name = params[:name]
       @mem_group_id = params[:mem_group_id]
     if @name.blank? &&  @mem_group_id.blank?
-      # @score_histories = ScoreHistory.where(:admin =>0).page(params[:page]).per(10)
       @score_histories = ScoreHistory.page(params[:page]).order("created_at DESC").per(10)
     else
       if @mem_group_id.blank?         

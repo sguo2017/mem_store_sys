@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170703092935) do
+ActiveRecord::Schema.define(version: 20170704024652) do
 
   create_table "activities", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "title"
@@ -157,7 +157,7 @@ ActiveRecord::Schema.define(version: 20170703092935) do
   create_table "sms_sends", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "recv_num"
     t.string "send_content"
-    t.string "state"
+    t.string "state", default: "00A"
     t.string "sms_type"
     t.integer "user_id"
     t.datetime "created_at", null: false

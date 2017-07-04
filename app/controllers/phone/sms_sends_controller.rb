@@ -29,20 +29,21 @@ class Phone::SmsSendsController < PhoneController
   def create
     @msg = "短信发送失败"
 
-    sms = SmsSend.where("TIMESTAMPDIFF(MINUTE,created_at ,now())<#{Const::SMS_TIME_LIMIT} and sms_type='code' and recv_num =?", sms_send_params[:recv_num]).first
+    sms = SmsSend.where("TIMESTAMPDIFF(MINUTE,created_at ,now())<#{Const::SMS_TIME_LIMIT} and sms_type='code' and recv_num =? and state='00A'", sms_send_params[:recv_num]).first
     
     unless sms.blank?
       @msg = "#{Const::SMS_TIME_LIMIT}分钟内不用重新发送"
       return render json: {status: :created, msg: @msg, retcode: '101'}
-    end    
+    end   
+
+    #历史数据 变更状态位   
+    SmsSend.where("recv_num =?",sms_send_params[:recv_num]).update_all(state: "00X")
 
     @sms_send = SmsSend.new(sms_send_params)
     @sms_send.sms_type='code'
 
     send_content = rand(1001..9999)     
     @sms_send.send_content = send_content   
-
-
 
     respond_to do |format|
       if @sms_send.save

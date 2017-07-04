@@ -10,4 +10,12 @@ $ ->
 
   $('#hideUser2Code').click ->  
 	    
-	  	$('#user2code').hide()	    
+	  	$('#user2code').hide()	
+
+  $('.ico-scan').click -> wx.scanQRCode({
+        	needResult: 0,
+        	scanType: ["qrCode","barCode"],
+        	success: (res) ->
+              		console.log(res.resultStr)          
+	  	});  
+	  	    

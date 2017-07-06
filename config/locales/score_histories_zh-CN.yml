@@ -9,7 +9,7 @@ zh-CN:
         object_type: "类型"
         object_id: "关联id"
         oper: "类型"
-        user_id: "用户"
+        user_id: "会员"
         created_at: "创建时间"
   helpers:
     submit:

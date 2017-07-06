@@ -41,6 +41,7 @@ class Admin::TechServsController < AdminController
   # PATCH/PUT /admin/tech_servs/1
   # PATCH/PUT /admin/tech_servs/1.json
   def update
+    begin_time=(Time.now.to_f * 1000).to_i
     respond_to do |format|
        if @tech_serv.update(tech_serv_params)
         @code = 200
@@ -53,6 +54,9 @@ class Admin::TechServsController < AdminController
         format.json { render json: @tech_serv.errors, status: :unprocessable_entity }
       end
     end
+    end_time=(Time.now.to_f * 1000).to_i
+    time_interval=end_time-begin_time
+    logger.debug "时间差： #{time_interval} ms"
   end
 
   # DELETE /admin/tech_servs/1

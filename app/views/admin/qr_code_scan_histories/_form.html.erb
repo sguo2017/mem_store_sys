@@ -1,0 +1,62 @@
+<%= form_for @qr_code_scan_history, :html => { :class => "form-horizontal qr_code_scan_history" } do |f| %>
+
+  <% if @qr_code_scan_history.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@qr_code_scan_history.errors.count, "error") %> prohibited this qr_code_scan_history from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @qr_code_scan_history.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :user_id, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :user_id, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:user_id) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :good_id, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :good_id, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:good_id) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :good_instance_id, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :good_instance_id, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:good_instance_id) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :score, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :score, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:score) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :status, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :status, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:status) %>
+  </div>
+
+  <div class="form-group">
+    <div class="col-lg-offset-2 col-lg-10">
+      <%= f.submit nil, :class => 'btn btn-primary' %>
+      <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                qr_code_scan_histories_path, :class => 'btn btn-default' %>
+    </div>
+  </div>
+
+<% end %>

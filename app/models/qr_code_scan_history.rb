@@ -1,0 +1,2 @@
+class QrCodeScanHistory < ApplicationRecord
+end

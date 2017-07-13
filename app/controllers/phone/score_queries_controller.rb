@@ -29,25 +29,40 @@ class Phone::ScoreQueriesController < PhoneController
     end
 
     case fun_type
-    when "goods_scan" #商品实例->商品->积分
-      @good_instance = GoodInstance.where(:code =>params[:score_history][:code]).first
+    when "goods_scan" #商品实例->商品->积分	
+	  @scan_query = QrCodeScanHistory.new()
+      
+	  @good_instance = GoodInstance.where(:code =>params[:score_history][:code]).first
+	  good = Good.where(:id =>@good_instance.good_id).first
+	  
+	  @scan_query.user_id = @user.id
+	  @scan_query.good_id = good.id
+	  @scan_query.good_instance_id = @good_instance.id
+	  @scan_query.score = good.score
+	  
       if @good_instance.status == '00A'
-        good = Good.where(:id =>@good_instance.good_id).first
         @add_score = params[:score_history][:point] = good.score
         @user.changeScore(@add_score) #会员积分变化
         params[:score_history][:user_id] = @user.id
         params[:score_history][:oper] = "获得"
         params[:score_history][:bonus_change_id] = "1"
         @score_query = ScoreHistory.new(score_history_params)
-        @score_query.save
+        @score_query.save		
+		
         @good_instance.status = '00X' 
         @good_instance.save
         @msg = "扫码送积分操作成功"
         @go_url = phone_score_queries_url
+		
+		@scan_query.status = '00A'
       else
         @msg = "商品积分已兑换过"
         @go_url = phone_homepages_url
+		
+		@scan_query.status = '00A'
       end      
+	  
+	  @scan_query.save
     when "bonus_change" #积分扣减送红包
       @add_score = -(params[:score_history][:point].presence.to_i)
       #扣减积分不够

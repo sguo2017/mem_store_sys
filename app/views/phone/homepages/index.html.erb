@@ -1,99 +1,136 @@
-  <div class="header">
+<% content_for :title, "会员中心" %>
+<head>
+    <title><%= yield(:title) %></title>
+</head>
+<body class="body-bg">
+<div class="header">
     <a class="header-left link" href="">
-      广州<span class="caret ml5"></span>
+        广州<span class="caret ml5"></span>
     </a>
     <h1>我的信息</h1>
-    <button class="header-right"><span class="ico-scan" onclick="wxScanQRCode();"></span></button>
-  </div>
-  <!-- header end -->
-  <div class="container has-top">
-    <!-- <a class="user-info-header" href="/phone/profiles"> -->
-    <div class="user-info-header">
-      <div class="user-img-wrap">
-      <a  href="/phone/profiles">
-        <div class="user-img">
-          <img <% if @user.headimgurl.blank? %> src="/assets/phone/images/img-user.png" <%else%> src="<%= @user.headimgurl %>" <% end %> alt="">
-        </div>
-        </a>  
-        <div class="flex-fluid">
-          <div class="user-name"><%= @user.name %></div>
-          <div class="mt10">
-            <div class="lever-bar">
-              <i class="ico-lever"></i>
-              等级<%= @user.level %>
+    <button class="header-right"><span class="ico-scan"></span></button>
+</div>
+<!-- header end -->
+<div class="container has-top">
+    <a class="user-info-header" href="/phone/profiles">
+        <div class="user-img-wrap">
+            <div class="user-img">
+                <img <% if @user.headimgurl.blank? %> src="/assets/phone/images/img-user.png" <%else%> src="<%=
+                @user.headimgurl %>" <% end %> alt="">
             </div>
-            <div class="progress-wrap ml5">
-              <div class="small"><%=  @level_up_per %>%</div>
-              <div class="progress">
-                <div class="progress-bar" style="width:<%=  @level_up_per %>%;"></div>
-              </div>
+            <div class="flex-fluid">
+                <div class="user-name"><%= @user.name %><span class="ico-arrow-right2 ml5"></span></div>
+                <div class="lever-bar">
+                    <i class="ico-lever"></i>
+                    等级<%= @user.level %>
+                </div>
+                <div class="progress-wrap">
+                    <div class="progress">
+                        <div class="progress-bar" style="width:<%=  @level_up_per %>%;"></div>
+                    </div>
+                    <%= @level_up_per %>%
+                </div>
             </div>
-          </div>
+            <div class="score">
+                <div class="my-score">我的积分</div>
+                <div class="score-num">
+                    <%= @user.score %>
+                    <span class="ico-arrow-right"></span>
+                </div>
+            </div>
         </div>
-        <div class="score">
-          积分:<%= @user.score %>
-        </div>
-      </div>
-      </div>
+    </a>
+    <!--     <%= bootstrap_flash %> %> -->
 
-<!--     <%= bootstrap_flash %> %> -->
 
-    
-    <div class="block-mt">
-      <ul class="float-ul wu3 clearfix ico-list">
-        <li class="float-item">
-          <a href="javascript:void(0)" onclick="window.location.href='/phone/activities';">
-            <img class="ico-img" src="/assets/phone/images/ico-index1.png" alt="">
-            <div class="ico-name">营销活动</div>
-          </a>
-        </li>
-        <li class="float-item">
-          <a href="/phone/bonus_changes">
-            <img class="ico-img" src="/assets/phone/images/ico-index2.png" alt="">
-            <div class="ico-name">积分兑换</div>  
-          </a>
-        </li>
-        <li class="float-item">
-          <a href="/phone/score_queries">
-            <img class="ico-img" src="/assets/phone/images/ico-index3.png" alt="">
-            <div class="ico-name">积分查询</div>  
-          </a>
-        </li>
-        <li class="float-item">
-          <a href="/phone/goods">
-            <img class="ico-img" src="/assets/phone/images/ico-index4.png" alt="">
-            <div class="ico-name">商品查询</div>  
-          </a>
-        </li>
-        <li class="float-item">
-          <a href="/phone/invitations">
-            <img class="ico-img" src="/assets/phone/images/ico-index5.png" alt="">
-            <div class="ico-name">邀请好友</div>  
-          </a>
-        </li>
-        <li class="float-item">
-          <a href="/phone/tech_servs">
-            <img class="ico-img" src="/assets/phone/images/ico-index6.png" alt="">
-            <div class="ico-name">技术服务</div>  
-          </a>
-        </li>
-        <li class="float-item">
-          <a href="javascript:void(0)" onclick="window.location.href='/phone/stores';">
-            <img class="ico-img" src="/assets/phone/images/ico-index6.png" alt="">
-            <div class="ico-name">门店查询</div>  
-          </a>
-        </li>
-      </ul>
+    <div class="ico-list-wrap">
+        <ul class="float-ul wu3 clearfix ico-list">
+            <li class="float-item">
+                <a href="javascript:void(0)" onclick="window.location.href='/phone/activities';">
+                    <img class="ico-img" src="/assets/phone/images/ico-index1.png" alt="">
+                    <div class="ico-name">营销活动</div>
+                </a>
+            </li>
+            <li class="float-item">
+                <a href="/phone/bonus_changes">
+                    <img class="ico-img" src="/assets/phone/images/ico-index2.png" alt="">
+                    <div class="ico-name">积分兑换</div>
+                </a>
+            </li>
+            <li class="float-item">
+                <a href="/phone/score_queries">
+                    <img class="ico-img" src="/assets/phone/images/ico-index3.png" alt="">
+                    <div class="ico-name">积分查询</div>
+                </a>
+            </li>
+            <li class="float-item">
+                <a href="/phone/goods">
+                    <img class="ico-img" src="/assets/phone/images/ico-index4.png" alt="">
+                    <div class="ico-name">商品查询</div>
+                </a>
+            </li>
+            <li class="float-item">
+                <a href="/phone/invitations">
+                    <img class="ico-img" src="/assets/phone/images/ico-index5.png" alt="">
+                    <div class="ico-name">邀请好友</div>
+                </a>
+            </li>
+            <li class="float-item">
+                <a href="/phone/tech_servs">
+                    <img class="ico-img" src="/assets/phone/images/ico-index6.png" alt="">
+                    <div class="ico-name">技术服务</div>
+                </a>
+            </li>
+            <li class="float-item">
+                <a href="javascript:void(0)" onclick="window.location.href='/phone/stores';">
+                    <img class="ico-img" src="/assets/phone/images/ico-index6.png" alt="">
+                    <div class="ico-name">门店查询</div>
+                </a>
+            </li>
+        </ul>
     </div>
-  </div>  
-  <%= render 'popup' %>
+    <div class="block-mt">
+        <div class="sub-title">会员专享活动</div>
+        <a class="adapt-img" href="">
+            <img src="/assets/phone/images/ad-img1.png" alt="">
+        </a>
+    </div>
+</div>
+<!-- container end -->
+<!-- <div class="popup-wrap popup-get-score">
+    <div class="popup">
+        <div class="pop-close" type="button">
+            <button class="ico-pop-close"></button>
+        </div>
+        <div class="popup-score-heading">
+            <div class="popup-score-title">恭喜</div>
+        </div>
+        <div class="popup-score-body">
+            <div class="get-score">
+                获得
+                <span class="score-num">+150</span>
+                积分
+            </div>
+            <div class="score-total">累计5600积分</div>
+            <div class="scan-code">
+                <a href="" >
+                    <span class="ico-scan2 mr10"></span>继续扫码
+                </a>
+            </div>
+        </div>
+    </div> -->
+
+   <!--  <div class="popup-bg"></div>
+</div> -->
+</body>
+<%= render 'popup' %>
 <script type="text/javascript">
-$(function () {
-    var needRefresh = sessionStorage.getItem("need-refresh");
-    if(needRefresh){
-        sessionStorage.removeItem("need-refresh");
-        location.reload();
-    }
-    sessionStorage.setItem("sub-need-refresh", true);     
-});
+    $(function () {
+        var needRefresh = sessionStorage.getItem("need-refresh");
+        if (needRefresh) {
+            sessionStorage.removeItem("need-refresh");
+            location.reload();
+        }
+        sessionStorage.setItem("sub-need-refresh", true);
+    });
 </script>

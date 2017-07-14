@@ -7,6 +7,7 @@ class Phone::HomepagesController < PhoneController
   # GET /phone/homepages
   # GET /phone/homepages.json
   def index
+    @title="会员中心"
     @user = current_user 
     if @user.qrcode.blank?
       go_url = "#{Const::WXConfig::AUTH_ADDR}appid=#{Const::WXConfig::APPID}&redirect_uri=#{Const::STORES_SHOW_ADDR}/phone/mem_activations?referee_id=#{@user.id.to_s}&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect"   

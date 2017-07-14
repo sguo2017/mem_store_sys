@@ -7,11 +7,12 @@
   </div>
   <!-- header end -->
   <div class="container has-top">
-    <div class="sub-title">账户与安全</div>
+    <div class="sub-title has-bg">账户与安全</div>
       <%=  form_tag(@action, method: :patch) do %>
-    <ul class="data-list form-list profile_form_list">
+    <ul class="data-list form-list">
       <li class="data-item">
-        <div><i class="ico-user2"></i>头像</div>
+        <div class="data-hd">
+        <i class="ico-user4 mr5"></i> 头像</div>
         <div class="user-pic-upload">
             <img <% if @user.headimgurl.blank? %> src="/assets/phone/images/img-user.png" <%else%> src="<%= @user.headimgurl %>" <% end %> alt="">
           <!-- <img src="/assets/phone/images/ico-user.png" alt="">
@@ -19,15 +20,15 @@
         </div>
       </li>
       <li class="data-item">
-        <div>
-          <i class="ico-nickname"></i>
+        <div class="data-hd">
+          <i class="ico-nickname mr5"></i>
           昵称  
         </div>
         <%= text_field_tag "user[name]", @user.name, class: "flex-fluid" %>
       </li>
       <li class="data-item">
-        <div>
-          <i class="ico-sex"></i>
+        <div class="data-hd">
+          <i class="ico-sex mr5"></i>
           性别  
         </div>
 
@@ -43,8 +44,8 @@
 
        </li>
       <li class="data-item">
-        <div>
-          <i class="ico-birth"></i>
+        <div class="data-hd">
+          <i class="ico-birth mr5"></i>
           生日  
         </div>
         <div>
@@ -54,15 +55,15 @@
     </ul>
     <ul class="data-list block-mt form-list">
       <li class="data-item">
-        <div>
-          <i class="ico-email"></i>
+        <div class="data-hd">
+          <i class="ico-email mr5"></i>
           邮箱  
         </div>
         <%= text_field_tag "user[mem_email]", @user.mem_email, class: "flex-fluid" %>
       </li>
       <li class="data-item">
-        <div>
-          <i class="ico-phone"></i>
+        <div class="data-hd">
+          <i class="ico-phone mr5"></i>
           电话  
         </div>
         <%= text_field_tag "user[phone_num]", @user.phone_num, class: "flex-fluid" %>
@@ -73,7 +74,7 @@
       <%= hidden_field_tag 'notice', flash.now[:notice] %>
     </ul>
     <div class="text-center block-mt bottom-btn">
-     <%= submit_tag "保存", class: 'btn-primary flex-fluid btn-size-lg profile_submit_button' %>
+     <%= submit_tag "保存", class: 'btn-primary flex-fluid btn-size-lg btn-round' %>
     </div>
   <% end %>
   <script type="text/javascript">

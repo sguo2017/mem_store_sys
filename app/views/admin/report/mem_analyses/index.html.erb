@@ -1,9 +1,17 @@
 <div class="container">
     <div class="panel">
-        <div class="panel-heading">
-            <div class="panel-title">会员分析</div>
+        <div class="sub-navbar">
+    <div id="menu" class="sub-navbar-nav-wrap">
+      <ul class="nav nav-pills">
+        <li <% if @qryType == "1" %> class="active" <% end %>>
+        <a href="/admin/report/mem_analyses?qryType=1">年龄</a></li>
+        <li <% if @qryType == "2" %> class="active" <% end %>>
+        <a href="/admin/report/mem_analyses?qryType=2">性别</a></li>
+        <li <% if @qryType == "3" %> class="active" <% end %>>
+        <a href="/admin/report/mem_analyses?qryType=3">等级</a></li>
+        </ul> 
         </div>
-
+        </div>
         <div class="panel-body">
             <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
             <div id="main" class="table-responsive block-mt" style="height:400px;width: 100%;
@@ -15,8 +23,6 @@ margin-bottom: 18px;"></div>
     <!-- 引入 echarts.js -->
     <script src="/assets/admin/javascript/echart/build/dist/echarts.js"></script>
     <script type="text/javascript">
-
-
         option = {
             title : {
                 text: '某站点用户访问来源',
@@ -30,7 +36,13 @@ margin-bottom: 18px;"></div>
             legend: {
                 orient : 'vertical',
                 x : 'left',
-                data:['直接访问','邮件营销','联盟广告','视频广告','搜索引擎']
+                data:[
+
+                    <% @data.each do |d| %> 
+                        '<%= d[:name] %>',
+                    <% end %>
+
+                ]
             },
             toolbox: {
                 show : true,
@@ -60,12 +72,11 @@ margin-bottom: 18px;"></div>
                     type:'pie',
                     radius : '55%',
                     center: ['50%', '60%'],
+                    <% names=@names %>
                     data:[
-                        {value:335, name:'直接访问'},
-                        {value:310, name:'邮件营销'},
-                        {value:234, name:'联盟广告'},
-                        {value:135, name:'视频广告'},
-                        {value:1548, name:'搜索引擎'}
+                    <% @data.each do |d| %> 
+                        {value:<%= d[:value] %>, name:'<%= d[:name] %>'},
+                    <% end %>   
                     ]
                 }
             ]
@@ -95,3 +106,4 @@ margin-bottom: 18px;"></div>
             }
         );
     </script>
+

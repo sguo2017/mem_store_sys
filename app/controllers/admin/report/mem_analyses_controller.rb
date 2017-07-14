@@ -13,7 +13,7 @@ class Admin::Report::MemAnalysesController < AdminController
         middle_age=0
         old=0
         other=0
-        users=User.all
+        users=User.where([ "id > ?  ",  1 ])
         users.each do |t|
             unless t.birthday.nil?
                 age = (DateTime.now - t.birthday) / 365.25
@@ -37,10 +37,10 @@ class Admin::Report::MemAnalysesController < AdminController
         # logger.debug("未成年人数: #{@minors}")     
     when "2" #性别  
         #统计性别人数
-        men=User.where(:sex=>1)
+        men=User.where([ "id > ? and sex = ? ", 1 , 1 ])
         men_num=men.length
         
-        women=User.where(:sex=>0)
+        women=User.where([ "id > ? and sex = ? ", 1 , 0 ])
         women_num=women.length
         @data = [
             {value:men_num, name:'男性'},

@@ -47,12 +47,12 @@
           <label class="col-xs-2 control-label" for=""><%= f.label '性别' %></label>
           <div class="col-xs-4">
               <select name="user[sex]" id="user_sex" class="form-control">
-                <% if @user.sex == "0" %>
-                <option value="0" selected>男</option>
-                <option value="1">女</option>
+                <% if @user.sex == "1" %>
+                <option value="1" selected>男</option>
+                <option value="0">女</option>
                  <% else @user.sex == "1"  %>
-                  <option value="0">男</option>
-                <option value="1" selected>女</option>
+                  <option value="1">男</option>
+                <option value="0" selected>女</option>
                 <% end %>
               </select>
             <!-- <%= f.text_field :sex, :class => 'form-control' %> -->

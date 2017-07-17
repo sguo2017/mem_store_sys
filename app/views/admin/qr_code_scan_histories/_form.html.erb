@@ -1,4 +1,4 @@
-<%= form_for @qr_code_scan_history, :html => { :class => "form-horizontal qr_code_scan_history" } do |f| %>
+<%= form_for [:admin, @qr_code_scan_history], :html => { :class => "form-horizontal qr_code_scan_history" } do |f| %>
 
   <% if @qr_code_scan_history.errors.any? %>
     <div id="error_expl" class="panel panel-danger">
@@ -53,9 +53,9 @@
 
   <div class="form-group">
     <div class="col-lg-offset-2 col-lg-10">
-      <%= f.submit nil, :class => 'btn btn-primary' %>
+      <%= f.submit nil, :class => 'btn btn-warning' %>
       <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-                qr_code_scan_histories_path, :class => 'btn btn-default' %>
+                admin_qr_code_scan_histories_path, :class => 'btn btn-default' %>
     </div>
   </div>
 

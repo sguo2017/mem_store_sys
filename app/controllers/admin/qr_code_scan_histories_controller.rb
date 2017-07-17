@@ -4,7 +4,30 @@ class Admin::QrCodeScanHistoriesController < AdminController
   # GET /admin/qr_code_scan_histories
   # GET /admin/qr_code_scan_histories.json
   def index
-    @qr_code_scan_histories = QrCodeScanHistory.all
+	@count = params[:count]
+	@start_date = params[:start_date]
+	@end_date = params[:end_date]
+	sql = "select * from qr_code_scan_histories where "
+	if @start_date.present?
+	  sql = sql + " created_at > '#{@start_date}' and "
+	end
+	if @end_date.present?
+	  sql = sql + " created_at < '#{@end_date}' and "
+	end
+	sql = sql + "user_id in(select user_id from qr_code_scan_histories where status='00A' "
+	if @start_date.present?
+	  sql = sql + " and created_at > '#{@start_date}' "
+	end
+	if @end_date.present?
+	  sql = sql + " and created_at < '#{@end_date}' "
+	end
+	if @count.present?
+	  sql = sql + " group by user_id having count(1)>=#{@count}"
+	end
+	sql = sql +")"
+    @qr_code_scan_histories = QrCodeScanHistory.find_by_sql(sql)
+	ids = @qr_code_scan_histories.map{|q| q.id}
+	@qr_code_scan_histories = QrCodeScanHistory.where(:id => ids).order("created_at DESC").page(params[:page]).per(10)
   end
 
   # GET /admin/qr_code_scan_histories/1

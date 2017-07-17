@@ -7,7 +7,7 @@ class Admin::QrCodeScanHistoriesController < AdminController
 	@count = params[:count]
 	@start_date = params[:start_date]
 	@end_date = params[:end_date]
-	sql = "select * from qr_code_scan_histories where "
+	sql = "select id from qr_code_scan_histories where "
 	if @start_date.present?
 	  sql = sql + " created_at > '#{@start_date}' and "
 	end

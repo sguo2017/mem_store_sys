@@ -6,8 +6,8 @@ zh-CN:
     attributes:
       qr_code_scan_history: 
         id: "编码"
-        user_id: "用户ID"
-        good_id: "商品ID"
+        user_id: "会员"
+        good_id: "商品名称"
         good_instance_id: "商品实例ID"
         status: "状态"
         score: "积分"

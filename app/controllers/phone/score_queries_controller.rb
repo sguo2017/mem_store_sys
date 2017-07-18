@@ -66,7 +66,7 @@ class Phone::ScoreQueriesController < PhoneController
         @msg = "商品积分已兑换过"
         @go_url = phone_homepages_url
 		
-		@scan_query.status = '00A'
+		@scan_query.status = '00X'
       end      
 	  
 	  @scan_query.save

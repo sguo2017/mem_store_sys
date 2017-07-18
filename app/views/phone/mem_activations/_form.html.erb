@@ -4,20 +4,19 @@
 
   <div class="container has-top">
     <div class="menber-card-wrap">
-      <img class="card-img" src="/assets/phone/images/menber-card.png" alt="">
-    </div>
-  
-
-    <ul class="data-list block-mt">
+      <div class="adapt-img">
+        <img src="/assets/phone/images/menber-card.png" alt="">
+      </div>
+    <ul class="data-list input-info">
       <li class="data-item">
+      <span class="ico-user3 flex-none"></span>
       <%= text_field_tag "user[phone_num]", nil, class: "flex-fluid", placeholder: "请输入手机号码", id: "recv_num" %>
-     
       </li>
         <%=f.error_span(:phone_num) %>
-    
       <li class="data-item">
+      <span class="ico-psw flex-none"></span>
       <%= text_field_tag "sms_content", nil, class: "flex-fluid", placeholder: "请输入验证码" %>
-      <a id="getSmsCode">获取随机码</a>
+      <a id="getSmsCode" class="text-primary">获取验证码</a>
       <span class="code-reload countdown_wrap" style="display: none"><span class="countdown_num">60</span>s后重新获取</span>
        
       </li>
@@ -25,9 +24,9 @@
     </ul>
    <%= hidden_field_tag 'user[referee_id]', @referee_id %>
    <%= hidden_field_tag 'user[store_id]', @store_id %>
-    <div class="text-center block-mt bottom-btn" id="submit_activation">
+    <div class="text-center bottom-btn" id="submit_activation">
 
-    <button type="button" class="btn-primary flex-fluid btn-size-lg mem-avctivate-btn">激活会员卡<button> 
+    <button type="button" class="btn-primary btn-size-lg btn-round">激活会员卡<button> 
 
       <!-- <button class="btn-primary flex-fluid btn-size-lg">激活会员卡</button> -->
     </div>  

@@ -473,7 +473,7 @@ a.text-primary:active {
   flex-grow: 1;
   flex: auto;
 }
-.flex-noe {
+.flex-none {
   -moz-box-flex: 0.0;
   -webkit-box-flex: 0.0;
   -o-box-flex: 0.0;

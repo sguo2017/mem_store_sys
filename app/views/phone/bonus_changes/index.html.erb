@@ -1,101 +1,75 @@
+<body class="body-bg">
 	<div class="header">
-		<a class="header-left" href="javascript:void(0)" onclick="window.location.href='/phone/homepages';">
+		<a  class="header-left" href="javascript:void(0)" onclick="window.location.href='/phone/homepages';">
 			<span class="ico-header-back"></span>
 		</a>
 		<h1>积分兑换</h1>
-		<button class="header-right"><span class="ico-scan" onclick="wxScanQRCode();"></span></button>
+		<button class="header-right"><span class="ico-scan"></span></button>
 	</div>
-
 	<!-- header end -->
-	<div class="container has-top">
-		<div class="score-s-header">
-			<a class="ico-question" href="#"></a>
-			<div class="score-scan">
-				<div class="score-num"><%= @user.score %></div>
-				<div class="f12">我的积分</div>
+	<div class="container has-top score-exchange-wrap">
+		<div class="flex-wrap-between score-exchange-title">
+			<div class="flex-fluid current">
+				积分
+				<span class="ico-score"></span>:
+				<%= @user.score %>
 			</div>
-			<!-- <a class="score-market" href="">
-					积分商场
-				<i class="ico-next"></i>
-			</a> -->
+			<div>
+				<a href="/phone/score_queries?pay_type=down">
+					<span class="ico-record"></span>
+					兑换记录
+				</a>
+			</div>
 		</div>
-
-    	<!-- <%= bootstrap_flash %> -->
-    	
-		<ul class="coupon-list">
-		<% @bonus_changes.each_with_index do |bonus_change, index| %>
-			    <% if index  % 3 == 0%>
-					<li class="coupon-item coupon-similar">
-						<i class="dot-line"></i>
-						<i class="coupon-tips">兑换券</i>
-						<div class="coupon-left">
-							￥<span class="coupon-price"><%= bonus_change.red_packet %></span>
-						</div>
-						<div class="coupon-center">
-							<div class="f16 text-tit">扣积分:</div>
-							<span class="label label-similar mt5"><%= bonus_change.score %></span>
-							<div class="coupon-right">
+		<div class="score-exchange">
+			<div class="score-exchange-left">
+				<ul class="exchange-tit-list">
+					<li class="active">
+						<a href="">
+							<img class="tit-img" src="/assets/phone/images/img-redpacket.png" alt="">
+							<div>红包</div>
+						</a>
+					</li>
+					<li>
+						<a href="">
+							<img class="tit-img" src="/assets/phone/images/img-provide.png" alt="">
+							<div>产品</div>
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div class="score-exchange-right">
+				<!-- <div class="no-exchage-tips text-tips">活动正在策划中，敬请期待</div> -->
+				<!-- 有兑换项时显示下面，没有显示上面no-exchage-tips的div -->
+				<div>
+					<ul class="exchange-list">
+					<% @bonus_changes.each_with_index do |bonus_change, index| %>
+						<li class="exchange-list-item">
+							<div class="adapt-img">
+								<img src="/assets/phone/images/bg-score-exchange.png" alt="">
+								<div class="score">10积分</div>
+								<div class="price">￥5</div>
+								<!-- <a class="btn-default" href="">立即兑换</a> -->
 								<%= link_to "立即兑换",
 			                      new_phone_score_query_path(:score_history => {:bonus_change_id => bonus_change.id,:user_id => @user.id, :object_type => "积分兑换", :fun_type => "bonus_change", :object_id => bonus_change.id, :point => bonus_change.score, :red_packet => bonus_change.red_packet, :oper => "扣减"}),
-			                      :class => 'btn-similar-hollow' %>
-								<%= link_to "商品扫码",
-			                      new_phone_score_query_path(:score_history => {:code => "10002",:user_id => @user.id, :object_type => "积分兑换", :fun_type => "goods_scan", :object_id => bonus_change.id, :point => bonus_change.score, :red_packet => bonus_change.red_packet, :oper => "扣减"}),
-			                      :class => 'btn-similar-hollow' %>
+			                      :class => 'btn-default' %>
 							</div>
-						</div>
-					</li>
-				<% end %>
-
-				<% if index  % 3 == 1%>
-					<li class="coupon-item coupon-warning">
-						<i class="dot-line"></i>
-						<i class="coupon-tips">兑换券</i>
-						<div class="coupon-left">
-							￥<span class="coupon-price"><%= bonus_change.red_packet %></span>
-						</div>
-						<div class="coupon-center">
-							<div class="f16 text-tit">扣积分:</div>
-							<span class="label label-warning mt5"><%= bonus_change.score %></span>
-							<div class="coupon-right">
-								<button class="btn-similar-hollow">立即兑换</button>
+						</li>
+						<!-- <li class="exchange-list-item">
+							<div class="adapt-img">
+								<img src="/assets/phone/images/bg-score-exchange.png" alt="">
+								<div class="score">50积分</div>
+								<div class="price">￥5121</div>
+								<a class="btn-default" href="">立即兑换</a>
 							</div>
-						</div>
-						
-					</li>
-				<% end %>
-
-				<% if index  % 3 == 2%>
-					<li class="coupon-item coupon-info">
-						<i class="dot-line"></i>
-						<i class="coupon-tips">兑换券</i>
-						<div class="coupon-left">
-							￥<span class="coupon-price"><%= bonus_change.red_packet %></span>
-						</div>
-						<div class="coupon-center">
-							<div class="f16 text-tit">扣积分:</div>
-							<span class="label label-info mt5"><%= bonus_change.score %></span>
-							<div class="coupon-right">
-								<button class="btn-similar-hollow">立即兑换</button>
-							</div>
-						</div>
-					</li>
-				<% end %>
+						</li> -->
+						<% end %>
+					</ul>
+					<div class="load-tips">更多礼品陆续添加中</div>
+				</div>
 				
-		    <% end %>
-		</ul>
+			</div>
+		</div>
 	</div>
-	<div class="line-through">
-		<span class="text">以上是积分兑换卷</span>
-	</div>
-	 <%= render 'popup' %>
-<script type="text/javascript">
-$(document).ready(function(){  
-  var needRefresh = sessionStorage.getItem("sub-need-refresh");
-  if(needRefresh){
-      sessionStorage.removeItem("sub-need-refresh");
-      location.reload();
-  }
-
-  sessionStorage.setItem("need-refresh", true);  
-})
-</script>	
+	<%= render :partial => 'popup', current_score: @bonus_change_score %>
+</body>

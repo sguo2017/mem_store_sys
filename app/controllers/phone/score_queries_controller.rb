@@ -7,8 +7,15 @@ class Phone::ScoreQueriesController < PhoneController
   # GET /phone/score_queries.json
   def index
      @user = current_user   
-     @score_queries = @user.score_histories.order("created_at DESC")
+     # @score_queries = @user.score_histories.order("created_at DESC")
+     @score_queries_up = @user.score_histories.where(:oper=>'获得').order("created_at DESC")
+     @score_queries_down = @user.score_histories.where(:oper=>'扣减').order("created_at DESC")
+     @pay_type=params[:pay_type]
+     @up_total=point_total(@score_queries_up)
+     @down_total=point_total(@score_queries_down)
+     # puts '支付类型:'+@pay_type.to_s
   end
+  
 
   # GET /phone/score_queries/1
   # GET /phone/score_queries/1.json
@@ -66,16 +73,21 @@ class Phone::ScoreQueriesController < PhoneController
     when "bonus_change" #积分扣减送红包
       @add_score = -(params[:score_history][:point].presence.to_i)
       #扣减积分不够
-      if @user.score + @add_score > 0
+      # puts "用户积分=" + (@user.score + @add_score).to_s
+      if @user.score + @add_score >= 0
         @user.changeScore(@add_score) #会员积分变化    
         params[:score_history][:user_id] = @user.id    
         @score_query = ScoreHistory.new(score_history_params)
         @score_query.save
         @msg = "积分兑换成功" 
-        @go_url = phone_score_queries_url
+        @go_url = '/phone/score_queries?pay_type=down'
+        # @go_url = phone_score_queries_url
       else        
         @msg = "积分兑换失败:积分余额不足"
+        $bonus_change_score= BonusChange.first.score
+        puts "红包积分: " + @bonus_change_score.to_s
         @go_url = phone_bonus_changes_url
+
       end
     when "no_login"
        @msg = "必须先授权登录"
@@ -138,5 +150,12 @@ class Phone::ScoreQueriesController < PhoneController
 
     def score_history_params
       params.require(:score_history).permit(:point, :object_type, :object_id, :oper, :user_id, :bonus_change_id, :red_packet)
+    end
+    def point_total(total)
+       point_sum=0
+       total.each do |t|
+        point_sum += t.point
+     end
+    return point_sum
     end
 end

@@ -1,35 +1,46 @@
+<% content_for :title, "邀请好友" %>
+<!-- <head>
+    <title><%= yield(:title) %></title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="blank" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="wap-font-scale" content="no" />
+</head> -->
 <div class="header">
     <a class="header-left" href="javascript:void(0)" onclick="window.location.href='/phone/homepages';">
-      <span class="ico-header-back"></span>
+        <span class="ico-header-back"></span>
     </a>
     <h1>邀请好友</h1>
-  </div>
-  <!-- header end -->
-  <div class="container has-top">
-      <div class="invite-friend-wrap">
+    <button class="header-right"><span class="ico-scan"></span></button>
+</div>
+<!-- header end -->
+<div class="container has-top">
+    <div class="add-friend-wrap">
         <div class="user-img-wrap">
-          <div class="user-img">
-            <img <% if @user.headimgurl.blank? %> src="/assets/phone/images/img-user.png" <%else%> src="<%= @user.headimgurl %>" <% end %> alt="">
-          </div>
-          <div class="flex-fluid">
-            <div class="user-name"><%= @user.name %></div>
-            <div class="f12"><%= @user.province %>&nbsp;&nbsp;<%= @user.city %></div>
-          </div>
+            <div class="user-img">
+                <img <% if @user.headimgurl.blank? %> src="/assets/phone/images/img-user.png" <%else%> src="<%= @user.headimgurl %>" <% end %> alt="">
+            </div>
+            <div class="flex-fluid">
+                <div class="user-name"><%= @user.name %></div>
+                <div class="f12"><%= @user.province %>&nbsp;&nbsp;<%= @user.city %><i class="ico-user3 ml10"></i></div>
+            </div>
         </div>
         <div class="code-2d-wrap">
-          <img class="img-2dcode" src="/uploads/user/mem_activation/user2code_<%= @user.id %>.png" alt="">
-          <div class="text-center text-danger code-btm-tips">扫一扫二维码加入会员</div>
+            <img class="img-2dcode" src="/uploads/user/mem_activation/user2code_<%= @user.id %>.png" alt="">
+            <div class="text-center text-danger code-btm-tips">扫一扫二维码加入会员</div>
         </div>
-      </div>
-  </div>
+    </div>
+</div>
 <script type="text/javascript">
-$(document).ready(function(){  
-  var needRefresh = sessionStorage.getItem("sub-need-refresh");
-  if(needRefresh){
-      sessionStorage.removeItem("sub-need-refresh");
-      location.reload();
-  }
-
-  sessionStorage.setItem("need-refresh", true);  
-})
-</script> 
+    $(document).ready(function(){
+        var needRefresh = sessionStorage.getItem("sub-need-refresh");
+        if(needRefresh){
+            sessionStorage.removeItem("sub-need-refresh");
+            location.reload();
+        }
+        sessionStorage.setItem("need-refresh", true);
+    })
+</script>

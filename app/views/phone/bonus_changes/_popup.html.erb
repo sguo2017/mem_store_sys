@@ -1,33 +1,23 @@
-<!-- 提示弹窗 -->
-<div class="popup-wrap" <% unless flash[:notice].blank? %>style="display:;"
-<% else %> style="display:none;"  <% end %> >
-<div class="popup has-title">
-    <div class="popup w280  text-center">
-        <img class="popup-coupon-img" src="/assets/phone/images/img-popup-smile.png" alt="">
-        <!--<div class="popup-main text-center">-->
-        <!--<div class="text-import f16 mb5">-->
-        <!--<i class="ico-error mr5"></i>-->
-        <!--<%= flash[:notice] %>-->
-        <!--</div>-->
-
-        <!--</div>-->
-        <div class="popup-main-coupon">
-            <div class="popup-coupon-tips text-tips">
-                <%= flash[:notice] %>
+<div class="popup-wrap bc_popup_wrap" <% unless flash[:notice].blank? %>style="display:;"<% else %> style="display:none;"  <% end %>>
+        <div class="popup w280  text-center">
+           <img class="popup-coupon-img" src="/assets/phone/images/img-popup-cry.png" alt="">
+            <div class="popup-main-coupon">
+                <div class="popup-coupon-tips text-tips">
+                    本次兑换需要<span class="text-primary"><%= $bonus_change_score %></span>积分
+                    <div class="f12">您的积分余额不足！</div>
+                </div>
             </div>
+            <div class="popup-foot flex-wrap">
+                <a class="flex-fluid a-button bc_notice_close_btn">返回</a>
+            </div>
+            
         </div>
-        <div class="popup-foot flex-wrap">
-            <a class="flex-fluid a-button">返回</a>
-        </div>
-
+        <div class="popup-bg"></div>
     </div>
-</div>
-<div class="popup-bg"></div>
-</div>
 
 <script type="text/javascript">
-    $(document).ready(function () {
-        $('.bc_notice_close_btn').click(function () {
+    $(document).ready(function(){
+        $('.bc_notice_close_btn').click(function() {
             $('.bc_popup_wrap').hide();
             return
         });

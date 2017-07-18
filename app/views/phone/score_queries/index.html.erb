@@ -1,33 +1,57 @@
-	<div class="header">
-		<a class="header-left" href="javascript:void(0)" onclick="window.location.href='/phone/homepages';">
-			<span class="ico-header-back"></span>
-		</a>
-		<h1>积分查询</h1>
-		<button class="header-right"><span class="ico-scan" onclick="wxScanQRCode();"></span></button>
-	</div>
-	<!-- header end -->
-	<div class="container has-top">
-		<div class="score-s-header">
-			<!-- <a class="ico-question" href="#"></a> -->
-			<div class="score-scan">
-				<div class="score-num"><%= @user.score %></div>
-				<div class="f12">我的积分</div>
-			</div>
-<!-- 			<a class="score-market" href="">
-					积分商场
-				<i class="ico-next"></i>
-			</a> -->
-		</div>
-		<div class="sub-title score-title">
-			<i class="ico-score mr5"></i>积分明细
-		</div>
-		<ul class="data-list">
-			<% @score_queries.each_with_index do |score_query, index| %>
-				<li class="data-item">
-					<div class="flex-fluid"><%= score_query.created_at.strftime('%Y-%m-%d %H:%M:%S') %></div>
-					<div><%= score_query.oper %><span class="text-info"><%= score_query.point %></span>积分</div>
-				</li>
-			<% end %>
-		</ul>
-	</div>
-	 <%= render 'popup' %>
+<body class="body-bg">
+<div class="header">
+    <a class="header-left" href="javascript:void(0)" onclick="window.location.href='/phone/homepages';">
+        <span class="ico-header-back"></span>
+    </a>
+    <h1>积分查询</h1>
+    <button class="header-right"><span class="ico-scan" onclick="wxScanQRCode();"></span></button>
+</div>
+<!-- header end -->
+<div class="container has-top">
+    <div class="score-header">
+        <!-- <a class="ico-question" href="#"></a> -->
+        <div>
+            <div class="my-score">我的积分</div>
+        </div>
+        <div class="score-num">
+            <a class="ico-question" href=""></a>
+            <span><%= @user.score %></span>
+        </div>
+    </div>
+    <ul class="tabs-nav tabs-nav-score">
+        <li class="tabs-nav-item <% if @pay_type=='up'%>active<%end%>">
+            <a href="/phone/score_queries?pay_type=up">
+                <span class="ico-score-plus"></span>
+                <div class="score-tit">
+                    <div class="mb5">积分获得</div>
+                    +<%= @up_total %>分
+                </div>
+            </a>
+        </li>
+        <li class="tabs-nav-item <% if @pay_type=='down' %>active<%end%>">
+            <a href="/phone/score_queries?pay_type=down">
+                <span class="ico-score-minus"></span>
+                <div class="score-tit">
+                    <div class="mb5">积分支出</div>
+                    -<%= @down_total %>分
+                </div>
+            </a>
+        </li>
+    </ul>
+
+    <ul class="data-list block-mt">
+    <% if @pay_type=='up'%>
+        <% @score_queries = @score_queries_up %>
+    <% else %>
+        <% @score_queries = @score_queries_down %>
+    <% end %>
+        <% @score_queries.each_with_index do |score_query, index| %>
+        <li class="data-item">
+            <div class="flex-fluid"><%= score_query.created_at.strftime('%Y-%m-%d %H:%M:%S') %></div>
+            <div><span class="text-danger"><%= score_query.oper %><%= score_query.point %></span>积分</div>
+        </li>
+        <% end %>
+    </ul>
+</div>
+</body>
+<%= render 'popup' %>

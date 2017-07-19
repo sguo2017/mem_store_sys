@@ -32,6 +32,7 @@ class Const
     GRANT_TYPE = "authorization_code"
     SIGNATURE = ""
 
+    RED_PACKET_ADDR = "https://api.mch.weixin.qq.com/mmpaymkttransfers/sendredpack"
     ACCESS_TOKEN_ADDR = "https://api.weixin.qq.com/sns/oauth2/access_token?"
     USER_INFO_ADDR = "https://api.weixin.qq.com/sns/userinfo?"
     JS_TIKET_ADDR = "https://api.weixin.qq.com/cgi-bin/ticket/getticket?"

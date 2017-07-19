@@ -65,4 +65,60 @@ class Wxinterface
     return JSON.parse(@data)['ticket'] 
   end
 
+  def Wxinterface.send_redpacket(user_info)
+    #各项参数
+	info = WeixinConfigInfo["weixinconfiginfo"]
+    act_name = "Register_to_send_red_packets"  #活动名称
+    client_ip = info["CLIENT_IP"]  #调用接口的机器Ip地址
+    mch_billno =  DateTime.now.to_s(:number) + DateTime.now.to_i.to_s#商户订单号
+    mch_id = info["MCH_ID"]  #商户号
+    #生成随机字符串
+    o = [('a'..'z'),('A'..'Z'),('0'..'9')].map{|i| i.to_a}.flatten 
+    nonce_str = (0...20).map{ o[rand(o.length)] }.join
+    re_openid = user_info["openid"]  #接受红包的用户
+    remark = "no"  #备注信息
+    send_name = info["SEND_NAME"]  #商户名称
+    total_amount = 100  #付款金额(单位为分)
+    total_num = 1  #红包发放总人数
+    wishing = "welcome"  #红包祝福语
+    wxappid = info["APPID"]  #公众账号appid
+
+    #生成签名
+    stringA = "act_name=#{act_name}&client_ip=#{client_ip}&mch_billno=#{mch_billno}&mch_id=#{mch_id}&nonce_str=#{nonce_str}&re_openid=#{re_openid}&remark=#{remark}&send_name=#{send_name}&total_amount=#{total_amount}&total_num=#{total_num}&wishing=#{wishing}&wxappid=#{wxappid}"
+    stringSignTemp = "#{stringA}&key=#{info["KEY"]}"
+	puts "stringSignTemp: #{stringSignTemp}"
+    sign = Digest::MD5.hexdigest(stringSignTemp).upcase
+
+    body_content = ""
+    body_content = body_content + "<xml>"
+    body_content = body_content + "<act_name>#{act_name}</act_name>"
+    body_content = body_content + "<client_ip>#{client_ip}</client_ip>"
+    body_content = body_content + "<mch_billno>#{mch_billno}</mch_billno>"
+    body_content = body_content + "<mch_id>#{mch_id}</mch_id>"
+    body_content = body_content + "<nonce_str>#{nonce_str}</nonce_str>"
+    body_content = body_content + "<re_openid>#{re_openid}</re_openid>"
+    body_content = body_content + "<remark>#{remark}</remark>"
+    body_content = body_content + "<send_name>#{send_name}</send_name>"
+    body_content = body_content + "<total_amount>#{total_amount}</total_amount>"
+    body_content = body_content + "<total_num>#{total_num}</total_num>"
+    body_content = body_content + "<wishing>#{wishing}</wishing>"
+    body_content = body_content + "<wxappid>#{wxappid}</wxappid>"
+    body_content = body_content + "<sign>#{sign}</sign>"
+    body_content = body_content + "</xml>"
+    uri = URI.parse(Const::WXConfig::RED_PACKET_ADDR)
+    puts "send_redpacket: #{uri}"
+    http = Net::HTTP.new(uri.host, uri.port)
+    http.use_ssl = true
+	http.cert =OpenSSL::X509::Certificate.new(File.read("#{Rails.root}/config/apiclient_cert.pem"))
+	http.key =OpenSSL::PKey::RSA.new((File.read("#{Rails.root}/config/apiclient_key.pem")), "1236802402")# key and password
+    http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+    request = Net::HTTP::Post.new(uri.request_uri)
+	request.body = body_content
+	puts "body_content: #{body_content}"
+    response = http.request(request)
+    @data = response.body
+    @data.force_encoding('UTF-8')
+    return @data
+  end
+
 end

@@ -103,6 +103,7 @@ class Phone::MemActivationsController < PhoneController
                 sign_in("user", @user)
                 @msg = "保存成功"
                 puts  @msg
+		#@data = Wxinterface.send_redpacket(userInfo)
                 format.html { redirect_to [:phone, 'homepages'] }
               else
                 @msg = "保存失败"

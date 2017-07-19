@@ -80,6 +80,7 @@ gem 'ckeditor'
 gem 'mini_magick'
 gem 'rqrcode_png'
 gem 'jquery-countdown-rails'
+gem 'settingslogic'
 #gem 'jquery-datetimepicker-rails'
 source 'https://rails-assets.org' do
   gem 'rails-assets-datetimepicker'

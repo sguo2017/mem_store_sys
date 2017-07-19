@@ -44,18 +44,19 @@ class Phone::SmsSendsController < PhoneController
 
     send_content = rand(1001..9999)     
     @sms_send.send_content = send_content   
-
+	
+	info = ConfigInfo["smsconfiginfo"]
     respond_to do |format|
       if @sms_send.save
-          add = "#{Const::SMS_SEND_URL}"
+          add = "#{info["SMS_SEND_URL"]}"
           logger.debug "48 #{add}"
           uri = URI.parse(add)
           http = Net::HTTP.new(uri.host)
           request = Net::HTTP::Post.new(uri.request_uri)
           tpl_val = URI.encode("#code#")  + "=" + URI.encode("#{send_content}");
-          data = {apikey:Const::SMS_SEND_API_KEY, 
+          data = {apikey:info["SMS_SEND_API_KEY"], 
                   mobile:sms_send_params[:recv_num],
-                  tpl_id:Const::TPL_ID,
+                  tpl_id:info["TPL_ID"],
                   tpl_value:tpl_val
                 }
           request.set_form_data(data)

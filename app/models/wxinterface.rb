@@ -4,8 +4,9 @@ class Wxinterface
   require "json"
 
   def Wxinterface.getAccessToken(code)
+	info = ConfigInfo["weixinconfiginfo"]
   	# puts "wxinterface.getAccessToken call"
-    uri = URI.parse(Const::WXConfig::ACCESS_TOKEN_ADDR + "appid=#{Const::WXConfig::APPID}&secret=#{Const::WXConfig::SECRET}&code=#{code}&grant_type=#{Const::WXConfig::GRANT_TYPE}")
+    uri = URI.parse(info["ACCESS_TOKEN_ADDR"] + "appid=#{info["APPID"]}&secret=#{info["SECRET"]}&code=#{code}&grant_type=#{Const::WXConfig::GRANT_TYPE}")
     # logger.debug "113 #{uri}"
     http = Net::HTTP.new(uri.host, uri.port)
     http.use_ssl = true
@@ -18,9 +19,10 @@ class Wxinterface
   end
 
   def Wxinterface.getUserInfo(params)
+	info = ConfigInfo["weixinconfiginfo"]
   	# puts "wxinterface.getUserInfo call"
     param = JSON.parse(params)
-    uri = URI.parse(Const::WXConfig::USER_INFO_ADDR + "access_token=#{param['access_token']}&openid=#{param['openid']}&lang=zh_CN")
+    uri = URI.parse(info["USER_INFO_ADDR"] + "access_token=#{param['access_token']}&openid=#{param['openid']}&lang=zh_CN")
     http = Net::HTTP.new(uri.host, uri.port)
     http.use_ssl = true
     http.verify_mode = OpenSSL::SSL::VERIFY_NONE
@@ -33,8 +35,9 @@ class Wxinterface
   end
 
   def Wxinterface.global_access_token
+	info = ConfigInfo["weixinconfiginfo"]
     puts "wxinterface.getjsapi_ticket call"
-    uri = URI.parse("https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=#{Const::WXConfig::APPID}&secret=#{Const::WXConfig::SECRET}")
+    uri = URI.parse(info["GLOBAL_ACCESS_TOKEN_ADDR"] + "grant_type=client_credential&appid=#{info["APPID"]}&secret=#{info["SECRET"]}")
     puts "169: #{uri}"
     http = Net::HTTP.new(uri.host, uri.port)
     http.use_ssl = true
@@ -51,8 +54,9 @@ class Wxinterface
   end
 
   def Wxinterface.getjsapi_ticket()
+	info = ConfigInfo["weixinconfiginfo"]
     Wxinterface.global_access_token()
-    uri = URI.parse(Const::WXConfig::JS_TIKET_ADDR + "access_token=#{$access_token}&type=jsapi")
+    uri = URI.parse(info["JS_TIKET_ADDR"] + "access_token=#{$access_token}&type=jsapi")
     puts "169: #{uri}"
     http = Net::HTTP.new(uri.host, uri.port)
     http.use_ssl = true
@@ -67,7 +71,7 @@ class Wxinterface
 
   def Wxinterface.send_redpacket(user_info)
     #各项参数
-	info = WeixinConfigInfo["weixinconfiginfo"]
+	info = ConfigInfo["weixinconfiginfo"]
     act_name = "Register_to_send_red_packets"  #活动名称
     client_ip = info["CLIENT_IP"]  #调用接口的机器Ip地址
     mch_billno =  DateTime.now.to_s(:number) + DateTime.now.to_i.to_s#商户订单号
@@ -105,12 +109,12 @@ class Wxinterface
     body_content = body_content + "<wxappid>#{wxappid}</wxappid>"
     body_content = body_content + "<sign>#{sign}</sign>"
     body_content = body_content + "</xml>"
-    uri = URI.parse(Const::WXConfig::RED_PACKET_ADDR)
+    uri = URI.parse(info["RED_PACKET_ADDR"])
     puts "send_redpacket: #{uri}"
     http = Net::HTTP.new(uri.host, uri.port)
     http.use_ssl = true
 	http.cert =OpenSSL::X509::Certificate.new(File.read("#{Rails.root}/config/apiclient_cert.pem"))
-	http.key =OpenSSL::PKey::RSA.new((File.read("#{Rails.root}/config/apiclient_key.pem")), "1236802402")# key and password
+	http.key =OpenSSL::PKey::RSA.new((File.read("#{Rails.root}/config/apiclient_key.pem")), mch_id)# key and password
     http.verify_mode = OpenSSL::SSL::VERIFY_NONE
     request = Net::HTTP::Post.new(uri.request_uri)
 	request.body = body_content

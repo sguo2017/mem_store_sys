@@ -91,7 +91,8 @@ class Phone::ScoreQueriesController < PhoneController
       end
     when "no_login"
        @msg = "必须先授权登录"
-       @go_url = "#{Const::WXConfig::AUTH_ADDR}appid=#{Const::WXConfig::APPID}&redirect_uri=http://gzb.davco.cn/phone/mem_activations?method=wxCfgEntrance&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect"   
+	   info = ConfigInfo["weixinconfiginfo"]
+       @go_url = "#{info["AUTH_ADDR"]}appid=#{info["APPID"]}&redirect_uri=http://gzb.davco.cn/phone/mem_activations?method=wxCfgEntrance&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect"   
     else
       @msg = "未知错误"
       @go_url = phone_homepages_url

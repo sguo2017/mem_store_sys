@@ -17,7 +17,8 @@ class Admin::StoresController < AdminController
   def show 
     @store=Store.find(params[:id])
     if @store.qrcode.blank?
-      go_url = "#{Const::WXConfig::AUTH_ADDR}appid=#{Const::WXConfig::APPID}&redirect_uri=#{Const::STORES_SHOW_ADDR}/phone/mem_activations?store_id=#{@store.id.to_s}&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect"   
+	  info = ConfigInfo["weixinconfiginfo"]
+      go_url = "#{info["AUTH_ADDR"]}appid=#{info["APPID"]}&redirect_uri=#{Const::STORES_SHOW_ADDR}/phone/mem_activations?store_id=#{@store.id.to_s}&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect"   
       logger.debug "21  #{go_url}"
       qr = RQRCode::QRCode.new(go_url, :size => 16, :level => :h )
       png = qr.to_img     

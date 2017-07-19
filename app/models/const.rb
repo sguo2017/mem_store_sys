@@ -17,26 +17,15 @@ class Const
 
 
   #短信接口<<
-  SMS_SEND_URL = "https://sms.yunpian.com/v2/sms/tpl_single_send.json"
-  SMS_SEND_API_KEY = "cdefecbad01205cd9de33b1ac0343c41"
   SMS_TMEPLE = "【德高工长巴】您好！您本次领取会员卡的验证码为：%s"
-  TPL_ID = "1846372"
   SMS_TIME_LIMIT=1  #短信有效时间
   #短信接口<< 
 
   #WX<<
   module WXConfig
-    APPID = "wx649eb094afb490f5"
-    SECRET = "86f9b7bc167aa6cd07ce068f3a905c13"
     # GRANT_TYPE = "client_credential"
     GRANT_TYPE = "authorization_code"
     SIGNATURE = ""
-
-    RED_PACKET_ADDR = "https://api.mch.weixin.qq.com/mmpaymkttransfers/sendredpack"
-    ACCESS_TOKEN_ADDR = "https://api.weixin.qq.com/sns/oauth2/access_token?"
-    USER_INFO_ADDR = "https://api.weixin.qq.com/sns/userinfo?"
-    JS_TIKET_ADDR = "https://api.weixin.qq.com/cgi-bin/ticket/getticket?"
-    AUTH_ADDR = "https://open.weixin.qq.com/connect/oauth2/authorize?"
   end
   #WX>>  
 

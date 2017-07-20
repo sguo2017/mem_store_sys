@@ -85,6 +85,7 @@
                     <li><%= link_to "月扫码频次统计", admin_bonus_changes_path  %></li> -->
                 </ul>
             </li> 
+			<li onclick="navbar_active(this)" <% if @current_nav == 'config_menu' %>class='active'<% end %>><%= link_to "系统参数配置", admin_config_table_infos_path  %></li>
         </ul>
     </div>
   </div>

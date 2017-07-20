@@ -69,7 +69,7 @@ class Wxinterface
     return JSON.parse(@data)['ticket'] 
   end
 
-  def Wxinterface.send_redpacket(user_info)
+  def Wxinterface.send_redpacket(user_info,money)
     #各项参数
 	info = ConfigInfo["weixinconfiginfo"]
     act_name = "Register_to_send_red_packets"  #活动名称
@@ -82,7 +82,7 @@ class Wxinterface
     re_openid = user_info["openid"]  #接受红包的用户
     remark = "no"  #备注信息
     send_name = info["SEND_NAME"]  #商户名称
-    total_amount = 100  #付款金额(单位为分)
+    total_amount = money  #付款金额(单位为分)
     total_num = 1  #红包发放总人数
     wishing = "welcome"  #红包祝福语
     wxappid = info["APPID"]  #公众账号appid

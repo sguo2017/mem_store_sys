@@ -1,0 +1,1 @@
+ConfigTableInfo.config_table_info_init

@@ -1,0 +1,33 @@
+---
+zh-CN:
+  activerecord:
+    models:
+      config_table_info: "配置表单"
+    attributes:
+      config_table_info: 
+        cf_id: "序号"
+        cf_desc: "描述"
+        cf_value: "值"
+        created_at: "创建日期"
+  helpers:
+    submit:
+      config_table_info:
+        create: "新增"
+        update: "更新"
+  config_table_infos:
+    edit:
+      title: "编辑"
+    form:
+      config_table_info: "配置表单"
+    index:
+      confirm: "缺认删除该条配置吗?"
+      empty: "未找到该条信息"
+      new_config_table_info: "新增"
+      title: "列表"
+    new:
+      title: "新增"
+    show:
+      title: "详情"
+    was_created: "新增成功"
+    was_deleted: "删除成功"
+    was_updated: "更新成功"

@@ -26,7 +26,6 @@ class Phone::MemActivationsController < PhoneController
       session[:userInfo] = userInfo
     else 
       user.saveWxUserInfo(userInfo)
-
       sign_in("user", user)
       respond_to do |format|
         format.html { redirect_to [:phone, 'homepages'] }
@@ -79,7 +78,6 @@ class Phone::MemActivationsController < PhoneController
               else
                 @user.saveWxUserInfo(userInfo)
                 sign_in("user", @user)
-                @msg = "登录成功"
                 format.html { redirect_to [:phone, 'homepages'] }
               end
             else
@@ -103,7 +101,21 @@ class Phone::MemActivationsController < PhoneController
                 sign_in("user", @user)
                 @msg = "保存成功"
                 puts  @msg
-		#@data = Wxinterface.send_redpacket(userInfo)
+			  $config_info.each do |c|
+				if c.cf_id == "RED_BOUNS_SWITCH"
+					@switch = c.cf_value
+				else 
+					if c.cf_id == "FIRST_LOGIN_RED_BONUS"
+						@money = c.cf_value
+					end
+				end
+			  end
+			  puts "switch: #{@switch}"
+			  puts "money: #{@money}"
+			  if @switch == 'yes'
+				@data = Wxinterface.send_redpacket(userInfo,@money)
+				puts @data
+			  end
                 format.html { redirect_to [:phone, 'homepages'] }
               else
                 @msg = "保存失败"

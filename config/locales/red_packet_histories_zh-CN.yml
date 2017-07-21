@@ -1,0 +1,35 @@
+---
+zh-CN:
+  activerecord:
+    models:
+      red_packet_history: "红包发送记录"
+    attributes:
+      red_packet_history: 
+        user_id: "会员"
+        money: "金额"
+        catalog: "类型"
+        phone_number: "手机"
+        status: "状态"
+        created_at: "创建日期"
+  helpers:
+    submit:
+      red_packet_history:
+        create: "Create red packet history"
+        update: "Update red packet history"
+  red_packet_histories:
+    edit:
+      title: "Editing of the red packet history"
+    form:
+      red_packet_history: "Red packet history"
+    index:
+      confirm: "Are you sure you want to delete the red packet history?"
+      empty: "No red packet histories found"
+      new_red_packet_history: "Add a new red packet history"
+      title: "Listing of red packet histories"
+    new:
+      title: "Adding a new red packet history"
+    show:
+      title: "Red packet history details"
+    was_created: "Red packet history was successfully added"
+    was_deleted: "Red packet history was successfully deleted"
+    was_updated: "Red packet history was successfully updated"

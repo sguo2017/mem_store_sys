@@ -27,7 +27,6 @@ Rails.application.routes.draw do
     resources :wxes
     resources :stores
     resources :invitations
-	  resources :qr_code_scan_histories
   end
 
   namespace :admin do
@@ -47,6 +46,7 @@ Rails.application.routes.draw do
     resources :good_instances
     resources :qr_code_scan_histories
     resources :config_table_infos
+    resources :red_packet_histories
   end
 
   mount Ckeditor::Engine => '/ckeditor'

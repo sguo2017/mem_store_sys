@@ -39,6 +39,9 @@
 				</ul>
 			</div>
 			<div class="score-exchange-right">
+				<% if @bonus_changes.blank? %>
+					<div class="no-exchage-tips text-tips">活动正在策划中，敬请期待</div>
+				<% else %>
 				<!-- <div class="no-exchage-tips text-tips">活动正在策划中，敬请期待</div> -->
 				<!-- 有兑换项时显示下面，没有显示上面no-exchage-tips的div -->
 				<div>
@@ -47,12 +50,19 @@
 						<li class="exchange-list-item">
 							<div class="adapt-img">
 								<img src="/assets/phone/images/bg-score-exchange.png" alt="">
-								<div class="score">10积分</div>
-								<div class="price">￥5</div>
+								<div class="score">
+									<%= bonus_change.score %>积分
+								</div>
+								<div class="price">
+									￥<%= bonus_change.red_packet %>
+								</div>
 								<!-- <a class="btn-default" href="">立即兑换</a> -->
 								<%= link_to "立即兑换",
-			                      new_phone_score_query_path(:score_history => {:bonus_change_id => bonus_change.id,:user_id => @user.id, :object_type => "积分兑换", :fun_type => "bonus_change", :object_id => bonus_change.id, :point => bonus_change.score, :red_packet => bonus_change.red_packet, :oper => "扣减"}),
+			                      new_phone_score_query_path(:fun_type => "bonus_change", :score_history => {:bonus_change_id => bonus_change.id,:user_id => @user.id, :object_type => "积分兑换",  :object_id => bonus_change.id, :point => bonus_change.score, :red_packet => bonus_change.red_packet, :oper => "扣减"}),
 			                      :class => 'btn-default' %>
+			                      <%= link_to "商品扫码",
+			                      new_phone_score_query_path(:fun_type => "goods_scan", :code => "10003",:score_history => {:bonus_change_id => bonus_change.id, :user_id => @user.id, :object_type => "积分兑换",  :object_id => bonus_change.id, :point => bonus_change.score, :red_packet => bonus_change.red_packet, :oper => "获得"}),
+			                      :class => 'btn-similar-hollow' %>
 							</div>
 						</li>
 						<!-- <li class="exchange-list-item">
@@ -67,9 +77,9 @@
 					</ul>
 					<div class="load-tips">更多礼品陆续添加中</div>
 				</div>
-				
+				<% end %>
 			</div>
 		</div>
 	</div>
-	<%= render :partial => 'popup', current_score: @bonus_change_score %>
+	<%= render :partial => 'popup' %>
 </body>

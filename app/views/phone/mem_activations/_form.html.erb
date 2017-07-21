@@ -9,7 +9,7 @@
       </div>
     <ul class="data-list input-info">
       <li class="data-item">
-      <span class="ico-user3 flex-none"></span>
+      <span class="ico-user2 flex-none"></span>
       <%= text_field_tag "user[phone_num]", nil, class: "flex-fluid", placeholder: "请输入手机号码", id: "recv_num" %>
       </li>
         <%=f.error_span(:phone_num) %>
@@ -26,7 +26,7 @@
    <%= hidden_field_tag 'user[store_id]', @store_id %>
     <div class="text-center bottom-btn" id="submit_activation">
 
-    <button type="button" class="btn-primary btn-size-lg btn-round">激活会员卡<button> 
+    <button id="ActiveButton" type="button" class="btn-primary btn-size-lg btn-round">激活会员卡<button> 
 
       <!-- <button class="btn-primary flex-fluid btn-size-lg">激活会员卡</button> -->
     </div>  
@@ -123,7 +123,7 @@
         $('.notice_close_btn').click(function() {
           return $('.activation_popup_wrap').hide();
         });
-        $('.mem-avctivate-btn').click(function() {
+        $('#ActiveButton').click(function() {
             if(valid_form() == true){
               if ('' === $('#sms_content').val()) {
                   alert("验证码不能为空");

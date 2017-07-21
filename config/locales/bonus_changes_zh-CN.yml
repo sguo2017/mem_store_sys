@@ -6,7 +6,7 @@ zh-CN:
     attributes:
       bonus_change: 
         score: "积分"
-        red_packet: "红包"
+        red_packet: "红包(元)"
         created_at: "创建时间"
   helpers:
     submit:

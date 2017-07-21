@@ -1753,6 +1753,7 @@ a.adapt-img {
 }
 .score-exchange-title {
   padding: 15px 16px;
+  background: #f1f1f1;
 }
 .score-exchange-title .current {
   color: #7e7e7e;
@@ -1764,6 +1765,8 @@ a.adapt-img {
   -o-box-sizing: border-box;
   -ms-box-sizing: border-box;
   box-sizing: border-box;
+}
+.score-exchange-wrap.container {
   padding-top: 94px;
 }
 .score-exchange-wrap .score-exchange-title {
@@ -1771,6 +1774,7 @@ a.adapt-img {
   top: 44px;
   left: 0;
   right: 0;
+  z-index: 6;
 }
 .score-exchange {
   display: -webkit-box;
@@ -1792,6 +1796,7 @@ a.adapt-img {
   -o-box-flex: 0.0;
   -ms-flex: 0.0;
   flex: none;
+  overflow: hidden;
 }
 .score-exchange .score-exchange-right {
   /*Firefox*/
@@ -1806,6 +1811,7 @@ a.adapt-img {
   -webkit-flex-grow: 1;
   flex-grow: 1;
   flex: auto;
+  overflow: hidden;
 }
 .score-exchange .exchange-tit-list > li > a {
   display: block;
@@ -1823,6 +1829,9 @@ a.adapt-img {
 .score-exchange .exchange-tit-list > li .tit-img {
   height: 28px;
   width: 28px;
+}
+.exchage-list-wrap {
+  overflow: hidden;
 }
 .exchange-list {
   padding: 5px;

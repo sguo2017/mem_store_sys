@@ -1,5 +1,5 @@
 <!-- 提示弹窗 -->
-<div class="popup-wrap bc_popup_wrap" <% unless flash[:notice].blank? %>style="display:;"<% else %> style="display:none;"  <% end %>>
+<div id="popup" class="popup-wrap bc_popup_wrap" <% unless flash[:notice].blank? %>style="display:;"<% else %> style="display:none;"  <% end %>>
         <div class="popup w280  text-center">
             <img class="popup-coupon-img" src="/assets/phone/images/img-popup-smile.png" alt="">
             <div class="popup-main-coupon">
@@ -10,7 +10,7 @@
                 </div>
             </div>
             <div class="popup-foot flex-wrap">
-                <a class="flex-fluid a-button bc_notice_close_btn">返回</a>
+                <a id="notice" class="flex-fluid a-button bc_notice_close_btn">返回</a>
             </div>
             
         </div>
@@ -19,8 +19,8 @@
 
 <script type="text/javascript">
     $(document).ready(function(){
-        $('.bc_notice_close_btn').click(function() {
-            $('.bc_popup_wrap').hide();
+        $('#notice').click(function() {
+            $('#popup').hide();
             return
         });
     })

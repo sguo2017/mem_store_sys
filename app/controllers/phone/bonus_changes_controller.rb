@@ -8,6 +8,7 @@ class Phone::BonusChangesController < PhoneController
   def index
      @user = current_user   
      @bonus_changes = BonusChange.all 
+     @bonus_change_score=params[:change_score]
   end
 
   # GET /phone/bonus_changes/1

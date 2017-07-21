@@ -24,6 +24,13 @@ class Phone::HomepagesController < PhoneController
       @user.save
     end
 
+    case @user.score
+    when 0..1999 then @user.level = "V1"
+    when 2000..4999 then @user.level = "V2"
+    when 5000..9999 then @user.level = "V3"
+    else @user.level = "V4"
+    end
+
     #计算会员升级的百分比<<
     if @user.score > 0
       @mem_levels = MemLevel.all.order("score ASC")

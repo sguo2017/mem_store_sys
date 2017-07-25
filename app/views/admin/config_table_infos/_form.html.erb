@@ -36,11 +36,18 @@
     </div>
     <%=f.error_span(:cf_value) %>
   </div>
+<!--   <div class="form-group">
+    <%= f.label :cf_value, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.file_field :cf_value, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:cf_value) %>
+  </div> -->
 
   <div class="form-group">
     <div class="col-lg-offset-2 col-lg-10">
       <%= f.submit nil, :class => 'btn btn-primary' %>
-      <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+     <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
                 admin_config_table_infos_path, :class => 'btn btn-default' %>
     </div>
   </div>

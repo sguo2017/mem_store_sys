@@ -47,6 +47,7 @@ Rails.application.routes.draw do
     resources :good_instances
     resources :qr_code_scan_histories
     resources :config_table_infos
+    resources :ad_modifies
   end
 
   mount Ckeditor::Engine => '/ckeditor'

@@ -21,7 +21,7 @@ class Admin::Report::MemAnalysesController < AdminController
                 when 0..17 then minors+=1  #未成年人
                 when 18..40 then youth+=1  #青年人
                 when 41..65 then middle_age+=1  #中年人
-                else old+=1  #中年人
+                else old+=1  #老年人
                 end      
             else 
                 other+=1  #其他情况，如未知生日，无法计算年龄

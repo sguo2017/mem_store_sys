@@ -4,7 +4,7 @@
         <span class="ico-header-back"></span>
     </a>
     <h1>积分查询</h1>
-    <button class="header-right"><span class="ico-scan" onclick="wxScanQRCode();"></span></button>
+    <button class="header-right"><span class="ico-scan"></span></button>
 </div>
 <!-- header end -->
 <div class="container has-top">
@@ -59,3 +59,13 @@
 <% else %>
 <%= render 'popup2' %>
 <% end %>
+<script type="text/javascript">
+    $(document).ready(function(){
+        var needRefresh = sessionStorage.getItem("sub-need-refresh");
+        if(needRefresh){
+            sessionStorage.removeItem("sub-need-refresh");
+            location.reload();
+        }
+        sessionStorage.setItem("need-refresh", true);
+    })
+</script>

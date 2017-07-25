@@ -29,5 +29,26 @@
             $('#popup').hide();
             return
         });
+        $('#notice').click(function() {
+	        $('#popup').hide();
+		    wx.scanQRCode({
+	        	needResult: 0,
+	        	scanType: ["qrCode","barCode"],
+	        	success: function(res){
+              		console.log(res.resultStr)       
+	        	}
+		  	})
+        });
     })
 </script>
+
+<!-- <script type="text/javascript">
+    $("#notice").click(function(){
+        var needRefresh = sessionStorage.getItem("sub-need-refresh");
+        if(needRefresh){
+            sessionStorage.removeItem("sub-need-refresh");
+            location.reload();
+        }
+        sessionStorage.setItem("need-refresh", true);
+    })
+</script> -->

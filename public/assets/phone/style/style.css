@@ -317,9 +317,6 @@ a.text-primary:active {
   height: 21px;
   width: 21px;
 }
-.ico-lever {
-  background: url('../images/ico-lever.png') no-repeat center center / cover;
-}
 .ico-header-back {
   background: url('../images/ico-header-back.png') no-repeat center center / cover;
 }
@@ -1105,6 +1102,10 @@ a.adapt-img {
 .user-info-header .lever-bar .ico-lever {
   margin-right: 5px;
 }
+.user-info-header .lever-bar .ico-lever img {
+  height: 21px;
+  width: 21px;
+}
 .user-info-header .progress-wrap {
   vertical-align: bottom;
   font-size: 10px;
@@ -1120,8 +1121,10 @@ a.adapt-img {
   margin-right: 23px;
 }
 .user-info-header .score .score-num {
+  display: block;
   font-size: 20px;
   font-weight: 700;
+  color: #fff;
 }
 .user-info-header .score .score-num .ico-arrow-right {
   margin-top: -3px;

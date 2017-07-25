@@ -12,17 +12,21 @@
 </div>
 <!-- header end -->
 <div class="container has-top">
-    <a class="user-info-header" href="/phone/profiles">
+    <div class="user-info-header" href="/phone/profiles">
         <div class="user-img-wrap">
             <div class="user-img">
+            <a href="/phone/profiles">
                 <img <% if @user.headimgurl.blank? %> src="/assets/phone/images/img-user.png" <%else%> src="<%=
                 @user.headimgurl %>" <% end %> alt="">
+                </a>
             </div>
             <div class="flex-fluid">
                 <div class="user-name"><%= @user.name %><span class="ico-arrow-right2 ml5"></span></div>
                 <div class="lever-bar">
-                    <i class="ico-lever"></i>
-                    等级<%= @user.level %>
+                    <span class="ico-lever">
+                        <img src="/assets/phone/images/<%= @ico_level %>">
+                    </span>
+                    <%= @level_name %>
                 </div>
                 <div class="progress-wrap">
                     <div class="progress">
@@ -32,14 +36,15 @@
                 </div>
             </div>
             <div class="score">
+
                 <div class="my-score">我的积分</div>
-                <div class="score-num">
+                <a class="score-num" href="/phone/score_queries?pay_type=up">
                     <%= @user.score %>
                     <span class="ico-arrow-right"></span>
-                </div>
+                </a>
             </div>
         </div>
-    </a>
+    </div>
     <!--     <%= bootstrap_flash %> %> -->
 
 

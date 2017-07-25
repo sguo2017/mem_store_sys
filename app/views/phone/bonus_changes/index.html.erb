@@ -4,7 +4,7 @@
 			<span class="ico-header-back"></span>
 		</a>
 		<h1>积分兑换</h1>
-		<button class="header-right"><span class="ico-scan"></span></button>
+		<button id="scan" class="header-right"><span class="ico-scan"></span></button>
 	</div>
 	<!-- header end -->
 	<div class="container has-top score-exchange-wrap">
@@ -60,19 +60,11 @@
 								<%= link_to "立即兑换",
 			                      new_phone_score_query_path(:fun_type => "bonus_change", :score_history => {:bonus_change_id => bonus_change.id,:user_id => @user.id, :object_type => "积分兑换",  :object_id => bonus_change.id, :point => bonus_change.score, :red_packet => bonus_change.red_packet, :oper => "扣减"}),
 			                      :class => 'btn-default' %>
-			                      <%= link_to "商品扫码",
-			                      new_phone_score_query_path(:fun_type => "goods_scan", :code => "10003",:score_history => {:bonus_change_id => bonus_change.id, :user_id => @user.id, :object_type => "积分兑换",  :object_id => bonus_change.id, :point => bonus_change.score, :red_packet => bonus_change.red_packet, :oper => "获得"}),
-			                      :class => 'btn-similar-hollow' %>
+  <%= link_to "商品扫码",
+			                      new_phone_score_query_path(:fun_type => "goods_scan", :code => "10003",:score_history => {:bonus_change_id => bonus_change.id,:object_type => "积分兑换",  :object_id => bonus_change.id,:oper => "获得"}),
+			                      :class => 'btn-similar-hollow' %> 
 							</div>
 						</li>
-						<!-- <li class="exchange-list-item">
-							<div class="adapt-img">
-								<img src="/assets/phone/images/bg-score-exchange.png" alt="">
-								<div class="score">50积分</div>
-								<div class="price">￥5121</div>
-								<a class="btn-default" href="">立即兑换</a>
-							</div>
-						</li> -->
 						<% end %>
 					</ul>
 					<div class="load-tips">更多礼品陆续添加中</div>
@@ -83,3 +75,13 @@
 	</div>
 	<%= render :partial => 'popup' %>
 </body>
+<script type="text/javascript">
+    $(document).ready(function(){
+        var needRefresh = sessionStorage.getItem("sub-need-refresh");
+        if(needRefresh){
+            sessionStorage.removeItem("sub-need-refresh");
+            location.reload();
+        }
+        sessionStorage.setItem("need-refresh", true);
+    })
+</script>

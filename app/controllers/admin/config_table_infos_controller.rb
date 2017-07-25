@@ -69,6 +69,6 @@ class Admin::ConfigTableInfosController < AdminController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def config_table_info_params
-      params.require(:config_table_info).permit(:cf_id, :cf_desc, :cf_value)
+      params.require(:config_table_info).permit(:cf_id, :cf_desc, :cf_value, :ad_photo)
     end
 end

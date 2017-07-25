@@ -1,7 +1,6 @@
 class Phone::MemActivationsController < PhoneController
   require 'net/http'
   require 'net/https'
-  require 'thread'
   require "json"
   # require "Wxinterface"
   layout "phone"

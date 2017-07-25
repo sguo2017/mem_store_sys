@@ -31,6 +31,14 @@
 							<%= @config_table_info.cf_value %>
 						</td>
 					</tr>
+          <tr>
+            <th>
+              <%= model_class.human_attribute_name(:ad_photo) %>:
+            </th>
+                <td>
+                  <img src="<%= @config_table_info.ad_photo %>" alt="Image" class="media-object">
+                </td>
+          </tr>
 				</table>
             </div>
 <div class="text-left block-mt">

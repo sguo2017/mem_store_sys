@@ -25,7 +25,6 @@ class Phone::HomepagesController < PhoneController
       @ico_level = 'level_v1.png'
       @user.save
     end
-
     case @user.score
     when 0..1999 then @user.level = "V1" 
     when 2000..4999 then @user.level = "V2"
@@ -45,6 +44,11 @@ class Phone::HomepagesController < PhoneController
     when 'V2' then @ico_level = 'level_v2.png'
     when 'V3' then @ico_level = 'level_v3.png'
     else @ico_level = 'level_v4.png'
+    end
+    $config_info.each do |c|
+      if c.cf_id == "HOME_PAGE_IMG"
+       @photo = c.ad_photo
+      end
     end
 
     #计算会员升级的百分比<<

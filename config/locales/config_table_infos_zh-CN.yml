@@ -8,6 +8,7 @@ zh-CN:
         cf_id: "序号"
         cf_desc: "描述"
         cf_value: "值"
+        ad_photo: "广告图片"
         created_at: "创建日期"
   helpers:
     submit:

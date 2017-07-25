@@ -2,7 +2,7 @@
 <div class="container">
     <div class="panel">
         <div class="panel-heading">
-            <div class="panel-title">商品详情</div>
+            <div class="panel-title">扫码记录详情</div>
         </div>
         <div class="panel-body">
             <div>
@@ -12,7 +12,7 @@
                             <%= model_class.human_attribute_name(:user_id) %>:
                         </th>
                         <td>
-                            <%= @qr_code_scan_history.user_id %>
+                            <%= @qr_code_scan_history.user.name %>
                         </td>
 					</tr>
 
@@ -21,7 +21,7 @@
                             <%= model_class.human_attribute_name(:good_id) %>:
                         </th>
                         <td>
-                            <%= @qr_code_scan_history.good_id %>
+                            <%= @qr_code_scan_history.good.name %>
                         </td>
                     </tr>
 

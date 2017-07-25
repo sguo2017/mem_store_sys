@@ -21,10 +21,10 @@ class AdminController < ApplicationController
         logger.debug "@current_nav  #{@current_nav}"
     end
     @goods_menu = ["goods_catalogs","good_instances"]
-    @user_menu = ["lotteries", "score_histories", "mem_groups"]
+    @user_menu = ["lotteries", "score_histories", "mem_groups", "red_packet_histories"]
     @bonus = ["bonus_changes", "mem_levels"]
     @report = ["report","qr_code_scan_histories"]
-	@config_menu = ["config_menu"]
+	@config_menu = ["config_table_infos"]
     if @goods_menu.include?(@current_nav) 
         @current_nav = "goods"
     elsif @user_menu.include?(@current_nav)

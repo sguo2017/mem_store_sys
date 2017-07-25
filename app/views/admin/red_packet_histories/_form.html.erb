@@ -1,13 +1,13 @@
-<%= form_for [:admin, @qr_code_scan_history], :html => { :class => "form-horizontal qr_code_scan_history" } do |f| %>
+<%= form_for [:admin, @red_packet_history], :html => { :class => "form-horizontal red_packet_history" } do |f| %>
 
-  <% if @qr_code_scan_history.errors.any? %>
+  <% if @red_packet_history.errors.any? %>
     <div id="error_expl" class="panel panel-danger">
       <div class="panel-heading">
-        <h3 class="panel-title"><%= pluralize(@qr_code_scan_history.errors.count, "error") %> prohibited this qr_code_scan_history from being saved:</h3>
+        <h3 class="panel-title"><%= pluralize(@red_packet_history.errors.count, "error") %> prohibited this red_packet_history from being saved:</h3>
       </div>
       <div class="panel-body">
         <ul>
-        <% @qr_code_scan_history.errors.full_messages.each do |msg| %>
+        <% @red_packet_history.errors.full_messages.each do |msg| %>
           <li><%= msg %></li>
         <% end %>
         </ul>
@@ -23,25 +23,25 @@
     <%=f.error_span(:user_id) %>
   </div>
   <div class="form-group">
-    <%= f.label :good_id, :class => 'control-label col-lg-2' %>
+    <%= f.label :money, :class => 'control-label col-lg-2' %>
     <div class="col-lg-10">
-      <%= f.text_field :good_id, :class => 'form-control' %>
+      <%= f.text_field :money, :class => 'form-control' %>
     </div>
-    <%=f.error_span(:good_id) %>
+    <%=f.error_span(:money) %>
   </div>
   <div class="form-group">
-    <%= f.label :good_instance_id, :class => 'control-label col-lg-2' %>
+    <%= f.label :catalog, :class => 'control-label col-lg-2' %>
     <div class="col-lg-10">
-      <%= f.text_field :good_instance_id, :class => 'form-control' %>
+      <%= f.text_field :catalog, :class => 'form-control' %>
     </div>
-    <%=f.error_span(:good_instance_id) %>
+    <%=f.error_span(:catalog) %>
   </div>
   <div class="form-group">
-    <%= f.label :score, :class => 'control-label col-lg-2' %>
+    <%= f.label :phone_number, :class => 'control-label col-lg-2' %>
     <div class="col-lg-10">
-      <%= f.text_field :score, :class => 'form-control' %>
+      <%= f.text_field :phone_number, :class => 'form-control' %>
     </div>
-    <%=f.error_span(:score) %>
+    <%=f.error_span(:phone_number) %>
   </div>
   <div class="form-group">
     <%= f.label :status, :class => 'control-label col-lg-2' %>
@@ -53,9 +53,9 @@
 
   <div class="form-group">
     <div class="col-lg-offset-2 col-lg-10">
-      <%= f.submit nil, :class => 'btn btn-warning' %>
+      <%= f.submit nil, :class => 'btn btn-primary' %>
       <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-                admin_qr_code_scan_histories_path, :class => 'btn btn-warning' %>
+                admin_red_packet_histories_path, :class => 'btn btn-warning' %>
     </div>
   </div>
 

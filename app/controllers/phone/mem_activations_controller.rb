@@ -25,11 +25,11 @@ class Phone::MemActivationsController < PhoneController
     if user.blank?
       session[:userInfo] = userInfo
     else 
-      user.saveWxUserInfo(userInfo)
+		user.saveWxUserInfo(userInfo)
       sign_in("user", user)
       respond_to do |format|
         format.html { redirect_to [:phone, 'homepages'] }
-      end
+		end
     end  
 
  end
@@ -101,7 +101,7 @@ class Phone::MemActivationsController < PhoneController
                 sign_in("user", @user)
                 @msg = "保存成功"
                 puts  @msg
-			  $config_info.each do |c|
+				$config_info.each do |c|
 				if c.cf_id == "RED_BOUNS_SWITCH"
 					@switch = c.cf_value
 				else 
@@ -115,7 +115,22 @@ class Phone::MemActivationsController < PhoneController
 			  if @switch == 'yes'
 				@data = Wxinterface.send_redpacket(userInfo,@money)
 				puts @data
-			  end
+				@redpackethistory = RedPacketHistory.new()
+				@redpackethistory.user_id = @user.id
+				@redpackethistory.catalog = "注册送红包活动"
+				@redpackethistory.phone_number = @user.phone_num
+				@redpackethistory.money = @money
+				status = @data.scan(/\<return_msg\>\<\!\[CDATA\[(.*)\]\]\>\<\/return_msg\>/).first.first
+				@redpackethistory.return_msg = status
+				if status == "发放成功"
+					status = "00A"
+				else
+					status = "00X"
+				end
+				@redpackethistory.status = status
+				puts @redpackethistory.to_json
+				@redpackethistory.save
+			end
                 format.html { redirect_to [:phone, 'homepages'] }
               else
                 @msg = "保存失败"

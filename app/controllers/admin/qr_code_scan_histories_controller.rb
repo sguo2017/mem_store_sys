@@ -7,29 +7,19 @@ class Admin::QrCodeScanHistoriesController < AdminController
 	@count = params[:count]
 	@start_date = params[:start_date]
 	@end_date = params[:end_date]
-	sql = "select id from qr_code_scan_histories where "
-	if @start_date.present?
-	  sql = sql + " created_at > '#{@start_date}' and "
-	end
-	if @end_date.present?
-	  sql = sql + " created_at < '#{@end_date}' and "
-	end
-	sql = sql + "user_id in(select user_id from qr_code_scan_histories where status='00A' "
-	if @start_date.present?
-	  sql = sql + " and created_at > '#{@start_date}' "
-	end
-	if @end_date.present?
-	  sql = sql + " and created_at < '#{@end_date}' "
-	end
-	if @count.present?
-	  sql = sql + " group by user_id having count(1)>=#{@count}"
-	end
-	sql = sql +")"
-    @qr_code_scan_histories = QrCodeScanHistory.find_by_sql(sql)
-	ids = @qr_code_scan_histories.map{|q| q.id}
-	@qr_code_scan_histories = QrCodeScanHistory.where(:id => ids).order("created_at DESC").page(params[:page]).per(10)
+  if @count.present?
+    @search_type = "search_result"
+    @qr_code_scan_histories_search_reasults = QrCodeScanHistory.select("user_id").where("created_at > ? and created_at < ?",@start_date,@end_date).select("user_id, count(1) as count").group("user_id").having("count(1) > ?",@count).order("count DESC").page(params[:page]).per(10)
+    @user = Array.new
+    for i in 0..@qr_code_scan_histories_search_reasults.length-1
+      @user[i] = User.select("id,status,name").find(@qr_code_scan_histories_search_reasults[i].user_id)
+    end
+    puts @qr_code_scan_histories_search_reasults.to_json
+  else
+    @search_type = "history_detail"
+    @qr_code_scan_histories = QrCodeScanHistory.where("created_at > ? and created_at < ?",@start_date,@end_date).order("created_at DESC").page(params[:page]).per(10)
   end
-
+end
   # GET /admin/qr_code_scan_histories/1
   # GET /admin/qr_code_scan_histories/1.json
   def show

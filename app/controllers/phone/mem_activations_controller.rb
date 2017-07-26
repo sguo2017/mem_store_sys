@@ -13,24 +13,45 @@ class Phone::MemActivationsController < PhoneController
     @referee_id = params[:referee_id]
     @store_id = params[:store_id]
     @code = params[:code]
-    #获取access_tocken
-    access_tocken = Wxinterface.getAccessToken(@code)
-    #请求获得jsapi_ticket
-    session[:jsapi_ticket] = Wxinterface.getjsapi_ticket()
-    #获取用户信息
-    userInfo = JSON.parse(Wxinterface.getUserInfo(access_tocken))
-    #存量用户
-    user = User.where("openid=?",userInfo["openid"]).first
-    # logger.debug "21:user #{user.to_json}"
-    if user.blank?
-      session[:userInfo] = userInfo
-    else 
-		user.saveWxUserInfo(userInfo)
-      sign_in("user", user)
-      respond_to do |format|
-        format.html { redirect_to [:phone, 'homepages'] }
-		end
-    end  
+    # singlemessage微信分享过来的 ；groupmessage再转分享
+    @from = params[:from] 
+    goto_url = ""
+    # 场景一 授权的没有注册过的用户
+    if @from.blank?
+      # logger.debug "20 @@@ #{@from}" 
+      #获取access_tocken
+      access_tocken = Wxinterface.getAccessToken(@code)
+      #请求获得jsapi_ticket
+      session[:jsapi_ticket] = Wxinterface.getjsapi_ticket()
+      #获取用户信息
+      userInfo = JSON.parse(Wxinterface.getUserInfo(access_tocken))
+      #存量用户
+      user = User.where("openid=?",userInfo["openid"]).first
+      # logger.debug "21:user #{user.to_json}"
+      if user.blank?
+        session[:userInfo] = userInfo
+      else 
+        user.saveWxUserInfo(userInfo)
+        sign_in("user", user)
+        goto_url = "/phone/homepages"
+
+        respond_to do |format|
+          format.html { redirect_to goto_url }
+        end
+      end  
+    else
+      # 场景二 分享过来的页面：要做转跳转到授权
+      if @from == "singlemessage" or @from == "groupmessage" 
+        goto_url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx649eb094afb490f5&redirect_uri=http://gzb.davco.cn/phone/mem_activations?method=wxCfgEntrance&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect"
+        respond_to do |format|
+          format.html { redirect_to goto_url }
+        end
+      elsif @from == "self"
+
+      end 
+      
+    end
+ 
 
  end
   # GET /phone/mem_activations/1
@@ -101,7 +122,7 @@ class Phone::MemActivationsController < PhoneController
                 sign_in("user", @user)
                 @msg = "保存成功"
                 puts  @msg
-				$config_info.each do |c|
+			  $config_info.each do |c|
 				if c.cf_id == "RED_BOUNS_SWITCH"
 					@switch = c.cf_value
 				else 
@@ -115,22 +136,7 @@ class Phone::MemActivationsController < PhoneController
 			  if @switch == 'yes'
 				@data = Wxinterface.send_redpacket(userInfo,@money)
 				puts @data
-				@redpackethistory = RedPacketHistory.new()
-				@redpackethistory.user_id = @user.id
-				@redpackethistory.catalog = "注册送红包活动"
-				@redpackethistory.phone_number = @user.phone_num
-				@redpackethistory.money = @money
-				status = @data.scan(/\<return_msg\>\<\!\[CDATA\[(.*)\]\]\>\<\/return_msg\>/).first.first
-				@redpackethistory.return_msg = status
-				if status == "发放成功"
-					status = "00A"
-				else
-					status = "00X"
-				end
-				@redpackethistory.status = status
-				puts @redpackethistory.to_json
-				@redpackethistory.save
-			end
+			  end
                 format.html { redirect_to [:phone, 'homepages'] }
               else
                 @msg = "保存失败"

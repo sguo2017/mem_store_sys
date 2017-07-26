@@ -1,0 +1,95 @@
+<div class="container">
+    <div class="panel">
+        <div class="sub-navbar">
+    <div id="menu" class="sub-navbar-nav-wrap">
+      <ul class="nav nav-pills">
+        <li <% if @analyses_type == "active_mem" %> class="active" <% end %>>
+        <a href="/admin/report/trend_analyses?analyses_type=active_mem">活跃会员</a></li>
+        <li <% if @analyses_type == "recently_register_mem" %> class="active" <% end %>>
+        <a href="/admin/report/trend_analyses?analyses_type=recently_register_mem">新注册会员</a></li>
+        <li <% if @analyses_type == "code_scan_rate" %> class="active" <% end %>>
+        <a href="/admin/report/trend_analyses?analyses_type=code_scan_rate">会员扫码率</a></li>
+        </ul> 
+        </div>
+        </div>
+        <div class="panel-body">
+            <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+            <div id="main" class="table-responsive block-mt" style="height:400px;width: 100%;
+max-width: 100%;
+margin-bottom: 18px;"></div>
+        </div>
+    </div>
+</div>
+    <!-- 引入 echarts.js -->
+    <script src="/assets/admin/javascript/echart/build/dist/echarts.js"></script>
+    <script type="text/javascript">
+        option = {
+            title : {
+                text: '日趋势分析',
+                x:'left'
+            },
+            tooltip : {},
+            legend: {
+                <% case @analyses_type %>
+                <% when "active_mem" %>
+                    data:['活跃会员']
+                <% when "recently_register_mem" %>
+                    data:['新注册会员']
+                <% when "code_scan_rate" %>
+                    data:['参与扫码会员']
+                <% end %>
+            },
+            xAxis: {
+                data: [<% @date.each do |d| %> 
+                        '<%= d.strftime('%m-%d') %>',
+                    <% end %>
+                    ]
+            },
+            yAxis: {},
+            series : [
+                {
+                    <% case @analyses_type %>
+                    <% when "active_mem" %>
+                        name:['活跃会员'],
+                    <% when "recently_register_mem" %>
+                        name:['新注册会员'],
+                    <% when "code_scan_rate" %>
+                        name:['参与扫码会员'],
+                    <% end %>
+                    type:'line',
+                    radius : '55%',
+                    center: ['50%', '60%'],
+                    data:[<% @data.each do |d| %> 
+                        '<%= d %>',
+                    <% end %>
+                    ]
+                }
+            ]
+        };
+                            
+
+         // 路径配置
+        require.config({
+            paths: {
+                echarts: '/assets/admin/javascript/echart/build/dist'
+            }
+        });
+        
+        // 使用
+        require(
+            [
+                'echarts',
+                'echarts/chart/pie', // 使用柱状图就加载bar模块，按需加载
+                'echarts/chart/line'
+            ],
+            function (ec) {
+                // 基于准备好的dom，初始化echarts图表
+                var myChart = ec.init(document.getElementById('main')); 
+                
+        
+                // 为echarts对象加载数据 
+                myChart.setOption(option); 
+            }
+        );
+    </script>
+

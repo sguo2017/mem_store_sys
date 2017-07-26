@@ -6,6 +6,7 @@ Rails.application.routes.draw do
       resources :page_analyses
       resources :mem_analyses
       resources :region_analyses
+      resources :trend_analyses
     end
   end
   

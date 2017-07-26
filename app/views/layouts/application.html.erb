@@ -50,8 +50,9 @@
                 </a>
                 <ul class="dropdown-menu">
                     <li><%= link_to "会员", admin_users_path %></li>
-                    <li><%= link_to "中奖纪录", admin_lotteries_path  %></li>                    
+                    <li><%= link_to "中奖纪录", admin_lotteries_path  %></li>            
                     <li><%= link_to "会员积分历史", admin_score_histories_path  %></li>
+                    <li><%= link_to "会员红包历史", admin_red_packet_histories_path  %></li>
                     <li><%= link_to "会员分组", admin_mem_groups_path  %></li>
                 </ul>
             </li>
@@ -78,6 +79,7 @@
                 <ul class="dropdown-menu">
 					<li><%= link_to "会员分析", admin_report_mem_analyses_path  %></li>
 					<li><%= link_to "高频预警分析", admin_qr_code_scan_histories_path  %></li>
+          <li><%= link_to "日趋势分析", admin_report_trend_analyses_path  %></li>
 <!--                    <li><%= link_to "流量分析", admin_report_flow_analyses_path  %></li>
                     <li><%= link_to "页面分析", admin_report_page_analyses_path  %></li>
                     <li><%= link_to "会员地域分布", admin_report_region_analyses_path  %></li>

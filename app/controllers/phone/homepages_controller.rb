@@ -18,33 +18,34 @@ class Phone::HomepagesController < PhoneController
       png.resize(172, 172).save(Rails.root.to_s + "/public/" + @user.qrcode)
       @user.save
     end  
-    #计算会员升级的百分比<<
+    #分配会员等级对应的名称和图标
     if @user.level.blank?
       @user.level = "V1"
       @level_name = '白银工长'
       @ico_level = 'level_v1.png'
       @user.save
     end
+
     case @user.score
-    when 0..1999 then @user.level = "V1" 
-    when 2000..4999 then @user.level = "V2"
-    when 5000..9999 then @user.level = "V3"
-    else @user.level = "V4"
+    when 0..1999 
+        @user.level = 'V1' 
+        @level_name='白银工长'
+        @ico_level = 'level_v1.png'
+    when 2000..4999
+        @user.level = 'V2'
+        @level_name='黄金工长'
+        @ico_level = 'level_v2.png'
+    when 5000..9999
+        @user.level = 'V3'
+        @user.level ='白金工长'
+        @ico_level = 'level_v3.png'
+    else 
+        @user.level = 'V4'
+        @user.level = '钻石工长'
+        @ico_level = 'level_v4.png'
     end
+    #分配会员等级对应的名称和图标
 
-    case @user.level
-    when 'V1' then @level_name='白银工长'
-    when 'V2' then @level_name='黄金工长'
-    when 'V3' then @user.level ='白金工长'
-    else @user.level = '钻石工长'
-    end
-
-    case @user.level
-    when 'V1' then @ico_level = 'level_v1.png'
-    when 'V2' then @ico_level = 'level_v2.png'
-    when 'V3' then @ico_level = 'level_v3.png'
-    else @ico_level = 'level_v4.png'
-    end
     $config_info.each do |c|
       if c.cf_id == "HOME_PAGE_IMG"
        @photo = c.ad_photo

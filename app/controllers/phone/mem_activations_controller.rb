@@ -13,7 +13,7 @@ class Phone::MemActivationsController < PhoneController
     @referee_id = params[:referee_id]
     @store_id = params[:store_id]
     @code = params[:code]
-    # singlemessage微信分享过来的 ；groupmessage再转分享
+    # from:singlemessage微信分享过来的 ；groupmessage再转分享
     @from = params[:from] 
     goto_url = ""
     # 场景一 授权的没有注册过的用户
@@ -79,12 +79,10 @@ class Phone::MemActivationsController < PhoneController
       if sms.blank?
           @msg = "验证码不存在"
           format.html { redirect_to [:phone, 'mem_activations'], notice: "ma_smscode_not_exist" }
-          puts  @msg
       else 
           if sms.send_content != @sms_content
             @msg = "验证码错误"
             format.html { redirect_to [:phone, 'mem_activations'], notice: "ma_smscode_error" }
-            puts  @msg
            #return render json: {status: :created, msg: @msg}
          else
             userInfo = session[:userInfo];
@@ -121,26 +119,35 @@ class Phone::MemActivationsController < PhoneController
                 @user.saveWxUserInfo(userInfo) 
                 sign_in("user", @user)
                 @msg = "保存成功"
-                puts  @msg
-			  $config_info.each do |c|
-				if c.cf_id == "RED_BOUNS_SWITCH"
-					@switch = c.cf_value
-				else 
-					if c.cf_id == "FIRST_LOGIN_RED_BONUS"
-						@money = c.cf_value
-					end
-				end
-			  end
-			  puts "switch: #{@switch}"
-			  puts "money: #{@money}"
-			  if @switch == 'yes'
-				@data = Wxinterface.send_redpacket(userInfo,@money)
-				puts @data
-			  end
+        			  $config_info.each do |c|
+        				  if c.cf_id == "RED_BOUNS_SWITCH"
+        					   @switch = c.cf_value
+        				  else 
+        					   if c.cf_id == "FIRST_LOGIN_RED_BONUS"
+        						    @money = c.cf_value
+        					   end
+        				  end
+        			  end
+        			  if @switch == 'yes'
+        				  @data = Wxinterface.send_redpacket(userInfo,@money)
+                  @redpackethistory = RedPacketHistory.new()
+                  @redpackethistory.user_id = @user.id
+                  @redpackethistory.catalog = "注册送红包活动"
+                  @redpackethistory.phone_number = @user.phone_num
+                  @redpackethistory.money = @money
+                  status = @data.scan(/\<return_msg\>\<\!\[CDATA\[(.*)\]\]\>\<\/return_msg\>/).first.first
+                  @redpackethistory.return_msg = status
+                  if status == "发放成功"
+                    status = "00A"
+                  else
+                    status = "00X"
+                  end
+                  @redpackethistory.status = status
+                  @redpackethistory.save
+        			  end
                 format.html { redirect_to [:phone, 'homepages'] }
               else
                 @msg = "保存失败"
-                puts  @msg
                 format.html { redirect_to [:phone, 'mem_activations'],notice: 'ma_save_fail' }
               end
             end

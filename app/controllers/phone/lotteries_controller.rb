@@ -76,15 +76,15 @@ class Phone::LotteriesController < PhoneController
     respond_to do |format|
       if @lottery.save
         @user.changeScore(@activity_award_cfg.score)
-        logger.debug "86: @activity_award_cfg.score #{@activity_award_cfg.score} result:#{@activity_award_cfg.score.to_i > 0 }" 
-        if @activity_award_cfg.score.to_i > 0                
+        # logger.debug "86: @activity_award_cfg.score #{@activity_award_cfg.score} result:#{@activity_award_cfg.score.to_i > 0 }" 
+        if @activity_award_cfg.score.to_i > 0   
           @score_query = ScoreHistory.new()
           @score_query.point = @activity_award_cfg.score 
           @score_query.object_type = "抽奖活动" 
           @score_query.object_id = @lottery.id 
           @score_query.oper = "获得" 
           @score_query.user_id = @user.id
-          @score_query.bonus_change_id = "1"
+          # @score_query.bonus_change_id = "1"
           @score_query.save
         end
 

@@ -18,7 +18,7 @@ margin-bottom: 18px;"></div>
             },
             tooltip : {},
             legend: {
-              data:['']
+              data:['月扫码次数']
             },
             xAxis: {
                 data: [<% @date.each do |d| %> 
@@ -28,7 +28,7 @@ margin-bottom: 18px;"></div>
             },
             yAxis: {},
             series : [
-                {
+                {   name:['月扫码次数'],
                     type:'line',
                     radius : '55%',
                     center: ['50%', '60%'],

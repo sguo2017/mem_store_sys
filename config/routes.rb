@@ -8,6 +8,7 @@ Rails.application.routes.draw do
       resources :region_analyses
       resources :trend_analyses
       resources :scan_geographical_distributions
+      resources :month_scans
     end
   end
   

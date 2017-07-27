@@ -1,54 +1,59 @@
 <%= form_for [:admin, @config_table_info], :html => { :class => "form-horizontal config_table_info" } do |f| %>
-
-  <% if @config_table_info.errors.any? %>
-    <div id="error_expl" class="panel panel-danger">
-      <div class="panel-heading">
-        <h3 class="panel-title"><%= pluralize(@config_table_info.errors.count, "error") %> prohibited this config_table_info from being saved:</h3>
-      </div>
-      <div class="panel-body">
-        <ul>
-        <% @config_table_info.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
+    <% if @config_table_info.errors.any? %>
+        <div id="error_expl" class="panel panel-danger">
+            <div class="panel-heading">
+                <h3 class="panel-title"><%= pluralize(@config_table_info.errors.count, "error") %> prohibited this config_table_info from being saved:</h3>
+            </div>
+            <div class="panel-body">
+                <ul>
+                    <% @config_table_info.errors.full_messages.each do |msg| %>
+                        <li>
+                            <%= msg %>
+                        </li>
+                        <% end %>
+                </ul>
+            </div>
+        </div>
         <% end %>
-        </ul>
-      </div>
-    </div>
-  <% end %>
-
-  <div class="form-group">
-    <%= f.label :cf_id, :class => 'control-label col-lg-2' %>
-    <div class="col-lg-10">
-      <%= f.text_field :cf_id, :class => 'form-control' %>
-    </div>
-    <%=f.error_span(:cf_id) %>
-  </div>
-  <div class="form-group">
-    <%= f.label :cf_desc, :class => 'control-label col-lg-2' %>
-    <div class="col-lg-10">
-      <%= f.text_field :cf_desc, :class => 'form-control' %>
-    </div>
-    <%=f.error_span(:cf_desc) %>
-  </div>
-  <div class="form-group">
-    <%= f.label :cf_value, :class => 'control-label col-lg-2' %>
-    <div class="col-lg-10">
-      <%= f.text_field :cf_value, :class => 'form-control' %>
-    </div>
-    <%=f.error_span(:cf_value) %>
-  </div>
-<label class="col-xs-2 control-label" for="">
-          <%= f.label :ad_photo %>    
-          </label>
-          <div class="col-xs-4">
-            <%= f.file_field :ad_photo, :class => 'form-control' %>
-            <%=f.error_span(:ad_photo) %>
-          </div>
-  <div class="form-group">
-    <div class="col-lg-offset-2 col-lg-10">
-      <%= f.submit nil, :class => 'btn btn-primary' %>
-     <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+            <div class="panel-body">
+                <form action="" class="form-horizontal">
+                    <div class="clearfix form-list">
+                        <label class="col-xs-2 control-label" for="">
+                            <%= f.label :cf_id %>
+                        </label>
+                        <div class="col-xs-4">
+                            <%= f.text_field :cf_id, :class => 'form-control' %>
+                                <%=f.error_span(:cf_id) %>
+                        </div>
+                        <label class="col-xs-2 control-label" for="">
+                            <%= f.label :cf_desc %>
+                        </label>
+                        <div class="col-xs-4">
+                            <%= f.text_field :cf_desc, :class => 'form-control' %>
+                                <%=f.error_span(:cf_desc) %>
+                        </div>
+                        <label class="col-xs-2 control-label" for="">
+                            <%= f.label :cf_value %>
+                        </label>
+                        <div class="col-xs-4">
+                            <%= f.text_field :cf_value, :class => 'form-control' %>
+                                <%=f.error_span(:cf_value) %>
+                        </div>
+                        <% if @config_table_info.cf_id == 'HOME_PAGE_IMG' %>
+                            <label class="col-xs-2 control-label" for="">
+                                <%= f.label :ad_photo %>
+                            </label>
+                            <div class="col-xs-4">
+                                <%= f.file_field :ad_photo, :class => 'form-control' %>
+                                    <%=f.error_span(:ad_photo) %>
+                            </div>
+                        <% end %>
+                    </div>
+                </form>
+                <div class="block-mt">
+                    <%= f.submit nil, :class => 'btn btn-warning' %>
+                        <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
                 admin_config_table_infos_path, :class => 'btn btn-default' %>
-    </div>
-  </div>
-
-<% end %>
+                </div>
+            </div>
+            <% end %>

@@ -19,26 +19,6 @@
     <div class="panel-body">
       <form action="" class="form-horizontal">
         <div class="clearfix form-list">
-          <!-- <label class="col-xs-2 control-label" for=""><%= f.label :code %></label>
-          <div class="col-xs-4">
-            <%= f.text_field :code, :class => 'form-control' %>
-            <%=f.error_span(:code) %>
-          </div>
-          <label class="col-xs-2 control-label" for=""><%= f.label :name %></label>
-          <div class="col-xs-4">
-            <%= f.text_field :name, :class => 'form-control' %>
-            <%=f.error_span(:name) %>
-          </div>
-          <label class="col-xs-2 control-label" for=""><%= f.label :goods_catalog_id %></label>
-          <div class="col-xs-4">
-            <%= f.select :goods_catalog_id, @goods_catalog.collect { |p| [ p.name, p.id ] }, {include_blank: false}, {:class => 'form-control'} %>
-            <%=f.error_span(:goods_catalog_id) %>
-          </div>
-          <label class="col-xs-2 control-label" for=""><%= f.label :spec%></label>
-          <div class="col-xs-4">
-            <%= f.text_field :spec, :class => 'form-control' %>
-            <%=f.error_span(:spec) %>
-          </div> -->
           <label class="col-xs-2 control-label" for=""><%= f.label :'发布' %></label>
           <div class="col-xs-4">
               <%= select_tag("good[status]", options_for_select(Const::SelectOption::GOODS_STATUS, @good.status), 

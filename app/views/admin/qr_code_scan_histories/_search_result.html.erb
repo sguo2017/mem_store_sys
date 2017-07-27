@@ -2,37 +2,37 @@
 <div class="table-responsive block-mt">
 <table class="table table-striped">
     <tr>
-      <th class="text-nowrap"> 会员</th>
+      <th class="text-nowrap"><%= model_class.human_attribute_name(:name) %></th>
       <th class="text-nowrap"> 频次</th>
       <th class="text-nowrap"><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   <tbody>
-    <% for i in 0..@qr_code_scan_histories_search_reasults.length-1 %>
+    <% @search_reasults.each do |user| %>
       <tr>
-        <td><%= @user[i]["name"] %></td>
-        <td><%= @qr_code_scan_histories_search_reasults[i].count %></td>
-        <% if @user[i].status != "00H" %>
+        <td><%= user.name %></td>
+        <td><%= user.count %></td>
+        <% if user.status != "00H" %>
         <td>
           <%= link_to t('.show', :default => t("helpers.links.show")),
-                      admin_user_path(@user[i]), :class => 'btn btn-default btn-xs' %>
-        <button type="button" class="btn btn-warning btn-xs mr5 lock-user-btn"  data-user=<%= @user[i].id %> data-status=<%= @user[i].status %>  >
-        <span class='lock-text' style="display: <% if @user[i].status == '00X' %>none<%end%>" >冻结</span>
-        <span class='unlock-text' style="display: <% if @user[i].status == '00A' %>none<%end%>">恢复</span>
+                      admin_user_path(user), :class => 'btn btn-default btn-xs' %>
+        <button type="button" class="btn btn-warning btn-xs mr5 lock-user-btn"  data-user=<%= user.id %> data-status=<%= user.status %>  >
+        <span class='lock-text' style="display: <% if user.status == '00X' %>none<%end%>" >冻结</span>
+        <span class='unlock-text' style="display: <% if user.status == '00A' %>none<%end%>">恢复</span>
         </button>
-         <button type="button" class="btn btn-warning btn-xs mr5 close-user-btn"  data-user=<%= @user[i].id %>  >注销
+         <button type="button" class="btn btn-warning btn-xs mr5 close-user-btn"  data-user=<%= user.id %>  >注销
         </button>
         </td>
         <% else %>
         <td>
            <%= link_to t('.show', :default => t("helpers.links.show")),
-                      admin_user_path(@user[i]), :class => 'btn btn-default btn-xs' %>
+                      admin_user_path(user), :class => 'btn btn-default btn-xs' %>
             <button type="button" class="btn btn-warning btn-xs mr5 " > 已注销
         </button>
         </td>
         <% end %>
       </tr>
     <% end %>
-    <%= paginate @qr_code_scan_histories_search_reasults %>
+    <%= paginate @search_reasults %>
   </tbody>
 </table>
 </div>

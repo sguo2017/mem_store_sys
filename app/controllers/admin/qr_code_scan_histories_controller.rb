@@ -9,12 +9,10 @@ class Admin::QrCodeScanHistoriesController < AdminController
 	@end_date = params[:end_date]
   if @count.present?
     @search_type = "search_result"
-    @qr_code_scan_histories_search_reasults = QrCodeScanHistory.select("user_id").where("created_at > ? and created_at < ?",@start_date,@end_date).select("user_id, count(1) as count").group("user_id").having("count(1) > ?",@count).order("count DESC").page(params[:page]).per(10)
-    @user = Array.new
-    for i in 0..@qr_code_scan_histories_search_reasults.length-1
-      @user[i] = User.select("id,status,name").find(@qr_code_scan_histories_search_reasults[i].user_id)
-    end
-    puts @qr_code_scan_histories_search_reasults.to_json
+    @search_reasults = User.select("name,users.id,users.status,count(1) as count")
+                          .joins(:qr_code_scan_histories)
+                          .where("qr_code_scan_histories.created_at > ? and qr_code_scan_histories.created_at < ?",@start_date,@end_date)
+                          .group("id").having("count(1) > ?",@count).order("count DESC").page(params[:page]).per(10)
   else
     @search_type = "history_detail"
     @qr_code_scan_histories = QrCodeScanHistory.where("created_at > ? and created_at < ?",@start_date,@end_date).order("created_at DESC").page(params[:page]).per(10)

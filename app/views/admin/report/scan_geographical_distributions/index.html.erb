@@ -1,0 +1,80 @@
+<div class="container">
+    <div class="panel">
+        <div class="sub-navbar">
+        <form action="/admin/report/scan_geographical_distributions" method="get">
+          <input id='datetimepicker' value= '<%= (DateTime.now - 1.day).strftime('%Y-%m-%d') %>'' class='datetimepicker' name ='date'/>
+            <script>
+                $("#datetimepicker").datetimepicker({
+                    format:"Y-m-d",timepicker:false});
+            </script>
+          <input type="submit" value="查询" />
+        </form>
+        </div>
+        <div class="panel-body">
+            <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+            <div id="main" class="table-responsive block-mt" style="height:400px;width: 100%;
+max-width: 100%;
+margin-bottom: 18px;"></div>
+        </div>
+    </div>
+</div>
+    <!-- 引入 echarts.js -->
+    <script src="/assets/admin/javascript/echart/build/dist/echarts.js"></script>
+    <script type="text/javascript">
+        option = {
+            title : {
+                text: '<%=@date.strftime('%Y-%m-%d')%>'+'地域扫码分布',
+                x:'left'
+            },
+            tooltip : {},
+            legend: {
+                    data:['会员扫码总数']
+            },
+            xAxis: {
+                data: [<% @data.each do |d| %>
+                        <%= d.province == "" %>?"其他":'<%=d.province%>',
+                    <% end %>
+                    ]
+            },
+            yAxis: {},
+            series : [
+                {
+                    name:['会员扫码总数'],
+                    type:'bar',
+                    barWidth : 30,
+                    radius : '55%',
+                    center: ['50%', '60%'],
+                    data:[<% @data.each do |d| %> 
+                        '<%= d.count %>',
+                    <% end %>
+                    ]
+                }
+            ]
+        };
+                            
+
+         // 路径配置
+        require.config({
+            paths: {
+                echarts: '/assets/admin/javascript/echart/build/dist'
+            }
+        });
+        
+        // 使用
+        require(
+            [
+                'echarts',
+                'echarts/chart/pie', // 使用柱状图就加载bar模块，按需加载
+                'echarts/chart/bar'
+            ],
+            function (ec) {
+                // 基于准备好的dom，初始化echarts图表
+                var myChart = ec.init(document.getElementById('main')); 
+                
+        
+                // 为echarts对象加载数据 
+                myChart.setOption(option); 
+            }
+        );
+    </script>
+

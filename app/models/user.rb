@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   has_many :score_histories
+  has_many :qr_code_scan_histories
   has_many :lotteries
   belongs_to :mem_group
   

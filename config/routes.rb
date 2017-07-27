@@ -7,6 +7,7 @@ Rails.application.routes.draw do
       resources :mem_analyses
       resources :region_analyses
       resources :trend_analyses
+      resources :scan_geographical_distributions
     end
   end
   

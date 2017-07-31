@@ -1,13 +1,17 @@
 <div class="container">
     <div class="panel">
         <div class="sub-navbar">
-        <form action="/admin/report/scan_geographical_distributions" method="get">
-          <input id='datetimepicker' value= '<%= (DateTime.now - 1.day).strftime('%Y-%m-%d') %>'' class='datetimepicker' name ='date'/>
+        <form action="/admin/report/scan_geographical_distributions" method="get" class="form-inline">
+        <div class="form-group">
+          <input class='form-control' id='datetimepicker' value= '<%= (DateTime.now - 1.day).strftime('%Y-%m-%d') %>'' class='datetimepicker' name ='date' />
+          </div>
             <script>
                 $("#datetimepicker").datetimepicker({
                     format:"Y-m-d",timepicker:false});
             </script>
-          <input type="submit" value="查询" />
+           <div class="form-group">
+    <%= submit_tag("搜 索", class: "btn btn-warning") %>
+  </div>
         </form>
         </div>
         <div class="panel-body">

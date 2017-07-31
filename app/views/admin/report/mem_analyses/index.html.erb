@@ -1,16 +1,19 @@
 <div class="container">
     <div class="panel">
         <div class="sub-navbar">
-    <div id="menu" class="sub-navbar-nav-wrap">
-      <ul class="nav nav-pills">
-        <li <% if @qryType == "1" %> class="active" <% end %>>
-        <a href="/admin/report/mem_analyses?qryType=1">年龄</a></li>
-        <li <% if @qryType == "2" %> class="active" <% end %>>
-        <a href="/admin/report/mem_analyses?qryType=2">性别</a></li>
-        <li <% if @qryType == "3" %> class="active" <% end %>>
-        <a href="/admin/report/mem_analyses?qryType=3">等级</a></li>
-        </ul> 
-        </div>
+            <div id="menu" class="sub-navbar-nav-wrap">
+                <ul class="nav nav-pills">
+                    <li <% if @qryType=="1" %> class="active"
+                        <% end %>>
+                            <a href="/admin/report/mem_analyses?qryType=1">年龄</a></li>
+                    <li <% if @qryType=="2" %> class="active"
+                        <% end %>>
+                            <a href="/admin/report/mem_analyses?qryType=2">性别</a></li>
+                    <li <% if @qryType=="3" %> class="active"
+                        <% end %>>
+                            <a href="/admin/report/mem_analyses?qryType=3">等级</a></li>
+                </ul>
+            </div>
         </div>
         <div class="panel-body">
             <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
@@ -20,90 +23,86 @@ margin-bottom: 18px;"></div>
         </div>
     </div>
 </div>
-    <!-- 引入 echarts.js -->
-    <script src="/assets/admin/javascript/echart/build/dist/echarts.js"></script>
-    <script type="text/javascript">
-        option = {
-            title : {
-                text: '某站点用户访问来源',
-                subtext: '纯属虚构',
-                x:'center'
-            },
-            tooltip : {
-                trigger: 'item',
-                formatter: "{a} <br/>{b} : {c} ({d}%)"
-            },
-            legend: {
-                orient : 'vertical',
-                x : 'left',
-                data:[
+<!-- 引入 echarts.js -->
+<script src="/assets/admin/javascript/echart/build/dist/echarts.js"></script>
+<script type="text/javascript">
+option = {
+    title: {
+        text: '会员分析',
+        subtext: '饼状图',
+        x: 'center'
+    },
+    tooltip: {
+        trigger: 'item',
+        formatter: "{a} <br/>{b} : {c} ({d}%)"
+    },
+    legend: {
+        orient: 'vertical',
+        x: 'left',
+        data: [
 
-                    <% @data.each do |d| %> 
-                        '<%= d[:name] %>',
-                    <% end %>
+            <% @data.each do |d| %>
+            '<%= d[:name] %>',
+            <% end %>
 
-                ]
-            },
-            toolbox: {
-                show : true,
-                feature : {
-                    mark : {show: true},
-                    dataView : {show: true, readOnly: false},
-                    magicType : {
-                        show: true, 
-                        type: ['pie', 'funnel'],
-                        option: {
-                            funnel: {
-                                x: '25%',
-                                width: '50%',
-                                funnelAlign: 'left',
-                                max: 1548
-                            }
-                        }
-                    },
-                    restore : {show: true},
-                    saveAsImage : {show: true}
+        ]
+    },
+    toolbox: {
+        show: true,
+        feature: {
+            mark: { show: true },
+            dataView: { show: true, readOnly: false },
+            magicType: {
+                show: true,
+                type: ['pie', 'funnel'],
+                option: {
+                    funnel: {
+                        x: '25%',
+                        width: '50%',
+                        funnelAlign: 'left',
+                        max: 1548
+                    }
                 }
             },
-            calculable : true,
-            series : [
-                {
-                    name:'访问来源',
-                    type:'pie',
-                    radius : '55%',
-                    center: ['50%', '60%'],
-                    <% names=@names %>
-                    data:[
-                    <% @data.each do |d| %> 
-                        {value:<%= d[:value] %>, name:'<%= d[:name] %>'},
-                    <% end %>   
-                    ]
-                }
-            ]
-        };
-                            
+            restore: { show: true },
+            saveAsImage: { show: true }
+        }
+    },
+    calculable: true,
+    series: [{
+        name: '访问来源',
+        type: 'pie',
+        radius: '55%',
+        center: ['50%', '60%'],
+        <% names=@names %>
+        data: [
+            <% @data.each do |d| %> { value: <%= d[:value] %>, name: '<%= d[:name] %>' },
+            <% end %>
+        ]
+    }]
+};
 
-         // 路径配置
-        require.config({
-            paths: {
-                echarts: '/assets/admin/javascript/echart/build/dist'
-            }
-        });
-        
-        // 使用
-        require(
-            [
-                'echarts',
-                'echarts/chart/pie' // 使用柱状图就加载bar模块，按需加载
-            ],
-            function (ec) {
-                // 基于准备好的dom，初始化echarts图表
-                var myChart = ec.init(document.getElementById('main')); 
-                
-        
-                // 为echarts对象加载数据 
-                myChart.setOption(option); 
-            }
-        );
-    </script>
 
+// 路径配置
+require.config({
+    paths: {
+        echarts: '/assets/admin/javascript/echart/build/dist'
+    }
+});
+
+// 使用
+require(
+    [
+        'echarts',
+        'echarts/chart/pie' // 使用柱状图就加载bar模块，按需加载
+    ],
+    function(ec) {
+        // 基于准备好的dom，初始化echarts图表
+        var myChart = ec.init(document.getElementById('main'));
+
+
+        // 为echarts对象加载数据 
+        myChart.setOption(option);
+    }
+);
+</script>

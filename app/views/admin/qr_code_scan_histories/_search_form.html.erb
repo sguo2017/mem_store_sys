@@ -2,12 +2,12 @@
   <%= label_tag(:count, "频次:") %>
   <%= text_field_tag(:count,@count,class: "form-control")  %>
   <%= label_tag(:start_date, "起始日期:") %>
-  <input id='datetimepicker1' value= '<%= (DateTime.now - 1.day).strftime('%Y-%m-%d %H:%M:%S') %>'' class='datetimepicker' name ='start_date'/>
+  <input class='form-control' id='datetimepicker1' value= '<%= (DateTime.now - 1.day).strftime('%Y-%m-%d %H:%M:%S') %>'' class='datetimepicker' name ='start_date'/>
 <script>
     $("#datetimepicker1").datetimepicker();
 </script>
   <%= label_tag(:end_date, "结束日期:") %>
-  <input id='datetimepicker2' value= '<%= DateTime.now.strftime('%Y-%m-%d %H:%M:%S') %>' class='datetimepicker' name ='end_date' />
+  <input class='form-control' id='datetimepicker2' value= '<%= DateTime.now.strftime('%Y-%m-%d %H:%M:%S') %>' class='datetimepicker' name ='end_date' />
 <script>
     $("#datetimepicker2").datetimepicker();
 </script>

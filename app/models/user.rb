@@ -34,6 +34,15 @@ class User < ApplicationRecord
     end
     #加积分 变级别>>
 
+    #抽奖活动送红包<<
+    def lotteryredpacket(param)
+        user_info = Hash.new
+        user_info["openid"] = self.openid
+        money = param
+        return Wxinterface.send_redpacket(user_info,money)
+    end
+    #抽奖活动送红包>>
+
     #保存微信信息<<
     def saveWxUserInfo(params)
         self.openid = params["openid"]

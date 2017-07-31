@@ -28,10 +28,12 @@ class Phone::LotteriesController < PhoneController
   def create    
     @user = current_user 
     #抽奖次数
-    has_draw = @user.lotteries.where("created_at >= ?", Time.now.beginning_of_day).size
-    @avaliable = Const::CHANCE_DRAE_COUNT.to_i - has_draw 
+    #has_draw = @user.lotteries.where("created_at >= ?", Time.now.beginning_of_day).size
+    #@avaliable = Const::CHANCE_DRAE_COUNT.to_i - has_draw 
+    #按消耗决定抽奖次数
+    @avaliable =  @user.score / Const::SCORE_COST.to_i
     if @avaliable < 1 
-      return render json: {status: "-1", msg: Const::LOTTERY_MSG[:no_chance] }
+      return render json: {status: "-1", msg: Const::LOTTERY_MSG[:score_not_enough] }
     end
 
     @activity = Activity.new
@@ -75,19 +77,37 @@ class Phone::LotteriesController < PhoneController
 
     respond_to do |format|
       if @lottery.save
-        @user.changeScore(@activity_award_cfg.score)
-        # logger.debug "86: @activity_award_cfg.score #{@activity_award_cfg.score} result:#{@activity_award_cfg.score.to_i > 0 }" 
-        if @activity_award_cfg.score.to_i > 0   
-          @score_query = ScoreHistory.new()
-          @score_query.point = @activity_award_cfg.score 
-          @score_query.object_type = "抽奖活动" 
-          @score_query.object_id = @lottery.id 
-          @score_query.oper = "获得" 
-          @score_query.user_id = @user.id
-          # @score_query.bonus_change_id = "1"
-          @score_query.save
+        if @activity_award_cfg.level_I == 'money'
+          money = @activity_award_cfg.score*100 #单位由元转为分
+          @data = @user.lotteryredpacket(money)
+          @redpackethistory = RedPacketHistory.new()
+          @redpackethistory.user_id = @user.id
+          @redpackethistory.catalog = "抽奖活动得红包"
+          @redpackethistory.phone_number = @user.phone_num
+          @redpackethistory.money = money
+          status = @data.scan(/\<return_msg\>\<\!\[CDATA\[(.*)\]\]\>\<\/return_msg\>/).first.first
+          @redpackethistory.return_msg = status
+          if status == "发放成功"
+            status = "00A"
+          else
+            status = "00X"
+          end
+          @redpackethistory.status = status
+          @redpackethistory.save
+        else
+          @user.changeScore(@activity_award_cfg.score)
+          # logger.debug "86: @activity_award_cfg.score #{@activity_award_cfg.score} result:#{@activity_award_cfg.score.to_i > 0 }" 
+          if @activity_award_cfg.score.to_i > 0   
+            @score_query = ScoreHistory.new()
+            @score_query.point = @activity_award_cfg.score 
+            @score_query.object_type = "抽奖活动" 
+            @score_query.object_id = @lottery.id 
+            @score_query.oper = "获得" 
+            @score_query.user_id = @user.id
+            # @score_query.bonus_change_id = "1"
+            @score_query.save
+          end
         end
-
         format.json { 
           render json: {status: "0", item: @item, avaliable:@avaliable-1, score: @activity_award_cfg.score} 
         }

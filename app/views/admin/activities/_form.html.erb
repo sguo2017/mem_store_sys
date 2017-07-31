@@ -26,7 +26,7 @@
     <div class="col-xs-4">
       <div class="panel active-set-panel">
         <div class="phone-preview">
-          <iframe src="/phone/activities" frameborder="0" height="375px" width="99%"></iframe>  
+          <!--<iframe src="/phone/activities" frameborder="0" height="375px" width="99%"></iframe>  -->
         </div>  
       </div>
     </div>
@@ -189,11 +189,11 @@
         <div class="form-group">
           <label class="col-xs-1 control-label text-right">奖品大类</label>
           <div class="col-xs-4">
-            <%= select_tag :level_I, options_for_select(@all_level_I, params[:level_I]), class: "form-control" %>
+            <%= f.select :level_I, options_for_select(@all_level_I, params[:level_I]), class: "form-control" %>
           </div>
         </div>  
         <div class="form-group">
-          <label class="col-xs-1 control-label text-right">积分值</label>
+          <label class="col-xs-1 control-label text-right">积分值或现金值</label>
           <div class="col-xs-4">
               <%= f.text_field :score, :class => 'form-control', :placeholder => "请输入积分值" %>            
           </div>

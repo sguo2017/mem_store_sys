@@ -3,19 +3,23 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 
-$ ->
-  $('#showUser2Code').click ->  
-	    
-	  	$('#user2code').show()
+$(document).on 'turbolinks:load', ->
+  $('#showUser2Code').click ->
+    $('#user2code').show()
+  $('#hideUser2Code').click ->
+    $('#user2code').hide()
+  $('.ico-scan').click ->
+    wx.scanQRCode
+      needResult: 0
+      scanType: [
+        'qrCode'
+        'barCode'
+      ]
+      success: (res) ->
+        console.log res.resultStr
+    return
+  return
 
-  $('#hideUser2Code').click ->  
-	    
-	  	$('#user2code').hide()	
-
-  $('.ico-scan').click -> wx.scanQRCode({
-        	needResult: 0,
-        	scanType: ["qrCode","barCode"],
-        	success: (res) ->
-              		console.log(res.resultStr)          
-	  	});  
 	  	    
+
+

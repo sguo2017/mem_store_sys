@@ -38,16 +38,5 @@
    			<% end %>
 			</div> 
 	</div>
-			<div class="text-center block-mt">加载完成</div>
-<script type="text/javascript">
-$(document).ready(function(){  
-  var needRefresh = sessionStorage.getItem("sub-need-refresh");
-  if(needRefresh){
-      sessionStorage.removeItem("sub-need-refresh");
-      location.reload();
-  }
-
-  sessionStorage.setItem("need-refresh", true);  
-})
-</script>				
+			<div class="text-center block-mt">加载完成</div>		
 

@@ -4,7 +4,7 @@
 			<span class="ico-header-back"></span>
 		</a>
 		<h1>营销活动</h1>
-		<button class="header-right"><span class="ico-scan" onclick="wxScanQRCode();"></span></button>
+		<button class="header-right"><span class="ico-scan"></span></button>
 		
 	</div>
 
@@ -75,15 +75,8 @@ var turnplate={
 };
 
 $(document).ready(function(){  
-  var needRefresh = sessionStorage.getItem("need-refresh");
-  if(needRefresh){
-      sessionStorage.removeItem("need-refresh");
-      location.reload();
-  }
 
-  sessionStorage.setItem("need-refresh", true);  
   //动态添加大转盘的奖品与奖品区域背景颜色
-
   turnplate.restaraunts = [<% @restaraunts.each do |restaraunt| %> "<%= restaraunt %>", <% end %>];
 
 

@@ -77,6 +77,7 @@ class Phone::LotteriesController < PhoneController
 
     respond_to do |format|
       if @lottery.save
+        @user.changeScore(-Const::SCORE_COST.to_i)
         if @activity_award_cfg.level_I == 'money'
           money = @activity_award_cfg.score*100 #单位由元转为分
           @data = @user.lotteryredpacket(money)

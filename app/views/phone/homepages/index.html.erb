@@ -103,13 +103,3 @@
 </div>
 </body>
 <%= render 'popup' %>
-<script type="text/javascript">
-    $(function () {
-        var needRefresh = sessionStorage.getItem("need-refresh");
-        if (needRefresh) {
-            sessionStorage.removeItem("need-refresh");
-            location.reload();
-        }
-        sessionStorage.setItem("sub-need-refresh", true);
-    });
-</script>

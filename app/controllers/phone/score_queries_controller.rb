@@ -103,7 +103,7 @@ class Phone::ScoreQueriesController < PhoneController
       @msg = "未知错误"
       @go_url = phone_homepages_url
     end
-
+    
     respond_to do |format|
       format.html { redirect_to @go_url, notice: @msg }
     end

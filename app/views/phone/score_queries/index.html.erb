@@ -48,7 +48,13 @@
         <% @score_queries.each_with_index do |score_query, index| %>
         <li class="data-item">
             <div class="flex-fluid"><%= score_query.created_at.strftime('%Y-%m-%d %H:%M:%S') %></div>
-            <div><span class="text-danger"><%= score_query.oper %><%= score_query.point %></span>积分</div>
+            <div><span class="text-danger"><%= score_query.object_type %>
+            <% if score_query.oper == "获得" %>
+                <%= "+" %>
+            <% else %>
+                <%= "-" %>
+            <% end %>
+            <%= score_query.point %></span>积分</div>
         </li>
         <% end %>
     </ul>

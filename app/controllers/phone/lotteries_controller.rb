@@ -78,6 +78,13 @@ class Phone::LotteriesController < PhoneController
     respond_to do |format|
       if @lottery.save
         @user.changeScore(-Const::SCORE_COST.to_i)
+        @score_query = ScoreHistory.new()
+        @score_query.point = Const::SCORE_COST.to_i
+        @score_query.object_type = "抽奖活动消耗" 
+        @score_query.object_id = @lottery.id 
+        @score_query.oper = "扣减" 
+        @score_query.user_id = @user.id
+        @score_query.save
         if @activity_award_cfg.level_I == 'money'
           money = @activity_award_cfg.score*100 #单位由元转为分
           @data = @user.lotteryredpacket(money)
@@ -101,7 +108,7 @@ class Phone::LotteriesController < PhoneController
           if @activity_award_cfg.score.to_i > 0   
             @score_query = ScoreHistory.new()
             @score_query.point = @activity_award_cfg.score 
-            @score_query.object_type = "抽奖活动" 
+            @score_query.object_type = "中奖送积分" 
             @score_query.object_id = @lottery.id 
             @score_query.oper = "获得" 
             @score_query.user_id = @user.id

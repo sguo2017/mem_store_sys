@@ -50,7 +50,7 @@
           生日  
         </div>
         <div>
-        <input type="date" name="user[birthday]" id="user_birthday" />
+        <input type="date" name="user[birthday]" id="user_birthday" value="<%=@user.birthday.strftime('%Y-%m-%d')%>" />
         </div>
       </li>
     </ul>

@@ -31,11 +31,18 @@ class Phone::LotteriesController < PhoneController
     #has_draw = @user.lotteries.where("created_at >= ?", Time.now.beginning_of_day).size
     #@avaliable = Const::CHANCE_DRAE_COUNT.to_i - has_draw 
     #按消耗决定抽奖次数
-    @avaliable =  @user.score / Const::SCORE_COST.to_i
-    if @avaliable < 1 
+    #@avaliable =  @user.score / Const::SCORE_COST.to_i
+    #if @avaliable < 1 
+    #  return render json: {status: "-1", msg: Const::LOTTERY_MSG[:score_not_enough] }
+    #end
+    $config_info.each do |c|
+      if c.cf_id == "ACTIVITY_SCORE_COST"
+         @cost = c.cf_value.to_i
+      end
+    end
+    if @user.score < @cost
       return render json: {status: "-1", msg: Const::LOTTERY_MSG[:score_not_enough] }
     end
-
     @activity = Activity.new
     @lottery = Lottery.new(lottery_params)
     #中奖奖项
@@ -77,9 +84,9 @@ class Phone::LotteriesController < PhoneController
 
     respond_to do |format|
       if @lottery.save
-        @user.changeScore(-Const::SCORE_COST.to_i)
+        @user.changeScore(-@cost)
         @score_query = ScoreHistory.new()
-        @score_query.point = Const::SCORE_COST.to_i
+        @score_query.point = @cost
         @score_query.object_type = "抽奖活动消耗" 
         @score_query.object_id = @lottery.id 
         @score_query.oper = "扣减" 
@@ -117,7 +124,7 @@ class Phone::LotteriesController < PhoneController
           end
         end
         format.json { 
-          render json: {status: "0", item: @item, avaliable:@avaliable-1, score: @activity_award_cfg.score} 
+          render json: {status: "0", item: @item,user_score: @user.score, score: @activity_award_cfg.score} 
         }
       else
         format.json { 

@@ -18,6 +18,8 @@ class Phone::HomepagesController < PhoneController
       png.resize(172, 172).save(Rails.root.to_s + "/public/" + @user.qrcode)
       @user.save
     end  
+    @fun_type = params[:oper_type]
+    @get_score = params[:add_score]
     #分配会员等级对应的名称和图标
  
     mem_level = MemLevel.where(" score > ? ", @user.score).order(" score ").first

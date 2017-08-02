@@ -1,0 +1,27 @@
+<!-- 提示弹窗 -->
+<div id="popup" class="popup-wrap bc_popup_wrap" <% unless flash[:notice].blank? %>style="display:;"<% else %> style="display:none;"  <% end %>>
+        <div class="popup w280  text-center">
+            <img class="popup-coupon-img" src="/assets/phone/images/img-popup-smile.png" alt="">
+            <div class="popup-main-coupon">
+                <div class="popup-coupon-tips text-tips">
+                    亲，恭喜您获得<span class="text-primary"><%= @bonus_change_redPacket %></span>元红包
+                    <div class="f12">您当前可用积分为<span class="text-primary">
+                    <%= @user.score %></span>！</div>
+                </div>
+            </div>
+            <div class="popup-foot flex-wrap">
+                <a id="notice" class="flex-fluid a-button bc_notice_close_btn">返回</a>
+            </div>
+            
+        </div>
+        <div class="popup-bg"></div>
+    </div>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('#notice').click(function() {
+            $('#popup').hide();
+            return
+        });
+    })
+</script>

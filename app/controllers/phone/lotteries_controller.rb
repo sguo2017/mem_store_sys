@@ -115,7 +115,7 @@ class Phone::LotteriesController < PhoneController
           if @activity_award_cfg.score.to_i > 0   
             @score_query = ScoreHistory.new()
             @score_query.point = @activity_award_cfg.score 
-            @score_query.object_type = "中奖送积分" 
+            @score_query.object_type = "转盘" 
             @score_query.object_id = @lottery.id 
             @score_query.oper = "获得" 
             @score_query.user_id = @user.id

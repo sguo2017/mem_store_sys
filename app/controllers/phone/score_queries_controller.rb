@@ -56,7 +56,7 @@ class Phone::ScoreQueriesController < PhoneController
         # params[:score_history][:oper] = "获得"
         # params[:score_history][:bonus_change_id] = '1'
         @score_query = ScoreHistory.new(score_history_params)
-        @score_query.object_type = "商品扫码"
+        @score_query.object_type = "产品"
         @score_query.save
         
         
@@ -84,7 +84,7 @@ class Phone::ScoreQueriesController < PhoneController
         @user.changeScore(@add_score) #会员积分变化
         params[:score_history][:user_id] = @user.id
         @score_query = ScoreHistory.new(score_history_params)
-        @score_query.object_type = "兑换红包"
+        @score_query.object_type = "红包兑换"
         @score_query.save!
         @msg = "积分兑换成功"
         @bonus_change_score= params[:score_history][:red_packet]

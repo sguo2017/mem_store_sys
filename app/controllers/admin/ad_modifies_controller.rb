@@ -28,10 +28,10 @@ class Admin::AdModifiesController < AdminController
   def create
     #先查找表里有没有ad_modify字段，有就直接修改，没有就新建
     ad_modifies_pre = "AD_MODIFY_"
-    @ad_modify_image = ConfigTableInfo.where("cf_id = ?","#{ad_modifies_pre}image").first
+    @ad_modify_image = ConfigTableInfo.where("cf_id = ?","#{ad_modifies_pre}IMAGE").first
     unless @ad_modify_image.blank?
-      @ad_modify_title = ConfigTableInfo.where("cf_id = ?","#{ad_modifies_pre}title").first   
-      @ad_modify_url = ConfigTableInfo.where("cf_id = ?","#{ad_modifies_pre}url").first
+      @ad_modify_title = ConfigTableInfo.where("cf_id = ?","#{ad_modifies_pre}TITLE").first   
+      @ad_modify_url = ConfigTableInfo.where("cf_id = ?","#{ad_modifies_pre}URL").first
     else
       @ad_modify_image = ConfigTableInfo.new()
       @ad_modify_title = ConfigTableInfo.new()
@@ -40,21 +40,21 @@ class Admin::AdModifiesController < AdminController
     
 
     image = params[:image]
-    @ad_modify_image.cf_id = ad_modifies_pre+"image";
+    @ad_modify_image.cf_id = ad_modifies_pre+"IMAGE";
     @ad_modify_image.ad_photo = image;
     @ad_modify_image.cf_desc = "首页下面的广告图片"
     @ad_modify_image.save
 
 
     title = params[:title]
-    @ad_modify_title.cf_id = ad_modifies_pre+"title";
+    @ad_modify_title.cf_id = ad_modifies_pre+"TITLE";
     @ad_modify_title.cf_value = title;
     @ad_modify_title.cf_desc = "首页下面的广告标题"
     @ad_modify_title.save
 
 
     url = params[:url]
-    @ad_modify_url.cf_id = ad_modifies_pre+"url";
+    @ad_modify_url.cf_id = ad_modifies_pre+"URL";
     @ad_modify_url.cf_value = url;
     @ad_modify_url.cf_desc = "首页下面的广告链接"
     @ad_modify_url.save

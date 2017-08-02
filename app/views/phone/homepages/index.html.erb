@@ -20,7 +20,7 @@
                 </a>
             </div>
             <div class="flex-fluid">
-                <div class="user-name"><%= @user.name %><span class="ico-arrow-right2 ml5"></span></div>
+                <a class="user-name" href="/phone/profiles"><%= @user.name %><span class="ico-arrow-right2 ml5"></span></a>
                 <div class="lever-bar">
                     <span class="ico-lever">
                         <img src="/assets/phone/images/<%= @ico_level %>">
@@ -63,7 +63,7 @@
                 </a>
             </li>
             <li class="float-item">
-                <a href="/phone/tech_servs">
+                <a href="/phone/goods">
                     <img class="ico-img" src="/assets/phone/images/ico-index6.png" alt="">
                     <div class="ico-name">优惠券</div>
                 </a>
@@ -75,7 +75,7 @@
                 </a>
             </li> -->
             <li class="float-item">
-                <a href="/phone/goods">
+                <a href="/phone/tech_servs">
                     <img class="ico-img" src="/assets/phone/images/ico-index4.png" alt="">
                     <div class="ico-name">工长助手</div>
                 </a>
@@ -97,7 +97,7 @@
     </div>
     <div class="block-mt">
         <div class="sub-title">会员专享活动</div>
-       <a class="adapt-img" href="<%= @url %>" title="<%= @title %>">
+       <a class="adapt-img" href="<%= @url %>" title="<%= @title %>" target="self">
              <%= image_tag @image.ad_photo.url %>
         </a>
     </div>

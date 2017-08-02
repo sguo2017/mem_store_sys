@@ -67,11 +67,11 @@ class Phone::HomepagesController < PhoneController
 
     #计算会员升级的百分比<<  
     pre = params[:pre]
-    title = ConfigTableInfo.where("cf_id = ?", "AD_MODIFY_title").first
+    title = ConfigTableInfo.where("cf_id = ?", "AD_MODIFY_TITLE").first
     @title = title.cf_value
-    url = ConfigTableInfo.where("cf_id = ?", "AD_MODIFY_url").first 
+    url = ConfigTableInfo.where("cf_id = ?", "AD_MODIFY_URL").first 
     @url = url.cf_value
-    @image = ConfigTableInfo.where("cf_id = ?", "AD_MODIFY_image").first 
+    @image = ConfigTableInfo.where("cf_id = ?", "AD_MODIFY_IMAGE").first 
   end
 
   # GET /phone/homepages/1

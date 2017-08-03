@@ -4,7 +4,18 @@ class Phone::StoresController < ApplicationController
   # GET /phone/stores
   # GET /phone/stores.json
   def index
-    
+    @store  = Store.where(" name like '%广州%' ")  
+    @store_array = []   
+    @store.each_with_index do |store|
+      s = store.attributes.clone
+      if store.latitude.blank? || store.longitude.blank?
+        # logger.debug "12 #{s.to_s}"
+      else
+        # logger.debug "14 #{s.to_s}"
+        @store_array.push(s)
+      end
+    end  
+    # logger.debug "13 #{@store_array.to_json}"
   end
 
   # GET /phone/stores/1

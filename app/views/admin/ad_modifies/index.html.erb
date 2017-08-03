@@ -1,0 +1,32 @@
+<div class="container">
+    <div class="panel">
+        <div class="panel-heading">
+            <div class="panel-title">修改首页底部广告</div>
+        </div>
+        <div class="panel-body">
+        <%= form_tag("/admin/ad_modifies", :multipart => true, method: "post", class: "form-horizontal") do %>
+            <div class="clearfix form-list">
+                <%= label_tag(:tltle, "标题:", class: "col-xs-2 control-label") %>
+                <div class="col-xs-4">
+                    <%= text_field_tag(:title,@name, class: "form-control")  %>
+                </div>
+            
+                <%= label_tag(:url, "链接:", class: "col-xs-2 control-label")%>
+                <div class="col-xs-4">
+                    <%= text_field_tag(:url,'请填写完整链接', class: "form-control") %>
+                </div>
+            
+                <%= label_tag(:image, "图片:", class: "col-xs-2 control-label") %>
+                <div class="col-xs-4">
+                    <%= file_field_tag(:image, :class=>'form-control')  %>
+                </div>
+            </div>
+            <div class="block-mt">
+                <%= submit_tag("修改", class: "btn btn-warning") %>
+                <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                admin_ad_modifies_path, :class => 'btn btn-default' %>
+            </div>
+        <% end %>
+        </div>
+    </div>
+</div>

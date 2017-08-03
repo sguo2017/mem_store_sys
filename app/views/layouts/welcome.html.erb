@@ -89,7 +89,17 @@
                     <li><%= link_to "月扫码频次统计", admin_bonus_changes_path  %></li> -->
                 </ul>
             </li> 
-           <li onclick="navbar_active(this)" <% if @current_nav == 'config_menu' %>class='active'<% end %>><%= link_to "系统参数配置", admin_config_table_infos_path  %></li>
+           <!-- <li onclick="navbar_active(this)" <% if @current_nav == 'config_menu' %>class='active'<% end %>><%= link_to "系统参数配置", admin_config_table_infos_path  %></li> -->
+           <li class="dropdown <% if @current_nav == 'config_menu' %> active<% end %>" onclick="navbar_active(this)">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                  参数配置
+                  <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><%= link_to "系统参数配置", admin_config_table_infos_path  %></li>
+                    <li><%= link_to "首页广告修改", admin_ad_modifies_path  %></li>
+                </ul>
+            </li>
         </ul>
     </div>
   </div>
@@ -97,3 +107,8 @@
           <%= yield %>
   </body>
 </html>
+<script type="text/javascript">
+  //日期中文化<<
+  $.datetimepicker.setLocale('zh');
+  //日期中文化>>
+</script>

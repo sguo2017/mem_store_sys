@@ -19,7 +19,7 @@
         <td><%= qr_code_scan_history.good.name %></td>
         <td><%= qr_code_scan_history.good_instance_id %></td>
         <td><%= qr_code_scan_history.score %></td>
-        <td><%= qr_code_scan_history.status %></td>
+        <td><%if qr_code_scan_history.status == "00A" %><%="成功"%><%else%><%="失败"%><%end%></td>
         <td><%= qr_code_scan_history.created_at.strftime('%Y-%m-%d %H:%M:%S') %></td>
         <td>
           <%= link_to t('.show', :default => t("helpers.links.show")),

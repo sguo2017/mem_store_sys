@@ -18,32 +18,24 @@ class Phone::HomepagesController < PhoneController
       png.resize(172, 172).save(Rails.root.to_s + "/public/" + @user.qrcode)
       @user.save
     end  
+    @fun_type = params[:oper_type]
+    @get_score = params[:add_score]
     #分配会员等级对应的名称和图标
-    if @user.level.blank?
-      @user.level = "V1"
-      @level_name = '白银工长'
-      @ico_level = 'level_v1.png'
-      @user.save
+ 
+    mem_level = MemLevel.where(" score > ? ", @user.score).order(" score ").first
+    if mem_level.blank?
+        mem_level = MemLevel.order(" score ").last
+        @user.level = mem_level.code
+        @level_name = mem_level.name
+        @ico_level = "level_#{@user.level}.png"
+        @user.save 
+    else
+        @user.level = mem_level.code
+        @level_name = mem_level.name
+        @ico_level = "level_#{@user.level}.png"
+        @user.save       
     end
 
-    case @user.score
-    when 0..1999 
-        @user.level = 'V1' 
-        @level_name='白银工长'
-        @ico_level = 'level_v1.png'
-    when 2000..4999
-        @user.level = 'V2'
-        @level_name='黄金工长'
-        @ico_level = 'level_v2.png'
-    when 5000..9999
-        @user.level = 'V3'
-        @user.level ='白金工长'
-        @ico_level = 'level_v3.png'
-    else 
-        @user.level = 'V4'
-        @user.level = '钻石工长'
-        @ico_level = 'level_v4.png'
-    end
     #分配会员等级对应的名称和图标
 
     $config_info.each do |c|
@@ -53,15 +45,17 @@ class Phone::HomepagesController < PhoneController
     end
 
     #计算会员升级的百分比<<
+    @level_up_per = 0
     if @user.score > 0
       @mem_levels = MemLevel.all.order("score ASC")
       @mem_levels.each_with_index do |l,index|
         if @user.level < l.code          
           next_level = @mem_levels[index-1]
-          logger.debug "28 @user.score #{@user.score} next_level.score #{next_level.score} rate #{@user.score.to_f / next_level.score.to_f}"
           @level_up_per = (@user.score.to_f / next_level.score.to_f * 100).to_i
-          break 
-        end
+          break
+        else 
+          @level_up_per = 100
+        end 
       end
 
       if @level_up_per>99
@@ -72,6 +66,12 @@ class Phone::HomepagesController < PhoneController
     end
 
     #计算会员升级的百分比<<  
+    pre = params[:pre]
+    title = ConfigTableInfo.where("cf_id = ?", "AD_MODIFY_TITLE").first
+    @title = title.cf_value
+    url = ConfigTableInfo.where("cf_id = ?", "AD_MODIFY_URL").first 
+    @url = url.cf_value
+    @image = ConfigTableInfo.where("cf_id = ?", "AD_MODIFY_IMAGE").first 
   end
 
   # GET /phone/homepages/1

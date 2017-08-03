@@ -35,10 +35,17 @@ class Phone::ActivitiesController < PhoneController
     logger.debug "#{@restaraunts.to_json}"
 
     #抽奖次数
-    has_draw = @user.lotteries.where("created_at >= ?", Time.now.beginning_of_day).size
+    #has_draw = @user.lotteries.where("created_at >= ?", Time.now.beginning_of_day).size
 
-    @avaliable = Const::CHANCE_DRAE_COUNT.to_i - has_draw 
+    #@avaliable = Const::CHANCE_DRAE_COUNT.to_i - has_draw 
 
+    #按消耗决定抽奖次数
+    #@avaliable =  @user.score / Const::SCORE_COST.to_i
+    $config_info.each do |c|
+      if c.cf_id == "ACTIVITY_SCORE_COST"
+         @cost = c.cf_value.to_i
+      end
+    end
   end
 
   # GET /phone/activities/1

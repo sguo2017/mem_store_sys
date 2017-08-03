@@ -50,6 +50,7 @@ Rails.application.routes.draw do
     resources :qr_code_scan_histories
     resources :config_table_infos
     resources :red_packet_histories
+    resources :ad_modifies
   end
 
   mount Ckeditor::Engine => '/ckeditor'

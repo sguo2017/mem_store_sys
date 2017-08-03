@@ -1,15 +1,15 @@
 <div  class="lottery" <% if @activity.avatar.blank? %> <% else%> style="background: #000 url('<%= @activity.avatar %>') center center ; background-size: cover;" <% end %> >
-	<div class="header">
-		<a class="header-left" href="javascript:void(0)" onclick="window.location.href='/phone/homepages';">
-			<span class="ico-header-back"></span>
-		</a>
-		<h1>营销活动</h1>
-		<button class="header-right"><span class="ico-scan" onclick="wxScanQRCode();"></span></button>
-		
-	</div>
+  <div class="header">
+    <a class="header-left" href="javascript:void(0)" onclick="window.location.href='/phone/homepages';">
+      <span class="ico-header-back"></span>
+    </a>
+    <h1>营销活动</h1>
+    <button class="header-right"><span class="ico-scan"></span></button>
+    
+  </div>
 
-	<div class="container has-top">
-		    <img src="/assets/phone/images/1.png" id="shan-img" style="display:none;" />
+  <div class="container has-top">
+        <img src="/assets/phone/images/1.png" id="shan-img" style="display:none;" />
     <img src="/assets/phone/images/2.png" id="sorry-img" style="display:none;" />
     
 <!--     <div class="top_caidan">
@@ -20,15 +20,16 @@
     </div> -->
     <div class="top_info">
      <!-- 用户手机号:<span><%= @user.phone_num %></span><br /> -->
-     抽奖剩余次数:<span id="avaliable_span"><%= @avaliable %></span>次 
+     会员积分:<span id="score_span"><%= @user.score %></span>
+     每次抽奖消耗:<%= @cost %></span>积分
      </div>
      <div class="line"></div>
-	<div class="banner">
-		<div class="turnplate" style="background-image:url(/assets/phone/images/turnplate-bg.png);background-size:100% 100%;">
-			<canvas class="item" id="wheelcanvas" width="422px" height="422px"></canvas>
-			<img class="pointer" src="/assets/phone/images/turnplate-pointer.png"/>
-		</div>
-	</div>
+  <div class="banner">
+    <div class="turnplate" style="background-image:url(/assets/phone/images/turnplate-bg.png);background-size:100% 100%;">
+      <canvas class="item" id="wheelcanvas" width="422px" height="422px"></canvas>
+      <img class="pointer" src="/assets/phone/images/turnplate-pointer.png"/>
+    </div>
+  </div>
 
 <div style="text-align:center;margin:15px 0; font:normal 14px/24px 'MicroSoft YaHei';">
 </div>
@@ -46,18 +47,18 @@
 
 <!--中奖弹出框-->
     <div id="lottery_result" class="submit_box yuanjiao" style="display: none;">
-		<a class="close" href="javascript:void(0);" onclick="close_div();"><img src="/assets/phone/images/close.png" width="33" /></a>
-		<div class="submit_box_text ">
+    <a class="close" href="javascript:void(0);" onclick="close_div();"><img src="/assets/phone/images/close.png" width="33" /></a>
+    <div class="submit_box_text ">
       <div class="org" id="award_result">恭喜您获得<span ></span>！</div>
-			<div class="search_bar">
+      <div class="search_bar">
           <p id="award_result_desc" class="text-center">恭喜：您抽中<span></span>！</p>
           <!-- <input style=" margin-right:8%;" class="sure_button cricle" type="button" value="兑换" /> -->
           <input class="sure_button cricle" onclick="close_div();" type="button" value="再来一次~" />
       </div>
                
-		</div>
-	</div>  
-	</div>
+    </div>
+  </div>  
+  </div>
 
 
 </div>
@@ -75,20 +76,12 @@ var turnplate={
 };
 
 $(document).ready(function(){  
-  var needRefresh = sessionStorage.getItem("need-refresh");
-  if(needRefresh){
-      sessionStorage.removeItem("need-refresh");
-      location.reload();
-  }
 
-  sessionStorage.setItem("need-refresh", true);  
   //动态添加大转盘的奖品与奖品区域背景颜色
-
   turnplate.restaraunts = [<% @restaraunts.each do |restaraunt| %> "<%= restaraunt %>", <% end %>];
 
 
   turnplate.colors = [<% @colors.each do |color| %> "<%= color %>", <% end %>];
-
   
   var rotateTimeOut = function (){
     $('#wheelcanvas').rotate({
@@ -102,7 +95,7 @@ $(document).ready(function(){
   };
 
   //旋转转盘 item:奖品位置; txt：提示语;
-  var rotateFn = function (item, txt){
+  var rotateFn = function (item, txt, score){
     var angles = item * (360 / turnplate.restaraunts.length) - (360 / (turnplate.restaraunts.length*2));
     if(angles<270){
       angles = 270 - angles; 
@@ -117,19 +110,19 @@ $(document).ready(function(){
       callback:function (){
         // $("#award_result").html(txt)
         $("#lottery_result").show();
-
+        $("#score_span").html(score);
         turnplate.bRotate = !turnplate.bRotate;
       }
     });
   };
 
   $('.pointer').click(function (){
-    var avaliable = $("#avaliable_span").html()
-    if(avaliable < 0){
-      alert("<%= Const::LOTTERY_MSG[:no_chance] %>")
+    var score = $("#score_span").html()
+    if(score < <%=@cost%>){
+      alert("<%= Const::LOTTERY_MSG[:score_not_enough] %>")
       return;
     }
-
+    $("#score_span").html(score-<%=@cost%>);
     if(turnplate.bRotate)return;
     turnplate.bRotate = !turnplate.bRotate;
 
@@ -147,10 +140,9 @@ $(document).ready(function(){
           var status = data.status
           if(status == 0){
             var item = data.item
-            var avaliable = data.avaliable
             var award = turnplate.restaraunts[item-1];
+            var score = data.user_score
             var idx = award.indexOf("#")
-            $("#avaliable_span").html(avaliable)
             
             if(data.score == '0'){
               $("#award_result").html("谢谢参与")
@@ -159,7 +151,8 @@ $(document).ready(function(){
               $("#award_result").html("恭喜您获得<span >"+award.substring(0,idx)+"</span>！")
               $("#award_result_desc").html("恭喜：您抽中<span>"+award.substring(idx+1)+"</span>！")
             }
-            rotateFn(item, item);
+            //$("#score_span").html(score)
+            rotateFn(item, item, score);
           }else{
             alert(data.msg)           
           }

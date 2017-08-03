@@ -4,10 +4,12 @@ class Const
   ACTIVITY_SHOW_PAGE = {:base => "base", :award => "award", :cfg => "cfg"} 
   #初始化奖项
   AWARD_COUNT=10
+  #抽奖消耗积分
+  SCORE_COST = 10
   #抽奖机会
   CHANCE_DRAE_COUNT = 100
   #抽奖返回信息提示
-  LOTTERY_MSG = {:no_chance => "您今天抽奖机会用完了，改天再来吧！", :unknown => "未知错误，请联系管理员"}
+  LOTTERY_MSG = {:no_chance => "您今天抽奖机会用完了，改天再来吧！", :score_not_enough => "积分不足，请加油获取积分！",:unknown => "未知错误，请联系管理员"}
   #活动状态
   ACTIVITY_STATUS = {:effect => "00A", :expiration => "00X"}
 
@@ -36,7 +38,7 @@ class Const
     #门店类型
     BOOLEAN_LIST = [['自营', 'self'], ['社会', 'social']]
     #奖品配置
-    AWARD_CFG_LIST = [["积分", "积分"]]
+    AWARD_CFG_LIST = [["积分", "score"],["现金","money"]]
     #用户性别
     USER_SEX = [["男", "1"], ["女", "0"]]
     #用户状态

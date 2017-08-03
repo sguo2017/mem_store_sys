@@ -7,7 +7,6 @@
     <a class="header-left link" href="">
         广州<span class="caret ml5"></span>
     </a>
-    <h1>我的信息</h1>
     <button class="header-right"><span class="ico-scan"></span></button>
 </div>
 <!-- header end -->
@@ -21,7 +20,7 @@
                 </a>
             </div>
             <div class="flex-fluid">
-                <div class="user-name"><%= @user.name %><span class="ico-arrow-right2 ml5"></span></div>
+                <a class="user-name" href="/phone/profiles"><%= @user.name %><span class="ico-arrow-right2 ml5"></span></a>
                 <div class="lever-bar">
                     <span class="ico-lever">
                         <img src="/assets/phone/images/<%= @ico_level %>">
@@ -50,12 +49,7 @@
 
     <div class="ico-list-wrap">
         <ul class="float-ul wu3 clearfix ico-list">
-            <li class="float-item">
-                <a href="javascript:void(0)" onclick="window.location.href='/phone/activities';">
-                    <img class="ico-img" src="/assets/phone/images/ico-index1.png" alt="">
-                    <div class="ico-name">营销活动</div>
-                </a>
-            </li>
+            
             <li class="float-item">
                 <a href="/phone/bonus_changes">
                     <img class="ico-img" src="/assets/phone/images/ico-index2.png" alt="">
@@ -63,53 +57,54 @@
                 </a>
             </li>
             <li class="float-item">
-                <a href="/phone/score_queries?pay_type=up">
-                    <img class="ico-img" src="/assets/phone/images/ico-index3.png" alt="">
-                    <div class="ico-name">积分查询</div>
+                <a href="javascript:void(0)" onclick="window.location.href='/phone/activities';">
+                    <img class="ico-img" src="/assets/phone/images/ico-index1.png" alt="">
+                    <div class="ico-name">积分抽奖</div>
                 </a>
             </li>
             <li class="float-item">
                 <a href="/phone/goods">
+                    <img class="ico-img" src="/assets/phone/images/ico-index6.png" alt="">
+                    <div class="ico-name">优惠券</div>
+                </a>
+            </li>
+           <!--  <li class="float-item">
+                <a href="/phone/score_queries?pay_type=up">
+                    <img class="ico-img" src="/assets/phone/images/ico-index3.png" alt="">
+                    <div class="ico-name">积分查询</div>
+                </a>
+            </li> -->
+            <li class="float-item">
+                <a href="/phone/tech_servs">
                     <img class="ico-img" src="/assets/phone/images/ico-index4.png" alt="">
-                    <div class="ico-name">商品查询</div>
+                    <div class="ico-name">工长助手</div>
                 </a>
             </li>
             <li class="float-item">
                 <a href="/phone/invitations">
                     <img class="ico-img" src="/assets/phone/images/ico-index5.png" alt="">
-                    <div class="ico-name">邀请好友</div>
+                    <div class="ico-name">会员邀请</div>
                 </a>
             </li>
-            <li class="float-item">
-                <a href="/phone/tech_servs">
-                    <img class="ico-img" src="/assets/phone/images/ico-index6.png" alt="">
-                    <div class="ico-name">技术服务</div>
-                </a>
-            </li>
+            
             <li class="float-item">
                 <a href="javascript:void(0)" onclick="window.location.href='/phone/stores';">
                     <img class="ico-img" src="/assets/phone/images/ico-index6.png" alt="">
-                    <div class="ico-name">门店查询</div>
+                    <div class="ico-name">附近门店</div>
                 </a>
             </li>
         </ul>
     </div>
     <div class="block-mt">
         <div class="sub-title">会员专享活动</div>
-        <a class="adapt-img" href="">
-            <img src="/assets/phone/images/ad-img1.png" alt="">
+       <a class="adapt-img" href="<%= @url %>" title="<%= @title %>" target="self">
+             <%= image_tag @image.ad_photo.url %>
         </a>
     </div>
 </div>
 </body>
-<%= render 'popup' %>
-<script type="text/javascript">
-    $(function () {
-        var needRefresh = sessionStorage.getItem("need-refresh");
-        if (needRefresh) {
-            sessionStorage.removeItem("need-refresh");
-            location.reload();
-        }
-        sessionStorage.setItem("sub-need-refresh", true);
-    });
-</script>
+<% if @fun_type == 'goods_scan' %>
+<%= render 'popup2' %>
+<% else %>
+<%= render 'popup1' %>
+<% end %>

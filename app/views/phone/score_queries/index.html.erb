@@ -1,9 +1,9 @@
+<% content_for :title, "积分查询" %>
 <body class="body-bg">
 <div class="header">
     <a class="header-left" href="javascript:void(0)" onclick="window.location.href='/phone/homepages';">
         <span class="ico-header-back"></span>
     </a>
-    <h1>积分查询</h1>
     <button class="header-right"><span class="ico-scan"></span></button>
 </div>
 <!-- header end -->
@@ -48,24 +48,17 @@
         <% @score_queries.each_with_index do |score_query, index| %>
         <li class="data-item">
             <div class="flex-fluid"><%= score_query.created_at.strftime('%Y-%m-%d %H:%M:%S') %></div>
-            <div><span class="text-danger"><%= score_query.oper %><%= score_query.point %></span>积分</div>
+            <div><span class="text-danger"><%= score_query.object_type %>
+            <% if score_query.oper == "获得" %>
+                <%= "+" %>
+            <% else %>
+                <%= "-" %>
+            <% end %>
+            <%= score_query.point %></span>积分</div>
         </li>
         <% end %>
     </ul>
 </div>
 </body>
-<% if @fun_type == 'bonus_change' %>
-<%= render 'popup1' %>
-<% else %>
-<%= render 'popup2' %>
-<% end %>
-<script type="text/javascript">
-    $(document).ready(function(){
-        var needRefresh = sessionStorage.getItem("sub-need-refresh");
-        if(needRefresh){
-            sessionStorage.removeItem("sub-need-refresh");
-            location.reload();
-        }
-        sessionStorage.setItem("need-refresh", true);
-    })
-</script>
+<%= render 'popup' %>
+

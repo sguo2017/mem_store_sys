@@ -10,12 +10,12 @@ class Phone::ScoreQueriesController < PhoneController
     # @score_queries = @user.score_histories.order("created_at DESC")
     @score_queries_up = @user.score_histories.where(:oper=>'获得').order("created_at DESC")
     @score_queries_down = @user.score_histories.where(:oper=>'扣减').order("created_at DESC")
-    @pay_type = params[:pay_type]
     @up_total = point_total(@score_queries_up)
     @down_total = point_total(@score_queries_down)
+    
+    @pay_type = params[:pay_type]
     @bonus_change_redPacket = params[:packet_money]
     @fun_type = params[:oper_type]
-    @get_score = params[:add_score]
   end
 
 
@@ -56,6 +56,7 @@ class Phone::ScoreQueriesController < PhoneController
         # params[:score_history][:oper] = "获得"
         # params[:score_history][:bonus_change_id] = '1'
         @score_query = ScoreHistory.new(score_history_params)
+        @score_query.object_type = "产品"
         @score_query.save
         
         
@@ -63,7 +64,7 @@ class Phone::ScoreQueriesController < PhoneController
         @good_instance.status = '00X'
         @good_instance.save
         @msg = "扫码送积分操作成功"
-        @go_url = phone_score_queries_url(pay_type: 'up', add_score: @add_score ,oper_type: fun_type)
+        @go_url = phone_homepages_url( add_score: @add_score ,oper_type: fun_type)
 
         @scan_query.status = '00A'
 
@@ -83,11 +84,12 @@ class Phone::ScoreQueriesController < PhoneController
         @user.changeScore(@add_score) #会员积分变化
         params[:score_history][:user_id] = @user.id
         @score_query = ScoreHistory.new(score_history_params)
+        @score_query.object_type = "红包兑换"
         @score_query.save!
         @msg = "积分兑换成功"
         @bonus_change_score= params[:score_history][:red_packet]
         # @go_url = '/phone/score_queries?pay_type=down'
-        @go_url = phone_score_queries_url(pay_type: 'down', packet_money: @bonus_change_score ,oper_type: fun_type)
+        @go_url = phone_score_queries_url(pay_type: 'down', packet_money: @bonus_change_score)
       else
         @msg = "积分兑换失败:积分余额不足"
         @bonus_id=params[:score_history][:point]
@@ -103,7 +105,7 @@ class Phone::ScoreQueriesController < PhoneController
       @msg = "未知错误"
       @go_url = phone_homepages_url
     end
-
+    
     respond_to do |format|
       format.html { redirect_to @go_url, notice: @msg }
     end

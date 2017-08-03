@@ -10,6 +10,7 @@ zh-CN:
         catalog: "类型"
         phone_number: "手机"
         status: "状态"
+        return_msg: "返回信息"
         created_at: "创建日期"
   helpers:
     submit:

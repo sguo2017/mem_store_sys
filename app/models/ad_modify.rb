@@ -1,0 +1,3 @@
+class AdModify < ApplicationRecord
+
+end

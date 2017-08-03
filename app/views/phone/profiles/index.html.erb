@@ -49,9 +49,11 @@
           <i class="ico-birth mr5"></i>
           生日  
         </div>
+      <div class="calendar">
         <div>
-        <%= text_field_tag "user[birthday]", @user.birthday, class: "flex-fluid datetimepicker" %>
+            <input type="text" id="datePicker" class="datetimepicker" value="<%if @user.birthday.present? %><%=@user.birthday.strftime('%Y-%m-%d')%><%else%><%=Time.new(1970).strftime('%Y-%m-%d')%><%end%>"/>
         </div>
+      </div>
       </li>
     </ul>
     <ul class="data-list block-mt form-list">
@@ -105,12 +107,13 @@
     $(document).ready(function(){
         show_notice()
         //日期控件初始化
-        $.datetimepicker.setLocale('zh');
         $('.datetimepicker').datetimepicker({timepicker:false,format:'Y-m-d'});
+        $(".datetimepicker").focus(function(){
+          document.activeElement.blur();
+        });
         //检查手机格式
         check_input()
     })
-
    
   </script>
 

@@ -15,7 +15,6 @@
       <th><%= model_class.human_attribute_name(:created_at) %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
-  </thead>
   <tbody>
     <% @config_table_infos.each do |config_table_info| %>
       <tr>
@@ -29,11 +28,6 @@
                       admin_config_table_info_path(config_table_info), :class => 'btn btn-default btn-xs' %>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_admin_config_table_info_path(config_table_info), :class => 'btn btn-warning btn-xs' %>
-<!--          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-                      admin_config_table_info_path(config_table_info),
-                      :method => :delete,
-                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-                      :class => 'btn btn-xs btn-danger' %> -->
         </td>
       </tr>
     <% end %>

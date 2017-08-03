@@ -1075,8 +1075,10 @@ a.adapt-img {
   border: 1px solid #f1f1f1;
 }
 .user-img-wrap .user-name {
+  display: block;
   font-size: 12px;
   margin-bottom: 7px;
+  color: #fff;
 }
 .user-img-wrap .user-name .ico-arrow-right2 {
   margin-top: -2px;

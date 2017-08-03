@@ -16,6 +16,8 @@ class Phone::MemActivationsController < PhoneController
     # from:singlemessage微信分享过来的 ；groupmessage再转分享
     @from = params[:from] 
     goto_url = ""
+
+    info = ConfigInfo["weixinconfiginfo"]
     # 场景一 授权的没有注册过的用户
     if @from.blank?
       # logger.debug "20 @@@ #{@from}" 
@@ -42,7 +44,7 @@ class Phone::MemActivationsController < PhoneController
     else
       # 场景二 分享过来的页面：要做转跳转到授权
       if @from == "singlemessage" or @from == "groupmessage" 
-        goto_url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx649eb094afb490f5&redirect_uri=http://gzb.davco.cn/phone/mem_activations?method=wxCfgEntrance&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect"
+        goto_url = "#{info["AUTH_ADDR"]}appid=#{info["APPID"]}&redirect_uri=http://gzb.davco.cn/phone/mem_activations?method=wxCfgEntrance&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect"
         respond_to do |format|
           format.html { redirect_to goto_url }
         end

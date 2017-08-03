@@ -106,5 +106,8 @@ require(
         myChart.setOption(option);
     }
 );
-
+    var chart8 = echarts.init(document.getElementById("main"));
+    var div_ = document.getElementById("main");  
+    div_.removeAttribute("_echarts_instance_");
+    chart8 = echarts.init(div_);
 </script>

@@ -10,7 +10,7 @@ class Phone::HomepagesController < PhoneController
     @title="会员中心"
     @user = current_user 
     if @user.qrcode.blank?
-	  info = ConfigInfo["weixinconfiginfo"]
+	    info = ConfigInfo["weixinconfiginfo"]
       go_url = "#{info["AUTH_ADDR"]}appid=#{info["APPID"]}&redirect_uri=#{Const::STORES_SHOW_ADDR}/phone/mem_activations?referee_id=#{@user.id.to_s}&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect"   
       qr = RQRCode::QRCode.new(go_url, :size => 16, :level => :h )
       png = qr.to_img                      

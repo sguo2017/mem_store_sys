@@ -1,9 +1,9 @@
+<% content_for :title, "积分抽奖" %>
 <div  class="lottery" <% if @activity.avatar.blank? %> <% else%> style="background: #000 url('<%= @activity.avatar %>') center center ; background-size: cover;" <% end %> >
   <div class="header">
     <a class="header-left" href="javascript:void(0)" onclick="window.location.href='/phone/homepages';">
       <span class="ico-header-back"></span>
     </a>
-    <h1>营销活动</h1>
     <button class="header-right"><span class="ico-scan"></span></button>
     
   </div>

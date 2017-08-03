@@ -25,7 +25,8 @@ margin-bottom: 18px;"></div>
 </div>
 <!-- 引入 echarts.js -->
 <script src="/assets/admin/javascript/echart/build/dist/echarts.js"></script>
-<script type="text/javascript">
+<script type="text/javascript"> 
+
 option = {
     title: {
         text: '会员分析',
@@ -105,4 +106,8 @@ require(
         myChart.setOption(option);
     }
 );
+
+var div_ = document.getElementById("main");  
+    div_.removeAttribute("_echarts_instance_");  
+    chart8 = echarts.init(div_);
 </script>

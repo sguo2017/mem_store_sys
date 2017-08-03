@@ -13,8 +13,12 @@
         <td><%= user.count %></td>
         <% if user.status != "00H" %>
         <td>
-          <%= link_to t('.show', :default => t("helpers.links.show")),
-                      admin_user_path(user), :class => 'btn btn-default btn-xs' %>
+          <form action="/admin/qr_code_scan_histories" method="get">
+            <input type='hidden' value= '<%=user.id%>' class='user_id' name ='user_id'/>
+            <input type='hidden' value= '<%=@start_date%>' class='start_date' name ='start_date'/>
+            <input type='hidden' value= '<%=@end_date%>' class='end_date' name ='end_date'/>
+            <input type="submit" class="btn btn-default btn-xs" value="查看" />
+          </form>
         <button type="button" class="btn btn-warning btn-xs mr5 lock-user-btn"  data-user=<%= user.id %> data-status=<%= user.status %>  >
         <span class='lock-text' style="display: <% if user.status == '00X' %>none<%end%>" >冻结</span>
         <span class='unlock-text' style="display: <% if user.status == '00A' %>none<%end%>">恢复</span>

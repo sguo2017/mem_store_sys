@@ -28,7 +28,7 @@
         <td><%= red_packet_history.money %></td>
         <td><%= red_packet_history.catalog %></td>
         <td><%= red_packet_history.phone_number %></td>
-        <td><%= red_packet_history.status %></td>
+        <td><%if red_packet_history.status == "00A" %><%="成功"%><%else%><%="失败"%><%end%></td>
         <td><%= red_packet_history.return_msg %></td>
         <td><%= red_packet_history.created_at.strftime('%Y-%m-%d %H:%M:%S') %></td>
         <td>

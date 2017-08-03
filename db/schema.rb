@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170725020752) do
+ActiveRecord::Schema.define(version: 20170803104352) do
 
   create_table "activities", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "title"
@@ -194,8 +194,8 @@ ActiveRecord::Schema.define(version: 20170725020752) do
     t.string "city"
     t.string "province"
     t.string "country"
-    t.string "latitude"
-    t.string "longitude"
+    t.float "latitude", limit: 24
+    t.float "longitude", limit: 24
     t.string "addr"
     t.string "linkman"
     t.string "contact_num"

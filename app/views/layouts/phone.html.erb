@@ -19,7 +19,12 @@
     <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
 
     <script type="text/javascript">
+      var user_latitude // 纬度，浮点数，范围为90 ~ -90
+      var user_longitude  // 经度，浮点数，范围为180 ~ -180。
+      var user_speed  // 速度，以米/每秒计
+      var user_accuracy  // 位置精度
 $(function(){
+
       var timestamp = Date.parse(new Date())/1000
       var nonceStr = '<%= FFaker::Lorem::characters %>'
       var string1 = "jsapi_ticket=<%= session[:jsapi_ticket] %>&noncestr="+nonceStr+"&timestamp="+timestamp+"&url="+window.location.href
@@ -119,7 +124,24 @@ $(function(){
             }
         });
 
+
+        wx.getLocation({
+
+          type: 'wgs84', // 默认为wgs84的gps坐标，如果要返回直接给openLocation用的火星坐标，可传入'gcj02'
+
+          success: function (res) {
+              user_latitude = res.latitude; // 纬度，浮点数，范围为90 ~ -90
+              user_longitude = res.longitude; // 经度，浮点数，范围为180 ~ -180。
+              user_speed = res.speed; // 速度，以米/每秒计
+              user_accuracy = res.accuracy; // 位置精度
+          }
+
+        });
+
       });
+
+
+
 
   }) ;     
 

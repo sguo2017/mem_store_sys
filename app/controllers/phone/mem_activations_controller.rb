@@ -11,11 +11,33 @@ class Phone::MemActivationsController < PhoneController
   def index
     @user = User.new
     @referee_id = params[:referee_id]
+    @menu = params[:menu]
     @store_id = params[:store_id]
     @code = params[:code]
     # from:singlemessage微信分享过来的 ；groupmessage再转分享
     @from = params[:from] 
     goto_url = ""
+
+    case @menu
+    when '1' #'1'表示跳转到积分兑换
+      go_url = phone_bonus_changes_url
+    when '2' #'2'表示跳转到积分抽奖
+      go_url = phone_activities_url
+    when '3' #'3'表示跳转到优惠券
+      go_url = phone_homepages_url
+    when '4' #'4'表示跳转到工长助手
+      go_url = phone_tech_servs_url
+    when '5' #'5'表示跳转到会员邀请
+      go_url = phone_invitations_url
+    when '6' #'6'表示跳转到附近门店
+      go_url = phone_stores_url
+    else     #其它情况跳转到主页
+      go_url = phone_homepages_url
+    end
+
+    respond_to do |format|
+      format.html { redirect_to go_url}
+    end
 
     info = ConfigInfo["weixinconfiginfo"]
     # 场景一 授权的没有注册过的用户
@@ -44,7 +66,7 @@ class Phone::MemActivationsController < PhoneController
     else
       # 场景二 分享过来的页面：要做转跳转到授权
       if @from == "singlemessage" or @from == "groupmessage" 
-        goto_url = "#{info["AUTH_ADDR"]}appid=#{info["APPID"]}&redirect_uri=http://gzb.davco.cn/phone/mem_activations?method=wxCfgEntrance&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect"
+        goto_url = "#{info["AUTH_ADDR"]}appid=#{info["APPID"]}&redirect_uri=http://gzb.davco.cn/phone/mem_activations?menu=#{@menu}&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect"
         respond_to do |format|
           format.html { redirect_to goto_url }
         end

@@ -32,7 +32,6 @@ class Phone::ActivitiesController < PhoneController
       @activity_award_cfg = ActivityAwardCfg.find(award.activity_award_cfg_id)
       @restaraunts.push(award.catalog+"#"+@activity_award_cfg.name)
     end
-    logger.debug "#{@restaraunts.to_json}"
 
     #抽奖次数
     #has_draw = @user.lotteries.where("created_at >= ?", Time.now.beginning_of_day).size

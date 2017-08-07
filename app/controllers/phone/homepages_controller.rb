@@ -7,6 +7,7 @@ class Phone::HomepagesController < PhoneController
   # GET /phone/homepages
   # GET /phone/homepages.json
   def index
+
     @title="会员中心"
     @user = current_user 
     if @user.qrcode.blank?

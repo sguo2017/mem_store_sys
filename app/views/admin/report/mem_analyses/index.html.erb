@@ -23,8 +23,6 @@ margin-bottom: 18px;"></div>
         </div>
     </div>
 </div>
-<!-- 引入 echarts.js -->
-<script src="/assets/admin/javascript/echart/build/dist/echarts.js"></script>
 <script type="text/javascript"> 
     
 option = {
@@ -106,8 +104,4 @@ require(
         myChart.setOption(option);
     }
 );
-    var chart8 = echarts.init(document.getElementById("main"));
-    var div_ = document.getElementById("main");  
-    div_.removeAttribute("_echarts_instance_");
-    chart8 = echarts.init(div_);
 </script>

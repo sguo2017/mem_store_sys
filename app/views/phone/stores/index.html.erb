@@ -22,65 +22,36 @@
 	var point = new BMap.Point(116.331398,39.897445);
 	map.centerAndZoom(point,12);
 	var mypoint ;
+	var city ;
 	var geolocation = new BMap.Geolocation();
 	var store = [<% @store_array.each do |s| %> {label:"<%= s['name'] %>",lat:<%= s['latitude'] %>, lng:<%= s['longitude'] %>}, <% end %>]
+	var gc = new BMap.Geocoder();    
 	geolocation.getCurrentPosition(function(r){
 		if(this.getStatus() == BMAP_STATUS_SUCCESS){
 			mypoint = r.point;
+			gc.getLocation(mypoint, function(rs){    
+                var addComp = rs.addressComponents;     
+                city = addComp.city 
+            });  
 			var mk = new BMap.Marker(r.point);
 			var latCurrent = r.point.lat;  
             var lngCurrent = r.point.lng;  
 			// map.addOverlay(mk);//您的位置加标注
 			map.panTo(r.point);
 
-			var d = [
-					{label:'广州天河墙固德高防水专卖店',lat:113.398109,lng:23.109886},
-					{label:'广州市天河区讯发建材城金利德高防水专卖店',lat:113.391548,lng:23.115885},
-				];
-
 			for(var i=0;i<store.length;i++){
 				var p = new BMap.Point(store[i].lat,store[i].lng);
 				var m = new BMap.Marker(p); 
 				var l = new BMap.Label(store[i].label,{offset:new BMap.Size(20,-10)});
 				m.setLabel(l);
-				m.addEventListener("click",attribute1);
+				m.addEventListener("click", function (){
+					var p = this.point;  
+
+					location.href="http://api.map.baidu.com/direction?origin="+latCurrent+","+lngCurrent+"&destination="+p.lat+","+p.lng+"&mode=driving&region=" + city + "&output=html";  
+				});
 				map.addOverlay(m);    //增加点	
-
-				function attribute1(){
-					var p = m.getPosition();  
-
-					location.href="http://api.map.baidu.com/direction?origin="+latCurrent+","+lngCurrent+"&destination="+p.lat+","+p.lng+"&mode=driving&region=广州&output=html";  			
-
-				}
+				
 			}
-
-			/*var china_unicom_gz_p1 = new BMap.Point(113.398109,23.109886);
-			var marker_china_unicom_gz_1 = new BMap.Marker(china_unicom_gz_p1); 
-			var label1 = new BMap.Label("广州天河墙固德高防水专卖店",{offset:new BMap.Size(20,-10)});
-			marker_china_unicom_gz_1.setLabel(label1);
-			marker_china_unicom_gz_1.addEventListener("click",attribute1);
-			map.addOverlay(marker_china_unicom_gz_1);    //增加点	
-
-			function attribute1(){
-				var p = marker_china_unicom_gz_1.getPosition();  
-
-				location.href="http://api.map.baidu.com/direction?origin="+latCurrent+","+lngCurrent+"&destination="+p.lat+","+p.lng+"&mode=driving&region=广州&output=html";  			
-
-			}
-
-
-			var china_unicom_gz_p2 = new BMap.Point(113.391548,23.115885);
-			var marker_china_unicom_gz_2 = new BMap.Marker(china_unicom_gz_p2); 
-			var labe2 = new BMap.Label("广州市天河区讯发建材城金利德高防水专卖店",{offset:new BMap.Size(20,-10)});
-			marker_china_unicom_gz_2.setLabel(labe2);
-			marker_china_unicom_gz_2.addEventListener("click",attribute2);
-			map.addOverlay(marker_china_unicom_gz_2);    //增加点	
-
-			function attribute2(){
-				var p = marker_china_unicom_gz_2.getPosition();  
-				location.href="http://api.map.baidu.com/direction?origin="+latCurrent+","+lngCurrent+"&destination="+p.lat+","+p.lng+"&mode=driving&region=广州&output=html";  				
-
-			}	*/
 
 		}
 		else {

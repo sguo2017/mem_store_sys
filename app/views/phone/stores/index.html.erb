@@ -17,60 +17,79 @@
 </body>
 </html>
 <script type="text/javascript">
-	// 百度地图API功能
-	var map = new BMap.Map("allmap");
-	var point = new BMap.Point(116.331398,39.897445);
-	map.centerAndZoom(point,12);
-	var mypoint ;
-	var city ;
-	var geolocation = new BMap.Geolocation();
-	var store = [<% @store_array.each do |s| %> {label:"<%= s['name'] %>",lat:<%= s['latitude'] %>, lng:<%= s['longitude'] %>}, <% end %>]
-	var gc = new BMap.Geocoder();    
-	geolocation.getCurrentPosition(function(r){
-		if(this.getStatus() == BMAP_STATUS_SUCCESS){
-			mypoint = r.point;
-			gc.getLocation(mypoint, function(rs){    
-                var addComp = rs.addressComponents;     
-                city = addComp.city 
-            });  
-			var mk = new BMap.Marker(r.point);
-			var latCurrent = r.point.lat;  
-            var lngCurrent = r.point.lng;  
-			// map.addOverlay(mk);//您的位置加标注
-			map.panTo(r.point);
+	<% if @from_url.blank? %>
+		// 百度地图API功能
+		var map = new BMap.Map("allmap");
+		var point = new BMap.Point(116.331398,39.897445);
+		map.centerAndZoom(point,12);
+		var mypoint ;
+		var city ;
+		var geolocation = new BMap.Geolocation();
+		var store = [<% @store_array.each do |s| %> {label:"<%= s['name'] %>",lat:<%= s['latitude'] %>, lng:<%= s['longitude'] %>}, <% end %>]
+		var gc = new BMap.Geocoder();    
+		geolocation.getCurrentPosition(function(r){
+			if(this.getStatus() == BMAP_STATUS_SUCCESS){
+				mypoint = r.point;
+				gc.getLocation(mypoint, function(rs){    
+	                var addComp = rs.addressComponents;     
+	                city = addComp.city 
+	            });  
+				var mk = new BMap.Marker(r.point);
+				var latCurrent = r.point.lat;  
+	            var lngCurrent = r.point.lng;  
+				// map.addOverlay(mk);//您的位置加标注
+				map.panTo(r.point);
 
-			for(var i=0;i<store.length;i++){
-				var p = new BMap.Point(store[i].lat,store[i].lng);
-				var m = new BMap.Marker(p); 
-				var l = new BMap.Label(store[i].label,{offset:new BMap.Size(20,-10)});
-				m.setLabel(l);
-				m.addEventListener("click", function (){
-					var p = this.point;  
+				for(var i=0;i<store.length;i++){
+					var p = new BMap.Point(store[i].lat,store[i].lng);
+					var m = new BMap.Marker(p); 
+					var l = new BMap.Label(store[i].label,{offset:new BMap.Size(20,-10)});
+					m.setLabel(l);
+					m.addEventListener("click", function (){
+						var p = this.point;  
 
-					location.href="http://api.map.baidu.com/direction?origin="+latCurrent+","+lngCurrent+"&destination="+p.lat+","+p.lng+"&mode=driving&region=" + city + "&output=html";  
-				});
-				map.addOverlay(m);    //增加点	
-				
+						location.href="http://api.map.baidu.com/direction?origin="+latCurrent+","+lngCurrent+"&destination="+p.lat+","+p.lng+"&mode=driving&region=" + city + "&output=html";  
+					});
+					map.addOverlay(m);    //增加点	
+					
+				}
+
 			}
+			else {
+				alert('failed'+this.getStatus());
+			}        
+		},{enableHighAccuracy: true})
 
+		function callback(e)//单击热点图层
+		{
 		}
-		else {
-			alert('failed'+this.getStatus());
-		}        
-	},{enableHighAccuracy: true})
+	<% else %>
+    var timestamp = Date.parse(new Date())/1000
+    var nonceStr = '<%= FFaker::Lorem::characters %>'
+    var string1 = "jsapi_ticket=<%= session[:jsapi_ticket] %>&noncestr="+nonceStr+"&timestamp="+timestamp+"&url="+window.location.href
+    var signature = sha1(string1)
+    wx.config({
+        debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+        appId: '<%= ConfigInfo["weixinconfiginfo"]["APPID"] %>', // 必填，公众号的唯一标识
+        timestamp: timestamp, // 必填，生成签名的时间戳
+        nonceStr: nonceStr, // 必填，生成签名的随机串
+        signature: signature,// 必填，签名，参与签名的字段包括noncestr（随机字符串）, 有效的jsapi_ticket, timestamp（时间戳）, url（当前网页的URL，不包含#及其后面部分） 。对所有待签名参数按照字段名的ASCII 码从小到大排序（字典序）后，使用URL键值对的格式（即key1=value1&key2=value2…）拼接成字符串string1。这里需要注意的是所有参数名均为小写字符。对string1作sha1加密，字段名和字段值都采用原始值，不进行URL 转义。
+        jsApiList: ['scanQRCode','onMenuShareTimeline','onMenuShareAppMessage','onMenuShareQQ','onMenuShareWeibo','onMenuShareQZone'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+    });
 
+    wx.ready(function(){
+	    wx.getLocation({
+	        type: 'wgs84', // 默认为wgs84的gps坐标，如果要返回直接给openLocation用的火星坐标，可传入'gcj02'
 
+	        success: function (res) {
+	            user_latitude = res.latitude; // 纬度，浮点数，范围为90 ~ -90
+	            user_longitude = res.longitude; // 经度，浮点数，范围为180 ~ -180。
+	            user_speed = res.speed; // 速度，以米/每秒计
+	            user_accuracy = res.accuracy; // 位置精度
+		 	    window.location='stores?user_latitude='+user_latitude+'&user_longitude='+user_longitude;
 
-
-
-
-	function callback(e)//单击热点图层
-	{
-		
-
-	}
-
-
-
-
+	    	}
+	    });
+	});
+	<% end %>
 </script>

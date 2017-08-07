@@ -30,7 +30,7 @@ class Phone::MemActivationsController < PhoneController
     when '5' #'5'表示跳转到会员邀请
       @goto_url = phone_invitations_url
     when '6' #'6'表示跳转到附近门店
-      @goto_url = phone_stores_url
+      @goto_url = phone_stores_url + "?from_url=mem_activations" 
     else     #其它情况跳转到主页
       @goto_url = phone_homepages_url
     end

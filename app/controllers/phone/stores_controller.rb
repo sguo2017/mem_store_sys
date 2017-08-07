@@ -6,38 +6,37 @@ class Phone::StoresController < ApplicationController
   def index
     user_latitude = params[:user_latitude]
     user_longitude = params[:user_longitude]
+    @from_url = params[:from_url]
+    @store_array = [] 
+    if @from_url.blank?
+      r = 6371.0000;    #地球半径千米  
+      dis = 5.0000;   #0.5千米距离  
+      dlng =  2*Math.asin(Math.sin(dis/(2*r))/Math.cos(user_latitude.to_f*3.14/180)).round(4) ;  
+      dlng = dlng*180/3.14.round(4);#角度转为弧度  
+      dlat = dis/r.round(4);  
+      dlat = dlat*180/3.14.round(4);    
+      minlat =user_latitude.to_f - dlat;  
+      maxlat = user_latitude.to_f + dlat;  
+      minlng = user_longitude.to_f - dlng;  
+      maxlng = user_longitude.to_f + dlng;  
+
+      @store  = Store.where("latitude >= ? and latitude <= ? and longitude >= ? and longitude <= ? ", minlng, maxlng, minlat, maxlat)  
+  
+      @store.each_with_index do |store|
+        s = store.attributes.clone
+        if store.latitude.blank? || store.longitude.blank?
+          # logger.debug "12 #{s.to_s}"
+        else
+          # logger.debug "14 #{s.to_s}"
+          @store_array.push(s)
+        end
+      end  
+      # logger.debug "13 #{@store_array.to_json}"
+
+    else
 
 
-    r = 6371.0000;    #地球半径千米  
-    dis = 5.0000;   #0.5千米距离  
-    dlng =  2*Math.asin(Math.sin(dis/(2*r))/Math.cos(user_latitude.to_f*3.14/180)).round(4) ;  
-    # logger.debug "14 #{dlng.to_s}" 
-    dlng = dlng*180/3.14.round(4);#角度转为弧度  
-    dlat = dis/r.round(4);  
-    dlat = dlat*180/3.14.round(4);     
-    # logger.debug "17 #{dlat.to_s}"    
-    # logger.debug "18 #{dlng.to_s}" 
-    minlat =user_latitude.to_f - dlat;  
-    maxlat = user_latitude.to_f + dlat;  
-    # logger.debug "19 #{user_longitude.to_s}"
-    minlng = user_longitude.to_f - dlng;  
-    maxlng = user_longitude.to_f + dlng;  
-
-    # logger.debug "21 #{maxlng.to_s}"
-    # logger.debug "22 #{minlng.to_s}"
-
-    @store  = Store.where("latitude >= ? and latitude <= ? and longitude >= ? and longitude <= ? ", minlng, maxlng, minlat, maxlat)  
-    @store_array = []   
-    @store.each_with_index do |store|
-      s = store.attributes.clone
-      if store.latitude.blank? || store.longitude.blank?
-        # logger.debug "12 #{s.to_s}"
-      else
-        # logger.debug "14 #{s.to_s}"
-        @store_array.push(s)
-      end
-    end  
-    # logger.debug "13 #{@store_array.to_json}"
+    end
   end
 
   # GET /phone/stores/1

@@ -4,21 +4,21 @@ class Phone::StoresController < ApplicationController
   # GET /phone/stores
   # GET /phone/stores.json
   def index
-    user_latitude = params[:user_latitude]
-    user_longitude = params[:user_longitude]
+    @user_latitude = params[:user_latitude]
+    @user_longitude = params[:user_longitude]
     @from_url = params[:from_url]
     @store_array = [] 
     if @from_url.blank?
       r = 6371.0000;    #地球半径千米  
       dis = 5.0000;   #0.5千米距离  
-      dlng =  2*Math.asin(Math.sin(dis/(2*r))/Math.cos(user_latitude.to_f*3.14/180)).round(4) ;  
+      dlng =  2*Math.asin(Math.sin(dis/(2*r))/Math.cos(@user_latitude.to_f*3.14/180)).round(4) ;  
       dlng = dlng*180/3.14.round(4);#角度转为弧度  
       dlat = dis/r.round(4);  
       dlat = dlat*180/3.14.round(4);    
-      minlat =user_latitude.to_f - dlat;  
-      maxlat = user_latitude.to_f + dlat;  
-      minlng = user_longitude.to_f - dlng;  
-      maxlng = user_longitude.to_f + dlng;  
+      minlat = @user_latitude.to_f - dlat;  
+      maxlat = @user_latitude.to_f + dlat;  
+      minlng = @user_longitude.to_f - dlng;  
+      maxlng = @user_longitude.to_f + dlng;  
 
       @store  = Store.where("latitude >= ? and latitude <= ? and longitude >= ? and longitude <= ? ", minlng, maxlng, minlat, maxlat)  
   

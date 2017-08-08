@@ -4,7 +4,6 @@ class Admin::Report::MemAnalysesController < AdminController
     if @qryType.blank?
         @qryType = "1"
     end
-    
     case @qryType
     when "1" 
         #统计各年龄阶段人数

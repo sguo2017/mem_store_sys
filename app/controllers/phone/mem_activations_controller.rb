@@ -31,6 +31,8 @@ class Phone::MemActivationsController < PhoneController
       @goto_url = phone_invitations_url
     when '6' #'6'表示跳转到附近门店
       @goto_url = phone_stores_url + "?from_url=mem_activations" 
+    when '7' #'7'表示跳转积分查询
+      @goto_url = phone_score_queries_url
     else     #其它情况跳转到主页
       @goto_url = phone_homepages_url
     end

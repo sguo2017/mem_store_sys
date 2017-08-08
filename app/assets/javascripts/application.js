@@ -19,6 +19,10 @@
 //= require bootstrap-sprockets
 //= require bootstrap-datepicker.min
 //= require turbolinks
-//= require_tree .
+//= require goods
+//= require echarts
+//= require cable
+//= require activities
+//= require_tree ./admin
 //= require ckeditor/init
 

@@ -25,8 +25,6 @@ margin-bottom: 18px;"></div>
 </div>
 <!-- 引入 echarts.js -->
 <script type="text/javascript"> 
-
-$(document).ready(function(){
     option = {
     title: {
         text: '会员分析',
@@ -101,14 +99,10 @@ require(
         // 基于准备好的dom，初始化echarts图表
         
             var myChart = ec.init(document.getElementById('main'));
-            myChart.clear()
-            myChart.setOption(option); 
-            console.log("AAA")
+            myChart.setOption(option);
         // 为echarts对象加载数据 
     }
 );
-
-}); 
 
 
 </script>

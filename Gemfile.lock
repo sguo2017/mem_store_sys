@@ -56,7 +56,7 @@ GEM
       sass (>= 3.3.4)
     builder (3.2.3)
     byebug (9.0.6)
-    cancancan (1.17.0)
+    cancancan (2.0.0)
     capybara (2.14.4)
       addressable
       mime-types (>= 1.16)
@@ -284,7 +284,7 @@ DEPENDENCIES
   annotate
   bootstrap-sass (~> 3.3.6)
   byebug
-  cancancan (~> 1.10)
+  cancancan (~> 2.0)
   capybara (~> 2.13)
   carrierwave
   ckeditor
@@ -327,4 +327,4 @@ DEPENDENCIES
   web-console (>= 3.3.0)
 
 BUNDLED WITH
-   1.14.6
+   1.15.3

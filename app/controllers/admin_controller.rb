@@ -2,7 +2,15 @@ class AdminController < ApplicationController
     before_action :authenticate_user!
     before_action :phone_access_admin    
     before_action :menu_active
+    load_and_authorize_resource
 
+  rescue_from CanCan::AccessDenied do |exception|
+      respond_to do |format|
+        format.json { head :forbidden, content_type: 'text/html' }
+        format.html { redirect_to main_app.root_url, notice: exception.message }
+        format.js   { head :forbidden, content_type: 'text/html' }
+      end
+  end
   def phone_access_admin    
     @user = current_user 
     #前端用户从前端跳转过来的 重新跳转到前端
@@ -10,6 +18,13 @@ class AdminController < ApplicationController
         redirect_to [:phone, 'homepages'] 
     end
 
+  end
+
+  def null_resource_authorize
+    @user = current_user
+    unless @user.admin == 1
+        redirect_to main_app.root_url
+    end
   end
 
   def menu_active    

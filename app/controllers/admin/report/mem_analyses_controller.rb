@@ -1,9 +1,12 @@
 class Admin::Report::MemAnalysesController < AdminController
+    skip_load_and_authorize_resource
+    before_action :null_resource_authorize
   def index
     @qryType = params[:qryType]
     if @qryType.blank?
         @qryType = "1"
     end
+    
     case @qryType
     when "1" 
         #统计各年龄阶段人数

@@ -6,9 +6,9 @@ class Admin::StoresController < AdminController
   def index
     @name = params[:name]
     if @name.blank? 
-      @stores = Store.page(params[:page]).per(10)
+      @stores = Store.page(params[:page]).accessible_by(current_ability).per(10)
     else
-      @stores = Store.where('name LIKE ? ', '%'+@name+'%').order("created_at DESC").page(params[:page]).per(10)
+      @stores = Store.accessible_by(current_ability).where('name LIKE ? ', '%'+@name+'%').order("created_at DESC").page(params[:page]).per(10)
     end
   end
 

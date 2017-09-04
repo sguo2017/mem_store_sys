@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="renderer" content="webkit">
-  <meta name="turbolinks-cache-control" content="no-preview">
   <title><%= content_for?(:title) ? yield(:title) : "会员积分体系" %></title>
     <%= csrf_meta_tags %>
 
@@ -101,6 +100,9 @@
                     <li><%= link_to "首页广告修改", admin_ad_modifies_path  %></li>
                 </ul>
             </li>
+                        <%if user_signed_in?%>
+          <li><%=link_to "quit",destroy_user_session_path,method: :delete%></li>
+            <%end%>
         </ul>
     </div>
   </div>
@@ -113,3 +115,4 @@
   $.datetimepicker.setLocale('zh');
   //日期中文化>>
 </script>
+

@@ -5,7 +5,9 @@
       <div class="panel-title">门店列表</div>
     </div>
     <div class="panel-body">
+    <%if current_user.admin == 1%>
     <%= render 'search_form' %>
+    <%end%>
 <div class="table-responsive block-mt">
         <table class="table table-striped">
           <colgroup>

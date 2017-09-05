@@ -32,9 +32,11 @@
         <% if user.status != "00H" %>
         <td>
         <!-- Button trigger modal -->
+        <% if current_user.admin == 1 %>
         <button type="button" class="btn btn-default btn-xs" data-toggle="modal" data-target="#modal-users" data-mem_group=<%= user.mem_group_id %> data-user=<%= user.id %> >
           切换分组
         </button>
+        <%end%>
           <%= link_to t('.show', :default => t("helpers.links.show")),
                       admin_user_path(user), :class => 'btn btn-default btn-xs' %>
  <!--          <%= link_to t('.edit', :default => t("helpers.links.edit")),
@@ -44,12 +46,14 @@
                       :method => :delete,
                       :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => '您确认?')) },
                       :class => 'btn btn-warning btn-xs mr5' %> -->
+        <% if current_user.admin == 1 %>
         <button type="button" class="btn btn-warning btn-xs mr5 lock-user-btn"  data-user=<%= user.id %> data-status=<%= user.status %>  >
         <span class='lock-text' style="display: <% if user.status == '00X' %>none<%end%>" >冻结</span>
         <span class='unlock-text' style="display: <% if user.status == '00A' %>none<%end%>">恢复</span>
         </button>
          <button type="button" class="btn btn-warning btn-xs mr5 close-user-btn"  data-user=<%= user.id %>  >注销
         </button>
+        <%end%>
         </td>
         <% else %>
         <td>

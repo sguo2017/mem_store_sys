@@ -3,7 +3,7 @@ class AdminController < ApplicationController
     before_action :phone_access_admin    
     before_action :menu_active
     load_and_authorize_resource
-
+    layout :admin_layout
   rescue_from CanCan::AccessDenied do |exception|
       respond_to do |format|
         format.json { head :forbidden, content_type: 'text/html' }
@@ -18,6 +18,10 @@ class AdminController < ApplicationController
         redirect_to [:phone, 'homepages'] 
     end
 
+  end
+
+  def admin_layout
+    current_user.admin == 1 ? "application" : "store_admin"
   end
 
   def null_resource_authorize

@@ -13,7 +13,7 @@
             
                 <%= label_tag(:url, "链接:", class: "col-xs-2 control-label")%>
                 <div class="col-xs-4">
-                    <%= text_field_tag(:url,'请填写完整链接', class: "form-control") %>
+                    <%= url_field_tag(:url, value = nil,options = {:placeholder => '请输入完整链接(如:https://...)', class: "form-control"}) %>
                 </div>
             
                 <%= label_tag(:image, "图片:", class: "col-xs-2 control-label") %>

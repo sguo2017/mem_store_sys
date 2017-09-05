@@ -35,7 +35,7 @@
            <li onclick="navbar_active(this)" <% if @current_nav == 'users' %>class='active'<% end %> ><%= link_to "会员", admin_users_path  %></li>
            <li onclick="navbar_active(this)" <% if @current_nav == 'stores' %>class='active'<% end %> ><%= link_to "门店", admin_stores_path  %></li>
             <%if user_signed_in?%>
-          <li><%=link_to "quit",destroy_user_session_path,method: :delete%></li>
+          <li><%=link_to "注销",destroy_user_session_path,method: :delete%></li>
             <%end%>
         </ul>
     </div>

@@ -68,6 +68,7 @@
   </tbody>
 </table>
 </div>
+<% if current_user.admin == 1 %>
 <div>
   <%= link_to t('.new', :default => t("helpers.links.new")),
             #new_admin_good_path
@@ -77,6 +78,7 @@
         <!--  切换分组 modal -->
         <%= render :partial => 'modal_users' %>
 </div>
+<% end %>
 <%= paginate @users %>
   </div>
             </div>

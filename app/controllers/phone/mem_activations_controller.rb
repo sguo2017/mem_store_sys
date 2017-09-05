@@ -9,17 +9,26 @@ class Phone::MemActivationsController < PhoneController
   # GET /phone/mem_activations
   # GET /phone/mem_activations.json
   def index
-    @user = User.new
+    @user = current_user
+    if @user.nil?
+      @user = User.new
+    end
     @referee_id = params[:referee_id]
     @menu = params[:menu]
     @store_id = params[:store_id]
+    puts "AAAAA#{@store_id}"
+    userInfo = session[:userInfo]
+    # puts "#CCCC{userInfo["user_id"]}"
     @code = params[:code]
+    @user.store_id = @store_id
+    @user.save
+    puts "DDDD#{@user.id}"
     # from:singlemessage微信分享过来的 ；groupmessage再转分享
     @from = params[:from] 
     goto_url = ""
 
     case @menu
-    when '1' #'1'表示跳转到积分兑换
+    when '1' #'1'表示跳转到积分兑换  
       goto_url = phone_bonus_changes_url
     when '2' #'2'表示跳转到积分抽奖
       goto_url = phone_activities_url
@@ -36,7 +45,6 @@ class Phone::MemActivationsController < PhoneController
     else     #其它情况跳转到主页
       goto_url = phone_homepages_url
     end
-puts goto_url
 
     info = ConfigInfo["weixinconfiginfo"]
     # 场景一 授权的没有注册过的用户
@@ -53,15 +61,17 @@ puts goto_url
       # logger.debug "21:user #{user.to_json}"
       if user.blank?
         session[:userInfo] = userInfo
-        logger.debug "AAAAAAA #{goto_url}"
+        puts(userInfo)
       else 
         user.saveWxUserInfo(userInfo)
         sign_in("user", user)
 
-        logger.debug "BBBBBB #{goto_url}"
-
         respond_to do |format|
-          format.html { redirect_to goto_url }
+          if @store_id.nil?
+            format.html { redirect_to goto_url}
+          else
+            format.html { redirect_to goto_url,notice: '您已成功绑定专卖店！'}
+          end
         end
       end  
     else
@@ -69,7 +79,11 @@ puts goto_url
       if @from == "singlemessage" or @from == "groupmessage" 
         goto_url = "#{info["AUTH_ADDR"]}appid=#{info["APPID"]}&redirect_uri=http://gzb.davco.cn/phone/mem_activations?menu=#{@menu}&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect"
         respond_to do |format|
-          format.html { redirect_to goto_url }
+          if @store_id.nil?
+            format.html { redirect_to goto_url}
+          else
+            format.html { redirect_to goto_url,notice: '您已成功绑定专卖店！'}
+          end
         end
       elsif @from == "self"
 
@@ -122,16 +136,16 @@ puts goto_url
               else
                 @user.saveWxUserInfo(userInfo)
                 sign_in("user", @user)
-                format.html { redirect_to [:phone, 'homepages'] }
+                format.html { redirect_to [:phone, 'homepages'],notice: '您已成功绑定专卖店！' }
               end
             else
-              #新增用户
+              #新增用户 
               @user = User.new(mem_activation_params)
               @user.admin = 'false'
               curr_time = rand(100000..999999)  
               @user.email =  Const::SYSTEM_EMAIL + "."+ mem_activation_params[:phone_num] +"."+ curr_time.to_s  #设置默认邮箱，邮箱为非空必须，否则报错
               
-              logger.debug "83 #{session[:userInfo]} city #{userInfo["city"]}"
+              logger.debug "83333 #{session[:userInfo]} city #{userInfo["city"]}"
               mg = MemGroup.find_by_city(userInfo["city"])
               if mg.blank?
                 mg = MemGroup.new(city: userInfo["city"],province: userInfo["province"],country: userInfo["country"])
@@ -140,6 +154,7 @@ puts goto_url
               @user.mem_group_id = mg.id
               @user.password = '123456'
               @user.password_confirmation='123456'
+
               if @user.save
                 @user.saveWxUserInfo(userInfo) 
                 sign_in("user", @user)
@@ -170,7 +185,7 @@ puts goto_url
                   @redpackethistory.status = status
                   @redpackethistory.save
         			  end
-                format.html { redirect_to [:phone, 'homepages'] }
+                format.html { redirect_to [:phone, 'homepages'],notice: '您已成功绑定专卖店！' }
               else
                 @msg = "保存失败"
                 format.html { redirect_to [:phone, 'mem_activations'],notice: 'ma_save_fail' }

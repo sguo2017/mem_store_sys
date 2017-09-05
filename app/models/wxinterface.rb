@@ -20,7 +20,6 @@ class Wxinterface
 
   def Wxinterface.getUserInfo(params)
 	info = ConfigInfo["weixinconfiginfo"]
-  	# puts "wxinterface.getUserInfo call"
     param = JSON.parse(params)
     uri = URI.parse(info["USER_INFO_ADDR"] + "access_token=#{param['access_token']}&openid=#{param['openid']}&lang=zh_CN")
     http = Net::HTTP.new(uri.host, uri.port)
@@ -30,7 +29,7 @@ class Wxinterface
     response = http.request(request)
     @data = response.body
     @data.force_encoding('UTF-8')
-    # logger.debug "162 #{@data.to_json}"
+    # puts "EEEEEE　#{@data.to_json}"
     return @data   
   end
 

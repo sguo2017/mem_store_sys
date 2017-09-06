@@ -124,4 +124,80 @@ class Wxinterface
     return @data
   end
 
+  def Wxinterface.get_industry()
+    #info = ConfigInfo["weixinconfiginfo"]
+    Wxinterface.global_access_token()
+    uri = URI.parse("https://api.weixin.qq.com/cgi-bin/template/get_industry?access_token=#{$access_token}")
+    puts "132: #{uri}"
+    http = Net::HTTP.new(uri.host, uri.port)
+    http.use_ssl = true
+    http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+    request = Net::HTTP::Get.new(uri.request_uri)
+    response = http.request(request)
+    @data = response.body
+    @data.force_encoding('UTF-8')
+    puts "140 #{@data}"
+    return JSON.parse(@data)['ticket'] 
+  end
+
+  def Wxinterface.get_all_private_template()
+    Wxinterface.global_access_token()
+    uri = URI.parse("https://api.weixin.qq.com/cgi-bin/template/get_all_private_template?access_token=#{$access_token}")
+    puts "132: #{uri}"
+    http = Net::HTTP.new(uri.host, uri.port)
+    http.use_ssl = true
+    http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+    request = Net::HTTP::Get.new(uri.request_uri)
+    response = http.request(request)
+    @data = response.body
+    @data.force_encoding('UTF-8')
+    puts "154 #{@data}"
+    return JSON.parse(@data)['ticket'] 
+  end
+
+  def Wxinterface.send_template_message(template_id,user_info)
+    data = {
+           "touser": user_info["openid"],
+           "template_id": template_id,        
+           "data":{
+                   "first": {
+                       "value": "积分变动！",
+                       "color": "#173177"
+                   },
+                   "keyword1":{
+                       "value": Time.now.strftime('%Y年-%m月-%d日 %H时:%M分'),
+                       "color": "#173177"
+                   },
+                   "keyword2": {
+                       "value":"1000",
+                       "color":"#173177"
+                   },
+                   "keyword3": {
+                       "value":"积分抽奖",
+                       "color":"#173177"
+                   },
+                   "keyword4": {
+                       "value":user_info["score"],
+                       "color":"#173177"
+                   },
+                   "remark":{
+                       "value":"欢迎再次参与！",
+                       "color":"#173177"
+                   }
+           }
+       }
+    info = ConfigInfo["weixinconfiginfo"]
+    Wxinterface.global_access_token()
+    uri = URI.parse("https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=#{$access_token}")
+    puts "192: #{uri}"
+    http = Net::HTTP.new(uri.host, uri.port)
+    http.use_ssl = true
+    http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+    request = Net::HTTP::Post.new(uri.request_uri)
+    request.body = data.to_json
+    response = http.request(request)
+    @data = response.body
+    @data.force_encoding('UTF-8')
+    puts "173 #{@data}"
+  end
 end

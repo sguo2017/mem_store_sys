@@ -121,6 +121,7 @@ class Phone::LotteriesController < PhoneController
             @score_query.user_id = @user.id
             # @score_query.bonus_change_id = "1"
             @score_query.save
+            Wxinterface.send_template_message_score(@user,@score_query.point,@score_query.object_type)
           end
         end
         format.json { 

@@ -35,18 +35,19 @@ class Wxinterface
 
   def Wxinterface.global_access_token
 	info = ConfigInfo["weixinconfiginfo"]
-    puts "wxinterface.getjsapi_ticket call"
-    uri = URI.parse(info["GLOBAL_ACCESS_TOKEN_ADDR"] + "grant_type=client_credential&appid=#{info["APPID"]}&secret=#{info["SECRET"]}")
-    puts "169: #{uri}"
-    http = Net::HTTP.new(uri.host, uri.port)
-    http.use_ssl = true
-    http.verify_mode = OpenSSL::SSL::VERIFY_NONE
-    request = Net::HTTP::Post.new(uri.request_uri)
-    response = http.request(request)
-    @data = response.body
-    @data.force_encoding('UTF-8')
-    puts "173 #{@data.to_json}"
-    $access_token = JSON.parse(@data)['access_token']   
+    if $access_token_effect_time == nil || (Time.now-$access_token_effect_time)>1.minute
+      uri = URI.parse(info["GLOBAL_ACCESS_TOKEN_ADDR"] + "grant_type=client_credential&appid=#{info["APPID"]}&secret=#{info["SECRET"]}")
+      http = Net::HTTP.new(uri.host, uri.port)
+      http.use_ssl = true
+      http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+      request = Net::HTTP::Post.new(uri.request_uri)
+      response = http.request(request)
+      @data = response.body
+      @data.force_encoding('UTF-8')
+      puts "50 #{@data.to_json}"
+      $access_token = JSON.parse(@data)['access_token']   
+      $access_token_effect_time = Time.now
+    end
     # session[:jsapi_ticket] = JSON.parse(@data)['ticket']    
     # puts "176 #{session[:jsapi_ticket]}"
     # return @data    
@@ -64,7 +65,7 @@ class Wxinterface
     response = http.request(request)
     @data = response.body
     @data.force_encoding('UTF-8')
-    puts "173 #{@data.to_json}" #"{\"errcode\":0,\"errmsg\":\"ok\",\"ticket\":\"sM4AOVdWfPE4DxkXGEs8VPHC6PkRrUTMm9L913Q0hTlkYsOYfpAjf9VQaukqSypUrVsU3cDmzApPUAL_DSE7AA\",\"expires_in\":7200}"
+    puts "71 #{@data.to_json}" #"{\"errcode\":0,\"errmsg\":\"ok\",\"ticket\":\"sM4AOVdWfPE4DxkXGEs8VPHC6PkRrUTMm9L913Q0hTlkYsOYfpAjf9VQaukqSypUrVsU3cDmzApPUAL_DSE7AA\",\"expires_in\":7200}"
     return JSON.parse(@data)['ticket'] 
   end
 
@@ -125,9 +126,9 @@ class Wxinterface
   end
 
   def Wxinterface.get_industry()
-    #info = ConfigInfo["weixinconfiginfo"]
+    info = ConfigInfo["weixinconfiginfo"]
     Wxinterface.global_access_token()
-    uri = URI.parse("https://api.weixin.qq.com/cgi-bin/template/get_industry?access_token=#{$access_token}")
+    uri = URI.parse(info["GET_INDUSTRY"]+"access_token=#{$access_token}")
     puts "132: #{uri}"
     http = Net::HTTP.new(uri.host, uri.port)
     http.use_ssl = true
@@ -141,8 +142,9 @@ class Wxinterface
   end
 
   def Wxinterface.get_all_private_template()
+    info = ConfigInfo["weixinconfiginfo"]
     Wxinterface.global_access_token()
-    uri = URI.parse("https://api.weixin.qq.com/cgi-bin/template/get_all_private_template?access_token=#{$access_token}")
+    uri = URI.parse(info["GET_ALL_PRIVATE_TEMPLATE"]+"access_token=#{$access_token}")
     puts "132: #{uri}"
     http = Net::HTTP.new(uri.host, uri.port)
     http.use_ssl = true
@@ -155,13 +157,13 @@ class Wxinterface
     return JSON.parse(@data)['ticket'] 
   end
 
-  def Wxinterface.send_template_message(template_id,user_info)
+  def Wxinterface.send_template_message_score(user_info,socre_change,score_type)
     data = {
            "touser": user_info["openid"],
-           "template_id": template_id,        
+           "template_id": "fggQR64tbFOksCBV8Nqt0V70KExuDOyYsg0PlZmOyow",        
            "data":{
                    "first": {
-                       "value": "积分变动！",
+                       "value": "亲爱的#{user_info['name']}，您的积分账户有新的变动，具体内容如下：",
                        "color": "#173177"
                    },
                    "keyword1":{
@@ -169,26 +171,98 @@ class Wxinterface
                        "color": "#173177"
                    },
                    "keyword2": {
-                       "value":"1000",
-                       "color":"#173177"
+                       "value": socre_change,
+                       "color": "#173177"
                    },
                    "keyword3": {
-                       "value":"积分抽奖",
-                       "color":"#173177"
+                       "value": score_type,
+                       "color": "#173177"
                    },
                    "keyword4": {
-                       "value":user_info["score"],
-                       "color":"#173177"
+                       "value": user_info["score"],
+                       "color": "#173177"
                    },
                    "remark":{
-                       "value":"欢迎再次参与！",
-                       "color":"#173177"
+                       "value": "欢迎再次参与！",
+                       "color": "#173177"
                    }
            }
        }
+    Wxinterface.send_template_message(data)
+  end
+
+  def Wxinterface.send_template_message_gift_exchange(user_info,gift_name,score_consumed)
+    data = {
+           "touser": user_info["openid"],
+           "template_id": "CPgWVvuZHalzOoxRyyNPPU4TL68Ff-DPiXIajmm85oM",        
+           "data":{
+                   "first": {
+                       "value": "亲爱的#{user_info['name']}，您的奖品兑换成功：",
+                       "color": "#173177"
+                   },
+                   "keyword1":{
+                       "value": gift_name,
+                       "color": "#173177"
+                   },
+                   "keyword2": {
+                       "value": score_consumed,
+                       "color": "#173177"
+                   },
+                   "keyword3": {
+                       "value": user_info["score"],
+                       "color": "#173177"
+                   },
+                   "keyword4": {
+                       "value": Time.now.strftime('%Y年-%m月-%d日 %H时:%M分'),
+                       "color": "#173177"
+                   },
+                   "remark":{
+                       "value": "欢迎再次参与！",
+                       "color": "#173177"
+                   }
+           }
+       }
+    Wxinterface.send_template_message(data)
+  end
+
+  def Wxinterface.send_template_message_profile_changed(user_info,detail,effect_time)
+    data = {
+           "touser": user_info["openid"],
+           "template_id": "GvUHMI1-78LuDhhf28qvFrMi6to8pn3-YGXzdIzIHTE",        
+           "data":{
+                   "first": {
+                       "value": "亲爱的#{user_info['name']}，您的信息变更成功：",
+                       "color": "#173177"
+                   },
+                   "keyword1":{
+                       "value": "会员卡号",
+                       "color": "#173177"
+                   },
+                   "keyword2": {
+                       "value": Time.now.strftime('%Y年-%m月-%d日 %H时:%M分'),
+                       "color": "#173177"
+                   },
+                   "keyword3": {
+                       "value": detail,
+                       "color": "#173177"
+                   },
+                   "keyword4": {
+                       "value": effect_time.strftime('%Y年-%m月-%d日 %H时:%M分'),
+                       "color": "#173177"
+                   },
+                   "remark":{
+                       "value": "感谢您长期以来对本平台的认可与支持，您的信赖，是我们进步的唯一动力！",
+                       "color": "#173177"
+                   }
+           }
+       }
+    Wxinterface.send_template_message(data)
+  end
+
+  def Wxinterface.send_template_message(data)
     info = ConfigInfo["weixinconfiginfo"]
     Wxinterface.global_access_token()
-    uri = URI.parse("https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=#{$access_token}")
+    uri = URI.parse(info["SEND_TEMPLATE_MESSAGE"]+"access_token=#{$access_token}")
     puts "192: #{uri}"
     http = Net::HTTP.new(uri.host, uri.port)
     http.use_ssl = true

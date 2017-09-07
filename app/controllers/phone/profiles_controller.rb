@@ -46,8 +46,28 @@ class Phone::ProfilesController < PhoneController
 
     respond_to do |format|
       @msg = ''
+      detail = ""
+      if profile_params["name"] != @user["name"]
+        detail+="昵称 "
+      end
+      if profile_params["sex"] != @user["sex"]
+        detail+="性别 "
+      end      
+      if profile_params["birthday"] != @user["birthday"]
+        detail+="生日 "
+      end
+      if profile_params["phone_num"] != @user["phone_num"]
+        detail+="电话 "
+      end
+      if profile_params["mem_email"] != @user["mem_email"]
+        detail+="邮箱 "
+      end
       if @user.update(profile_params)
         @msg = 'profile_save_success'
+        effect_time = Time.now
+        if detail != ""
+          Wxinterface.send_template_message_profile_changed(@user,detail,effect_time)
+        end
         format.html { redirect_to [:phone, "profiles"], notice:  @msg }
         #format.json { head :no_content,msg: @msg }
       else

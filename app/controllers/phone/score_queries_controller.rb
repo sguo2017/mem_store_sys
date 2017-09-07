@@ -63,6 +63,7 @@ class Phone::ScoreQueriesController < PhoneController
 
         @good_instance.status = '00X'
         @good_instance.save
+        Wxinterface.send_template_message_score(@user,@score_query.point,@score_query.object_type)
         @msg = "扫码送积分操作成功"
         @go_url = phone_homepages_url( add_score: @add_score ,oper_type: fun_type)
 
@@ -90,6 +91,7 @@ class Phone::ScoreQueriesController < PhoneController
         @bonus_change_score= params[:score_history][:red_packet]
         # @go_url = '/phone/score_queries?pay_type=down'
         @go_url = phone_score_queries_url(pay_type: 'down', packet_money: @bonus_change_score)
+        Wxinterface.send_template_message_gift_exchange(@user,"红包",-@add_score)
       else
         @msg = "积分兑换失败:积分余额不足"
         @bonus_id=params[:score_history][:point]

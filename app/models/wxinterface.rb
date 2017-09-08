@@ -35,7 +35,7 @@ class Wxinterface
 
   def Wxinterface.global_access_token
 	info = ConfigInfo["weixinconfiginfo"]
-    if $access_token_effect_time == nil || (Time.now-$access_token_effect_time)>1.minute
+    if $access_token_effect_time == nil || (Time.now-$access_token_effect_time)>1.hour
       uri = URI.parse(info["GLOBAL_ACCESS_TOKEN_ADDR"] + "grant_type=client_credential&appid=#{info["APPID"]}&secret=#{info["SECRET"]}")
       http = Net::HTTP.new(uri.host, uri.port)
       http.use_ssl = true
@@ -128,7 +128,7 @@ class Wxinterface
   def Wxinterface.get_industry()
     info = ConfigInfo["weixinconfiginfo"]
     Wxinterface.global_access_token()
-    uri = URI.parse(info["GET_INDUSTRY"]+"access_token=#{$access_token}")
+    uri = URI.parse(info["GET_INDUSTRY_ADDR"]+"access_token=#{$access_token}")
     puts "132: #{uri}"
     http = Net::HTTP.new(uri.host, uri.port)
     http.use_ssl = true
@@ -144,7 +144,7 @@ class Wxinterface
   def Wxinterface.get_all_private_template()
     info = ConfigInfo["weixinconfiginfo"]
     Wxinterface.global_access_token()
-    uri = URI.parse(info["GET_ALL_PRIVATE_TEMPLATE"]+"access_token=#{$access_token}")
+    uri = URI.parse(info["GET_ALL_PRIVATE_TEMPLATE_ADDR"]+"access_token=#{$access_token}")
     puts "132: #{uri}"
     http = Net::HTTP.new(uri.host, uri.port)
     http.use_ssl = true
@@ -262,7 +262,7 @@ class Wxinterface
   def Wxinterface.send_template_message(data)
     info = ConfigInfo["weixinconfiginfo"]
     Wxinterface.global_access_token()
-    uri = URI.parse(info["SEND_TEMPLATE_MESSAGE"]+"access_token=#{$access_token}")
+    uri = URI.parse(info["SEND_TEMPLATE_MESSAGE_ADDR"]+"access_token=#{$access_token}")
     puts "192: #{uri}"
     http = Net::HTTP.new(uri.host, uri.port)
     http.use_ssl = true
@@ -273,5 +273,21 @@ class Wxinterface
     @data = response.body
     @data.force_encoding('UTF-8')
     puts "173 #{@data}"
+  end
+
+  def Wxinterface.get_user_info_unionID(openid)
+    info = ConfigInfo["weixinconfiginfo"]
+    Wxinterface.global_access_token()
+    uri = URI.parse(info["USER_INFO_UNIONID_ADDR"]+"access_token=#{$access_token}&openid=#{openid}")    
+    http = Net::HTTP.new(uri.host, uri.port)
+    http.use_ssl = true
+    http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+    request = Net::HTTP::Get.new(uri.request_uri)
+    response = http.request(request)
+    @data = response.body
+    @data.force_encoding('UTF-8')
+    puts "140 #{@data}"
+    @data = JSON.parse(@data)
+    return @data
   end
 end

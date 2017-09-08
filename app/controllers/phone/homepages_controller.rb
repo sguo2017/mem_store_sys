@@ -7,13 +7,23 @@ class Phone::HomepagesController < PhoneController
   # GET /phone/homepages
   # GET /phone/homepages.json
   def index
-
     @title="会员中心"
     @user = current_user 
+    @data = Wxinterface.get_user_info_unionID(@user.openid)
+    if(@data["subscribe"] == 0 )
+      p "用户未关注公众号"
+    else
+      p "用户已关注公众号"
+    end
     if @user.qrcode.blank?
 	    info = ConfigInfo["weixinconfiginfo"]
       go_url = "#{info["AUTH_ADDR"]}appid=#{info["APPID"]}&redirect_uri=#{Const::STORES_SHOW_ADDR}/phone/mem_activations?referee_id=#{@user.id.to_s}&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect"   
-      qr = RQRCode::QRCode.new(go_url, :size => 16, :level => :h )
+      short_url_object = ShortUrl.new
+      short_url_object.value = go_url
+      short_url_object.save
+      short_url = Const::GOODS_SHOW_ADDR + '/s/' + ShortUrl.decb64(short_url_object.id)
+      p short_url
+      qr = RQRCode::QRCode.new(short_url, :size => 4, :level => :h )
       png = qr.to_img                      
       @user.qrcode = "uploads/user/mem_activation/user2code_"+@user.id.to_s+".png"
       png.resize(172, 172).save(Rails.root.to_s + "/public/" + @user.qrcode)

@@ -18,9 +18,13 @@ class Admin::StoresController < AdminController
     @store=Store.find(params[:id])
     if @store.qrcode.blank?
 	  info = ConfigInfo["weixinconfiginfo"]
-      go_url = "#{info["AUTH_ADDR"]}appid=#{info["APPID"]}&redirect_uri=#{Const::STORES_SHOW_ADDR}/phone/mem_activations?store_id=#{@store.id.to_s}&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect"   
-      logger.debug "21  #{go_url}"
-      qr = RQRCode::QRCode.new(go_url, :size => 16, :level => :h )
+      go_url = "#{info["AUTH_ADDR"]}appid=#{info["APPID"]}&redirect_uri=#{Const::STORES_SHOW_ADDR}/phone/mem_activations?store_id=#{@store.id.to_s}&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect"
+      short_url_object = ShortUrl.new
+      short_url_object.value = go_url
+      short_url_object.save
+      short_url = Const::GOODS_SHOW_ADDR + '/s/' + ShortUrl.decb64(short_url_object.id)
+      p short_url
+      qr = RQRCode::QRCode.new(short_url, :size => 4, :level => :h )
       png = qr.to_img     
       @store.qrcode = "/uploads/store/mem_activation/qrcode_"+@store.id.to_s+".png";                 
       png.resize(172, 172).save(Rails.root.to_s + "/public/" + @store.qrcode)

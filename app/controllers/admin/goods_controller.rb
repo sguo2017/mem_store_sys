@@ -49,7 +49,13 @@ class Admin::GoodsController < AdminController
     respond_to do |format|
       if @good.save
         #生成二维码
-        qr = RQRCode::QRCode.new(Const::GOODS_SHOW_ADDR+'/admin/goods/'+@good.id.to_s, :size => 8, :level => :h )
+        url = Const::GOODS_SHOW_ADDR+'/admin/goods/'+@good.id.to_s
+        short_url_object = ShortUrl.new
+        short_url_object.value = url
+        short_url_object.save
+        short_url = Const::GOODS_SHOW_ADDR + '/s/' + ShortUrl.decb64(short_url_object.id)
+        p short_url
+        qr = RQRCode::QRCode.new(short_url, :size => 4, :level => :h )
         png = qr.to_img                      
         png.resize(90, 90).save(Rails.root.to_s+"/public/uploads/good/qrcode/qrcode_"+@good.id.to_s+".png")
         format.html { redirect_to [:admin, @good], notice: '商品成功创建' }

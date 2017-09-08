@@ -230,6 +230,6 @@ class Phone::MemActivationsController < PhoneController
     # Never trust parameters from the scary internet, only allow the white list through.
     def mem_activation_params
       # params[:mem_activation]
-      params.require(:user).permit(:phone_num, :referee_id, :store_id)
+      params.require(:user).permit(:phone_num, :referee_id, :store_id, :birthday)
     end
 end

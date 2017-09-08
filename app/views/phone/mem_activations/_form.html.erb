@@ -13,6 +13,12 @@
       <%= text_field_tag "user[phone_num]", nil, class: "flex-fluid", placeholder: "请输入手机号码", id: "recv_num" %>
       </li>
         <%=f.error_span(:phone_num) %>
+
+        <li class="data-item">
+      <span class="ico-birth mr10"></span>
+      <input type="text" id="datePicker" name="user[birthday]" class="datetimepicker" placeholder="请选择生日"/>
+      </li>
+
       <li class="data-item">
       <span class="ico-psw flex-none"></span>
       <%= text_field_tag "sms_content", nil, class: "flex-fluid", placeholder: "请输入验证码" %>
@@ -135,6 +141,10 @@
               return false
             }
         })
+        $('.datetimepicker').datetimepicker({timepicker:false,format:'Y-m-d'});
+        $(".datetimepicker").focus(function(){
+          document.activeElement.blur();
+        });
         
       });
 

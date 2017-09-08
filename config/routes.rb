@@ -56,7 +56,7 @@ Rails.application.routes.draw do
   mount Ckeditor::Engine => '/ckeditor'
 
   devise_for :users
-  
+  get "s/:url", to: "short_urls#redirect"
   root 'welcome#index'
 
 end

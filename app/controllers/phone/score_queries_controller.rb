@@ -45,6 +45,8 @@ class Phone::ScoreQueriesController < PhoneController
       good = Good.where(:id =>@good_instance.good_id).first
 
       @scan_query.user_id = @user.id
+      @scan_query.province = @user.province
+      @scan_query.city = @user.city
       @scan_query.good_id = good.id
       @scan_query.good_instance_id = @good_instance.id
       @scan_query.score = good.score
@@ -86,6 +88,8 @@ class Phone::ScoreQueriesController < PhoneController
         params[:score_history][:user_id] = @user.id
         @score_query = ScoreHistory.new(score_history_params)
         @score_query.object_type = "红包兑换"
+        @score_query.province = @user.province
+        @score_query.city = @user.city
         @score_query.save!
         @msg = "积分兑换成功"
         @bonus_change_score= params[:score_history][:red_packet]

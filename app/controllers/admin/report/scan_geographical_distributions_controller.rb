@@ -9,9 +9,8 @@ class Admin::Report::ScanGeographicalDistributionsController < AdminController
 			@date = Time.parse(@date)
 		end
 		@date = @date.beginning_of_day
-		@data = User.select("province,count(1) as count")
-				.joins(:qr_code_scan_histories)
-				.where("qr_code_scan_histories.created_at >= ? and qr_code_scan_histories.created_at < ?",@date,@date+1.day)
+		@data = QrCodeScanHistory.select("province,count(1) as count")
+				.where("created_at >= ? and created_at < ?",@date,@date+1.day)
 				.group(:province)
 				.order("count DESC")
 				.limit('10')

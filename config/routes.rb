@@ -56,6 +56,8 @@ Rails.application.routes.draw do
   mount Ckeditor::Engine => '/ckeditor'
 
   devise_for :users
+  post "phone/uploadLocation", to: "phone/profiles#uploadLocation"
+  get "phone/uploadLocation", to: "phone/profiles#uploadLocation"
   get "s/:url", to: "short_urls#redirect"
   root 'welcome#index'
 

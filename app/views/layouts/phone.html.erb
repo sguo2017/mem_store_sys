@@ -5,7 +5,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
     <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
-    <meta name="turbolinks-cache-control" content="no-preview">
     <title><%= content_for?(:title) ? yield(:title) : "" %></title>
     <%= csrf_meta_tags %>
     <%= javascript_include_tag "phone" %>
@@ -16,7 +15,7 @@
 
 
     <%= javascript_include_tag "/assets/phone/javascript/sha1", :media => "all" %>
-
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=zjWI30gAZU41u3jbBbKbWSyv1X4I1cUa"></script>
     <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
 
     <script type="text/javascript">
@@ -38,7 +37,7 @@ $(function(){
           timestamp: timestamp, // 必填，生成签名的时间戳
           nonceStr: nonceStr, // 必填，生成签名的随机串
           signature: signature,// 必填，签名，参与签名的字段包括noncestr（随机字符串）, 有效的jsapi_ticket, timestamp（时间戳）, url（当前网页的URL，不包含#及其后面部分） 。对所有待签名参数按照字段名的ASCII 码从小到大排序（字典序）后，使用URL键值对的格式（即key1=value1&key2=value2…）拼接成字符串string1。这里需要注意的是所有参数名均为小写字符。对string1作sha1加密，字段名和字段值都采用原始值，不进行URL 转义。
-          jsApiList: ['scanQRCode','onMenuShareTimeline','onMenuShareAppMessage','onMenuShareQQ','onMenuShareWeibo','onMenuShareQZone'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+          jsApiList: ['scanQRCode','onMenuShareTimeline','onMenuShareAppMessage','onMenuShareQQ','onMenuShareWeibo','onMenuShareQZone','getLocation'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
       });
       var share_title = "会员积分系统";
       var share_link = "http://gzb.davco.cn/phone/mem_activations";
@@ -158,6 +157,39 @@ $(function(){
       //日期中文化<<
       $.datetimepicker.setLocale('zh');
       //日期中文化>>
+      var uploadLocationtime;
+      function uploadLocation(){
+        var timestamp = (new Date()).valueOf();
+        //如果距离上一次上传地址时间超过了2小时，重新上传
+        if ((uploadLocationtime === undefined || timestamp - uploadLocationtime > 7200) && user_longitude != undefined && user_latitude != undefined){
+          uploadLocationtime = timestamp;
+          //根据经纬度获取详细地址
+          var geoc = new BMap.Geocoder();
+          pt = new BMap.Point(user_longitude,user_latitude);
+          geoc.getLocation(pt, function(rs){
+            var addComp = rs.addressComponents;
+            var mypoint = new Object();
+            mypoint.province = addComp.province;
+            mypoint.city = addComp.city;
+            //上传地址
+            $.ajax('/phone/uploadLocation', {
+              type: 'POST',
+              dataType: 'json',
+              data: {
+                latitude: user_latitude,
+                longitude: user_longitude,
+                city: mypoint.city,
+                province: mypoint.province
+              },
+              success: function(data, textStatus, jqXHR) {
+                },
+              error: function(jqXHR, textStatus, errorThrown) {
+                
+              }
+            });
+          });
+        }
+      }
     </script>
   
   </head>

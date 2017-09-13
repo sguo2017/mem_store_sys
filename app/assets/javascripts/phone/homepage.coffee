@@ -9,6 +9,7 @@ $(document).on 'turbolinks:load', ->
   $('#hideUser2Code').click ->
     $('#user2code').hide()
   $('.ico-scan').click ->
+    uploadLocation()
     wx.scanQRCode
       needResult: 0
       scanType: [

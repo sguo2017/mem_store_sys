@@ -10,10 +10,10 @@ class Phone::HomepagesController < PhoneController
     @title="会员中心"
     @user = current_user 
     @data = Wxinterface.get_user_info_unionID(@user.openid)
-    if(@data["subscribe"] == 0 )
-      p "用户未关注公众号"
-    else
+    if(@data["subscribe"] == 1 )
       p "用户已关注公众号"
+    else
+      p "用户未关注公众号"
     end
     if @user.qrcode.blank?
 	    info = ConfigInfo["weixinconfiginfo"]

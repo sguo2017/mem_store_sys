@@ -88,6 +88,23 @@ class Phone::ProfilesController < PhoneController
     end
   end
 
+  #POST /phone/uploadLocation
+  def uploadLocation
+    @user = current_user
+    @user.latitude = params["latitude"]
+    @user.longitude = params["longitude"]
+    @user.province = params["province"]
+    @user.city = params["city"]
+    @user.save
+    respond_to do |format|
+      #format.html { redirect_to phone_profiles_url, notice: 'Profile was successfully destroyed.' }
+      format.json { render json: {
+      msg: "成功！",
+     }
+    }
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_profile

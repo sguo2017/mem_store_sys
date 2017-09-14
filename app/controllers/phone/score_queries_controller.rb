@@ -1,5 +1,5 @@
 class Phone::ScoreQueriesController < PhoneController
-  # before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:new]
   layout "phone"
   before_action :set_score_query, only: [:show, :edit, :update, :destroy]
 
@@ -41,9 +41,9 @@ class Phone::ScoreQueriesController < PhoneController
     when "goods_scan" #商品实例->商品->积分
       @scan_query = QrCodeScanHistory.new()
 
-      @good_instance = GoodInstance.where(:code =>params[:code]).first
+      @good_instance = GoodInstance.where(:code =>params[:good_instance_code]).first
+    if @good_instance.present?
       good = Good.where(:id =>@good_instance.good_id).first
-
       @scan_query.user_id = @user.id
       @scan_query.province = @user.province
       @scan_query.city = @user.city
@@ -52,18 +52,21 @@ class Phone::ScoreQueriesController < PhoneController
       @scan_query.score = good.score
 
       if @good_instance.status == '00A'
-        @add_score = params[:score_history][:point] = good.score
+        @add_score = good.score
         @user.changeScore(@add_score) #会员积分变化
-        params[:score_history][:user_id] = @user.id
-        # params[:score_history][:oper] = "获得"
-        # params[:score_history][:bonus_change_id] = '1'
-        @score_query = ScoreHistory.new(score_history_params)
+        @score_query = ScoreHistory.new()
+        @score_query.oper = "获得"
+        @score_query.point = @add_score
+        @score_query.object_id = @good_instance.id
         @score_query.object_type = "产品"
+        @score_query.user_id = @user.id
+        @score_query.province = @user.province
+        @score_query.city = @user.city
         @score_query.save
         
         
 
-        @good_instance.status = '00X'
+        @good_instance.status = '00A' #暂做开发测试用，提交请改成00X
         @good_instance.save
         Wxinterface.send_template_message_score(@user,@score_query.point,@score_query.object_type)
         @msg = "扫码送积分操作成功"
@@ -78,35 +81,41 @@ class Phone::ScoreQueriesController < PhoneController
 
         @scan_query.status = '00X'
       end
+    else
+      @go_url = phone_homepages_url
+    end
 
       @scan_query.save
     when "bonus_change" #积分扣减送红包
-      @add_score = -(params[:score_history][:point].presence.to_i)
+      @bonus_change = BonusChange.find(params[:bonus_change_id])
+      @add_score = -@bonus_change.score
       #扣减积分不够
       if @user.score + @add_score >= 0
         @user.changeScore(@add_score) #会员积分变化
-        params[:score_history][:user_id] = @user.id
-        @score_query = ScoreHistory.new(score_history_params)
+        @score_query = ScoreHistory.new()
+        @score_query.oper = "扣减"
+        @score_query.point = -@add_score
         @score_query.object_type = "红包兑换"
+        @score_query.object_id = @bonus_change.id
+        @score_query.user_id = @user.id
         @score_query.province = @user.province
         @score_query.city = @user.city
         @score_query.save!
         @msg = "积分兑换成功"
-        @bonus_change_score= params[:score_history][:red_packet]
+        #@bonus_change_score= params[:score_history][:red_packet]
         # @go_url = '/phone/score_queries?pay_type=down'
-        @go_url = phone_score_queries_url(pay_type: 'down', packet_money: @bonus_change_score)
+        @go_url = phone_score_queries_url(pay_type: 'down', packet_money: @bonus_change.red_packet)
         Wxinterface.send_template_message_gift_exchange(@user,"红包",-@add_score)
       else
         @msg = "积分兑换失败:积分余额不足"
-        @bonus_id=params[:score_history][:point]
-        @bonus_change_score= params[:score_history][:point]
-        @go_url = phone_bonus_changes_url(change_score: @bonus_change_score)
+        @go_url = phone_bonus_changes_url(change_score: @bonus_change.score)
 
       end
     when "no_login"
       @msg = "必须先授权登录"
       info = ConfigInfo["weixinconfiginfo"]
-      @go_url = "#{info["AUTH_ADDR"]}appid=#{info["APPID"]}&redirect_uri=http://gzb.davco.cn/phone/mem_activations?method=wxCfgEntrance&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect"
+      @go_url = "#{info["AUTH_ADDR"]}appid=#{info["APPID"]}&redirect_uri=http://gzb.davco.cn/phone/mem_activations?method=wxCfgEntrance%26menu=8%26good_instance_code=#{params[:good_instance_code]}&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect"
+      #@go_url = "http://gzb.davco.cn/phone/mem_activations?method=wxCfgEntrance%26menu=8%26good_instance_code=#{params[:good_instance_code]}"
     else
       @msg = "未知错误"
       @go_url = phone_homepages_url

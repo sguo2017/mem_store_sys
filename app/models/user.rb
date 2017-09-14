@@ -3,7 +3,7 @@ class User < ApplicationRecord
   has_many :qr_code_scan_histories
   has_many :lotteries
   belongs_to :mem_group
-  belongs_to :store
+  #belongs_to :store
   
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable

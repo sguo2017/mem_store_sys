@@ -42,6 +42,9 @@ class Phone::MemActivationsController < PhoneController
       goto_url = phone_stores_url + "?from_url=mem_activations" 
     when '7' #'7'表示跳转积分查询
       goto_url = phone_score_queries_url
+    when '8' #'8'表示跳转到商品扫码
+      code = params[:good_instance_code]
+      goto_url = new_phone_score_query_url(:fun_type => "goods_scan",:good_instance_code => code)
     else     #其它情况跳转到主页
       goto_url = phone_homepages_url
     end
@@ -185,7 +188,11 @@ class Phone::MemActivationsController < PhoneController
                   @redpackethistory.status = status
                   @redpackethistory.save
         			  end
-                format.html { redirect_to [:phone, 'homepages'],notice: '您已成功绑定专卖店！' }
+                if params[:good_instance_code].blank?#普通登录的用户
+                  format.html { redirect_to [:phone, 'homepages'],notice: '您已成功注册！' }
+                else#扫码进入登录页面的用户
+                  format.html { redirect_to new_phone_score_query_url(:fun_type => "goods_scan",:good_instance_code => params[:good_instance_code]) }
+                end
               else
                 @msg = "保存失败"
                 format.html { redirect_to [:phone, 'mem_activations'],notice: 'ma_save_fail' }

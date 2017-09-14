@@ -63,7 +63,7 @@
 								</div>
 								<!-- <a class="btn-default" href="">立即兑换</a> -->
 								<%= link_to "立即兑换",
-			                      new_phone_score_query_path(:fun_type => "bonus_change", :score_history => {:bonus_change_id => bonus_change.id,:user_id => @user.id, :object_type => "积分兑换",  :object_id => bonus_change.id, :point => bonus_change.score, :red_packet => bonus_change.red_packet, :oper => "扣减"}),
+			                      new_phone_score_query_path(:fun_type => "bonus_change", :bonus_change_id => bonus_change.id),
 			                      :class => 'btn-default' %>
 <!--                            <%= link_to "商品扫码",
 			                      new_phone_score_query_path(:fun_type => "goods_scan", :code => "10003",:score_history => {:bonus_change_id => bonus_change.id,:object_type => "积分兑换",  :object_id => bonus_change.id,:oper => "获得"}),

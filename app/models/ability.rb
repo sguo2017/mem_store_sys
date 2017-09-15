@@ -8,8 +8,8 @@ class Ability
        if user.admin == 1
          can :manage, :all
        elsif user.admin == 2
-         storeid = user.store_id
-         can :read, User, store_id: storeid
+         storeid = user.store_admin_id
+         #can :read, User, store_id: storeid
          can [:read, :update, :destroy], Store, id: storeid
        end
     #

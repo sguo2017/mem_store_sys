@@ -15,16 +15,10 @@ class Phone::MemActivationsController < PhoneController
     end
     @referee_id = params[:referee_id]
     @menu = params[:menu]
-    @store_id = params[:store_id]
-    puts "AAAAA#{@store_id}"
     userInfo = session[:userInfo]
-    # puts "#CCCC{userInfo["user_id"]}"
     @code = params[:code]
-    @user.store_id = @store_id
-    @user.save
-    puts "DDDD#{@user.id}"
     # from:singlemessage微信分享过来的 ；groupmessage再转分享
-    @from = params[:from] 
+    @from = params[:from]
     goto_url = ""
 
     case @menu
@@ -50,7 +44,7 @@ class Phone::MemActivationsController < PhoneController
     end
 
     info = ConfigInfo["weixinconfiginfo"]
-    # 场景一 授权的没有注册过的用户
+    # 场景一 授权的没有登录过的用户
     if @from.blank?
       # logger.debug "20 @@@ #{@from}" 
       #获取access_tocken
@@ -62,18 +56,18 @@ class Phone::MemActivationsController < PhoneController
       #存量用户
       user = User.where("openid=?",userInfo["openid"]).first
       # logger.debug "21:user #{user.to_json}"
-      if user.blank?
+      if user.blank? #如果是未注册过的用户
         session[:userInfo] = userInfo
         puts(userInfo)
-      else 
+      else #如果是已经注册过的用户
         user.saveWxUserInfo(userInfo)
         sign_in("user", user)
-
+        @notice = user.bindingStore(params[:store_id])
         respond_to do |format|
-          if @store_id.nil?
+          if @notice.blank?
             format.html { redirect_to goto_url}
           else
-            format.html { redirect_to goto_url,notice: '您已成功绑定专卖店！'}
+            format.html { redirect_to goto_url,notice: @notice}
           end
         end
       end  
@@ -82,10 +76,10 @@ class Phone::MemActivationsController < PhoneController
       if @from == "singlemessage" or @from == "groupmessage" 
         goto_url = "#{info["AUTH_ADDR"]}appid=#{info["APPID"]}&redirect_uri=http://gzb.davco.cn/phone/mem_activations?menu=#{@menu}&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect"
         respond_to do |format|
-          if @store_id.nil?
+          if @notice.blank?
             format.html { redirect_to goto_url}
           else
-            format.html { redirect_to goto_url,notice: '您已成功绑定专卖店！'}
+            format.html { redirect_to goto_url,notice: @notice}
           end
         end
       elsif @from == "self"
@@ -188,10 +182,13 @@ class Phone::MemActivationsController < PhoneController
                   @redpackethistory.status = status
                   @redpackethistory.save
         			  end
-                if params[:good_instance_code].blank?#普通登录的用户
-                  format.html { redirect_to [:phone, 'homepages'],notice: '您已成功注册！' }
-                else#扫码进入登录页面的用户
+                if params[:good_instance_code].present?#商品扫码进入登录页面的用户
                   format.html { redirect_to new_phone_score_query_url(:fun_type => "goods_scan",:good_instance_code => params[:good_instance_code]) }
+                elsif params[:store_id].present?
+                  @notice = @user.bindingStore(params[:store_id])
+                  format.html { redirect_to [:phone, 'homepages'],notice: @notice}
+                else#普通登录的用户
+                  format.html { redirect_to [:phone, 'homepages'],notice: '您已成功注册！' }
                 end
               else
                 @msg = "保存失败"
@@ -237,6 +234,6 @@ class Phone::MemActivationsController < PhoneController
     # Never trust parameters from the scary internet, only allow the white list through.
     def mem_activation_params
       # params[:mem_activation]
-      params.require(:user).permit(:phone_num, :referee_id, :store_id, :birthday)
+      params.require(:user).permit(:phone_num, :referee_id, :birthday)
     end
 end

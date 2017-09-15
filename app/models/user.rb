@@ -3,6 +3,7 @@ class User < ApplicationRecord
   has_many :qr_code_scan_histories
   has_many :lotteries
   belongs_to :mem_group
+  has_and_belongs_to_many :stores
   #belongs_to :store
   
   devise :database_authenticatable, :registerable,
@@ -66,5 +67,21 @@ class User < ApplicationRecord
     end
     #保存微信信息>>
 
+    def bindingStore(store_id)
+        if store_id.present? #如果传入了store_id参数
+          @store = Store.find(store_id)
+          if @store.present? #能根据store_id找到store
+            unless self.stores.exists?(id: @store.id) #如果该store没有与当前用户关联
+              self.stores << @store
+              @notice = "您已成功绑定该专卖店！"
+            else
+              @notice = "您已经绑定过该专卖店！"
+            end
+          else
+            @notice = "不存在该专卖店！"
+          end
+        end
+        return @notice
+    end
  
 end

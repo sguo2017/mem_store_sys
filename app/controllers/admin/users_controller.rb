@@ -1,11 +1,14 @@
 class Admin::UsersController < AdminController
   before_action :set_user, only: [ :edit, :update, :destroy]
+  skip_load_and_authorize_resource
+  before_action :null_resource_authorize ,except: [:index,:show]
 
   # GET /admin/users
   # GET /admin/users.json
   def index
       @name = params[:name]
       @mem_group_id = params[:mem_group_id]
+  if current_user.admin == 1
     if @name.blank? &&  @mem_group_id.blank?
       @users = User.where(:admin =>0).accessible_by(current_ability).page(params[:page]).per(10)
     else
@@ -20,16 +23,28 @@ class Admin::UsersController < AdminController
         
       end
     end
-    @mem_groups = MemGroup.page(params[:page]).per(10)
     
+  elsif current_user.admin == 2
+    @store = Store.find(current_user.store_admin_id)
+    @users = @store.users.page(params[:page]).per(10)
+  end
+    @mem_groups = MemGroup.page(params[:page]).per(10)
     
   end
 
   # GET /admin/users/1
   # GET /admin/users/1.json
   def show
-    @user = User.find(params[:id])
-    authorize! :show, @user
+    if current_user.admin == 1
+      @user = User.find(params[:id])
+    else
+      @store = Store.find(current_user.store_admin_id)
+      if @store.users.exists?(id: params[:id])
+        @user = User.find(params[:id])
+      else
+        redirect_to main_app.root_url
+      end
+    end
   end
 
   # GET /admin/users/new

@@ -133,12 +133,6 @@
                     
                     <tr>
                         <th>
-                            <%= model_class.human_attribute_name(:store_id) %>:
-                        </th>
-                        <td>
-                            <%= @user.store_id %>
-                        </td>
-                        <th>
                             <%= model_class.human_attribute_name(:status) %>:
                         </th>
                         <td>
@@ -152,8 +146,10 @@
                 </table>
             </div>
             <div class="text-left block-mt">
-                <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                edit_admin_user_path(@user), :class => 'btn btn-warning mr10' %>
+                <% if current_user.admin == 1%>
+                    <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                    edit_admin_user_path(@user), :class => 'btn btn-warning mr10' %>
+                <%end%>
                 <a class="btn btn-default mr10" href="javascript:void(0);"
                    onclick=window.location.href="<%= admin_users_path%>" >返回
                 </a>

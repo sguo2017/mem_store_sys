@@ -1,20 +1,33 @@
 class Admin::StoresController < AdminController
+  before_action :forbid_super_admin, except: [:index,:show]
   before_action :set_store, only: [:show, :edit, :update, :destroy]
-
   # GET /admin/stores
   # GET /admin/stores.json
   def index
     @name = params[:name]
-    if @name.blank? 
-      @stores = Store.page(params[:page]).accessible_by(current_ability).per(10)
+    if current_user.admin == 1
+      if @name.blank? 
+        @stores = Store.page(params[:page]).per(10)
+      else
+        @stores = Store.where('name LIKE ? ', '%'+@name+'%').order("created_at DESC").page(params[:page]).per(10)
+      end
     else
-      @stores = Store.accessible_by(current_ability).where('name LIKE ? ', '%'+@name+'%').order("created_at DESC").page(params[:page]).per(10)
+      if @name.blank? 
+        @stores = current_user.managestores.page(params[:page]).per(10)
+      else
+        @stores = current_user.managestores.where('name LIKE ? ', '%'+@name+'%').order("created_at DESC").page(params[:page]).per(10)
+      end
     end
   end
 
   # GET /admin/stores/1
   # GET /admin/stores/1.json
   def show 
+    if current_user.admin == 2
+      unless current_user.managestores.exists?(id: params[:id])
+         redirect_to main_app.root_url
+       end
+    end
     @store=Store.find(params[:id])
     if @store.qrcode.blank?
 	  info = ConfigInfo["weixinconfiginfo"]

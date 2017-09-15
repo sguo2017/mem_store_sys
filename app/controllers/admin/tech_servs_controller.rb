@@ -1,5 +1,6 @@
 class Admin::TechServsController < AdminController
   protect_from_forgery :except => [:update, :delete, :create]
+  before_action :forbid_super_admin
   before_action :set_tech_serv, only: [:show, :edit, :update, :destroy]
 
   # GET /admin/tech_servs

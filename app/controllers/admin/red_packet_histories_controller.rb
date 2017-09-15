@@ -1,4 +1,5 @@
 class Admin::RedPacketHistoriesController < AdminController
+  before_action :forbid_super_admin
   before_action :set_red_packet_history, only: [:show, :edit, :update, :destroy]
 
   # GET /admin/red_packet_histories

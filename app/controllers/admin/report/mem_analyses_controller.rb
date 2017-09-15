@@ -1,6 +1,5 @@
 class Admin::Report::MemAnalysesController < AdminController
-    skip_load_and_authorize_resource
-    before_action :null_resource_authorize
+    before_action :forbid_super_admin
   def index
     @qryType = params[:qryType]
     if @qryType.blank?
@@ -15,7 +14,7 @@ class Admin::Report::MemAnalysesController < AdminController
         middle_age=0
         old=0
         other=0
-        users=User.where([ "admin = ?  ", 0 ])
+        users=User.where([ "admin = ?  ", false ])
         users.each do |t|
             unless t.birthday.nil?
                 age = (DateTime.now - t.birthday) / 365.25
@@ -38,10 +37,10 @@ class Admin::Report::MemAnalysesController < AdminController
           ]  
     when "2" #性别  
         #统计性别人数
-        men=User.where([ "admin = ? and sex = ? ", 0 , 1 ])
+        men=User.where([ "admin = ? and sex = ? ", false , 1 ])
         men_num=men.length
         
-        women=User.where([ "admin = ? and sex = ? ", 0 , 0 ])
+        women=User.where([ "admin = ? and sex = ? ", false , 0 ])
         women_num=women.length
         @data = [
             {value:men_num, name:'男性'},
@@ -51,16 +50,16 @@ class Admin::Report::MemAnalysesController < AdminController
        
     when "3" 
          #统计等级人数
-        level_v1=User.where([ "admin = ? and level = ? ", 0 , 'V1' ])
+        level_v1=User.where([ "admin = ? and level = ? ", false , 'V1' ])
         level_v1_num=level_v1.length
         
-        level_v2=User.where([ "admin = ? and level = ? ", 0 , 'V2' ])
+        level_v2=User.where([ "admin = ? and level = ? ", false , 'V2' ])
         level_v2_num=level_v2.length
 
-        level_v3=User.where([ "admin = ? and level = ? ", 0 , 'V3' ])
+        level_v3=User.where([ "admin = ? and level = ? ", false , 'V3' ])
         level_v3_num=level_v3.length
 
-        level_v4=User.where([ "admin = ? and level = ? ", 0 , 'V4' ])
+        level_v4=User.where([ "admin = ? and level = ? ", false , 'V4' ])
         level_v4_num=level_v4.length
 
          @data = [

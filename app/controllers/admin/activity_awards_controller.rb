@@ -1,4 +1,5 @@
 class Admin::ActivityAwardsController < AdminController
+  before_action :forbid_super_admin
   before_action :set_activity_award, only: [:show, :edit, :update, :destroy]
 
   # GET /admin/activity_awards

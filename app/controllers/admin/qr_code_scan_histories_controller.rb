@@ -1,4 +1,5 @@
 class Admin::QrCodeScanHistoriesController < AdminController
+  before_action :forbid_super_admin
   before_action :set_qr_code_scan_history, only: [:show, :edit, :update, :destroy]
 
   # GET /admin/qr_code_scan_histories
@@ -22,7 +23,6 @@ class Admin::QrCodeScanHistoriesController < AdminController
       @qr_code_scan_histories = QrCodeScanHistory.where("created_at > ? and created_at < ?",@start_date,@end_date).order("created_at DESC").page(params[:page]).per(10)
     end
   end
-  $mem=true
 end
   # GET /admin/qr_code_scan_histories/1
   # GET /admin/qr_code_scan_histories/1.json

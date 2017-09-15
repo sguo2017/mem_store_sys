@@ -1,6 +1,5 @@
 class Admin::Report::TrendAnalysesController < AdminController
-	skip_load_and_authorize_resource
-    before_action :null_resource_authorize
+    before_action :forbid_super_admin
 	def index
 		_type = ["active_mem","recently_register_mem","code_scan_rate","red_pactket_data","score_date","repay_rate","mem_turnover_rate"]
 		@analyses_type = params[:analyses_type]

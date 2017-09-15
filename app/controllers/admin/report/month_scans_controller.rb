@@ -1,6 +1,5 @@
 class Admin::Report::MonthScansController < AdminController
-    skip_load_and_authorize_resource
-    before_action :null_resource_authorize
+    before_action :forbid_super_admin
 	def index
 		@data = Array.new(6)   #存放近六月的对应的扫码总数
 		@date = Array.new(6)   #存放近六月的日期 （且日期为那一月的最后一天）

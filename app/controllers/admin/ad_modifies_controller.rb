@@ -1,7 +1,7 @@
 class Admin::AdModifiesController < AdminController
+  before_action :forbid_super_admin
   before_action :set_ad_modify, only: [:show, :edit, :update, :destroy]
-  skip_load_and_authorize_resource
-  before_action :null_resource_authorize
+
   # GET /admin/ad_modifies
   # GET /admin/ad_modifies.json
   def index
@@ -48,7 +48,7 @@ class Admin::AdModifiesController < AdminController
 
 
     title = params[:title]
-    @ad_modify_title.cf_id = ad_modifies_pre+"TITLE"
+    @ad_modify_title.cf_id = ad_modifies_pre+"TITLE";
     @ad_modify_title.cf_value = title;
     @ad_modify_title.cf_desc = "首页下面的广告标题"
     @ad_modify_title.save

@@ -1,4 +1,5 @@
 class Admin::ConfigTableInfosController < AdminController
+  before_action :forbid_super_admin
   before_action :set_config_table_info, only: [:show, :edit, :update, :destroy]
 
   # GET /admin/config_table_infos

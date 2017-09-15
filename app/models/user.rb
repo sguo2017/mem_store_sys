@@ -4,6 +4,11 @@ class User < ApplicationRecord
   has_many :lotteries
   belongs_to :mem_group
   has_and_belongs_to_many :stores
+  has_and_belongs_to_many :managestores, 
+    class_name: "Store", 
+    foreign_key: "admin_id", 
+    association_foreign_key: "managestore_id",
+    join_table: "managestores_admins"
   #belongs_to :store
   
   devise :database_authenticatable, :registerable,

@@ -1,4 +1,5 @@
 class Admin::LotteriesController < AdminController
+  before_action :forbid_super_admin
   before_action :set_lottery, only: [:show, :edit, :update, :destroy]
 
   # GET /admin/lotteries

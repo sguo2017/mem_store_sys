@@ -10,23 +10,35 @@ class Admin::UsersController < AdminController
       @mem_group_id = params[:mem_group_id]
   if current_user.admin == 1
     if @name.blank? &&  @mem_group_id.blank?
-      @users = User.where(:admin =>0).accessible_by(current_ability).page(params[:page]).per(10)
+      @users = User.where(:admin =>0).page(params[:page]).per(10)
     else
       if @mem_group_id.blank? 
-        @users = User.where('name LIKE ? ', '%'+@name+'%').where(:admin =>0).accessible_by(current_ability).page(params[:page]).per(10)
+        @users = User.where('name LIKE ? ', '%'+@name+'%').where(:admin =>0).page(params[:page]).per(10)
       else
         if @name.blank?   ##当name字段值为空时要去掉like,否则查询不到
-           @users = User.where(:admin =>0).where(:mem_group_id =>@mem_group_id).accessible_by(current_ability).page(params[:page]).per(10)
+           @users = User.where(:admin =>0).where(:mem_group_id =>@mem_group_id).page(params[:page]).per(10)
         else
-         @users = User.where('name LIKE ? ', '%'+@name+'%').where(:admin =>0).accessible_by(current_ability).where(:mem_group_id =>@mem_group_id).page(params[:page]).per(10)
+         @users = User.where('name LIKE ? ', '%'+@name+'%').where(:admin =>0).where(:mem_group_id =>@mem_group_id).page(params[:page]).per(10)
         end
         
       end
     end
-    
   elsif current_user.admin == 2
-    @store = Store.find(current_user.store_admin_id)
-    @users = @store.users.page(params[:page]).per(10)
+    @store = current_user.managestores.first
+    if @name.blank? &&  @mem_group_id.blank?
+      @users = @store.users.page(params[:page]).per(10)
+    else
+      if @mem_group_id.blank? 
+        @users = @store.users.where('name LIKE ? ', '%'+@name+'%').page(params[:page]).per(10)
+      else
+        if @name.blank?   ##当name字段值为空时要去掉like,否则查询不到
+           @users = @store.users.where(:mem_group_id =>@mem_group_id).page(params[:page]).per(10)
+        else
+         @users = @store.users.where('name LIKE ? ', '%'+@name+'%').where(:mem_group_id =>@mem_group_id).page(params[:page]).per(10)
+        end
+        
+      end
+    end
   end
     @mem_groups = MemGroup.page(params[:page]).per(10)
     

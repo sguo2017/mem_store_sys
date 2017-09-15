@@ -1,6 +1,5 @@
 class Admin::Report::ScanGeographicalDistributionsController < AdminController
-	skip_load_and_authorize_resource
-    before_action :null_resource_authorize
+    before_action :forbid_super_admin
 	def index
 		@date = params[:date]
 		if @date.blank?

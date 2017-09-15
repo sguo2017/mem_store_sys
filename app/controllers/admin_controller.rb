@@ -2,7 +2,6 @@ class AdminController < ApplicationController
     before_action :authenticate_user!
     before_action :phone_access_admin    
     before_action :menu_active
-    load_and_authorize_resource
     layout :admin_layout
   rescue_from CanCan::AccessDenied do |exception|
       respond_to do |format|
@@ -24,7 +23,7 @@ class AdminController < ApplicationController
     current_user.admin == 1 ? "application" : "store_admin"
   end
 
-  def null_resource_authorize
+  def forbid_super_admin
     @user = current_user
     unless @user.admin == 1
         redirect_to main_app.root_url

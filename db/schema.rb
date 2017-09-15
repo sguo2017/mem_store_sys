@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170915064259) do
+ActiveRecord::Schema.define(version: 20170915102724) do
 
   create_table "activities", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "title"
@@ -124,6 +124,13 @@ ActiveRecord::Schema.define(version: 20170915064259) do
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "managestores_admins", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer "managestore_id"
+    t.integer "admin_id"
+    t.index ["admin_id"], name: "index_managestores_admins_on_admin_id"
+    t.index ["managestore_id"], name: "index_managestores_admins_on_managestore_id"
   end
 
   create_table "mem_groups", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -260,7 +267,6 @@ ActiveRecord::Schema.define(version: 20170915064259) do
     t.string "latitude"
     t.string "longitude"
     t.integer "referee_id"
-    t.integer "store_admin_id"
     t.string "status", default: "00A"
     t.string "mem_email", default: ""
     t.string "openid"

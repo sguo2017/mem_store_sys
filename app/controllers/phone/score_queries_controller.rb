@@ -102,6 +102,24 @@ class Phone::ScoreQueriesController < PhoneController
         @score_query.city = @user.city
         @score_query.save!
         @msg = "积分兑换成功"
+        #发送红包
+        @money = @bonus_change.red_packet*100  #数据库记录的红包金额单位为元，微信发送单位为分
+        @data = Wxinterface.send_redpacket(@user,@money)
+        @redpackethistory = RedPacketHistory.new()
+        @redpackethistory.user_id = @user.id
+        @redpackethistory.catalog = "注册送红包活动"
+        @redpackethistory.phone_number = @user.phone_num
+        @redpackethistory.money = @money
+        p @data
+        status = @data.scan(/\<return_msg\>\<\!\[CDATA\[(.*)\]\]\>\<\/return_msg\>/).first.first
+        @redpackethistory.return_msg = status
+        if status == "发放成功"
+          status = "00A"
+        else
+          status = "00X"
+        end
+        @redpackethistory.status = status
+        @redpackethistory.save
         #@bonus_change_score= params[:score_history][:red_packet]
         # @go_url = '/phone/score_queries?pay_type=down'
         @go_url = phone_score_queries_url(pay_type: 'down', packet_money: @bonus_change.red_packet)

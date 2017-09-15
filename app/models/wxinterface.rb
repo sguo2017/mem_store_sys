@@ -259,6 +259,41 @@ class Wxinterface
     Wxinterface.send_template_message(data)
   end
 
+    def Wxinterface.send_template_message_active_notice(user_info,active_url,active_name,active_time,active_adress)
+    data = {
+           "touser": user_info["openid"],
+           "template_id": "FuHupYxzmYc1Y9SJonyNNjWJNI7ukFXU1l5DEk-rZwI",
+           "url": active_url,          
+           "data":{
+                   "first": {
+                       "value": "亲爱的会员您好，您参加的活动即将开始：",
+                       "color": "#173177"
+                   },
+                   "keyword1":{
+                       "value": user_info["name"],
+                       "color": "#173177"
+                   },
+                   "keyword2": {
+                       "value": active_name,
+                       "color": "#173177"
+                   },
+                   "keyword3": {
+                       "value": active_time,
+                       "color": "#173177"
+                   },
+                   "keyword4": {
+                       "value": active_adress,
+                       "color": "#173177"
+                   },
+                   "remark":{
+                       "value": "点击查看更多消息",
+                       "color": "#173177"
+                   }
+           }
+       }
+    Wxinterface.send_template_message(data)
+  end
+  
   def Wxinterface.send_template_message(data)
     info = ConfigInfo["weixinconfiginfo"]
     Wxinterface.global_access_token()

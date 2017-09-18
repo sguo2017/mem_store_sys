@@ -1,0 +1,2 @@
+class ColorPageAcceptUser < ApplicationRecord
+end

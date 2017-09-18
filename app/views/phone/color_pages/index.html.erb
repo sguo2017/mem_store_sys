@@ -1,0 +1,39 @@
+<h1>Listing color_pages</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Begin time</th>
+      <th>End time</th>
+      <th>Profile</th>
+      <th>Avatar</th>
+      <th>Content</th>
+      <th>Accept users type</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @color_pages.each do |color_page| %>
+      <tr>
+        <td><%= color_page.name %></td>
+        <td><%= color_page.begin_time %></td>
+        <td><%= color_page.end_time %></td>
+        <td><%= color_page.profile %></td>
+        <td><%= color_page.avatar %></td>
+        <td><%= color_page.content %></td>
+        <td><%= color_page.accept_users_type %></td>
+        <td><%= link_to 'Show', [:phone, color_page] %></td>
+        <td><%= link_to 'Edit', edit_phone_color_page_path(color_page) %></td>
+        <td><%= link_to 'Destroy', [:phone, color_page], method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Color page', new_phone_color_page_path %>

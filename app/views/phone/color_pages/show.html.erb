@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @color_page.name %>
+</p>
+
+<p>
+  <strong>Begin time:</strong>
+  <%= @color_page.begin_time %>
+</p>
+
+<p>
+  <strong>End time:</strong>
+  <%= @color_page.end_time %>
+</p>
+
+<p>
+  <strong>Profile:</strong>
+  <%= @color_page.profile %>
+</p>
+
+<p>
+  <strong>Avatar:</strong>
+  <%= @color_page.avatar %>
+</p>
+
+<p>
+  <strong>Content:</strong>
+  <%= @color_page.content %>
+</p>
+
+<p>
+  <strong>Accept users type:</strong>
+  <%= @color_page.accept_users_type %>
+</p>
+
+<%= link_to 'Edit', edit_phone_color_page_path(@color_page) %> |
+<%= link_to 'Back', phone_color_pages_path %>

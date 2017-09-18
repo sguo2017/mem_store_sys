@@ -1,0 +1,2 @@
+class ColorPage < ApplicationRecord
+end

@@ -1,0 +1,35 @@
+---
+zh-CN:
+  activerecord:
+    models:
+      red_packet_base_rate: "红包发送基准"
+    attributes:
+      red_packet_base_rate: 
+        catalog_i: "类型"
+        catalog_ii: "n值系数"
+        val: "红包基数"
+        rate: "概率"
+        created_at: "创建日期"
+        updated_at: "修改日期"
+  helpers:
+    submit:
+      red_packet_base_rates:
+        create: "Create red packet history"
+        update: "Update red packet history"
+  red_packet_base_rates:
+    edit:
+      title: "Editing of the red packet history"
+    form:
+      red_packet_base_rates: "Red packet history"
+    index:
+      confirm: "Are you sure you want to delete the red packet history?"
+      empty: "No red packet histories found"
+      new_red_packet_base_rates: "Add a new red packet history"
+      title: "Listing of red packet histories"
+    new:
+      title: "Adding a new red packet history"
+    show:
+      title: "Red packet history details"
+    was_created: "Red packet history was successfully added"
+    was_deleted: "Red packet history was successfully deleted"
+    was_updated: "Red packet history was successfully updated"

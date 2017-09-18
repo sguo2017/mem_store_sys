@@ -1,39 +1,65 @@
-<h1>Listing color_pages</h1>
+<% content_for :title, "历史活动" %>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Begin time</th>
-      <th>End time</th>
-      <th>Profile</th>
-      <th>Avatar</th>
-      <th>Content</th>
-      <th>Accept users type</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
+  <!-- header begin -->
+  <div class="header">
+    <a class="header-left" href="javascript:void(0)" onclick="window.location.href='/phone/homepages';">
+      <span class="ico-header-back"></span>
+    </a>
+    <div class="condition-group goods-catalog-cond" hidden>
+      <ul class="float-ul clearfix wu3">
+      
+      </ul>
+    </div>
+  </div>
+  <!-- header end -->
+  
+  <!-- content begin -->
+  <div class="container has-top action-config-wrap">
+    <div class="flex-wrap-top">
+      <div class="flex-none action-list-wrap">
+        <ul class="action-list">
+          <li class="action-item">
+            <a href="">我的会员</a>
+          </li>
+          <li class="action-item"><%= link_to "活动配置", new_phone_color_page_path  %></li>
+          <li class="action-item active"><%= link_to "历史活动", phone_color_pages_path  %></li>
+        </ul>
+      </div>
+      <div class="flex-fluid action-content-wrap">
+        <div class="flex-wrap">
+          <div class="flex-fluid">
+            <div class="ui-input">
+              <input type="text" clas name="">
+            </div>
+          </div>
+          <div class="flex-none">
+            <button class="btn-primary-hollow ml10">查询</button>
+          </div>
+        </div>
+        <div class="action-result-title">查询结果</div>
+        <div class="bd-table tc">
+          <table>
+            <tr>
+              <th>活动名称</th>
+              <th>创建时间</th>
+              <th>操作</th>
+            </tr>
 
-  <tbody>
-    <% @color_pages.each do |color_page| %>
-      <tr>
-        <td><%= color_page.name %></td>
-        <td><%= color_page.begin_time %></td>
-        <td><%= color_page.end_time %></td>
-        <td><%= color_page.profile %></td>
-        <td><%= color_page.avatar %></td>
-        <td><%= color_page.content %></td>
-        <td><%= color_page.accept_users_type %></td>
-        <td><%= link_to 'Show', [:phone, color_page] %></td>
-        <td><%= link_to 'Edit', edit_phone_color_page_path(color_page) %></td>
-        <td><%= link_to 'Destroy', [:phone, color_page], method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+          <% @color_pages.each do |color_page| %>
+            <tr>
+              <td><%= color_page.name %></td>
+              <td><%= color_page.created_at %></td>
+              <td><%= link_to '详情>>', [:phone, color_page], :class =>'text-primary' %></td>
+            </tr>
+          <% end %>
 
-<br>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- content end -->
 
-<%= link_to 'New Color page', new_phone_color_page_path %>
+
+  <div class="text-center block-mt">加载完成</div>    
+

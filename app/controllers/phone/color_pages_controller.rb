@@ -1,4 +1,6 @@
 class Phone::ColorPagesController < ApplicationController
+  before_action :authenticate_user!
+  layout "phone"
   before_action :set_color_page, only: [:show, :edit, :update, :destroy]
 
   # GET /phone/color_pages

@@ -1,45 +1,61 @@
-<%= form_for([:phone, @color_page]) do |f| %>
-  <% if @color_page.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@color_page.errors.count, "error") %> prohibited this color_page from being saved:</h2>
+<%= form_for [:phone, @color_page], :html => { :class => "form-vertical" } do |f| %>
 
-      <ul>
-      <% @color_page.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+<div class="form-group">
 
-  <div class="field">
-      <%= f.label :name %><br>
-    <%= f.text_field :name %>
+  <label class="label-vertical"><%= f.label :name %>:</label> 
+  <div class="ui-input">
+    <div class="flex-wrap">
+      <%= f.text_field :name, :class => 'form-control'  %>
     </div>
-  <div class="field">
-      <%= f.label :begin_time %><br>
-    <%= f.date_select :begin_time %>
+  </div>
+
+  <label class="label-vertical"><%= f.label :begin_time %>:</label>
+  <div class="ui-input">
+    <div class="flex-wrap">
+      <%= f.text_field :begin_time, :class => 'form-control'  %>
     </div>
-  <div class="field">
-      <%= f.label :end_time %><br>
-    <%= f.date_select :end_time %>
+  </div>
+
+  <label class="label-vertical"><%= f.label :end_time %>:</label>
+  <div class="ui-input">
+    <div class="flex-wrap">
+      <%= f.text_field :end_time, :class => 'form-control'  %>
     </div>
-  <div class="field">
-      <%= f.label :profile %><br>
-    <%= f.text_field :profile %>
+  </div>
+
+  <label class="label-vertical"><%= f.label :profile %>:</label>
+  <div class="ui-input">
+    <div class="flex-wrap">
+      <%= f.text_field :profile, :class => 'form-control'  %>
     </div>
-  <div class="field">
-      <%= f.label :avatar %><br>
-    <%= f.text_field :avatar %>
+  </div>
+
+  <label class="label-vertical"><%= f.label :avatar %>:</label>
+  <div class="ui-input">
+    <div class="flex-wrap">
+      <%= f.text_field :avatar, :class => 'form-control'  %>
     </div>
-  <div class="field">
-      <%= f.label :content %><br>
-    <%= f.text_area :content %>
+  </div>
+
+  <label class="label-vertical"><%= f.label :content %>:</label>
+  <div class="ui-input">
+    <div class="flex-wrap">
+      <%= f.text_field :content, :class => 'form-control'  %>
     </div>
-  <div class="field">
-      <%= f.label :accept_users_type %><br>
-    <%= f.number_field :accept_users_type %>
+  </div>
+
+
+  <label class="label-vertical"><%= f.label :accept_users_type %>:</label>
+  <div class="ui-input">
+    <div class="flex-wrap">
+      <%= f.text_field :accept_users_type, :class => 'form-control'  %>
     </div>
+  </div>
+
   <div class="actions">
     <%= f.submit %>
   </div>
+  
 <% end %>
+
+</div>

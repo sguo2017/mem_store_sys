@@ -416,6 +416,10 @@ a.text-primary:active {
 .block-mb {
   margin-bottom: 15px;
 }
+.block-mtb {
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
 .text-gray {
   color: #999;
 }
@@ -527,6 +531,9 @@ a.text-primary:active {
 }
 .float-ul .float-item {
   float: left;
+}
+.float-ul.wu2 .float-item {
+  width: 50%;
 }
 .float-ul.wu3 .float-item {
   width: 33.33333%;
@@ -667,7 +674,7 @@ a.text-primary:active {
 }
 .btn-size-lg {
   font-size: 16px;
-  padding: 16.2px 16px !important;
+  padding: 11.2px 16px !important;
 }
 .btn-round {
   -moz-border-radius: 1000px;
@@ -1773,6 +1780,7 @@ a.adapt-img {
 }
 .score-exchange-wrap.container {
   padding-top: 94px;
+  height: 100%;
 }
 .score-exchange-wrap .score-exchange-title {
   position: fixed;
@@ -1889,4 +1897,264 @@ a.adapt-img {
   padding: 50px 30px;
   background: #fff;
   text-align: center;
+}
+.time-tips-wrap {
+  text-align: center;
+  padding: 12px 16px;
+}
+.time-tips {
+  display: inline-block;
+  font-size: 12px;
+  color: #fff;
+  background: #cecece;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  padding: 5px;
+}
+.card-list {
+  padding: 0 16px;
+}
+.card-list .card-item {
+  padding: 15px 10px;
+  border: 1px solid #e0e0e0;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  background: #fff;
+}
+.card-list .card-item + .card-item {
+  margin-top: 10px;
+}
+.card-list .card-footer {
+  padding-top: 15px;
+  border-top: 1px solid #ebebeb;
+}
+.exchange-wrap {
+  color: #666;
+}
+.exchange-wrap .exchange-tit {
+  color: #333;
+  font-weight: 700;
+  font-size: 16px;
+  margin-bottom: 7px;
+}
+.back-prepage-wrap {
+  position: relative;
+}
+.back-prepage {
+  position: absolute;
+  top: 9.5px;
+  left: 16px;
+  height: 25px;
+  width: 25px;
+  background: url('../images/ico-back.png') no-repeat center center / cover;
+}
+.ui-checkbox {
+  display: inline-block;
+  margin: 0 5px 5px 0;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  border: 1px solid #cdcdcd;
+  line-height: 1.1;
+  padding: 5px 10px 5px 8px;
+  position: relative;
+}
+.ui-checkbox .ui-checkbox-tick {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  height: 12px;
+  width: 12px;
+  background: url('../images/ico-ui-checkbox.png') no-repeat center center / cover;
+}
+.ui-checkbox.active,
+.ui-checkbox:hover {
+  border-color: #d90404;
+}
+.ui-checkbox.active .ui-checkbox-tick,
+.ui-checkbox:hover .ui-checkbox-tick {
+  background: url('../images/ico-ui-checkbox2.png') no-repeat center center / cover;
+}
+.ui-input-file {
+  height: 20px;
+  width: 20px;
+  position: relative;
+  background: url('../images/ico-input-file.png') no-repeat center center / cover;
+  overflow: hidden;
+}
+.ui-input-file input[type='file'] {
+  position: absolute;
+  bottom: 0;
+  top: 0;
+  right: 0;
+  opacity: 0;
+  width: 12px;
+}
+.ui-input {
+  border-bottom: 1px solid #cdcdcd;
+  position: relative;
+  padding-bottom: 5px;
+}
+.ui-input:before,
+.ui-input:after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  height: 5px;
+  width: 1px;
+  background: #cdcdcd;
+}
+.ui-input:before {
+  left: 0;
+}
+.ui-input:after {
+  right: 0;
+}
+.ui-input input[type='text'],
+.ui-input .ui-input-static {
+  padding: 0 5px;
+  line-height: 24px;
+}
+.ui-input textarea {
+  resize: none;
+}
+.content-wrap {
+  padding: 15px 16px;
+  background: #fff;
+}
+.img-thumb {
+  padding: 5px;
+  border: 1px solid #eee;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  line-height: 0;
+}
+.img-thumb img {
+  width: 100%;
+}
+.btn-primary-hollow {
+  border: 1px solid #d90404;
+  padding: 7px 10px;
+  min-width: 70px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  line-height: 1;
+  color: #d90404;
+}
+.sales-promotion-box {
+  position: relative;
+}
+.sales-promotion-box .sales-promotion-sign {
+  position: absolute;
+  width: 50px;
+  height: 64px;
+  line-height: 84px;
+  text-align: center;
+  color: #fff;
+  background: url('../images/ico-sales-promotion.png') no-repeat center center / cover;
+  top: -8px;
+  right: 16px;
+}
+.action-config-wrap.container {
+  height: 100%;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+.action-config-wrap .flex-wrap-top {
+  height: 100%;
+  align-items: stretch;
+  -webkit-box-align: stretch;
+}
+.action-config-wrap .action-list-wrap {
+  background: #f5f5f5;
+  border-left: 3px solid #dbdbdb;
+  border-right: 1px solid #cdcdcd;
+  width: 66px;
+  font-size: 15px;
+  overflow-y: auto;
+}
+.action-config-wrap .action-list-wrap .action-item {
+  line-height: 1.3;
+}
+.action-config-wrap .action-list-wrap .action-item a {
+  position: relative;
+  display: block;
+  padding: 15px 16px 15px 20px;
+  border-bottom: 1px solid #cdcdcd;
+}
+.action-config-wrap .action-list-wrap .action-item.active a {
+  background: #fff;
+  margin-right: -2ui inputpx;
+  color: #d90404;
+  font-weight: 700;
+}
+.action-config-wrap .action-list-wrap .action-item.active a:before {
+  content: '';
+  width: 6px;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -3px;
+  background: #d90404;
+}
+.action-config-wrap .action-content-wrap {
+  overflow-y: auto;
+  background: #fff;
+  padding: 15px 16px;
+}
+.form-vertical label {
+  color: #888;
+}
+.form-vertical .label-vertical {
+  margin-bottom: 10px;
+  display: block;
+}
+.form-vertical .form-group:not(:last-child) {
+  margin-bottom: 15px;
+}
+.action-img-wrap .float-item > a {
+  display: block;
+}
+.action-img-wrap .float-item:nth-child(2n+1) a {
+  margin-right: 5px;
+}
+.action-img-wrap .float-item:nth-child(2n) a {
+  margin-left: 5px;
+}
+.action-img-wrap .float-item .aciton-img-title {
+  margin-top: 6px;
+  margin-left: 5px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.action-result-title {
+  border-top: 1px solid #cdcdcd;
+  margin-top: 20px;
+  padding-top: 18px;
+  margin-bottom: 10px;
+  color: #666;
+  font-weight: 700;
+}
+.bd-table table {
+  width: 100%;
+}
+.bd-table.tc th,
+.bd-table.tc td {
+  text-align: center;
+}
+.bd-table th,
+.bd-table td {
+  border: 1px solid #EEE;
+  padding: 10px;
+}
+.bd-table th {
+  font-weight: normal;
+}
+.bd-table td {
+  color: #666;
 }

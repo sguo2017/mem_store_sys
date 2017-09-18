@@ -1,5 +1,37 @@
-<h1>New color_page</h1>
+<% content_for :title, "活动配置" %>
 
-<%= render 'form' %>
+  <!-- header begin -->
+  <div class="header">
+    <a class="header-left" href="javascript:void(0)" onclick="window.location.href='/phone/homepages';">
+      <span class="ico-header-back"></span>
+    </a>
+    <div class="condition-group goods-catalog-cond" hidden>
+      <ul class="float-ul clearfix wu3">
+      
+      </ul>
+    </div>
+  </div>
+  <!-- header end -->
+  
+  <!-- content begin -->
+  <div class="container has-top action-config-wrap">
+    <div class="flex-wrap-top">
+      <div class="flex-none action-list-wrap">
+        <ul class="action-list">
+          <li class="action-item">
+            <a href="">我的会员</a>
+          </li>
+          <li class="action-item active"><%= link_to "活动配置", new_phone_color_page_path  %></li>
+          <li class="action-item"><%= link_to "历史活动", phone_color_pages_path  %></li>
+        </ul>
+      </div>
+      <div class="flex-fluid action-content-wrap">
+		<%= render 'form' %> 
+      </div>
+    </div>
+  </div>
+  <!-- content end -->
 
-<%= link_to 'Back', phone_color_pages_path %>
+
+  <div class="text-center block-mt">加载完成</div>    
+

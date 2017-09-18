@@ -4,7 +4,14 @@ class Phone::UsersController < PhoneController
   # GET /phone/users
   # GET /phone/users.json
   def index
-    @users = User.all
+    @title = params[:title]
+    @page = params[:page] || 1
+    @store = current_user.managestores.first
+    if @title.blank?
+      @users = @store.users.order("created_at DESC").page(params[:page]).per(10)
+    else @title.blank?
+      @users = @store.users.where("name LIKE ? ", "%#{@title}%").order("created_at DESC").page(params[:page]).per(10)
+    end
   end
 
   # GET /phone/users/1

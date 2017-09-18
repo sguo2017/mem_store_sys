@@ -1,0 +1,78 @@
+    <% content_for :title, "会员资料" %>
+    <div class="header">
+    <a class="header-left" href="javascript:void(0)" onclick="window.location.href='/phone/users';">
+      <span class="ico-header-back"></span>
+    </a>
+    <!-- <button class="header-right"><span class="ico-scan" onclick="wxScanQRCode();"></span></button> -->
+    <button class="header-right"><span class="ico-scan"></span></button>
+  </div>
+  <!-- header end -->
+  <div class="container has-top">
+    <div class="sub-title has-bg">用户信息</div>
+    <ul class="data-list form-list">
+      <li class="data-item">
+        <div class="data-hd">
+        <i class="ico-user4 mr5"></i> 头像</div>
+        <div class="user-pic-upload">
+            <img <% if @user.headimgurl.blank? %> src="/assets/phone/images/img-user.png" <%else%> src="<%= @user.headimgurl %>" <% end %> alt="">
+          <!-- <img src="/assets/phone/images/ico-user.png" alt="">
+          <input type="file" accept="image/*" capture="camera"> -->
+        </div>
+      </li>
+      <li class="data-item">
+        <div class="data-hd">
+          <i class="ico-nickname mr5"></i>
+          昵称  
+        </div>
+        <%= @user.name %>
+      </li>
+      <li class="data-item">
+        <div class="data-hd">
+          <i class="ico-sex mr5"></i>
+          性别  
+        </div>
+
+          <% if @user.sex == "1" %>
+          男
+           <% else @user.sex == "0"  %>
+          女
+          <% end %>
+
+       </li>
+      <li class="data-item">
+        <div class="data-hd">
+          <i class="ico-birth mr5"></i>
+          生日  
+        </div>
+      <div class="calendar">
+        <div>
+            <%if @user.birthday.present? %>
+              <%=@user.birthday.strftime('%Y-%m-%d')%>
+            <%else%>
+              <%="unknow"%>
+            <%end%>
+        </div>
+      </div>
+      </li>
+    </ul>
+    <ul class="data-list block-mt form-list">
+      <li class="data-item">
+        <div class="data-hd">
+          <i class="ico-email mr5"></i>
+          邮箱  
+        </div>
+        <%= @user.mem_email %>
+      </li>
+      <li class="data-item">
+        <div class="data-hd">
+          <i class="ico-phone mr5"></i>
+          电话  
+        </div>
+        <%= @user.phone_num %>
+      </li>
+    </ul>
+    <div class="text-center block-mt bottom-btn">
+        <%= link_to "返回",phone_users_path,class: 'btn-primary flex-fluid btn-size-lg btn-round' %>
+    </div>
+
+  </div>

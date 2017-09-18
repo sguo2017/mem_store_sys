@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Color page:</strong>
+  <%= @color_page_accept_user.color_page_id %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @color_page_accept_user.user_id %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @color_page_accept_user.status %>
+</p>
+
+<%= link_to 'Edit', edit_phone_color_page_accept_user_path(@color_page_accept_user) %> |
+<%= link_to 'Back', phone_color_page_accept_users_path %>

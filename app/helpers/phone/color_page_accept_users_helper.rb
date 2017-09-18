@@ -1,0 +1,2 @@
+module Phone::ColorPageAcceptUsersHelper
+end

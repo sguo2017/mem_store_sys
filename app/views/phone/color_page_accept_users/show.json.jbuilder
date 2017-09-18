@@ -1,0 +1,1 @@
+json.extract! @color_page_accept_user, :color_page_id, :user_id, :status, :created_at, :updated_at

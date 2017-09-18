@@ -1,0 +1,34 @@
+---
+zh-CN:
+  activerecord:
+    models:
+      color_page_accept_user: "彩页接收用户"
+    attributes:
+      color_page_accept_user: 
+        color_page_id: "彩页"
+        user_id: "会员"
+        status: "状态"
+        created_at: "创建日期"
+        updated_at: "修改日期"
+  helpers:
+    submit:
+      red_packet_base_rates:
+        create: "Create red packet history"
+        update: "Update red packet history"
+  red_packet_base_rates:
+    edit:
+      title: "Editing of the red packet history"
+    form:
+      red_packet_base_rates: "Red packet history"
+    index:
+      confirm: "Are you sure you want to delete the red packet history?"
+      empty: "No red packet histories found"
+      new_red_packet_base_rates: "Add a new red packet history"
+      title: "Listing of red packet histories"
+    new:
+      title: "Adding a new red packet history"
+    show:
+      title: "Red packet history details"
+    was_created: "Red packet history was successfully added"
+    was_deleted: "Red packet history was successfully deleted"
+    was_updated: "Red packet history was successfully updated"

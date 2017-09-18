@@ -110,6 +110,9 @@ class Phone::ProfilesController < PhoneController
     def set_profile
       #@profile = Profile.find(params[:id])
       @user = User.find(params[:id])
+      if @user.id != current_user.id
+        redirect_to phone_homepages_url
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

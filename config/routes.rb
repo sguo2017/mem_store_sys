@@ -31,6 +31,7 @@ Rails.application.routes.draw do
     resources :stores
     resources :invitations
     resources :color_pages
+    resources :users
   end
 
   namespace :admin do

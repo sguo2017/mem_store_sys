@@ -1,4 +1,4 @@
-<% content_for :title, "历史活动" %>
+<% content_for :title, "我的会员" %>
 
   <!-- header begin -->
   <div class="header">
@@ -18,9 +18,9 @@
     <div class="flex-wrap-top">
       <div class="flex-none action-list-wrap">
         <ul class="action-list">
-          <li class="action-item "><%= link_to "我的会员", phone_users_path %></li>
+          <li class="action-item active"><%= link_to "我的会员", phone_users_path %></li>
           <li class="action-item"><%= link_to "活动配置", new_phone_color_page_path  %></li>
-          <li class="action-item active"><%= link_to "历史活动", phone_color_pages_path  %></li>
+          <li class="action-item"><%= link_to "历史活动", phone_color_pages_path  %></li>
         </ul>
       </div>
       <div class="flex-fluid action-content-wrap">
@@ -37,20 +37,23 @@
         <div class="action-result-title">查询结果</div>
         <div class="bd-table tc">
           <table>
-            <tr>
-              <th>活动名称</th>
-              <th>创建时间</th>
-              <th>操作</th>
-            </tr>
+            <thead>
+              <tr>
+                <th>名称</th>
+                <th>电话</th>
+                <th>操作</th>
+              </tr>
+            </thead>
 
-          <% @color_pages.each do |color_page| %>
-            <tr>
-              <td><%= color_page.name %></td>
-              <td><%= color_page.created_at %></td>
-              <td><%= link_to '详情>>', [:phone, color_page], :class =>'text-primary' %></td>
-            </tr>
-          <% end %>
-
+            <tbody>
+              <% @users.each do |user| %>
+                <tr>
+                  <td><%= user.name %></td>
+                  <td><%= user.phone_num %></td>
+                  <td><%= link_to '详情>>', phone_profile_path(user.id), :class =>'text-primary' %></td>
+                </tr>
+              <% end %>
+            </tbody>
           </table>
         </div>
       </div>

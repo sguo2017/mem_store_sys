@@ -1,0 +1,31 @@
+<h1>Listing color_page_accept_users</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Color page</th>
+      <th>User</th>
+      <th>Status</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @color_page_accept_users.each do |color_page_accept_user| %>
+      <tr>
+        <td><%= color_page_accept_user.color_page_id %></td>
+        <td><%= color_page_accept_user.user_id %></td>
+        <td><%= color_page_accept_user.status %></td>
+        <td><%= link_to 'Show', [:phone, color_page_accept_user] %></td>
+        <td><%= link_to 'Edit', edit_phone_color_page_accept_user_path(color_page_accept_user) %></td>
+        <td><%= link_to 'Destroy', [:phone, color_page_accept_user], method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Color page accept user', new_phone_color_page_accept_user_path %>

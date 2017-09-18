@@ -1,1 +1,0 @@
-json.extract! @color_page, :name, :begin_time, :end_time, :profile, :avatar, :content, :accept_users_type, :created_at, :updated_at

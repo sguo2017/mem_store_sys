@@ -6,7 +6,7 @@ class Phone::ColorPagesController < ApplicationController
   # GET /phone/color_pages
   # GET /phone/color_pages.json
   def index
-    @color_pages = ColorPage.all
+    @color_pages = ColorPage.all.order("created_at DESC")
   end
 
   # GET /phone/color_pages/1

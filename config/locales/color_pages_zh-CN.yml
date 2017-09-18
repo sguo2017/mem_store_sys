@@ -8,16 +8,17 @@ zh-CN:
         name: "活动名称"
         begin_time: "活动开始时间"
         end_time: "活动结束时间"
-        profile: "活动简介"
+        profile: "活动主题"
         avatar: "活动图片"
-        accept_users_type: "接收用户范围"
+        content: "活动内容"
+        accept_users_type: "活动对象"
         created_at: "创建日期"
         updated_at: "修改日期"
   helpers:
     submit:
       red_packet_base_rates:
-        create: "Create red packet history"
-        update: "Update red packet history"
+        create: "创建"
+        update: "修改"
   red_packet_base_rates:
     edit:
       title: "Editing of the red packet history"
@@ -28,10 +29,10 @@ zh-CN:
       empty: "No red packet histories found"
       new_red_packet_base_rates: "Add a new red packet history"
       title: "Listing of red packet histories"
-    new:
-      title: "Adding a new red packet history"
     show:
       title: "Red packet history details"
+    new:
+      title: "新增"      
     was_created: "Red packet history was successfully added"
     was_deleted: "Red packet history was successfully deleted"
     was_updated: "Red packet history was successfully updated"

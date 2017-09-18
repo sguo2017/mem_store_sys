@@ -1,39 +1,56 @@
-<p id="notice"><%= notice %></p>
+<% content_for :title, "促销" %>
 
-<p>
-  <strong>Name:</strong>
-  <%= @color_page.name %>
-</p>
+  <!-- header begin -->
+  <div class="header">
+    <a class="header-left" href="javascript:void(0)" onclick="window.location.href='/phone/homepages';">
+      <span class="ico-header-back"></span>
+    </a>
+    <div class="condition-group goods-catalog-cond" hidden>
+      <ul class="float-ul clearfix wu3">
+      
+      </ul>
+    </div>
+  </div>
+  <!-- header end -->
+  
+  <!-- content begin -->
+  <div class="container">
+    <div class="adapt-img back-prepage-wrap">
+      <a href="" class="back-prepage"></a>
+      <img src="/assets/phone/images/img-sales-promotion.png">
+    </div>
+    <div class="block-mt">
+      <ul class="card-list ">
+        <li class="card-item sales-promotion-box">
+          <div class="sales-promotion-sign">促销</div>
+          <div class="exchange-wrap">
+            <div class="exchange-tit">促销活动</div>
+            <div class="text-tips block-mb">8月17日</div>
+            <div class="flex-wrap-top mb10">
+              <div class="flex-none">活动名称：</div>
+              <div class="flex-fluid"><%= @color_page.name %></div>
+            </div>  
+            <div class="flex-wrap-top mb10">
+              <div class="flex-none">活动时间：</div>
+              <div class="flex-fluid"></div>
+            </div>  
+            <div class="flex-wrap-top mb10">
+              <div class="flex-none">活动主题：</div>
+              <div class="flex-fluid"><%= @color_page.profile %></div>
+            </div>  
+            <div class="flex-wrap-top mb10">
+              <div class="flex-none">活动对象：</div>
+              <div class="flex-fluid">茂茂专卖店全体会员</div>
+            </div>  
+            <div class="flex-wrap-top mb10">
+              <div class="flex-none">活动内容：</div>
+              <div class="flex-fluid"><%= @color_page.content %></div>
+            </div>  
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div class="text-tips text-center block-mtb">没有内容了</div>  
+  </div>
+  <!-- content end -->
 
-<p>
-  <strong>Begin time:</strong>
-  <%= @color_page.begin_time %>
-</p>
-
-<p>
-  <strong>End time:</strong>
-  <%= @color_page.end_time %>
-</p>
-
-<p>
-  <strong>Profile:</strong>
-  <%= @color_page.profile %>
-</p>
-
-<p>
-  <strong>Avatar:</strong>
-  <%= @color_page.avatar %>
-</p>
-
-<p>
-  <strong>Content:</strong>
-  <%= @color_page.content %>
-</p>
-
-<p>
-  <strong>Accept users type:</strong>
-  <%= @color_page.accept_users_type %>
-</p>
-
-<%= link_to 'Edit', edit_phone_color_page_path(@color_page) %> |
-<%= link_to 'Back', phone_color_pages_path %>

@@ -60,7 +60,7 @@ Rails.application.routes.draw do
 
   devise_for :users
   post "phone/uploadLocation", to: "phone/profiles#uploadLocation"
-  get "phone/uploadLocation", to: "phone/profiles#uploadLocation"
+  post "admin/stores/set_store_admin", to: "admin/stores#setStoreAdmin"
   get "s/:url", to: "short_urls#redirect"
   root 'welcome#index'
 

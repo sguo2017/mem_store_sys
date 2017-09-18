@@ -8,6 +8,7 @@
     <%if current_user.admin == 1%>
     <%= render 'search_form' %>
     <%end%>
+    <input type="hidden" id="store_id" value="" />
 <div class="table-responsive block-mt">
         <table class="table table-striped">
           <colgroup>
@@ -46,8 +47,9 @@
         <td><%= store.contact_num %></td>
         <td><%= store.created_at.strftime('%Y-%m-%d %H:%M:%S') %></td>
         <td>
-          <%= link_to t('.show', :default => t("helpers.links.show")),
+          <%= link_to t('.show', :default => ' 查  看 '),
                       admin_store_path(store), :class => 'btn btn-default btn-xs' %>
+          <a class='btn btn-default btn-xs' id="_set_admin" type="text"  placeholder="选择" data-toggle="modal" data-target="#modal_set_admin" value="设置" onclick="set_store_id(<%=store.id%>)">设置店长</a>
 <!--           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_admin_store_path(store), :class => 'btn btn-default btn-xs' %> -->
 <!--           <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
@@ -68,5 +70,9 @@
             </div>
             </div>
         </div>
-
-
+<script type="text/javascript">
+  function set_store_id(store_id){
+  $("#store_id").val(store_id);
+}
+</script>
+<%= render :partial => 'modal_set_admin' %>

@@ -94,6 +94,17 @@ class Admin::StoresController < AdminController
     end
   end
 
+  #POST /admin/stores/set_admin
+  def setStoreAdmin
+    if current_user.admin == 1
+      @user = User.find(params[:user_id])
+      @notice = @user.bindingStoreAdmin(params[:store_id])
+    else
+      @notice = "越权操作！"
+    end
+    render json:{notice: @notice}
+  end
+  
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_store

@@ -23,6 +23,7 @@
 //= require echarts
 //= require cable
 //= require activities
+//= require store
 //= require_tree ./admin
 //= require ckeditor/init
 

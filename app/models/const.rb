@@ -23,6 +23,11 @@ class Const
   SMS_TIME_LIMIT=1  #短信有效时间
   #短信接口<< 
 
+  #supper_manager超级管理员，store_manager店铺管理员，nil_manager普通会员
+  #管理员类型<<
+  MANAGER = {:supper_manager => 1, :store_manager => 2, :nil_manager => 0 }
+  #管理员类型<<
+
   #WX<<
   module WXConfig
     # GRANT_TYPE = "client_credential"

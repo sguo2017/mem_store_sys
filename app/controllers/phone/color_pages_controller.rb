@@ -6,7 +6,7 @@ class Phone::ColorPagesController < ApplicationController
   # GET /phone/color_pages
   # GET /phone/color_pages.json
   def index
-    @color_pages = ColorPage.all.order("created_at DESC")
+    @color_pages = ColorPage.where("store_id = ?",current_user.managestores.first.id)
   end
 
   # GET /phone/color_pages/1
@@ -27,7 +27,7 @@ class Phone::ColorPagesController < ApplicationController
   # POST /phone/color_pages.json
   def create
     @color_page = ColorPage.new(color_page_params)
-
+    @color_page.store_id = current_user.managestores.first.id
     respond_to do |format|
       if @color_page.save
         format.html { redirect_to [:phone, @color_page], notice: 'Color page was successfully created.' }

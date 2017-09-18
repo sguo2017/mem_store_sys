@@ -37,7 +37,9 @@
             <div class="score">
 
                 <a class="my-score" href="/phone/score_queries?pay_type=up">我的积分</a>
+                <% if [Const::MANAGER[:store_manager], Const::MANAGER[:supper_manager]].include?(current_user.admin) %>
                 <a class="my-score" href="/phone/users">我的会员</a>
+                <%end%>
                 <a class="score-num" href="/phone/score_queries?pay_type=up">
                     <%= @user.score %>
                     <span class="ico-arrow-right"></span>

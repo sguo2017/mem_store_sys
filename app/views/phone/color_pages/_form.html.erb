@@ -33,7 +33,7 @@
   <label class="label-vertical"><%= f.label :avatar %>:</label>
   <div class="ui-input">
     <div class="flex-wrap">
-      <%= f.text_field :avatar, :class => 'form-control'  %>
+      <%= f.file_field :avatar, :class => 'form-control'  %>
     </div>
   </div>
 
@@ -52,9 +52,10 @@
     </div>
   </div>
 
-  <div class="text-center bottom-btn">
-    <input class="btn-primary flex-fluid btn-size-lg btn-round" type="submit" name="commit" value="活动发布" data-disable-with="活动发布">
+  <div class="actions">
+    <%= f.submit %>
   </div>
+  
 <% end %>
 
 </div>

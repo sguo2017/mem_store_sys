@@ -88,5 +88,26 @@ class User < ApplicationRecord
         end
         return @notice
     end
+
+    def bindingStoreAdmin(store_id)
+      if store_id.present? #如果传入了store_id参数
+        @store = Store.find(store_id)
+        if @store.present? #能根据store_id找到store
+          unless self.managestores.exists?(id: @store.id) #如果该store没有与当前用户关联
+            self.managestores << @store
+            @notice = "成功设置该专卖店管理员！"
+          else
+            @notice = "该用户已经是该专卖店管理员！"
+          end
+          if self.admin == Const::MANAGER[:nil_manager]
+            self.admin = Const::MANAGER[:store_manager]
+            self.save
+          end
+        else
+          @notice = "不存在该专卖店！"
+        end
+      end
+      return @notice
+    end
  
 end

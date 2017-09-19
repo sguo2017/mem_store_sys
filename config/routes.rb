@@ -62,6 +62,7 @@ Rails.application.routes.draw do
   post "phone/uploadLocation", to: "phone/profiles#uploadLocation"
   post "admin/stores/set_store_admin", to: "admin/stores#setStoreAdmin"
   get "s/:url", to: "short_urls#redirect"
+  get "g/:good_instance_code", to: "short_urls#scan_redirect"
   root 'welcome#index'
 
 end

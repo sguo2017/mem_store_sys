@@ -41,14 +41,29 @@ class User < ApplicationRecord
     end
     #加积分 变级别>>
 
-    #抽奖活动送红包<<
-    def lotteryredpacket(param)
+    #送红包<<
+    def sendRedPacket(param)
         user_info = Hash.new
         user_info["openid"] = self.openid
         money = param
-        return Wxinterface.send_redpacket(user_info,money)
+        @data = Wxinterface.send_redpacket(user_info,money)
+        @redpackethistory = RedPacketHistory.new()
+        @redpackethistory.user_id = @user.id
+        @redpackethistory.catalog = "注册送红包活动"
+        @redpackethistory.phone_number = @user.phone_num
+        @redpackethistory.money = @money
+        status = @data.scan(/\<return_msg\>\<\!\[CDATA\[(.*)\]\]\>\<\/return_msg\>/).first.first
+        @redpackethistory.return_msg = status
+        if status == "发放成功"
+          status = "00A"
+        else
+          status = "00X"
+        end
+        @redpackethistory.status = status
+        @redpackethistory.save
+        return @data
     end
-    #抽奖活动送红包>>
+    #送红包>>
 
     #保存微信信息<<
     def saveWxUserInfo(params)

@@ -1,5 +1,20 @@
-<%= form_for [:phone, @color_page], :html => { :class => "form-vertical" } do |f| %>
+<style type="text/css">
+  .form-vertical .label-vertical {
+    margin-bottom: 0;
+  }
+  .form-group .ui-input {
+    margin-bottom: 15px;
+    padding-bottom: 0;
+  }
+  .form-group .ui-input .flex-wrap .form-control {
+    width: 100%;
+  }
+  input[type='file'] {
+    opacity: 1;
+  }
+</style>
 
+<%= form_for [:phone, @color_page], :html => { :class => "form-vertical" } do |f| %>
 <div class="form-group">
 
   <label class="label-vertical"><%= f.label :name %>:</label> 
@@ -33,7 +48,7 @@
   <label class="label-vertical"><%= f.label :avatar %>:</label>
   <div class="ui-input">
     <div class="flex-wrap">
-      <%= f.file_field :avatar, :class => 'form-control'  %>
+      <%= f.file_field :avatar, :class => 'form-control', :style => 'padding: 5px 5px 0 0;' %>
     </div>
   </div>
 
@@ -44,7 +59,6 @@
     </div>
   </div>
 
-
   <label class="label-vertical"><%= f.label :accept_users_type %>:</label>
   <div class="ui-input">
     <div class="flex-wrap">
@@ -53,9 +67,8 @@
   </div>
 
   <div class="text-center bottom-btn">
-     <input class="btn-primary flex-fluid btn-size-lg btn-round" type="submit" name="commit" value="活动发布" data-disable-with="活动发布">
+    <input class="btn-primary flex-fluid btn-size-lg btn-round" type="submit" name="commit" value="活动发布" data-disable-with="活动发布">
   </div>
-  
-<% end %>
 
 </div>
+<% end %>

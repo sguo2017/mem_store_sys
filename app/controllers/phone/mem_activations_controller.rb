@@ -166,21 +166,7 @@ class Phone::MemActivationsController < PhoneController
         				  end
         			  end
         			  if @switch == 'yes'
-        				  @data = Wxinterface.send_redpacket(userInfo,@money)
-                  @redpackethistory = RedPacketHistory.new()
-                  @redpackethistory.user_id = @user.id
-                  @redpackethistory.catalog = "注册送红包活动"
-                  @redpackethistory.phone_number = @user.phone_num
-                  @redpackethistory.money = @money
-                  status = @data.scan(/\<return_msg\>\<\!\[CDATA\[(.*)\]\]\>\<\/return_msg\>/).first.first
-                  @redpackethistory.return_msg = status
-                  if status == "发放成功"
-                    status = "00A"
-                  else
-                    status = "00X"
-                  end
-                  @redpackethistory.status = status
-                  @redpackethistory.save
+                  @user.sendRedPacket(@money)
         			  end
                 if params[:good_instance_code].present?#商品扫码进入登录页面的用户
                   format.html { redirect_to new_phone_score_query_url(:fun_type => "goods_scan",:good_instance_code => params[:good_instance_code]) }

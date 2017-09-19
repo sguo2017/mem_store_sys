@@ -52,29 +52,34 @@ class Phone::ScoreQueriesController < PhoneController
       @scan_query.score = good.score
 
       if @good_instance.status == '00A'
-        @add_score = good.score
-        @user.changeScore(@add_score) #会员积分变化
-        @score_query = ScoreHistory.new()
-        @score_query.oper = "获得"
-        @score_query.point = @add_score
-        @score_query.object_id = @good_instance.id
-        @score_query.object_type = "产品"
-        @score_query.user_id = @user.id
-        @score_query.province = @user.province
-        @score_query.city = @user.city
-        @score_query.save
-        
-        
-
-        @good_instance.status = '00A' #暂做开发测试用，提交请改成00X
-        @good_instance.save
-        Wxinterface.send_template_message_score(@user,@score_query.point,@score_query.object_type)
-        @msg = "扫码送积分操作成功"
-        @go_url = phone_homepages_url( add_score: @add_score ,oper_type: fun_type)
-
+        #先送红包
+        @money = good.calculateMoney()
+        @money = @money*100 #单位由元转为分
+        p "发送红包： #{@money}分"
+        #@user.sendRedPacket(@money)
+        @go_url = phone_homepages_url
+        if @user.stores.length > 0 #如果用户至少绑定了一个门店 则送积分
+          @add_score = good.score
+          @user.changeScore(@add_score) #会员积分变化
+          @score_query = ScoreHistory.new()
+          @score_query.oper = "获得"
+          @score_query.point = @add_score
+          @score_query.object_id = @good_instance.id
+          @score_query.object_type = "产品"
+          @score_query.user_id = @user.id
+          @score_query.province = @user.province
+          @score_query.city = @user.city
+          @score_query.save
+          
+          @good_instance.status = '00A' #暂做开发测试用，提交请改成00X
+          @good_instance.save
+          Wxinterface.send_template_message_score(@user,@score_query.point,@score_query.object_type)
+          @msg = "扫码送积分操作成功"
+          @go_url = phone_homepages_url( add_score: @add_score ,oper_type: fun_type)
+        else
+          @scan_query.score = 0 #如果用户未绑定门店，则该次扫码记录积分值为0
+        end
         @scan_query.status = '00A'
-
-
       else
         @msg = "商品积分已兑换过"
         @go_url = phone_homepages_url
@@ -104,22 +109,7 @@ class Phone::ScoreQueriesController < PhoneController
         @msg = "积分兑换成功"
         #发送红包
         @money = @bonus_change.red_packet*100  #数据库记录的红包金额单位为元，微信发送单位为分
-        @data = Wxinterface.send_redpacket(@user,@money)
-        @redpackethistory = RedPacketHistory.new()
-        @redpackethistory.user_id = @user.id
-        @redpackethistory.catalog = "注册送红包活动"
-        @redpackethistory.phone_number = @user.phone_num
-        @redpackethistory.money = @money
-        p @data
-        status = @data.scan(/\<return_msg\>\<\!\[CDATA\[(.*)\]\]\>\<\/return_msg\>/).first.first
-        @redpackethistory.return_msg = status
-        if status == "发放成功"
-          status = "00A"
-        else
-          status = "00X"
-        end
-        @redpackethistory.status = status
-        @redpackethistory.save
+        @user.sendRedPacket(@money)
         #@bonus_change_score= params[:score_history][:red_packet]
         # @go_url = '/phone/score_queries?pay_type=down'
         @go_url = phone_score_queries_url(pay_type: 'down', packet_money: @bonus_change.red_packet)

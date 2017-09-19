@@ -223,7 +223,8 @@ a.text-primary:active {
 .ico-score,
 .ico-record,
 .ico-flash,
-.ico-user3 {
+.ico-user3,
+.ico-crown {
   display: inline-block;
   vertical-align: middle;
   position: relative;
@@ -310,9 +311,15 @@ a.text-primary:active {
 .ico-record {
   background: url('../images/ico-record.png') no-repeat center center / cover;
 }
+.ico-scan {
+  height: 33px;
+  width: 33px;
+}
+.ico-header-back {
+  height: 19px;
+  width: 48px;
+}
 .ico-lever,
-.ico-header-back,
-.ico-scan,
 .ico-flash {
   height: 21px;
   width: 21px;
@@ -370,6 +377,13 @@ a.text-primary:active {
 }
 .ico-close2 {
   background: url('../images/ico-close2.png') no-repeat center center / cover;
+}
+.ico-crown {
+  height: 19px;
+  width: 24px;
+}
+.ico-crown {
+  background: url('../images/ico-crown.png') no-repeat center center / cover;
 }
 .mr5 {
   margin-right: 5px;
@@ -1034,10 +1048,10 @@ a.adapt-img {
   font-size: 16px;
 }
 .header .header-left {
-  margin-left: 16px;
+  margin-left: 14px;
 }
 .header .header-right {
-  margin-right: 16px;
+  margin-right: 14px;
 }
 .container {
   min-height: 100%;
@@ -1069,6 +1083,8 @@ a.adapt-img {
   -moz-align-items: center;
   -webkit-align-items: center;
   align-items: center;
+  align-items: flex-start;
+  -webkit-box-align: flex-start;
 }
 .user-img-wrap .user-img {
   margin-right: 14px;
@@ -1084,7 +1100,7 @@ a.adapt-img {
 .user-img-wrap .user-name {
   display: block;
   font-size: 12px;
-  margin-bottom: 7px;
+  margin: 5px 0 7px;
   color: #fff;
 }
 .user-img-wrap .user-name .ico-arrow-right2 {
@@ -1126,17 +1142,31 @@ a.adapt-img {
   width: 65px;
   margin-right: 4px;
 }
-.user-info-header .score {
-  margin-right: 23px;
-}
-.user-info-header .score .score-num {
+.user-info-header .score a,
+.user-info-header .menber a {
   display: block;
-  font-size: 20px;
+  color: #fcd953;
+  text-align: center;
+}
+.user-info-header .score a .highlight-a,
+.user-info-header .menber a .highlight-a {
+  margin-bottom: 8px;
+  font-size: 12px;
+  text-decoration: underline;
+}
+.user-info-header .score .score-num,
+.user-info-header .menber .score-num {
+  display: block;
+  font-size: 18px;
   font-weight: 700;
   color: #fff;
 }
-.user-info-header .score .score-num .ico-arrow-right {
+.user-info-header .score .score-num .ico-arrow-right,
+.user-info-header .menber .score-num .ico-arrow-right {
   margin-top: -3px;
+}
+.user-info-header .menber {
+  margin-right: 18px;
 }
 .my-score {
   font-size: 12px;

@@ -147,7 +147,6 @@ input {
   overflow: visible;
 }
 input[type='file'] {
-  opacity: 0;
   padding: 0;
 }
 button,
@@ -1999,12 +1998,10 @@ a.adapt-img {
   width: 12px;
   background: url('../images/ico-ui-checkbox.png') no-repeat center center / cover;
 }
-.ui-checkbox.active,
-.ui-checkbox:hover {
+.ui-checkbox.active {
   border-color: #d90404;
 }
-.ui-checkbox.active .ui-checkbox-tick,
-.ui-checkbox:hover .ui-checkbox-tick {
+.ui-checkbox.active .ui-checkbox-tick {
   background: url('../images/ico-ui-checkbox2.png') no-repeat center center / cover;
 }
 .ui-input-file {
@@ -2118,7 +2115,7 @@ a.adapt-img {
 }
 .action-config-wrap .action-list-wrap .action-item.active a {
   background: #fff;
-  margin-right: -2ui inputpx;
+  margin-right: -2px;
   color: #d90404;
   font-weight: 700;
 }

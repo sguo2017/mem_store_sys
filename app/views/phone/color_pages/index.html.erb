@@ -1,63 +1,63 @@
 <% content_for :title, "历史活动" %>
 
-  <!-- header begin -->
-  <div class="header">
-    <a class="header-left" href="javascript:void(0)" onclick="window.location.href='/phone/homepages';">
-      <span class="ico-header-back"></span>
-    </a>
-    <div class="condition-group goods-catalog-cond" hidden>
-      <ul class="float-ul clearfix wu3">
-      
+<!-- header begin -->
+<div class="header">
+  <a class="header-left" href="javascript:void(0)" onclick="window.location.href='/phone/homepages';">
+    <span class="ico-header-back"></span>
+  </a>
+  <div class="condition-group goods-catalog-cond" hidden>
+    <ul class="float-ul clearfix wu3">
+    
+    </ul>
+  </div>
+</div>
+<!-- header end -->
+
+<!-- content begin -->
+<div class="container has-top action-config-wrap">
+  <div class="flex-wrap-top">
+    <div class="flex-none action-list-wrap">
+      <ul class="action-list">
+        <li class="action-item"><%= link_to "我的会员", phone_users_path %></li>
+        <li class="action-item"><%= link_to "活动配置", new_phone_color_page_path  %></li>
+        <li class="action-item active"><%= link_to "历史活动", phone_color_pages_path  %></li>
       </ul>
     </div>
-  </div>
-  <!-- header end -->
-  
-  <!-- content begin -->
-  <div class="container has-top action-config-wrap">
-    <div class="flex-wrap-top">
-      <div class="flex-none action-list-wrap">
-        <ul class="action-list">
-          <li class="action-item"><%= link_to "我的会员", phone_users_path %></li>
-          <li class="action-item"><%= link_to "活动配置", new_phone_color_page_path  %></li>
-          <li class="action-item active"><%= link_to "历史活动", phone_color_pages_path  %></li>
-        </ul>
+    <div class="flex-fluid action-content-wrap">
+      <div class="flex-wrap">
+        <div class="flex-fluid">
+          <div class="ui-input">
+            <input type="text" clas name="">
+          </div>
+        </div>
+        <div class="flex-none">
+          <button class="btn-primary-hollow ml10">查询</button>
+        </div>
       </div>
-      <div class="flex-fluid action-content-wrap">
-        <div class="flex-wrap">
-          <div class="flex-fluid">
-            <div class="ui-input">
-              <input type="text" clas name="">
-            </div>
-          </div>
-          <div class="flex-none">
-            <button class="btn-primary-hollow ml10">查询</button>
-          </div>
-        </div>
-        <div class="action-result-title">查询结果</div>
-        <div class="bd-table tc">
-          <table>
-            <tr>
-              <th>活动名称</th>
-              <th>创建时间</th>
-              <th>操作</th>
-            </tr>
+      <div class="action-result-title">查询结果</div>
+      <div class="bd-table tc">
+        <table>
+          <tr>
+            <th>活动名称</th>
+            <th>创建时间</th>
+            <th>操作</th>
+          </tr>
 
-          <% @color_pages.each do |color_page| %>
-            <tr>
-              <td><%= color_page.name %></td>
-              <td><%= color_page.created_at.strftime('%Y-%m-%d')  %></td>
-              <td><%= link_to '详情>>', [:phone, color_page], :class =>'text-primary' %></td>
-            </tr>
-          <% end %>
+        <% @color_pages.each do |color_page| %>
+          <tr>
+            <td><%= color_page.name %></td>
+            <td><%= color_page.created_at.strftime('%Y-%m-%d')  %></td>
+            <td><%= link_to '详情>>', [:phone, color_page], :class =>'text-primary' %></td>
+          </tr>
+        <% end %>
 
-          </table>
-        </div>
+        </table>
       </div>
     </div>
   </div>
-  <!-- content end -->
+</div>
+<!-- content end -->
 
 
-  <div class="text-center block-mt">加载完成</div>    
+<div class="text-center block-mt">加载完成</div>    
 

@@ -1,74 +1,120 @@
 <style type="text/css">
-  .form-vertical .label-vertical {
-    margin-bottom: 0;
-  }
-  .form-group .ui-input {
-    margin-bottom: 15px;
-    padding-bottom: 0;
-  }
   .form-group .ui-input .flex-wrap .form-control {
     width: 100%;
   }
-  input[type='file'] {
-    opacity: 1;
+  .ui-input--inputFile {
+    position: absolute;
+    bottom: 0;
+    top: 0;
+    right: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
   }
 </style>
 
 <%= form_for [:phone, @color_page], :html => { :class => "form-vertical" } do |f| %>
-<div class="form-group">
 
+<div class="form-group">
   <label class="label-vertical"><%= f.label :name %>:</label> 
   <div class="ui-input">
     <div class="flex-wrap">
-      <%= f.text_field :name, :class => 'form-control'  %>
+      <%= f.text_field :name, :class => 'form-control', :placeholder=>"输入活动名称"  %>
     </div>
   </div>
+</div>
 
+<div class="form-group">
   <label class="label-vertical"><%= f.label :begin_time %>:</label>
   <div class="ui-input">
     <div class="flex-wrap">
-      <%= f.text_field :begin_time, :class => 'form-control'  %>
+      <%= f.text_field :begin_time, :class => 'form-control datetimepicker', :placeholder=>"输入活动开始时间"  %>
     </div>
   </div>
+</div>
 
+<div class="form-group">
   <label class="label-vertical"><%= f.label :end_time %>:</label>
   <div class="ui-input">
     <div class="flex-wrap">
-      <%= f.text_field :end_time, :class => 'form-control'  %>
+      <%= f.text_field :end_time, :class => 'form-control datetimepicker', :placeholder=>"输入活动结束时间"  %>
     </div>
   </div>
+</div>
 
+<div class="form-group">
   <label class="label-vertical"><%= f.label :profile %>:</label>
   <div class="ui-input">
     <div class="flex-wrap">
-      <%= f.text_field :profile, :class => 'form-control'  %>
+      <%= f.text_field :profile, :class => 'form-control', :placeholder=>"输入活动主题"  %>
     </div>
   </div>
+</div>
 
+<div class="form-group">
   <label class="label-vertical"><%= f.label :avatar %>:</label>
   <div class="ui-input">
     <div class="flex-wrap">
-      <%= f.file_field :avatar, :class => 'form-control', :style => 'padding: 5px 5px 0 0;' %>
+      <input id="inputFileDisplayer" type="text" class="flex-fluid" value="" placeholder="选择活动图片">
+      <div class="flex-none">
+        <div class="ui-input-file mr10"></div>
+      </div>
     </div>
+    <%= f.file_field :avatar, :class => 'form-control ui-input--inputFile' %>
   </div>
+</div>
 
+<div class="form-group">
   <label class="label-vertical"><%= f.label :content %>:</label>
   <div class="ui-input">
     <div class="flex-wrap">
-      <%= f.text_field :content, :class => 'form-control'  %>
+      <%= f.text_field :content, :class => 'form-control', :placeholder=>"输入活动内容"  %>
     </div>
   </div>
+</div>
 
-  <label class="label-vertical"><%= f.label :accept_users_type %>:</label>
-  <div class="ui-input">
-    <div class="flex-wrap">
-      <%= f.text_field :accept_users_type, :class => 'form-control'  %>
+<div class="form-group">
+  <div class="flex-wrap-top">
+    <label class="flex-none mr10">活动对象:</label>
+    <div class="flex-fluid">
+      <span id="userTypeSpan" class="ui-checkbox">
+        全部会员
+        <i class="ui-checkbox-tick"></i>
+      </span>
     </div>
+    <input class="form-control" type="hidden" name="color_page[accept_users_type]" id="color_page_accept_users_type">
   </div>
+</div> 
 
+<div class="form-group">
   <div class="text-center bottom-btn">
     <input class="btn-primary flex-fluid btn-size-lg btn-round" type="submit" name="commit" value="活动发布" data-disable-with="活动发布">
   </div>
-
 </div>
+
 <% end %>
+
+<script>
+  $(function() {
+    var _span = $('#userTypeSpan');
+    var _input = $('#color_page_accept_users_type');
+    _span.on('click', function(e) {
+      e.preventDefault();
+      _span.toggleClass('active');
+      _input.val(_span.hasClass('active') ? 1 : 0);
+    });
+
+    var _file = $('#color_page_avatar');
+    var _displayer = $('#inputFileDisplayer')
+    _file.on('change', function() {
+      console.log(_file);
+      _displayer.val(_file.val());
+    });
+
+    $('.datetimepicker').datetimepicker({timepicker:false,format:'Y-m-d'});
+    $(".datetimepicker").focus(function(){
+      document.activeElement.blur();
+    });
+  });
+</script>

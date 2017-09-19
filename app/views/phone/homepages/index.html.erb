@@ -34,15 +34,17 @@
                     <%= @level_up_per %>%
                 </div>
             </div>
+<% if [Const::MANAGER[:store_manager], Const::MANAGER[:supper_manager]].include?(current_user.admin) %>
+            <div class="menber">
+                <a href="/phone/users"><div class="highlight-a">我的会员</div>
+                <span class="ico-crown"></span>
+                </a>
+            </div>
+<% end %>
             <div class="score">
-
-                <a class="my-score" href="/phone/score_queries?pay_type=up">我的积分</a>
-                <% if [Const::MANAGER[:store_manager], Const::MANAGER[:supper_manager]].include?(current_user.admin) %>
-                <a class="my-score" href="/phone/users">我的会员</a>
-                <%end%>
-                <a class="score-num" href="/phone/score_queries?pay_type=up">
-                    <%= @user.score %>
-                    <span class="ico-arrow-right"></span>
+                <a href="/phone/score_queries?pay_type=up">
+                    <div class="highlight-a">我的积分</div>
+                    <span href="" class="score-num"><%= @user.score %></span>
                 </a>
             </div>
         </div>

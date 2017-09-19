@@ -24,7 +24,11 @@
     <% @red_packet_histories.each do |red_packet_history| %>
       <tr>
         <!-- <td><%= link_to red_packet_history.id, admin_red_packet_history_path(red_packet_history) %></td> -->
-        <td><%= red_packet_history.user.name %></td>
+        <% if red_packet_history.user.blank? %>
+          <td>-</td>
+        <% else %>
+          <td><%= red_packet_history.user.name %></td>
+        <% end %>
         <td><%= red_packet_history.money %></td>
         <td><%= red_packet_history.catalog %></td>
         <td><%= red_packet_history.phone_number %></td>

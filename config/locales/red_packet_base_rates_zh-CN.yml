@@ -7,6 +7,7 @@ zh-CN:
       red_packet_base_rate: 
         catalog_i: "类型"
         catalog_ii: "n值系数"
+        catalog_iii: "大小概率"
         val: "红包基数"
         rate: "概率"
         created_at: "创建日期"

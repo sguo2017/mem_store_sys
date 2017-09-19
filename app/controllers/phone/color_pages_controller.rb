@@ -39,6 +39,15 @@ class Phone::ColorPagesController < ApplicationController
 
     respond_to do |format|
       if @color_page.save
+        if @color_page.accept_users_type == 1
+          @users = current_user.managestores.first.users
+          active_url = Const::DOMAIN + phone_color_page_path(@color_page)
+          p active_url
+          active_time = @color_page.begin_time.strftime('%Y年-%m月-%d日 %H时:%M分')+"至"+@color_page.end_time.strftime('%Y年-%m月-%d日 %H时:%M分')
+          @users.each do |u|
+            Wxinterface.send_template_message_active_notice(u,active_url,@color_page.name,active_time,"活动中心")
+          end
+        end
         format.html { redirect_to [:phone, @color_page], notice: 'Color page was successfully created.' }
         format.json { render action: 'show', status: :created, location: @color_page }
       else

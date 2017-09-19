@@ -69,6 +69,6 @@ class Admin::RedPacketBaseRatesController < AdminController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def red_packet_base_rate_params
-      params.require(:red_packet_base_rate).permit(:catalog_i, :catalog_ii, :val, :rate)
+      params.require(:red_packet_base_rate).permit(:catalog_i, :catalog_ii, :catalog_iii, :val, :rate)
     end
 end

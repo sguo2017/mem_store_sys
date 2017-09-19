@@ -166,7 +166,9 @@ class Phone::MemActivationsController < PhoneController
         				  end
         			  end
         			  if @switch == 'yes'
-                  @user.sendRedPacket(@money)
+                  param = Hash.new
+                  param["money"] = @money
+                  @user.sendRedPacket(param)
         			  end
                 if params[:good_instance_code].present?#商品扫码进入登录页面的用户
                   format.html { redirect_to new_phone_score_query_url(:fun_type => "goods_scan",:good_instance_code => params[:good_instance_code]) }

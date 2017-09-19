@@ -94,7 +94,9 @@ class Phone::LotteriesController < PhoneController
         @score_query.save
         if @activity_award_cfg.level_I == 'money'
           money = @activity_award_cfg.score*100 #单位由元转为分
-          @data = @user.lotteryredpacket(money)
+          param = Hash.new
+          param["money"] = money
+          @data = @user.sendRedPacket(param)
           @redpackethistory = RedPacketHistory.new()
           @redpackethistory.user_id = @user.id
           @redpackethistory.catalog = "抽奖活动得红包"

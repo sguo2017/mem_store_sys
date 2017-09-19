@@ -33,6 +33,20 @@ class Good < ApplicationRecord
 			end
 			@redpacket = @redpackets[item]
 			@money = @redpacket.val + @redpacket.catalog_ii*base_money
+			if @redpacket.catalog_iii == "small"
+				#计算概率控制数
+				count1 = @redpacket.rate
+				#统计已中奖数量
+				m = @money*100
+				rs = RedPacketHistory.find_by_sql("select t.* from (SELECT h.* from red_packet_histories h where obj_id=#{self.id} ORDER BY created_at desc LIMIT 10000) t where t.money=#{m}")
+				count2 = rs.length
+				p "count2: #{count2}"
+				if count2 > count1 - 1
+					p "重新抽取"
+					return self.calculateMoney
+				end
+                
+			end
 			return @money
 		else
 			return 0

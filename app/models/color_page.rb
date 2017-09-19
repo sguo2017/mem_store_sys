@@ -7,4 +7,9 @@
 # accept_users_type  0 => 不发送全部用户, 1 => 发送全部用户
 class ColorPage < ApplicationRecord
 	mount_uploader :avatar, AvatarUploader
+	before_save :default_values
+	  def default_values
+	    self.begin_time ||= Time.now
+	    self.end_time ||= Time.now
+	  end
 end

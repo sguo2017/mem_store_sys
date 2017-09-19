@@ -35,7 +35,7 @@ class Wxinterface
 
   def Wxinterface.global_access_token
 	info = ConfigInfo["weixinconfiginfo"]
-    if $access_token_effect_time == nil || (Time.now-$access_token_effect_time)>1.hour
+    if $access_token_effect_time == nil || (Time.now-$access_token_effect_time)>30.minute
       uri = URI.parse(info["GLOBAL_ACCESS_TOKEN_ADDR"] + "grant_type=client_credential&appid=#{info["APPID"]}&secret=#{info["SECRET"]}")
       http = Net::HTTP.new(uri.host, uri.port)
       http.use_ssl = true

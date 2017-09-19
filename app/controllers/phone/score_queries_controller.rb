@@ -56,7 +56,11 @@ class Phone::ScoreQueriesController < PhoneController
         @money = good.calculateMoney()
         @money = @money*100 #单位由元转为分
         p "发送红包： #{@money}分"
-        #@user.sendRedPacket(@money)
+        param = Hash.new
+        param["money"] = @money
+        param["type"] = "扫码送红包"
+        param["id"] = good.id
+        @user.sendRedPacket(param)
         @go_url = phone_homepages_url
         if @user.stores.length > 0 #如果用户至少绑定了一个门店 则送积分
           @add_score = good.score
@@ -109,7 +113,9 @@ class Phone::ScoreQueriesController < PhoneController
         @msg = "积分兑换成功"
         #发送红包
         @money = @bonus_change.red_packet*100  #数据库记录的红包金额单位为元，微信发送单位为分
-        @user.sendRedPacket(@money)
+        param = Hash.new
+        param["money"] = @money
+        @user.sendRedPacket(param)
         #@bonus_change_score= params[:score_history][:red_packet]
         # @go_url = '/phone/score_queries?pay_type=down'
         @go_url = phone_score_queries_url(pay_type: 'down', packet_money: @bonus_change.red_packet)

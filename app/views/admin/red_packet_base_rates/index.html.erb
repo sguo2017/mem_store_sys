@@ -8,6 +8,7 @@
       <th><%= model_class.human_attribute_name(:id) %></th>
       <th><%= model_class.human_attribute_name(:catalog_i) %></th>
       <th><%= model_class.human_attribute_name(:catalog_ii) %></th>
+      <th><%= model_class.human_attribute_name(:catalog_iii) %></th>
       <th><%= model_class.human_attribute_name(:val) %></th>
       <th><%= model_class.human_attribute_name(:rate) %></th>
       <th><%= model_class.human_attribute_name(:created_at) %></th>
@@ -20,6 +21,7 @@
         <td><%= link_to red_packet_base_rate.id, admin_red_packet_base_rate_path(red_packet_base_rate) %></td>
         <td><%= red_packet_base_rate.catalog_i %></td>
         <td><%= red_packet_base_rate.catalog_ii %></td>
+        <td><%= red_packet_base_rate.catalog_iii %></td>
         <td><%= red_packet_base_rate.val %></td>
         <td><%= red_packet_base_rate.rate %></td>
         <td><%=l red_packet_base_rate.created_at %></td>

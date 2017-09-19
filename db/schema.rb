@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170919043823) do
+ActiveRecord::Schema.define(version: 20170919094604) do
 
   create_table "activities", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "title"
@@ -94,6 +94,7 @@ ActiveRecord::Schema.define(version: 20170919043823) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "store_id"
+    t.integer "user_id"
   end
 
   create_table "config_table_infos", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -192,6 +193,7 @@ ActiveRecord::Schema.define(version: 20170919043823) do
     t.integer "rate"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "catalog_iii"
   end
 
   create_table "red_packet_histories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -203,6 +205,8 @@ ActiveRecord::Schema.define(version: 20170919043823) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "return_msg"
+    t.string "obj_type"
+    t.integer "obj_id"
   end
 
   create_table "score_histories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

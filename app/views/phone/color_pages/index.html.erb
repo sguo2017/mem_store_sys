@@ -24,16 +24,20 @@
       </ul>
     </div>
     <div class="flex-fluid action-content-wrap">
+
+      <%= form_tag("/phone/color_pages", method: "get") do %>
       <div class="flex-wrap">
         <div class="flex-fluid">
           <div class="ui-input">
-            <input type="text" clas name="">
+            <%= text_field_tag(:name, @name, placeholder: '请输入要要查询的内容', value: @name, style: 'width:100%;') %>
           </div>
         </div>
         <div class="flex-none">
           <button class="btn-primary-hollow ml10">查询</button>
         </div>
       </div>
+      <% end %>
+
       <div class="action-result-title">查询结果</div>
       <div class="bd-table tc">
         <table>
@@ -43,13 +47,21 @@
             <th>操作</th>
           </tr>
 
-        <% @color_pages.each do |color_page| %>
+          <% @color_pages.each do |color_page| %>
           <tr>
             <td><%= color_page.name %></td>
             <td><%= color_page.created_at.strftime('%Y-%m-%d')  %></td>
             <td><%= link_to '详情>>', [:phone, color_page], :class =>'text-primary' %></td>
           </tr>
-        <% end %>
+          <% end %>
+
+          <% if @color_pages.length == 0 %>
+          <tfoot>
+            <tr>
+              <td colspan="3">暂无数据</td>
+            </tr>
+          </tfoot>
+          <% end %>
 
         </table>
       </div>
@@ -59,5 +71,5 @@
 <!-- content end -->
 
 
-<div class="text-center block-mt">加载完成</div>    
+<!-- <div class="text-center block-mt">加载完成</div>-->
 

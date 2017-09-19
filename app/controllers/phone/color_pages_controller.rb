@@ -6,7 +6,15 @@ class Phone::ColorPagesController < ApplicationController
   # GET /phone/color_pages
   # GET /phone/color_pages.json
   def index
-    @color_pages = ColorPage.where("store_id = ?",current_user.managestores.first.id)
+    @name = params[:name]
+    @page = params[:page] || 1
+    userId = current_user.id
+
+    if @name.blank?
+      @color_pages = ColorPage.where("user_id = ? ", userId).order("created_at DESC").page(params[:page]).per(10)
+    else @name.blank?
+      @color_pages = ColorPage.where("user_id = ? and name LIKE ? ", userId, "%#{@name}%").order("created_at DESC").page(params[:page]).per(10)
+    end
   end
 
   # GET /phone/color_pages/1
@@ -27,7 +35,8 @@ class Phone::ColorPagesController < ApplicationController
   # POST /phone/color_pages.json
   def create
     @color_page = ColorPage.new(color_page_params)
-    @color_page.store_id = current_user.managestores.first.id
+    @color_page.user_id = current_user.id
+
     respond_to do |format|
       if @color_page.save
         format.html { redirect_to [:phone, @color_page], notice: 'Color page was successfully created.' }
@@ -71,6 +80,6 @@ class Phone::ColorPagesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def color_page_params
-      params.require(:color_page).permit(:name, :begin_time, :end_time, :profile, :avatar, :content, :accept_users_type)
+      params.require(:color_page).permit(:name, :begin_time, :end_time, :profile, :avatar, :content, :accept_users_type, :user_id)
     end
 end

@@ -6,4 +6,5 @@
 # content            活动内容
 # accept_users_type  0 => 不发送全部用户, 1 => 发送全部用户
 class ColorPage < ApplicationRecord
+	mount_uploader :avatar, AvatarUploader
 end

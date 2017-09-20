@@ -168,6 +168,8 @@ class Phone::MemActivationsController < PhoneController
         			  if @switch == 'yes'
                   param = Hash.new
                   param["money"] = @money
+                  param["type"] = "注册送红包活动"
+                  param["id"] = @user.id
                   @user.sendRedPacket(param)
         			  end
                 if params[:good_instance_code].present?#商品扫码进入登录页面的用户

@@ -115,6 +115,8 @@ class Phone::ScoreQueriesController < PhoneController
         @money = @bonus_change.red_packet*100  #数据库记录的红包金额单位为元，微信发送单位为分
         param = Hash.new
         param["money"] = @money
+        param["type"] = "积分兑换红包"
+        param["id"] = @score_query.id
         @user.sendRedPacket(param)
         #@bonus_change_score= params[:score_history][:red_packet]
         # @go_url = '/phone/score_queries?pay_type=down'

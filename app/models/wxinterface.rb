@@ -69,10 +69,14 @@ class Wxinterface
     return JSON.parse(@data)['ticket'] 
   end
 
-  def Wxinterface.send_redpacket(user_info,money)
+  def Wxinterface.send_redpacket(user_info,param)
     #各项参数
 	info = ConfigInfo["weixinconfiginfo"]
-    act_name = "Register_to_send_red_packets"  #活动名称
+    if param["type"].present? #活动名称
+      act_name = param["type"]
+    else
+      act_name = "德叔之家"
+    end
     client_ip = info["CLIENT_IP"]  #调用接口的机器Ip地址
     mch_billno =  DateTime.now.to_s(:number) + DateTime.now.to_i.to_s#商户订单号
     mch_id = info["MCH_ID"]  #商户号
@@ -82,7 +86,7 @@ class Wxinterface
     re_openid = user_info["openid"]  #接受红包的用户
     remark = "no"  #备注信息
     send_name = info["SEND_NAME"]  #商户名称
-    total_amount = money  #付款金额(单位为分)
+    total_amount = param["money"]  #付款金额(单位为分)
     total_num = 1  #红包发放总人数
     wishing = "恭喜"  #红包祝福语
     wxappid = info["APPID"]  #公众账号appid

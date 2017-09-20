@@ -96,21 +96,9 @@ class Phone::LotteriesController < PhoneController
           money = @activity_award_cfg.score*100 #单位由元转为分
           param = Hash.new
           param["money"] = money
+          param["type"] = "抽奖活动"
+          param["id"] = @lottery.id
           @data = @user.sendRedPacket(param)
-          @redpackethistory = RedPacketHistory.new()
-          @redpackethistory.user_id = @user.id
-          @redpackethistory.catalog = "抽奖活动得红包"
-          @redpackethistory.phone_number = @user.phone_num
-          @redpackethistory.money = money
-          status = @data.scan(/\<return_msg\>\<\!\[CDATA\[(.*)\]\]\>\<\/return_msg\>/).first.first
-          @redpackethistory.return_msg = status
-          if status == "发放成功"
-            status = "00A"
-          else
-            status = "00X"
-          end
-          @redpackethistory.status = status
-          @redpackethistory.save
         else
           @user.changeScore(@activity_award_cfg.score)
           # logger.debug "86: @activity_award_cfg.score #{@activity_award_cfg.score} result:#{@activity_award_cfg.score.to_i > 0 }" 

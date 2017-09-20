@@ -43,13 +43,10 @@ class User < ApplicationRecord
 
     #送红包<<
     def sendRedPacket(param)
-        user_info = Hash.new
-        user_info["openid"] = self.openid
-        money = param["money"]
-        @data = Wxinterface.send_redpacket(self,money)
+        @data = Wxinterface.send_redpacket(self,param)
         @redpackethistory = RedPacketHistory.new()
         @redpackethistory.user_id = self.id
-        @redpackethistory.catalog = "注册送红包活动"
+        #@redpackethistory.catalog = "注册送红包活动"
         @redpackethistory.phone_number = self.phone_num
         @redpackethistory.money = param["money"]
         @redpackethistory.obj_type = param["type"]

@@ -10,7 +10,7 @@ class Phone::UsersController < PhoneController
     if @name.blank?
       @users = @store.users.order("created_at DESC").page(params[:page]).per(10)
     else @name.blank?
-      @users = @store.users.where("name LIKE ? ", "%#{@name}%").order("created_at DESC").page(params[:page]).per(10)
+      @users = @store.users.where("name LIKE ? or phone_num LIKE ?", "%#{@name}%","%#{@name}%").order("created_at DESC").page(params[:page]).per(10)
     end
   end
 

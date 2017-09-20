@@ -42,8 +42,10 @@ class Phone::ColorPagesController < ApplicationController
         if @color_page.accept_users_type == 1
           @users = current_user.managestores.first.users
           active_url = Const::DOMAIN + phone_color_page_path(@color_page)
+          info = ConfigInfo["weixinconfiginfo"]
+          total_url = "#{info["AUTH_ADDR"]}appid=#{info["APPID"]}&redirect_uri="+active_url+"&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect"
           @users.each do |u|
-            Wxinterface.send_template_message_active_notice(u,active_url,@color_page.name,@color_page.time,@color_page.address)
+            Wxinterface.send_template_message_active_notice(u,total_url,@color_page.name,@color_page.time,@color_page.address)
           end
         end
         format.html { redirect_to [:phone, @color_page], notice: 'Color page was successfully created.' }

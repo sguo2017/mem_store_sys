@@ -26,3 +26,7 @@
 /yarn-error.log
 
 .byebug_history
+
+# Ignore images uploaded by user.
+public/uploads/activity
+public/uploads/activity_award_cfg

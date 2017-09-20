@@ -1,5 +1,15 @@
 <%- model_class = RedPacketBaseRate -%>
-<div class="page-header">
-  <h1><%=t '.title', :default => [:'helpers.titles.edit', 'Edit %{model}'], :model => model_class.model_name.human.titleize %></h1>
+
+<div class="container">
+  <div class="panel">
+    <div class="panel-heading">
+      <div class="panel-title">
+        <%=t '.title', :default => [:'helpers.titles.edit', 'Edit %{model}'], :model => model_class.model_name.human.titleize %>
+      </div>
+    </div>
+    <div class="panel-body">
+    	<%= render :partial => 'form' %>
+    </div>
+  </div>
 </div>
-<%= render :partial => 'form' %>
+

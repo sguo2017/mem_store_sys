@@ -18,8 +18,6 @@
       <th class="text-nowrap">
       <%= model_class.human_attribute_name(:goods_catalog_id) %></th>
       <th class="text-nowrap"><%= model_class.human_attribute_name(:spec) %></th>
-      <th class="text-nowrap">
-      <%= model_class.human_attribute_name(:status) %></th>
       <th class="text-nowrap"><%= model_class.human_attribute_name(:score) %></th>
       <th class="text-nowrap"><%= model_class.human_attribute_name(:price) %></th>
       <th class="text-nowrap"><%= model_class.human_attribute_name(:scan_catalog) %></th>
@@ -35,7 +33,6 @@
         <td><%= good.name %></td>
         <td><%= good.goods_catalog.name %></td>
         <td><%= good.spec %></td>
-        <td><%= good.status %></td>
         <td><%= good.score %></td>
         <td><%= good.price %></td>
         <td><%= good.scan_catalog %></td>

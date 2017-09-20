@@ -79,7 +79,8 @@ class Phone::ScoreQueriesController < PhoneController
           @good_instance.save
           Wxinterface.send_template_message_score(@user,@score_query.point,@score_query.object_type)
           @msg = "扫码送积分操作成功"
-          @go_url = phone_homepages_url( add_score: @add_score ,oper_type: fun_type)
+          @money_yuan = @money/100
+          @go_url = phone_homepages_url( add_score: @add_score , get_money: @money_yuan, oper_type: fun_type)
         else
           @scan_query.score = 0 #如果用户未绑定门店，则该次扫码记录积分值为0
         end

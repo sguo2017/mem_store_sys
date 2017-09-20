@@ -31,6 +31,7 @@ class Phone::HomepagesController < PhoneController
     end  
     @fun_type = params[:oper_type]
     @get_score = params[:add_score]
+    @get_money = params[:get_money] #单位为元
     #分配会员等级对应的名称和图标
  
     mem_level = MemLevel.where(" score > ? ", @user.score).order(" score ").first

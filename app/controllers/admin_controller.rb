@@ -42,7 +42,7 @@ class AdminController < ApplicationController
     @user_menu = ["lotteries", "score_histories", "mem_groups", "red_packet_histories"]
     @bonus = ["bonus_changes", "mem_levels"]
     @report = ["report","qr_code_scan_histories"]
-	@config_menu = ["config_table_infos"]
+	@config_menu = ["config_table_infos","ad_modifies","red_packet_base_rates"]
     if @goods_menu.include?(@current_nav) 
         @current_nav = "goods"
     elsif @user_menu.include?(@current_nav)

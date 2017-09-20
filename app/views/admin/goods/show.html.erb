@@ -27,7 +27,7 @@
                             <%= model_class.human_attribute_name(:goods_catalog_id) %>:
                         </th>
                         <td>
-                            <%= @good.goods_catalog_id %>
+                            <%= @good.goods_catalog.name %>
                         </td>
                         <th>
                             <%= model_class.human_attribute_name(:spec) %>:
@@ -64,6 +64,21 @@
                         </th>
                         <td>
                             <%= @good.ispromotion %>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th>
+                            <%= model_class.human_attribute_name(:scan_catalog) %>:
+                        </th>
+                        <td>
+                            <%= @good.scan_catalog %>
+                        </td>
+                        <th>
+                            <%= model_class.human_attribute_name(:scan_base_money) %>:
+                        </th>
+                        <td>
+                            <%= @good.scan_base_money %>
                         </td>
                     </tr>
 

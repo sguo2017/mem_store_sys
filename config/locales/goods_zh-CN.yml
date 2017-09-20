@@ -8,6 +8,8 @@ zh-CN:
         code: "编码"
         name: "名称"
         goods_catalog_id: "类型"
+        scan_catalog: "档次"
+        scan_base_money: "N值"
         spec: "规格"
         status: "状态"
         score: "积分"

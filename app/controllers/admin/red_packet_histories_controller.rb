@@ -15,9 +15,9 @@ class Admin::RedPacketHistoriesController < AdminController
 	  @end_date = Time.now
 	end
 	if @catalog.present?
-	  @red_packet_histories = RedPacketHistory.where("created_at > '#{@start_date}' and created_at < '#{@end_date}' and catalog LIKE ? ", '%'+@catalog+'%').order("created_at DESC").page(params[:page]).per(10)
+	  @red_packet_histories = RedPacketHistory.includes(:user).where("created_at > '#{@start_date}' and created_at < '#{@end_date}' and catalog LIKE ? ", '%'+@catalog+'%').order("created_at DESC").page(params[:page]).per(10)
 	else
-	  @red_packet_histories = RedPacketHistory.where("created_at > '#{@start_date}' and created_at < '#{@end_date}'").order("created_at DESC").page(params[:page]).per(10)
+	  @red_packet_histories = RedPacketHistory.includes(:user).where("created_at > '#{@start_date}' and created_at < '#{@end_date}'").order("created_at DESC").page(params[:page]).per(10)
 	end
   end
 

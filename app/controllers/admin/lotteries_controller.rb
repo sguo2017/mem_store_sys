@@ -9,17 +9,17 @@ class Admin::LotteriesController < AdminController
       @mem_group_id = params[:mem_group_id]
     if @name.blank? &&  @mem_group_id.blank?
       # @users = User.where(:admin =>0).page(params[:page]).per(10)
-      @lotteries = Lottery.order("created_at DESC").page(params[:page]).per(10)
+      @lotteries = Lottery.includes(:user).order("created_at DESC").page(params[:page]).per(10)
     else
       if @mem_group_id.blank? 
-        @lotteries = Lottery.joins("INNER JOIN users ON users.admin =0 and users.id = lotteries.user_id AND users.name like '%#{@name}%'")
+        @lotteries = Lottery.includes(:user).joins("INNER JOIN users ON users.admin =0 and users.id = lotteries.user_id AND users.name like '%#{@name}%'")
         .page(params[:page]).per(10)
       else
         if @name.blank?   ##当name字段值为空时要去掉like,否则查询不到
-           @lotteries = Lottery.joins("INNER JOIN users ON users.admin =0 and users.id = lotteries.user_id AND users.mem_group_id=#{@mem_group_id} ")
+           @lotteries = Lottery.includes(:user).joins("INNER JOIN users ON users.admin =0 and users.id = lotteries.user_id AND users.mem_group_id=#{@mem_group_id} ")
         .page(params[:page]).per(10)
         else
-         @lotteries = Lottery.joins("INNER JOIN users ON users.admin =0 and users.id = lotteries.user_id AND users.mem_group_id=#{@mem_group_id} AND users.name like '%#{@name}%'")
+         @lotteries = Lottery.includes(:user).joins("INNER JOIN users ON users.admin =0 and users.id = lotteries.user_id AND users.mem_group_id=#{@mem_group_id} AND users.name like '%#{@name}%'")
         .page(params[:page]).per(10)
         end
         

@@ -16,16 +16,16 @@ class Admin::ScoreHistoriesController < AdminController
       @score_histories = ScoreHistory.includes(:user).page(params[:page]).order("created_at DESC").per(10)
     else
       if @mem_group_id.blank?         
-        @score_histories = ScoreHistory.joins("INNER JOIN users ON users.admin =0 and users.id = score_histories.user_id AND users.name like '%#{@name}%'")
+        @score_histories = ScoreHistory.includes(:user).joins("INNER JOIN users ON users.admin =0 and users.id = score_histories.user_id AND users.name like '%#{@name}%'")
         .page(params[:page]).per(10)
       else
         if @name.blank? 
           # @users = User.where(:admin =>0).where(:mem_group_id =>@mem_group_id)
           # .page(params[:page]).per(10) 
-          @score_histories = ScoreHistory.joins("INNER JOIN users ON users.admin =0 and users.id = score_histories.user_id AND users.mem_group_id=#{@mem_group_id} ")
+          @score_histories = ScoreHistory.includes(:user).joins("INNER JOIN users ON users.admin =0 and users.id = score_histories.user_id AND users.mem_group_id=#{@mem_group_id} ")
         .page(params[:page]).per(10)
         else
-          @score_histories = ScoreHistory.joins("INNER JOIN users ON users.admin =0 and users.id = score_histories.user_id AND users.mem_group_id=#{@mem_group_id} AND users.name like '%#{@name}%'")
+          @score_histories = ScoreHistory.includes(:user).joins("INNER JOIN users ON users.admin =0 and users.id = score_histories.user_id AND users.mem_group_id=#{@mem_group_id} AND users.name like '%#{@name}%'")
         .page(params[:page]).per(10)
         end      
       end

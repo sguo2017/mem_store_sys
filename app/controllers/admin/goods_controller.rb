@@ -10,15 +10,15 @@ class Admin::GoodsController < AdminController
       @name = params[:name]
       @goods_catalog_id = params[:goods_catalog_id]
     if @name.blank? &&  @goods_catalog_id.blank?
-      @goods = Good.page(params[:page]).per(10)
+      @goods = Good.includes(:goods_catalog).page(params[:page]).per(10)
     else
       if @goods_catalog_id.blank? 
-        @goods = Good.where('name LIKE ? ', '%'+@name+'%').order("created_at DESC").page(params[:page]).per(10)
+        @goods = Good.includes(:goods_catalog).where('name LIKE ? ', '%'+@name+'%').order("created_at DESC").page(params[:page]).per(10)
       else
         if @name.blank?   ##当name字段值为空时要去掉like,否则查询不到
-           @goods = Good.where(:goods_catalog_id =>@goods_catalog_id).order("created_at DESC").page(params[:page]).per(10)
+           @goods = Good.includes(:goods_catalog).where(:goods_catalog_id =>@goods_catalog_id).order("created_at DESC").page(params[:page]).per(10)
         else
-         @goods = Good.where('name LIKE ? ', '%'+@name+'%').where(:goods_catalog_id =>@goods_catalog_id).order("created_at DESC").page(params[:page]).per(10)
+         @goods = Good.includes(:goods_catalog).where('name LIKE ? ', '%'+@name+'%').where(:goods_catalog_id =>@goods_catalog_id).order("created_at DESC").page(params[:page]).per(10)
         end
         
       end
@@ -103,6 +103,6 @@ class Admin::GoodsController < AdminController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def good_params
-      params.require(:good).permit(:code, :name, :goods_catalog_id, :spec, :status, :score, :ispromotion, :price, :avatar, :info)
+      params.require(:good).permit(:code, :name, :goods_catalog_id, :scan_catalog, :scan_base_money, :spec, :status, :score, :ispromotion, :price, :avatar, :info)
     end
 end

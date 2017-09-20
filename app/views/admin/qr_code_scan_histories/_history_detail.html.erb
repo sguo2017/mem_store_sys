@@ -15,7 +15,11 @@
     <% @qr_code_scan_histories.each do |qr_code_scan_history| %>
       <tr>
         <!-- <td><%= link_to qr_code_scan_history.id, admin_qr_code_scan_history_path(qr_code_scan_history) %></td> -->
-        <td><%= qr_code_scan_history.user.name %></td>
+        <% if qr_code_scan_history.user.blank? %>
+          <td>-</td>
+        <% else %>
+          <td><%= qr_code_scan_history.user.name %></td>
+        <% end %>
         <td><%= qr_code_scan_history.good.name %></td>
         <td><%= qr_code_scan_history.good_instance_id %></td>
         <td><%= qr_code_scan_history.score %></td>

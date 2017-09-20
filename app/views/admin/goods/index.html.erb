@@ -22,8 +22,8 @@
       <%= model_class.human_attribute_name(:status) %></th>
       <th class="text-nowrap"><%= model_class.human_attribute_name(:score) %></th>
       <th class="text-nowrap"><%= model_class.human_attribute_name(:price) %></th>
-      <th class="text-nowrap">
-      <%= model_class.human_attribute_name(:ispromotion) %></th>
+      <th class="text-nowrap"><%= model_class.human_attribute_name(:scan_catalog) %></th>
+      <th class="text-nowrap"><%= model_class.human_attribute_name(:scan_base_money) %></th>
       <th class="text-nowrap"><%= model_class.human_attribute_name(:created_at) %></th>
       <th class="text-nowrap"><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
@@ -33,13 +33,14 @@
         <!-- <td><%= link_to good.id, admin_good_path(good) %></td> -->
         <td><%= good.code %></td>
         <td><%= good.name %></td>
-        <td><%= good.goods_catalog_id %></td>
+        <td><%= good.goods_catalog.name %></td>
         <td><%= good.spec %></td>
         <td><%= good.status %></td>
         <td><%= good.score %></td>
         <td><%= good.price %></td>
-        <td><%= good.ispromotion %></td>
-        <td><%= good.created_at.strftime('%Y-%m-%d %H:%M:%S') %></td>
+        <td><%= good.scan_catalog %></td>
+        <td><%= good.scan_base_money %></td>
+        <td><%= good.created_at.strftime('%Y%m%d') %></td>
         <td>
           <%= link_to t('.show', :default => t("helpers.links.show")),
                       admin_good_path(good), :class => 'btn btn-default btn-xs' %>

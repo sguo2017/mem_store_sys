@@ -18,9 +18,9 @@ class Admin::QrCodeScanHistoriesController < AdminController
   else
     @search_type = "history_detail"
     if @user_id.present?
-      @qr_code_scan_histories = QrCodeScanHistory.where("created_at > ? and created_at < ? and user_id = ?",@start_date,@end_date,@user_id).order("created_at DESC").page(params[:page]).per(10)
+      @qr_code_scan_histories = QrCodeScanHistory.includes(:user).includes(:good).where("created_at > ? and created_at < ? and user_id = ?",@start_date,@end_date,@user_id).order("created_at DESC").page(params[:page]).per(10)
     else
-      @qr_code_scan_histories = QrCodeScanHistory.where("created_at > ? and created_at < ?",@start_date,@end_date).order("created_at DESC").page(params[:page]).per(10)
+      @qr_code_scan_histories = QrCodeScanHistory.includes(:user).includes(:good).where("created_at > ? and created_at < ?",@start_date,@end_date).order("created_at DESC").page(params[:page]).per(10)
     end
   end
 end

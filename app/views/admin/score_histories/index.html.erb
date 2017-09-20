@@ -36,7 +36,11 @@
         <td><%= score_history.object_type %></td>
         <td><%= score_history.object_id %></td>
         <td><%= score_history.oper %></td>
-        <td><%= score_history.user.name %></td>
+        <% if score_history.user.blank? %>
+          <td>-</td>
+        <% else %>
+          <td><%= score_history.user.name %></td>
+        <% end %>
         <td><%= score_history.created_at.strftime('%Y-%m-%d %H:%M:%S') %></td>
         <td>
           <%= link_to t('.show', :default => t("helpers.links.show")),

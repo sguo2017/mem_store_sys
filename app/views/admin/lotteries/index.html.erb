@@ -44,7 +44,11 @@
         <td><%= lottery.activity_award_id %></td>
         <td><%= lottery.activity_award_cfg_id %></td> -->
         <td><%= lottery.activity_award_cfg_name %></td>
-        <td><%= lottery.user.name %></td>
+        <% if lottery.user.blank? %>
+          <td>-</td>
+        <% else %>
+          <td><%= lottery.user.name %></td>
+        <% end %>
         <td><%= lottery.created_at.strftime('%Y-%m-%d %H:%M:%S')  %></td>
         <!-- <td>
           <%= link_to t('.show', :default => t("helpers.links.show")),

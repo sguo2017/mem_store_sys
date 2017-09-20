@@ -884,13 +884,23 @@ a.text-primary:active {
   text-align: center;
   color: #fff;
 }
-.popup-get-score .get-score {
-  padding: 15px 0;
+.popup-get-score .get-score,
+.popup-get-score .get-red-paper {
+  padding-top: 5px;
 }
-.popup-get-score .get-score .score-num {
-  font-size: 45px;
+.popup-get-score .get-score .score-num,
+.popup-get-score .get-red-paper .score-num,
+.popup-get-score .get-score .red-paper-num,
+.popup-get-score .get-red-paper .red-paper-num {
+  font-size: 25px;
   color: #fcea10;
   margin: 0 10px;
+}
+.popup-get-score .get-red-paper {
+  padding-top: 10px;
+}
+.popup-get-score .get-red-paper .red-paper-num {
+  color: red;
 }
 .popup-get-score .score-total {
   position: absolute;
@@ -2097,12 +2107,31 @@ a.adapt-img {
   -webkit-box-align: stretch;
 }
 .action-config-wrap .action-list-wrap {
+  position: relative;
   background: #f5f5f5;
-  border-left: 3px solid #dbdbdb;
-  border-right: 1px solid #cdcdcd;
-  width: 66px;
+  width: 70px;
   font-size: 15px;
   overflow-y: auto;
+}
+.action-config-wrap .action-list-wrap:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  left: 0;
+  height: 100%;
+  background: #cdcdcd;
+}
+.action-config-wrap .action-list-wrap:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 1px;
+  width: 1px;
+  height: 100%;
+  background: #cdcdcd;
 }
 .action-config-wrap .action-list-wrap .action-item {
   line-height: 1.3;
@@ -2112,10 +2141,10 @@ a.adapt-img {
   display: block;
   padding: 15px 16px 15px 20px;
   border-bottom: 1px solid #cdcdcd;
+  z-index: 10;
 }
 .action-config-wrap .action-list-wrap .action-item.active a {
   background: #fff;
-  margin-right: -2px;
   color: #d90404;
   font-weight: 700;
 }
@@ -2125,7 +2154,7 @@ a.adapt-img {
   position: absolute;
   top: 0;
   bottom: 0;
-  left: -3px;
+  left: 0;
   background: #d90404;
 }
 .action-config-wrap .action-content-wrap {

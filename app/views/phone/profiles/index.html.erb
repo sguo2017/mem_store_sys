@@ -51,7 +51,7 @@
         </div>
       <div class="calendar">
         <div>
-            <input type="text" id="datePicker" name="user[birthday]" class="datetimepicker" value="<%if @user.birthday.present? %><%=@user.birthday.strftime('%Y-%m-%d')%><%else%><%=Time.new(1970).strftime('%Y-%m-%d')%><%end%>"/>
+            <input type="date" id="datePicker" name="user[birthday]" class="datetimepicke22r" value="<%if @user.birthday.present? %><%=@user.birthday.strftime('%Y-%m-%d')%><%else%><%=Time.new(1970).strftime('%Y-%m-%d')%><%end%>"/>
         </div>
       </div>
       </li>

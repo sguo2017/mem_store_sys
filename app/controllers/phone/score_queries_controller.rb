@@ -75,7 +75,7 @@ class Phone::ScoreQueriesController < PhoneController
           @score_query.city = @user.city
           @score_query.save
           
-          @good_instance.status = '00A' #暂做开发测试用，提交请改成00X
+          @good_instance.status = '00X'
           @good_instance.save
           Wxinterface.send_template_message_score(@user,@score_query.point,@score_query.object_type)
           @msg = "扫码送积分操作成功"

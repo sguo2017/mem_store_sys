@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170919094604) do
+ActiveRecord::Schema.define(version: 20170920024127) do
 
   create_table "activities", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "title"
@@ -85,8 +85,6 @@ ActiveRecord::Schema.define(version: 20170919094604) do
 
   create_table "color_pages", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
-    t.date "begin_time"
-    t.date "end_time"
     t.string "profile"
     t.string "avatar"
     t.text "content"
@@ -95,6 +93,8 @@ ActiveRecord::Schema.define(version: 20170919094604) do
     t.datetime "updated_at", null: false
     t.integer "store_id"
     t.integer "user_id"
+    t.string "address"
+    t.string "time"
   end
 
   create_table "config_table_infos", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

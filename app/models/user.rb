@@ -45,8 +45,8 @@ class User < ApplicationRecord
     def sendRedPacket(param)
         user_info = Hash.new
         user_info["openid"] = self.openid
-        money = param
-        #@data = Wxinterface.send_redpacket(user_info,money)
+        money = param["money"]
+        @data = Wxinterface.send_redpacket(self,money)
         @redpackethistory = RedPacketHistory.new()
         @redpackethistory.user_id = self.id
         @redpackethistory.catalog = "注册送红包活动"
@@ -54,8 +54,8 @@ class User < ApplicationRecord
         @redpackethistory.money = param["money"]
         @redpackethistory.obj_type = param["type"]
         @redpackethistory.obj_id = param["id"]
-        #status = @data.scan(/\<return_msg\>\<\!\[CDATA\[(.*)\]\]\>\<\/return_msg\>/).first.first
-        status = "发放成功"
+        status = @data.scan(/\<return_msg\>\<\!\[CDATA\[(.*)\]\]\>\<\/return_msg\>/).first.first
+        #status = "发放成功"
         @redpackethistory.return_msg = status
         if status == "发放成功"
           status = "00A"

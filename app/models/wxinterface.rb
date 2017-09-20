@@ -84,7 +84,7 @@ class Wxinterface
     send_name = info["SEND_NAME"]  #商户名称
     total_amount = money  #付款金额(单位为分)
     total_num = 1  #红包发放总人数
-    wishing = "welcome"  #红包祝福语
+    wishing = "恭喜"  #红包祝福语
     wxappid = info["APPID"]  #公众账号appid
 
     #生成签名

@@ -6,8 +6,8 @@ zh-CN:
     attributes:
       color_page: 
         name: "活动名称"
-        begin_time: "活动开始时间"
-        end_time: "活动结束时间"
+        time: "活动时间"
+        address: "活动地点"
         profile: "活动主题"
         avatar: "活动图片"
         content: "活动内容"

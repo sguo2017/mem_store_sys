@@ -1,5 +1,5 @@
 class Admin::ScoreHistoriesController < AdminController
-  before_action :forbid_super_admin
+  before_action :forbid_store_manager
   before_action :set_score_history, only: [:show, :edit, :update, :destroy]
 
   # GET /admin/score_histories

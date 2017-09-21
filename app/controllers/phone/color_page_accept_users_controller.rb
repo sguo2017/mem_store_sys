@@ -1,5 +1,6 @@
 class Phone::ColorPageAcceptUsersController < PhoneController
   before_action :set_color_page_accept_user, only: [:show, :edit, :update, :destroy]
+  before_action :forbid_nil_manager
 
   # GET /phone/color_page_accept_users
   # GET /phone/color_page_accept_users.json

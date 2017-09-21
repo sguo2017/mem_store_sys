@@ -1,5 +1,5 @@
 class Admin::Report::TrendAnalysesController < AdminController
-    before_action :forbid_super_admin
+    before_action :forbid_store_manager
 	def index
 		_type = ["active_mem","recently_register_mem","code_scan_rate","red_pactket_data","score_date","repay_rate","mem_turnover_rate"]
 		@analyses_type = params[:analyses_type]

@@ -1,7 +1,6 @@
 class Admin::UsersController < AdminController
   before_action :set_user, only: [ :edit, :update, :destroy]
-  skip_load_and_authorize_resource
-  before_action :null_resource_authorize ,except: [:index,:show]
+  before_action :forbid_store_manager ,except: [:index,:show]
 
   # GET /admin/users
   # GET /admin/users.json

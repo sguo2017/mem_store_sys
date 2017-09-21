@@ -1,5 +1,5 @@
 class Admin::MemGroupsController < AdminController
-  before_action :forbid_super_admin
+  before_action :forbid_store_manager
   before_action :set_mem_group, only: [:show, :edit, :update, :destroy]
 
   # GET /admin/mem_groups

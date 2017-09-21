@@ -1,5 +1,5 @@
 class Admin::GoodInstancesController < AdminController
-  before_action :forbid_super_admin
+  before_action :forbid_store_manager
   before_action :set_good_instance, only: [:show, :edit, :update, :destroy]
 
   # GET /admin/good_instances

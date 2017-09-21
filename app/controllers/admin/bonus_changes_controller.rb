@@ -1,5 +1,5 @@
 class Admin::BonusChangesController < AdminController
-  before_action :forbid_super_admin
+  before_action :forbid_store_manager
   before_action :set_bonus_change, only: [:show, :edit, :update, :destroy]
 
   # GET /admin/bonus_changes

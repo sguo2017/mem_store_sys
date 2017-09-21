@@ -1,7 +1,8 @@
-class Phone::ColorPagesController < ApplicationController
+class Phone::ColorPagesController < PhoneController
   before_action :authenticate_user!
   layout "phone"
   before_action :set_color_page, only: [:show, :edit, :update, :destroy]
+  before_action :forbid_nil_manager, except: :show
 
   # GET /phone/color_pages
   # GET /phone/color_pages.json

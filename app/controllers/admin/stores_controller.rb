@@ -1,5 +1,5 @@
 class Admin::StoresController < AdminController
-  before_action :forbid_super_admin, except: [:index,:show]
+  before_action :forbid_store_manager, except: [:index,:show]
   before_action :set_store, only: [:show, :edit, :update, :destroy]
   # GET /admin/stores
   # GET /admin/stores.json

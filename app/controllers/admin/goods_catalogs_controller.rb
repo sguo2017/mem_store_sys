@@ -1,5 +1,5 @@
 class Admin::GoodsCatalogsController < AdminController
-  before_action :forbid_super_admin
+  before_action :forbid_store_manager
   before_action :set_goods_catalog, only: [:show, :edit, :update, :destroy]
 
   # GET /admin/goods_catalogs

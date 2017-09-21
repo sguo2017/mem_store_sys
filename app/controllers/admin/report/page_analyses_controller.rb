@@ -1,5 +1,5 @@
 class Admin::Report::PageAnalysesController < AdminController
-    before_action :forbid_super_admin
+    before_action :forbid_store_manager
   def index
     
   end

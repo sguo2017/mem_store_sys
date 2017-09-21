@@ -1,7 +1,7 @@
 require 'rqrcode_png'
 
 class Admin::GoodsController < AdminController
-  before_action :forbid_super_admin
+  before_action :forbid_store_manager
   before_action :set_good, only: [:show, :edit, :update, :destroy]
 
   # GET /admin/goods

@@ -1,5 +1,5 @@
 class Admin::QrCodeScanHistoriesController < AdminController
-  before_action :forbid_super_admin
+  before_action :forbid_store_manager
   before_action :set_qr_code_scan_history, only: [:show, :edit, :update, :destroy]
 
   # GET /admin/qr_code_scan_histories

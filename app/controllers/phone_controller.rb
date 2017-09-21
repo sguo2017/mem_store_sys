@@ -11,4 +11,11 @@ class PhoneController < ApplicationController
 		end
 	end
 
+	def forbid_nil_manager
+    @user = current_user
+	    if @user.admin == Const::MANAGER[:nil_manager]
+	        redirect_to phone_homepages_url
+	    end
+  	end
+
 end

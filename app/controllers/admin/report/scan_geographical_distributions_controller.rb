@@ -1,5 +1,5 @@
 class Admin::Report::ScanGeographicalDistributionsController < AdminController
-    before_action :forbid_super_admin
+    before_action :forbid_store_manager
 	def index
 		@date = params[:date]
 		if @date.blank?

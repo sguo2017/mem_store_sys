@@ -49,7 +49,9 @@
         <td>
           <%= link_to t('.show', :default => ' 查  看 '),
                       admin_store_path(store), :class => 'btn btn-default btn-xs' %>
+          <%if current_user.admin == Const::MANAGER[:supper_manager]%>
           <a class='btn btn-default btn-xs' id="_set_admin" type="text"  placeholder="选择" data-toggle="modal" data-target="#modal_set_admin" value="设置" onclick="set_store_id(<%=store.id%>)">设置店长</a>
+          <%end%>
 <!--           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_admin_store_path(store), :class => 'btn btn-default btn-xs' %> -->
 <!--           <%= link_to t('.destroy', :default => t("helpers.links.destroy")),

@@ -50,7 +50,7 @@ class Admin::UsersController < AdminController
     if current_user.admin == 1
       @user = User.find(params[:id])
     else
-      @store = Store.find(current_user.stores.first.id)
+      @store = Store.find(current_user.managestores.first.id)
       if @store.users.exists?(id: params[:id])
         @user = User.find(params[:id])
       else

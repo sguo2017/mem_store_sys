@@ -20,12 +20,12 @@ class AdminController < ApplicationController
   end
 
   def admin_layout
-    current_user.admin == 1 ? "application" : "store_admin"
+    current_user.admin == Const::MANAGER[:supper_manager] ? "application" : "store_admin"
   end
 
-  def forbid_super_admin
+  def forbid_store_manager
     @user = current_user
-    unless @user.admin == 1
+    unless @user.admin == Const::MANAGER[:supper_manager]
         redirect_to main_app.root_url
     end
   end

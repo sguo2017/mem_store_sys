@@ -13,7 +13,7 @@ class Phone::ProfilesController < PhoneController
   # GET /phone/profiles/1
   # GET /phone/profiles/1.json
   def show
-    unless current_user.stores.first.users.exists?(id: params[:id])
+    unless current_user.managestores.first.users.exists?(id: params[:id])
       redirect_to main_app.root_url
     end
     @user = User.find(params[:id])

@@ -29,9 +29,6 @@ class Admin::GoodsController < AdminController
   # GET /admin/goods/1
   # GET /admin/goods/1.json
   def show
-    for i in 1..20 do
-      p @good.calculateMoney
-    end
   end
 
   # GET /admin/goods/new

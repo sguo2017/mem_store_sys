@@ -96,7 +96,7 @@ class Admin::StoresController < AdminController
 
   #POST /admin/stores/set_admin
   def setStoreAdmin
-    if current_user.admin == 1
+    if current_user.admin == Const::MANAGER[:supper_manager]
       @user = User.find(params[:user_id])
       @notice = @user.bindingStoreAdmin(params[:store_id])
     else

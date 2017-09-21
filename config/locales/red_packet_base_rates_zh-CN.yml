@@ -9,7 +9,7 @@ zh-CN:
         catalog_ii: "n值系数"
         catalog_iii: "大小概率"
         val: "红包基数"
-        rate: "概率"
+        rate: "概率(单位:万)"
         created_at: "创建日期"
         updated_at: "修改日期"
   helpers:

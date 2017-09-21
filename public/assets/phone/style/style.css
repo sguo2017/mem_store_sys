@@ -2162,6 +2162,10 @@ a.adapt-img {
   background: #fff;
   padding: 15px 16px;
 }
+.action-config-wrap .action-content-wrap .bottom-btn {
+  padding-top: 0;
+  padding-bottom: 0;
+}
 .form-vertical label {
   color: #888;
 }

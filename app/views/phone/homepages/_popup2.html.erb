@@ -7,12 +7,14 @@
 				<div class="popup-score-title">恭喜</div>
 			</div>
 			<div class="popup-score-body">
+				<%if @get_score.present? && @get_score != 0%>
 				<div class="get-score">
 					获得
 					<span class="score-num">+<%= @get_score %></span>
 					积分
 				</div>
-				<%if @get_money.present? %>
+				<%end%>
+				<%if @get_money.present? && @get_money != 0%>
 				<div class="get-red-paper">
 					获得
 					<span class="red-paper-num"><%= @get_money %></span>

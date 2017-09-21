@@ -6,8 +6,9 @@ zh-CN:
     attributes:
       red_packet_history: 
         user_id: "会员"
-        money: "金额"
+        money: "金额(分)"
         catalog: "类型"
+        obj_type: "获得类型"
         phone_number: "手机"
         status: "状态"
         return_msg: "返回信息"

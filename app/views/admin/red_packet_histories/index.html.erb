@@ -12,7 +12,7 @@
       <!-- <th><%= model_class.human_attribute_name(:id) %></th> -->
       <th><%= model_class.human_attribute_name(:user_id) %></th>
       <th><%= model_class.human_attribute_name(:money) %></th>
-      <th><%= model_class.human_attribute_name(:catalog) %></th>
+      <th><%= model_class.human_attribute_name(:obj_type) %></th>
       <th><%= model_class.human_attribute_name(:phone_number) %></th>
       <th><%= model_class.human_attribute_name(:status) %></th>
       <th><%= model_class.human_attribute_name(:return_msg) %></th>
@@ -30,7 +30,7 @@
           <td><%= red_packet_history.user.name %></td>
         <% end %>
         <td><%= red_packet_history.money %></td>
-        <td><%= red_packet_history.catalog %></td>
+        <td><%= red_packet_history.obj_type %></td>
         <td><%= red_packet_history.phone_number %></td>
         <td><%if red_packet_history.status == "00A" %><%="成功"%><%else%><%="失败"%><%end%></td>
         <td><%= red_packet_history.return_msg %></td>

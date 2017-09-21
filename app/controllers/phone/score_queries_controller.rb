@@ -61,7 +61,8 @@ class Phone::ScoreQueriesController < PhoneController
         param["type"] = "扫码送红包"
         param["id"] = good.id
         @user.sendRedPacket(param)
-        @go_url = phone_homepages_url
+        @money_yuan = @money/100
+        @go_url = phone_homepages_url(get_money: @money_yuan, oper_type: fun_type)
         if @user.stores.length > 0 #如果用户至少绑定了一个门店 则送积分
           @add_score = good.score
           @user.changeScore(@add_score) #会员积分变化
@@ -79,7 +80,6 @@ class Phone::ScoreQueriesController < PhoneController
           @good_instance.save
           Wxinterface.send_template_message_score(@user,@score_query.point,@score_query.object_type)
           @msg = "扫码送积分操作成功"
-          @money_yuan = @money/100
           @go_url = phone_homepages_url( add_score: @add_score , get_money: @money_yuan, oper_type: fun_type)
         else
           @scan_query.score = 0 #如果用户未绑定门店，则该次扫码记录积分值为0

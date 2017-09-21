@@ -94,7 +94,7 @@ class Wxinterface
     #生成签名
     stringA = "act_name=#{act_name}&client_ip=#{client_ip}&mch_billno=#{mch_billno}&mch_id=#{mch_id}&nonce_str=#{nonce_str}&re_openid=#{re_openid}&remark=#{remark}&send_name=#{send_name}&total_amount=#{total_amount}&total_num=#{total_num}&wishing=#{wishing}&wxappid=#{wxappid}"
     stringSignTemp = "#{stringA}&key=#{info["KEY"]}"
-	puts "stringSignTemp: #{stringSignTemp}"
+	  #puts "stringSignTemp: #{stringSignTemp}"
     sign = Digest::MD5.hexdigest(stringSignTemp).upcase
 
     body_content = ""
@@ -114,15 +114,15 @@ class Wxinterface
     body_content = body_content + "<sign>#{sign}</sign>"
     body_content = body_content + "</xml>"
     uri = URI.parse(info["RED_PACKET_ADDR"])
-    puts "send_redpacket: #{uri}"
+    #puts "send_redpacket: #{uri}"
     http = Net::HTTP.new(uri.host, uri.port)
     http.use_ssl = true
-	http.cert =OpenSSL::X509::Certificate.new(File.read("#{Rails.root}/config/apiclient_cert.pem"))
-	http.key =OpenSSL::PKey::RSA.new((File.read("#{Rails.root}/config/apiclient_key.pem")), mch_id)# key and password
+	  http.cert =OpenSSL::X509::Certificate.new(File.read("#{Rails.root}/config/apiclient_cert.pem"))
+	  http.key =OpenSSL::PKey::RSA.new((File.read("#{Rails.root}/config/apiclient_key.pem")), mch_id)# key and password
     http.verify_mode = OpenSSL::SSL::VERIFY_NONE
     request = Net::HTTP::Post.new(uri.request_uri)
-	request.body = body_content
-	puts "body_content: #{body_content}"
+	  request.body = body_content
+	  #puts "body_content: #{body_content}"
     response = http.request(request)
     @data = response.body
     @data.force_encoding('UTF-8')

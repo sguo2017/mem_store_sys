@@ -17,7 +17,7 @@
   <div class="container">
     <div class="adapt-img back-prepage-wrap">
       <a href="" class="back-prepage"></a>
-      <img src="<%= @color_page.avatar %>" alt="Image" class="media-object">
+      <img src="/assets/phone/images/img-sales-promotion.png">
     </div>
     <div class="block-mt">
       <ul class="card-list ">
@@ -32,12 +32,23 @@
             </div>  
             <div class="flex-wrap-top mb10">
               <div class="flex-none">活动时间：</div>
-              <div class="flex-fluid"><%= @color_page.time%></div>
-            </div>   
-            <div class="flex-wrap-top mb10">
-              <div class="flex-none">活动对象：</div>
-              <div class="flex-fluid">茂茂专卖店全体会员</div>
+              <div class="flex-fluid"></div>
             </div>  
+            <div class="flex-wrap-top mb10">
+              <div class="flex-none">活动主题：</div>
+              <div class="flex-fluid"><%= @color_page.profile %></div>
+            </div>  
+            <%if @color_page.accept_users_type == 1 %>
+              <div class="flex-wrap-top mb10">
+                <div class="flex-none">活动对象：</div>
+                <div class="flex-fluid">所有人</div>
+              </div> 
+            <%else %>
+              <div class="flex-wrap-top mb10">
+                <div class="flex-none">活动对象：</div>
+                <div class="flex-fluid">无</div>
+              </div> 
+            <% end %> 
             <div class="flex-wrap-top mb10">
               <div class="flex-none">活动内容：</div>
               <div class="flex-fluid"><%= @color_page.content %></div>

@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="renderer" content="webkit">
   <meta name="turbolinks-cache-control" content="no-preview">
-  <title><%= content_for?(:title) ? yield(:title) : "会员积分体系" %></title>
+  <title><%= content_for?(:title) ? yield(:title) : Const::WEB_NAME %></title>
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag "application", :media => "all" %>

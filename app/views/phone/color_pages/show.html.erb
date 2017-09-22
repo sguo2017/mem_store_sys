@@ -1,3 +1,4 @@
+
 <% content_for :title, "促销" %>
 
   <!-- header begin -->
@@ -17,7 +18,7 @@
   <div class="container">
     <div class="adapt-img back-prepage-wrap">
       <a href="" class="back-prepage"></a>
-      <img src="/assets/phone/images/img-sales-promotion.png">
+      <img src="<%= @color_page.avatar %>" alt="Image" class="media-object">
     </div>
     <div class="block-mt">
       <ul class="card-list ">
@@ -32,12 +33,8 @@
             </div>  
             <div class="flex-wrap-top mb10">
               <div class="flex-none">活动时间：</div>
-              <div class="flex-fluid"></div>
-            </div>  
-            <div class="flex-wrap-top mb10">
-              <div class="flex-none">活动主题：</div>
-              <div class="flex-fluid"><%= @color_page.profile %></div>
-            </div>  
+              <div class="flex-fluid"><%= @color_page.time%></div>
+            </div>   
             <%if @color_page.accept_users_type == 1 %>
               <div class="flex-wrap-top mb10">
                 <div class="flex-none">活动对象：</div>
@@ -60,4 +57,4 @@
     <div class="text-tips text-center block-mtb">没有内容了</div>  
   </div>
   <!-- content end -->
-
+  

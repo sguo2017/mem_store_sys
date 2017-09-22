@@ -2,7 +2,7 @@
   <div class="login-box">
     <div class="brand-logo-wrap">
       <%= image_tag("/assets/admin/images/logo.png")%>  
-      <div class="brand-name">会员积分系统</div>
+      <div class="brand-name"><%= Const::WEB_NAME%></div>
     </div>
     <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { role: 'form' }) do |f| %>
     <!-- <form class="login-form"> -->

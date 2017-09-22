@@ -29,7 +29,9 @@
       <div class="flex-wrap">
         <div class="flex-fluid">
           <div class="ui-input">
-            <%= text_field_tag(:name, @name, placeholder: '请输入要要查询的内容', value: @name, style: 'width:100%;') %>
+            <div class="flex-wrap">
+              <%= text_field_tag(:name, @name, placeholder: '请输入要要查询的内容', value: @name, class: 'flex-fluid') %>
+            </div>
           </div>
         </div>
         <div class="flex-none">

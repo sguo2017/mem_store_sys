@@ -4,7 +4,7 @@ class Admin::CouponsController < AdminController
   # GET /admin/coupons
   # GET /admin/coupons.json
   def index
-    @coupons = Coupon.all.page(params[:page]).per(10)
+    @coupons = Coupon.all.order("created_at DESC").page(params[:page]).per(10)
   end
 
   # GET /admin/coupons/1

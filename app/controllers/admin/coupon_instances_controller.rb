@@ -4,7 +4,7 @@ class Admin::CouponInstancesController < ApplicationController
   # GET /admin/coupon_instances
   # GET /admin/coupon_instances.json
   def index
-    @coupon_instances = CouponInstance.all
+    @coupon_instances = CouponInstance.all.order("created_at DESC").page(params[:page]).per(10)
   end
 
   # GET /admin/coupon_instances/1

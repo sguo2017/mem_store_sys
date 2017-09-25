@@ -1,0 +1,45 @@
+<%= form_for([:phone, @coupon_instance]) do |f| %>
+  <% if @coupon_instance.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@coupon_instance.errors.count, "error") %> prohibited this coupon_instance from being saved:</h2>
+
+      <ul>
+      <% @coupon_instance.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+      <%= f.label :coupon_id %><br>
+    <%= f.number_field :coupon_id %>
+    </div>
+  <div class="field">
+      <%= f.label :user_id %><br>
+    <%= f.number_field :user_id %>
+    </div>
+  <div class="field">
+      <%= f.label :order_id %><br>
+    <%= f.number_field :order_id %>
+    </div>
+  <div class="field">
+      <%= f.label :status %><br>
+    <%= f.text_field :status %>
+    </div>
+  <div class="field">
+      <%= f.label :code %><br>
+    <%= f.text_field :code %>
+    </div>
+  <div class="field">
+      <%= f.label :write_off_time %><br>
+    <%= f.datetime_select :write_off_time %>
+    </div>
+  <div class="field">
+      <%= f.label :write_off_store_id %><br>
+    <%= f.number_field :write_off_store_id %>
+    </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

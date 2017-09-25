@@ -1,0 +1,2 @@
+class CouponInstance < ApplicationRecord
+end

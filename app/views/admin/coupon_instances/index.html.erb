@@ -1,0 +1,39 @@
+<h1>Listing coupon_instances</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Coupon</th>
+      <th>User</th>
+      <th>Order</th>
+      <th>Status</th>
+      <th>Code</th>
+      <th>Write off time</th>
+      <th>Write off store</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @coupon_instances.each do |coupon_instance| %>
+      <tr>
+        <td><%= coupon_instance.coupon_id %></td>
+        <td><%= coupon_instance.user_id %></td>
+        <td><%= coupon_instance.order_id %></td>
+        <td><%= coupon_instance.status %></td>
+        <td><%= coupon_instance.code %></td>
+        <td><%= coupon_instance.write_off_time %></td>
+        <td><%= coupon_instance.write_off_store_id %></td>
+        <td><%= link_to 'Show', [:admin, coupon_instance] %></td>
+        <td><%= link_to 'Edit', edit_admin_coupon_instance_path(coupon_instance) %></td>
+        <td><%= link_to 'Destroy', [:admin, coupon_instance], method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Coupon instance', new_admin_coupon_instance_path %>

@@ -32,6 +32,7 @@ Rails.application.routes.draw do
     resources :invitations
     resources :color_pages
     resources :users
+    resources :coupon_instances
   end
 
   namespace :admin do
@@ -54,6 +55,8 @@ Rails.application.routes.draw do
     resources :red_packet_histories
     resources :ad_modifies
     resources :red_packet_base_rates
+    resources :coupons
+    resources :coupon_instances
   end
 
   mount Ckeditor::Engine => '/ckeditor'

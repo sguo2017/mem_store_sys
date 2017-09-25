@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Coupon:</strong>
+  <%= @coupon_instance.coupon_id %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @coupon_instance.user_id %>
+</p>
+
+<p>
+  <strong>Order:</strong>
+  <%= @coupon_instance.order_id %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @coupon_instance.status %>
+</p>
+
+<p>
+  <strong>Code:</strong>
+  <%= @coupon_instance.code %>
+</p>
+
+<p>
+  <strong>Write off time:</strong>
+  <%= @coupon_instance.write_off_time %>
+</p>
+
+<p>
+  <strong>Write off store:</strong>
+  <%= @coupon_instance.write_off_store_id %>
+</p>
+
+<%= link_to 'Edit', edit_admin_coupon_instance_path(@coupon_instance) %> |
+<%= link_to 'Back', admin_coupon_instances_path %>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170920024127) do
+ActiveRecord::Schema.define(version: 20170925093059) do
 
   create_table "activities", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "title"
@@ -104,6 +104,30 @@ ActiveRecord::Schema.define(version: 20170920024127) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "ad_photo"
+  end
+
+  create_table "coupon_instances", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer "coupon_id"
+    t.integer "user_id"
+    t.integer "order_id"
+    t.string "status"
+    t.string "code"
+    t.datetime "write_off_time"
+    t.integer "write_off_store_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "coupons", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "name"
+    t.string "catalog"
+    t.integer "good_id"
+    t.datetime "effect_time"
+    t.datetime "invalid_time"
+    t.integer "score"
+    t.string "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "good_instances", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

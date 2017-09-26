@@ -1,10 +1,12 @@
-class Phone::CouponInstancesController < ApplicationController
+class Phone::CouponInstancesController < PhoneController
   before_action :set_coupon_instance, only: [:show, :edit, :update, :destroy]
 
   # GET /phone/coupon_instances
   # GET /phone/coupon_instances.json
   def index
-    @coupon_instances = CouponInstance.all
+    @user = current_user
+    # @coupon_instances = CouponInstance.all
+    @coupons = Coupon.all
   end
 
   # GET /phone/coupon_instances/1

@@ -1,39 +1,72 @@
-<h1>Listing coupon_instances</h1>
+<% content_for :title, "积分兑换" %>
 
-<table>
-  <thead>
-    <tr>
-      <th>Coupon</th>
-      <th>User</th>
-      <th>Order</th>
-      <th>Status</th>
-      <th>Code</th>
-      <th>Write off time</th>
-      <th>Write off store</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @coupon_instances.each do |coupon_instance| %>
-      <tr>
-        <td><%= coupon_instance.coupon_id %></td>
-        <td><%= coupon_instance.user_id %></td>
-        <td><%= coupon_instance.order_id %></td>
-        <td><%= coupon_instance.status %></td>
-        <td><%= coupon_instance.code %></td>
-        <td><%= coupon_instance.write_off_time %></td>
-        <td><%= coupon_instance.write_off_store_id %></td>
-        <td><%= link_to 'Show', [:phone, coupon_instance] %></td>
-        <td><%= link_to 'Edit', edit_phone_coupon_instance_path(coupon_instance) %></td>
-        <td><%= link_to 'Destroy', [:phone, coupon_instance], method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Coupon instance', new_phone_coupon_instance_path %>
+<body class="body-bg">
+  <div class="header">
+    <a  class="header-left" href="javascript:void(0)" onclick="window.location.href='/phone/homepages';">
+      <span class="ico-header-back"></span>
+    </a>
+    <button id="scan" class="header-right"><span class="ico-scan"></span></button>
+  </div>
+  <!-- header end -->
+  <div class="container has-top score-exchange-wrap">
+    <div class="flex-wrap-between score-exchange-title">
+      <div class="flex-fluid current">
+        积分
+        <span class="ico-score"></span>:
+        <%= @user.score %>
+      </div>
+      <div>
+        <a href="/phone/score_queries?pay_type=down">
+          <span class="ico-record"></span>
+          兑换记录
+        </a>
+      </div>
+    </div>
+    <div class="score-exchange">
+      <div class="score-exchange-left">
+        <ul class="exchange-tit-list">
+          <li>
+            <a href="/phone/bonus_changes">
+              <img class="tit-img" src="/assets/phone/images/img-redpacket.png" alt="">
+              <div>红包</div>
+            </a>
+          </li>
+          <li class="active">
+            <a href="/phone/coupon_instances">
+              <img class="tit-img" src="/assets/phone/images/img-new-coupon.png">
+              <div>优惠券</div>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="score-exchange-right">
+        <div>
+          <ul class="exchange-coupon-list">
+            <% 3.times do %>
+            <li class="exchage-coupon-item">
+              <div class="flex-wrap">
+                <div class="flex-none mr10">
+                  <img src="/assets/phone/images/img-coupon-logo.png" class="img-circle r54">
+                </div>
+                <div class="flex-fluid">
+                  <div class="exchange-coupon-tit">墙不漏外墙防水浆料5KG</div>
+                  <div class="need-score">
+                    <span class="need-score-num">880</span>
+                    积分
+                  </div>
+                  <div class="text-center mt10">
+                    <button class="btn-default-rever-hllow btn-round">立即兑换</button> 
+                  </div>
+                  <div class="effective-time">有效期至2017-12-12</div>
+                </div>
+              </div>
+            </li>
+            <% end %>
+          </ul>
+          <div class="load-tips">更多优惠卷陆续添加中</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <%= render :partial => 'popup' %>
+</body>

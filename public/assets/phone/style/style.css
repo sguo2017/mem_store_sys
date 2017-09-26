@@ -6,6 +6,7 @@
 body,
 html {
   height: 100%;
+  position: relative;
 }
 body,
 dl,
@@ -666,6 +667,29 @@ a.text-primary:active {
 .btn-default:active {
   background: #e6e6e6;
 }
+.btn-default-rever-hllow {
+  display: inline-block;
+  padding: 4px 12px;
+  text-align: center;
+  cursor: pointer;
+  line-height: 1;
+  font-size: 12px;
+  color: #fff;
+  border: 1px solid #fff;
+  background: #d90404;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.btn-default-rever-hllow:hover,
+.btn-default-rever-hllow:active {
+  background: #fc4747;
+}
 .btn-similar-hollow {
   display: inline-block;
   padding: 4px 12px;
@@ -1061,9 +1085,6 @@ a.adapt-img {
 }
 .header .header-right {
   margin-right: 14px;
-}
-.container {
-  min-height: 100%;
 }
 .container.has-top {
   padding-top: 44px;
@@ -1932,6 +1953,58 @@ a.adapt-img {
   font-size: 12px;
   line-height: 20px;
 }
+.exchange-coupon-list {
+  padding: 20px 15px;
+  background: #fff;
+}
+.exchange-coupon-list .exchage-coupon-item {
+  position: relative;
+  padding: 10px 18px;
+  background: #d90404;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+}
+.exchange-coupon-list .exchage-coupon-item + .exchage-coupon-item {
+  margin-top: 8px;
+}
+.exchange-coupon-list .exchage-coupon-item:before,
+.exchange-coupon-list .exchage-coupon-item:after {
+  position: absolute;
+  content: '';
+  top: 0;
+  bottom: 0;
+  width: 12px;
+  background: url('../images/dot-line2.png') repeat-y 0 3px / contain;
+}
+.exchange-coupon-list .exchage-coupon-item:before {
+  left: -7px;
+}
+.exchange-coupon-list .exchage-coupon-item:after {
+  right: -7px;
+}
+.exchange-coupon-list .exchage-coupon-item .exchange-coupon-tit {
+  color: rgba(255, 255, 255, 0.8);
+}
+.exchange-coupon-list .exchage-coupon-item .need-score {
+  margin-top: 5px;
+  color: #fada2f;
+  font-size: 12px;
+  font-weight: 700;
+}
+.exchange-coupon-list .exchage-coupon-item .need-score .need-score-num {
+  font-size: 16px;
+}
+.exchange-coupon-list .exchage-coupon-item .effective-time {
+  text-align: center;
+  font-size: 12px;
+  color: #711e10;
+  margin-top: 15px;
+}
+.exchange-coupon-list .exchage-coupon-item .btn-round {
+  min-width: 100px;
+  padding: 7px 12px;
+}
 .no-exchage-tips {
   padding: 50px 30px;
   background: #fff;
@@ -1977,6 +2050,9 @@ a.adapt-img {
   font-weight: 700;
   font-size: 16px;
   margin-bottom: 7px;
+}
+.exchange-wrap .exchange-tit.block-mb {
+  margin-bottom: 15px;
 }
 .back-prepage-wrap {
   position: relative;
@@ -2072,6 +2148,15 @@ a.adapt-img {
 .img-thumb img {
   width: 100%;
 }
+.img-circle {
+  -moz-border-radius: 1000px;
+  -webkit-border-radius: 1000px;
+  border-radius: 1000px;
+}
+.img-circle.r54 {
+  height: 54px;
+  width: 54px;
+}
 .btn-primary-hollow {
   border: 1px solid #d90404;
   padding: 7px 10px;
@@ -2141,7 +2226,6 @@ a.adapt-img {
   display: block;
   padding: 15px 16px 15px 20px;
   border-bottom: 1px solid #cdcdcd;
-  z-index: 10;
 }
 .action-config-wrap .action-list-wrap .action-item.active a {
   background: #fff;
@@ -2217,4 +2301,42 @@ a.adapt-img {
 }
 .bd-table td {
   color: #666;
+}
+.my-coupon-wrap {
+  padding: 0 8%;
+  background: #fff;
+}
+.brick-tabs {
+  background: #fff;
+  height: 40px;
+  line-height: 40px;
+}
+.brick-tabs > li {
+  float: left;
+  width: 33%;
+  box-sizing: border-box;
+  padding: 0 10px;
+  text-align: center;
+  position: relative;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.brick-tabs > li a {
+  color: #c1c9d4;
+}
+.brick-tabs > li.active a {
+  color: #d90404;
+}
+.brick-tabs > li:not(:last-child):after {
+  position: absolute;
+  content: '';
+  top: 15%;
+  bottom: 15%;
+  right: 0;
+  width: 1px;
+  background: #f1f1f1;
+}
+.coupon-detail-2dnum {
+  padding: 0 16px;
 }

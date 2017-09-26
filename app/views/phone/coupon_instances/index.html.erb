@@ -1,4 +1,4 @@
-<% content_for :title, "积分兑换" %>
+<% content_for :title, "我的优惠券" %>
 
 <body class="body-bg">
   <div class="header">
@@ -8,27 +8,43 @@
     <button id="scan" class="header-right"><span class="ico-scan"></span></button>
   </div>
   <!-- header end -->
-
-<table>
-  <thead>
-    <tr>
-      <th>name</th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @coupon_instances.each do |coupon_instance|%>
-      <tr>
-        <td><%=coupon_instance.coupon.name%></td>
-        <td><a href=<%=phone_coupon_instance_path(coupon_instance)%>>Show</a></td>
-      </tr>
-    <%end%>
-  </tbody>
-</table>
-
-<br>
-
-<a href="/phone/coupon_instances/new">New Coupon instance</a>
-
+  <div class="container has-top">
+    <ul class="brick-tabs mb10">
+      <li class="<% if @c_type=='unused'%>active<%end%>" >
+        <a href="<%=phone_coupon_instances_path(c_type: 'unused')%>">未使用</a>
+      </li>
+      <li class="<% if @c_type=='used'%>active<%end%>" >
+        <a href="<%=phone_coupon_instances_path(c_type: 'used')%>">已使用</a>
+      </li>
+      <li class="<% if @c_type=='invalid'%>active<%end%>" >
+        <a href="<%=phone_coupon_instances_path(c_type: 'invalid')%>">已过期</a>
+      </li>
+    </ul>
+    <div class="my-coupon-wrap">
+      <ul class="exchange-coupon-list">
+      <%@coupon_instances.each do |ci|%>
+        <li class="exchage-coupon-item">
+          <div class="flex-wrap">
+            <div class="flex-none mr10">
+              <img src="/assets/phone/images/img-coupon-logo.png" class="img-circle r54">
+            </div>
+            <div class="flex-fluid">
+              <div class="exchange-coupon-tit"><%=ci.coupon.name%></div>
+              <div class="need-score">
+                <span class="need-score-num"><%=ci.coupon.score%></span>
+                积分
+              </div>
+              <div class="text-center mt10">
+                <a class="btn-default-rever-hllow btn-round" href="<%=phone_coupon_instance_path(ci)%>">查看详情</a> 
+              </div>
+              <div class="effective-time"><%=ci.coupon.effect_time.strftime('%Y-%m-%d')+"至"+ci.coupon.invalid_time.strftime('%Y-%m-%d')%></div>
+            </div>
+          </div>
+        </li>
+      <%end%>
+      </ul> 
+    </div>
+    <div class="load-tips">更多优惠卷陆续添加中</div>
+  </div>
 
 </body>

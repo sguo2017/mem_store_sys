@@ -7,6 +7,26 @@ class Phone::CouponInstancesController < PhoneController
   def index
     @user = current_user
     @coupon_instances = @user.coupon_instances
+    @c_type = params[:c_type]
+    if @c_type.blank?
+      @c_type = "unused"
+    end
+    case @c_type
+    when "unused"
+      @coupon_instances = @user.coupon_instances
+                          .joins(:coupon)
+                          .where("coupon_instances.status=? and coupons.invalid_time>?","未使用",Time.now)
+                          .order("created_at DESC")
+    when "used"
+      @coupon_instances = @user.coupon_instances.where("status=?","已使用").order("created_at DESC")
+    when "invalid"
+      @coupon_instances = @user.coupon_instances
+                          .joins(:coupon)
+                          .where("coupon_instances.status=? and coupons.invalid_time<?","未使用",Time.now)
+                          .order("created_at DESC")
+    else
+      redirect_to phone_homepages_path
+    end
   end
 
   # GET /phone/coupon_instances/1

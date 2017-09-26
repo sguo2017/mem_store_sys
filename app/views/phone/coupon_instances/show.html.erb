@@ -1,13 +1,4 @@
-<head>
-  <meta charset="UTF-8">
-  <title>优惠券详情</title>
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="blank" />
-    <meta name="format-detection" content="telephone=no" />
-    <meta name="wap-font-scale" content="no" />
-</head>
+<% content_for :title, "优惠券详情" %>
 <body class="body-bg">
   <div class="header">
     <a class="header-left" href="javascript:void(0)" onclick="window.location.href='/phone/coupon_instances';">
@@ -39,7 +30,8 @@
         <div class="card-footer">
           <div class="coupon-detail-2dnum">
             <div class="adapt-img">
-              <div class="flex-fluid"><%=@coupon_instance.code%></div>
+              <img src="/assets/phone/images/img-coupon-num.png" class="">
+              <!--<div class="flex-fluid"><%=@coupon_instance.code%></div>-->
             </div>
           </div>
         </div>

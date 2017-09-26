@@ -6,8 +6,9 @@ class Phone::CouponsController < PhoneController
   # GET /phone/coupons.json
   def index
     @user = current_user
-    @coupons = Coupon.all
+    @coupons = Coupon.where("invalid_time>?",Time.now)
     @coupon_score=params[:coupon_score]
+    @coupons_status = params[:coupons_status]
   end
 
   # GET /phone/coupons/1

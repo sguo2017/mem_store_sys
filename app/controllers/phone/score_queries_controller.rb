@@ -154,10 +154,10 @@ class Phone::ScoreQueriesController < PhoneController
         @coupon_instance.status = "未使用"
         @coupon_instance.code = Time.now.strftime('%Y%m%d%H%M%S')
         @coupon_instance.save
-        @go_url = phone_coupon_instance_url(@coupon_instance)
+        @go_url = phone_coupons_url(coupons_status: "ok")
       else
         @msg = "积分兑换失败:积分余额不足"
-        @go_url = phone_coupons_url(coupon_score: @coupon.score)
+        @go_url = phone_coupons_url(coupons_status: "score_not_enough", coupon_score: @coupon.score)
 
       end
     when "no_login"

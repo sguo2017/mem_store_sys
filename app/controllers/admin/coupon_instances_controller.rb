@@ -1,5 +1,6 @@
 class Admin::CouponInstancesController < ApplicationController
-  before_action :set_coupon_instance, only: [:show, :edit, :update, :destroy, :write_off]
+  before_action :forbid_store_manager
+  before_action :set_coupon_instance, only: [:show, :edit, :update, :destroy]
 
   # GET /admin/coupon_instances
   # GET /admin/coupon_instances.json
@@ -61,14 +62,24 @@ class Admin::CouponInstancesController < ApplicationController
     end
   end
 
+  #GET  /admin/coupon_instances/write_off
+  def index_write_off
+    render 'write_off'
+  end
+
   # POST /admin/coupon_instances/write_off
   def write_off
-    @coupon_instance.order_id = params[:order_id]
-    @coupon_instance.write_off_time = Time.now
-    @coupon_write_off_store_id = nil
-    @coupon_instance.status = "已使用"
-    @coupon_instance.save
-    render json: {status: "ok",notice: "成功核销"}
+    @coupon_instance = CouponInstance.where("code = ?",params[:code]).first
+    if @coupon_instance.present?
+      @coupon_instance.order_id = params[:order_id]
+      @coupon_instance.write_off_time = Time.now
+      @coupon_write_off_store_id = nil
+      @coupon_instance.status = "已使用"
+      @coupon_instance.save
+      render json: {status: "ok",notice: "成功核销"}
+    else
+      render json: {status: "error",notice: "优惠券编码有误"}
+    end
   end
 
   private

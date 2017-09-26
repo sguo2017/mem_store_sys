@@ -71,7 +71,8 @@ Rails.application.routes.draw do
   #商品实例扫码短链接
   get "g/:good_instance_code", to: "short_urls#scan_redirect"
   #核销订单
-  post "admin/coupon_instances/write_off", to: "admin/coupon_instances#write_off"
+  get "admin/coupon_instances_write_off", to: "admin/coupon_instances#index_write_off"
+  post "admin/coupon_instances_write_off", to: "admin/coupon_instances#write_off"
   root 'welcome#index'
 
 end

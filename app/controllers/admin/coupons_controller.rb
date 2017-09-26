@@ -1,4 +1,5 @@
 class Admin::CouponsController < AdminController
+  before_action :forbid_store_manager
   before_action :set_coupon, only: [:show, :edit, :update, :destroy]
 
   # GET /admin/coupons

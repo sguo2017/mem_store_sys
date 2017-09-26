@@ -1,0 +1,50 @@
+<div class="container">
+	<div class="panel block-mt">
+		<div class="panel-heading">
+			<div class="panel-title">优惠券核销</div>
+		</div>
+		<div class="panel-body">
+			<form action="admin/coupon_instances_write_off" class="form-horizontal">
+				<div class="form-group">
+					<label class="col-xs-1 control-label text-right">优惠券编码</label>
+					<div class="col-xs-4">
+						<input class="form-control" id="wo_code" name="code" type="text" placeholder="请输入优惠券编码">
+					</div>
+				</div>
+				
+				<div class="form-group">
+					<label class="col-xs-1 control-label text-right">订单编号</label>
+					<div class="col-xs-4">
+						<input type="text" id="wo_order_id" name="order_id" class="form-control" placeholder="请输入订单编号">
+					</div>
+				</div>	
+			</form>
+		</div>
+		
+	</div>
+	<div class="block-mt text-center">
+		<button class="btn btn-warning" onclick="write_off()">核销</button>
+		<button class="btn btn-normal ml10">返回</button>
+	</div>
+</div>
+
+<script type="text/javascript">
+	function write_off(){
+	code = $("input#wo_code").val();
+	order_id = $("input#wo_order_id").val();
+	$.ajax('/admin/coupon_instances_write_off', {
+	  type: 'POST',
+	  dataType: 'json',
+	  data: {
+	    code: code,
+	    order_id: order_id
+	  },
+	  success: function(data, textStatus, jqXHR) {
+	  	var msg = data
+	  	alert(msg.notice)
+	    },
+	  error: function(jqXHR, textStatus, errorThrown) {
+	  }
+	});
+}
+</script>

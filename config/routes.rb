@@ -62,10 +62,16 @@ Rails.application.routes.draw do
   mount Ckeditor::Engine => '/ckeditor'
 
   devise_for :users
+  #用户上传当前地址
   post "phone/uploadLocation", to: "phone/profiles#uploadLocation"
+  #设置店铺管理员
   post "admin/stores/set_store_admin", to: "admin/stores#setStoreAdmin"
+  #短链接
   get "s/:url", to: "short_urls#redirect"
+  #商品实例扫码短链接
   get "g/:good_instance_code", to: "short_urls#scan_redirect"
+  #核销订单
+  post "admin/coupon_instances/write_off", to: "admin/coupon_instances#write_off"
   root 'welcome#index'
 
 end

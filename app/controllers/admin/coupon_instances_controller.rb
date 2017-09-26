@@ -1,5 +1,5 @@
 class Admin::CouponInstancesController < ApplicationController
-  before_action :set_coupon_instance, only: [:show, :edit, :update, :destroy]
+  before_action :set_coupon_instance, only: [:show, :edit, :update, :destroy, :write_off]
 
   # GET /admin/coupon_instances
   # GET /admin/coupon_instances.json
@@ -59,6 +59,16 @@ class Admin::CouponInstancesController < ApplicationController
       format.html { redirect_to admin_coupon_instances_url, notice: 'Coupon instance was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  # POST /admin/coupon_instances/write_off
+  def write_off
+    @coupon_instance.order_id = params[:order_id]
+    @coupon_instance.write_off_time = Time.now
+    @coupon_write_off_store_id = nil
+    @coupon_instance.status = "已使用"
+    @coupon_instance.save
+    render json: {status: "ok",notice: "成功核销"}
   end
 
   private

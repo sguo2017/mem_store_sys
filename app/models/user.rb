@@ -2,6 +2,7 @@ class User < ApplicationRecord
   has_many :score_histories
   has_many :qr_code_scan_histories
   has_many :lotteries
+  has_many :coupon_instances
   belongs_to :mem_group
   has_and_belongs_to_many :stores
   has_and_belongs_to_many :managestores, 

@@ -38,7 +38,7 @@ class AdminController < ApplicationController
     else
         logger.debug "@current_nav  #{@current_nav}"
     end
-    @goods_menu = ["goods_catalogs","good_instances"]
+    @goods_menu = ["goods_catalogs","good_instances","coupons","coupon_instances"]
     @user_menu = ["lotteries", "score_histories", "mem_groups", "red_packet_histories"]
     @bonus = ["bonus_changes", "mem_levels"]
     @report = ["report","qr_code_scan_histories"]

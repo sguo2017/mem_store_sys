@@ -76,16 +76,22 @@
                 <td><%= User.find(coupon_instance.user_id).name %></td>
                 <td><%= User.find(coupon_instance.user_id).phone_num %></td>
               <%else%>
-                <td>陈静怡</td>
-                <td>13288888888</td>
+                <td>-</td>
+                <td>-</td>
               <%end%>
               <td><%= coupon_instance.status %></td>
               <td><%= coupon_instance.created_at.strftime('%Y-%m-%d %H:%M:%S') %></td>
-              <td>2017-09-11&nbsp;11:11:11</td>
-              <td>
-                <span class="text-primary">E2332323</span>
-              </td>
-              <td>门店124号</td>
+              <% if coupon_instance.status == "已使用" %>
+                <td><%= coupon_instance.write_off_time.strftime('%Y-%m-%d %H:%M:%S') %></td>
+                <td>
+                  <span class="text-primary"><%= coupon_instance.order_id %></span>
+                </td>
+                <td><%= coupon_instance.store.name %></td>
+              <% else %>
+                <td></td>
+                <td></td>
+                <td></td>
+              <%end%>
             </tr>
           <% end %>
         </table>

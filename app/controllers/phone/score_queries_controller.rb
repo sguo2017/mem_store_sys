@@ -27,9 +27,10 @@ class Phone::ScoreQueriesController < PhoneController
 
   # GET /phone/score_queries/new
   # 两种场景：
-  # 1、积分兑换           fun_type == "bonus_change"
+  # 1、积分兑换红包           fun_type == "bonus_change"
   # 2、商品实例扫码送积分 fun_type == "goods_scan"
   # 3、未登录             fun_type == "no_login"
+  # 4、积分兑换优惠券         fun_type == "coupons_change"
   def new
     fun_type = params[:fun_type] #必填字段，不允许为空
     @user = current_user
@@ -128,6 +129,35 @@ class Phone::ScoreQueriesController < PhoneController
       else
         @msg = "积分兑换失败:积分余额不足"
         @go_url = phone_bonus_changes_url(change_score: @bonus_change.score)
+
+      end
+    when "coupons_change"
+      @coupon = Coupon.find(params[:coupon_id])
+      @add_score = -@coupon.score
+      #扣减积分足够
+      if @user.score + @add_score >= 0
+        @user.changeScore(@add_score) #会员积分变化
+        @score_query = ScoreHistory.new()
+        @score_query.oper = "扣减"
+        @score_query.point = -@add_score
+        @score_query.object_type = "优惠券兑换"
+        @score_query.object_id = @coupon.id
+        @score_query.user_id = @user.id
+        @score_query.province = @user.province
+        @score_query.city = @user.city
+        @score_query.save!
+        @msg = "积分兑换成功"
+        #获取优惠券
+        @coupon_instance = CouponInstance.new
+        @coupon_instance.coupon_id = @coupon.id
+        @coupon_instance.user_id = @user.id
+        @coupon_instance.status = "未使用"
+        @coupon_instance.code = Time.now.strftime('%Y%m%d%H%M%S')
+        @coupon_instance.save
+        @go_url = phone_coupon_instance_url(@coupon_instance)
+      else
+        @msg = "积分兑换失败:积分余额不足"
+        @go_url = phone_coupons_url(coupon_score: @coupon.score)
 
       end
     when "no_login"

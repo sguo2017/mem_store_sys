@@ -1,0 +1,2 @@
+module Phone::CouponsHelper
+end

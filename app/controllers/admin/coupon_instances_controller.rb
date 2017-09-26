@@ -1,4 +1,4 @@
-class Admin::CouponInstancesController < ApplicationController
+class Admin::CouponInstancesController < AdminController
   before_action :forbid_store_manager
   before_action :set_coupon_instance, only: [:show, :edit, :update, :destroy]
 

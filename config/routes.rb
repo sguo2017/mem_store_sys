@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
 
+  namespace :phone do
+    resources :coupons
+  end
   namespace :admin do
     namespace :report do
       resources :flow_analyses

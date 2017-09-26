@@ -1,39 +1,50 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Coupon:</strong>
-  <%= @coupon_instance.coupon_id %>
-</p>
-
-<p>
-  <strong>User:</strong>
-  <%= @coupon_instance.user_id %>
-</p>
-
-<p>
-  <strong>Order:</strong>
-  <%= @coupon_instance.order_id %>
-</p>
-
-<p>
-  <strong>Status:</strong>
-  <%= @coupon_instance.status %>
-</p>
-
-<p>
-  <strong>Code:</strong>
-  <%= @coupon_instance.code %>
-</p>
-
-<p>
-  <strong>Write off time:</strong>
-  <%= @coupon_instance.write_off_time %>
-</p>
-
-<p>
-  <strong>Write off store:</strong>
-  <%= @coupon_instance.write_off_store_id %>
-</p>
-
-<%= link_to 'Edit', edit_phone_coupon_instance_path(@coupon_instance) %> |
-<%= link_to 'Back', phone_coupon_instances_path %>
+<head>
+  <meta charset="UTF-8">
+  <title>优惠券详情</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="blank" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="wap-font-scale" content="no" />
+</head>
+<body class="body-bg">
+  <div class="header">
+    <a class="header-left" href="javascript:void(0)" onclick="window.location.href='/phone/coupon_instances';">
+        <span class="ico-header-back"></span>
+    </a>
+    <button class="header-right"><span class="ico-scan"></span></button>
+</div>
+  <!-- header end -->
+  <div class="container has-top">
+    <div class="card-list block-mt">
+      <div class="card-item">
+        <div class="card-body">
+          <div class="exchange-wrap">
+            <div class="exchange-tit f16 block-mb"><%=@coupon_instance.coupon.name%></div>
+            <div class="flex-wrap mb10">
+              <div class="flex-none">适用商品:</div>
+              <div class="flex-fluid"><%=@coupon_instance.coupon.good.name%></div>
+            </div>  
+            <div class="flex-wrap mb10">
+              <div class="flex-none">有效时间:</div>
+              <div class="flex-fluid"><%=@coupon_instance.coupon.effect_time.strftime('%Y-%m-%d')+"至"+@coupon_instance.coupon.invalid_time.strftime('%Y-%m-%d')%></div>
+            </div>  
+            <div class="flex-wrap mb10">
+              <div class="flex-none">适用须知:</div>
+              <div class="flex-fluid">该卷可在线下专卖店使用，逾期无效</div>
+            </div>  
+          </div>
+        </div>
+        <div class="card-footer">
+          <div class="coupon-detail-2dnum">
+            <div class="adapt-img">
+              <div class="flex-fluid"><%=@coupon_instance.code%></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- container end -->
+</body>

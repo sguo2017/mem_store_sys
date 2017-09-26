@@ -1,17 +1,20 @@
 class Phone::CouponInstancesController < PhoneController
+  before_action :authenticate_user!
   before_action :set_coupon_instance, only: [:show, :edit, :update, :destroy]
 
   # GET /phone/coupon_instances
   # GET /phone/coupon_instances.json
   def index
     @user = current_user
-    # @coupon_instances = CouponInstance.all
-    @coupons = Coupon.all
+    @coupon_instances = @user.coupon_instances
   end
 
   # GET /phone/coupon_instances/1
   # GET /phone/coupon_instances/1.json
   def show
+    if @coupon_instance.user_id != current_user.id
+      redirect_to phone_homepages_path
+    end
   end
 
   # GET /phone/coupon_instances/new

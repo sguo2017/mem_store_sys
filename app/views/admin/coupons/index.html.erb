@@ -72,15 +72,11 @@
               <td><%= coupon.status %></td>
               <td><%= coupon.created_at.strftime('%Y-%m-%d %H:%M:%S') %></td>
               <%if coupon.good.present?%>
-                <td><%= coupon.good %></td>
+                <td><%= coupon.good.name %></td>
               <%else%>
                 <td>-</td>
               <%end%>
               <td><%= coupon.score %></td>
-              <td>
-                <span class="text-primary">E2332323</span>
-              </td>
-              <td>门店124号</td>
             </tr>
           <% end %>
         </table>
@@ -88,7 +84,11 @@
        <%= paginate @coupons %>
     </div>
   </div>
-  
+  <div>
+  <%= link_to t('.new', :default => t("helpers.links.new")),
+            new_admin_coupon_path,
+            :class => 'btn btn-warning' %>
+          </div>
 </div>
 
 <br>

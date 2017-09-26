@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @coupon.name %>
+</p>
+
+<p>
+  <strong>Catalog:</strong>
+  <%= @coupon.catalog %>
+</p>
+
+<p>
+  <strong>Good:</strong>
+  <%= @coupon.good_id %>
+</p>
+
+<p>
+  <strong>Effect time:</strong>
+  <%= @coupon.effect_time %>
+</p>
+
+<p>
+  <strong>Invalid time:</strong>
+  <%= @coupon.invalid_time %>
+</p>
+
+<p>
+  <strong>Score:</strong>
+  <%= @coupon.score %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @coupon.status %>
+</p>
+
+<%= link_to 'Edit', edit_phone_coupon_path(@coupon) %> |
+<%= link_to 'Back', phone_coupons_path %>

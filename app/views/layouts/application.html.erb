@@ -42,8 +42,9 @@
                   <li><%= link_to "商品", admin_goods_path  %></li>
                   <li><%= link_to "商品实例", admin_good_instances_path  %></li>
                   <li><%= link_to "商品分类", admin_goods_catalogs_path  %></li>
-                  <li><%= link_to "优惠券", admin_coupons_path %>
-                  <li><%= link_to "优惠券实例", admin_coupon_instances_path %>
+                  <li><%= link_to "优惠券", admin_coupons_path %></li>
+                  <li><%= link_to "优惠券实例", admin_coupon_instances_path %></li>
+                  <li><%= link_to "优惠券核销", '/admin/coupon_instances_write_off' %></li>
                 </ul>
             </li>
             <li class="dropdown <% if @current_nav == 'users' %> active<% end %>" onclick="navbar_active(this)">

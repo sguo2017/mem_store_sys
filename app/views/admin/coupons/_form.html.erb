@@ -1,4 +1,5 @@
 <%= form_for([:admin, @coupon],:html => { :class => "form-horizontal" }) do |f| %>
+ 
   <% if @coupon.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@coupon.errors.count, "error") %> prohibited this coupon from being saved:</h2>
@@ -19,13 +20,13 @@
     <div class="panel-body">
       <form action="" class="form-horizontal">
         <div class="form-group">
-          <label class="col-xs-1 control-label text-right">优惠券名称</label>
+          <label class="col-xs-2 control-label text-right">优惠券名称</label>
           <div class="col-xs-4">
             <%= f.text_field :name, :class => 'form-control', :placeholder=>"请输入优惠券名称"%>
           </div>
         </div>
         <div class="form-group">
-          <label class="col-xs-1 control-label text-right">优惠券类型</label>
+          <label class="col-xs-2 control-label text-right">优惠券类型</label>
           <div class="col-xs-4">
             <select name="coupon[catalog]" id="coupon_catalog" class="form-control">
               <option value="积分奖品">积分奖品</option>
@@ -35,31 +36,32 @@
           </div>
         </div>  
         <div class="form-group">
-          <label class="col-xs-1 control-label text-right">生效时间</label>
+          <label class="col-xs-2 control-label text-right">生效时间</label>
           <div class="col-xs-4">
             <%= f.date_field :effect_time, :class => 'form-control', :placeholder=>"请输入生效时间"%>
           </div>
         </div>  
         <div class="form-group">
-          <label class="col-xs-1 control-label text-right">失效时间</label>
+          <label class="col-xs-2 control-label text-right">失效时间</label>
           <div class="col-xs-4">
             <%= f.date_field :invalid_time, :class => 'form-control', :placeholder=>"请输入失效时间"%>
           </div>
         </div>
         <div class="form-group">
-          <label class="col-xs-1 control-label text-right">适用商品</label>
+          <label class="col-xs-2 control-label text-right">适用商品</label>
           <div class="col-xs-4">
-            <%= f.text_field :good_id, :class => 'form-control', :placeholder=>"请选择适用商品"%>
+            <input class="form-control" id="_sys_modal_select_good_name" type="text" placeholder="请选择合适的商品" data-toggle="modal" data-target="#modal-select-good" value="" readonly="true">
+            <%= f.text_field :good_id, :id=>"_sys_modal_select_good_id", :type=>"hidden", :class => 'form-control', :placeholder=>"请选择合适的商品" %>
           </div>
         </div>
         <div class="form-group">
-          <label class="col-xs-1 control-label text-right">兑换积分</label>
+          <label class="col-xs-2 control-label text-right">兑换积分</label>
           <div class="col-xs-4">
             <%= f.text_field :score, :class => 'form-control', :placeholder=>"请输入优惠券兑换积分"%>
           </div>
         </div>
         <div class="form-group">
-          <label class="col-xs-1 control-label text-right">发布状态</label>
+          <label class="col-xs-2 control-label text-right">发布状态</label>
           <div class="col-xs-4">
             <label class="radio-inline mr10">
               <input type="radio" name="coupon[status]" value="发布">发布
@@ -79,3 +81,5 @@
   </div>
 </div>
 <% end %>
+
+<%= render :partial => 'modal_select_good' %>

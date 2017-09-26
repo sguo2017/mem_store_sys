@@ -16,6 +16,7 @@ class Admin::CouponsController < AdminController
   # GET /admin/coupons/new
   def new
     @coupon = Coupon.new
+    @goods = Good.all.order("created_at DESC")
   end
 
   # GET /admin/coupons/1/edit

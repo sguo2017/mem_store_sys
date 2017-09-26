@@ -1,0 +1,59 @@
+<script type="text/javascript">
+  function _selectGood(id, name, obj) {
+    // $('#modal-select-good, .modal-backdrop').removeClass('in').addClass('out');
+    if($(obj).hasClass('active')) {
+      $(obj).removeClass('active').html('选择');
+      
+      $('#_sys_modal_select_good_name').val('');
+      $('#_sys_modal_select_good_id').val('');
+    } else {
+      $('.btn-selectGood').removeClass('active').html('选择');
+      $(obj).addClass('active').html('已选择');
+      
+      $('#_sys_modal_select_good_name').val(name);
+      $('#_sys_modal_select_good_id').val(id);
+    }
+  }
+
+  function _clearSelectGood() {
+    $('#_sys_modal_select_good_name').val('');
+    $('#_sys_modal_select_good_id').val('');
+  }
+</script>
+
+<div class="modal fade" id="modal-select-good" tabindex="-1" role="dialog" aria-labelledby="modal-users-title" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h4 class="modal-title" id="modal-users-title">选择商品</h4>
+      </div>
+      <div class="modal-body">
+        <table class="table table-bordered">
+          <thead>
+          <tr>
+            <th>ID</th>
+            <th>名称</th>
+            <th>操作</th>
+          </tr>
+          </thead>
+          <tbody>
+
+            <% @goods.each do |good| %>
+            <tr class="select" data-good_id="<%= good.id %>" >
+              <td><%= good.id %></td>
+              <td><%= good.name %></td>
+              <td><a onclick="_selectGood(<%= good.id %>, '<%= good.name %>', this)" class="btn-selectGood btn btn-primary btn-xs" href="javascript:void(0)">选择</a></td>
+            </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" onclick = "_clearSelectGood()">取消</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal">确定</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+

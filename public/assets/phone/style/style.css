@@ -2340,3 +2340,10 @@ a.adapt-img {
 .coupon-detail-2dnum {
   padding: 0 16px;
 }
+.coupon-detail-2dnum .coupon-2dnum {
+  font-size: 17px;
+  color: #d90404;
+  font-weight: 700;
+  text-align: center;
+  margin-top: 6px;
+}

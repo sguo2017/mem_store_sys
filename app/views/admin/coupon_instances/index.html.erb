@@ -3,7 +3,7 @@
 <div class="container">
   <div class="panel">
     <div class="panel-heading">
-      <div class="panel-title">优惠卷实例列表</div>
+      <div class="panel-title">优惠券实例列表</div>
     </div>
     <div class="panel-body">
       <%= form_tag("/admin/coupon_instances", method: "get",class: "form-horizontal") do %>
@@ -66,7 +66,7 @@
           </tr>
           <% @coupon_instances.each do |coupon_instance| %>
             <tr>
-              <td><%= coupon_instance.id %></td>
+              <td><%= coupon_instance.code %></td>
               <%if coupon_instance.user_id.present?%>
                 <td><%= User.find(coupon_instance.user_id).name %></td>
                 <td><%= User.find(coupon_instance.user_id).phone_num %></td>
@@ -81,7 +81,7 @@
                 <td>
                   <span class="text-primary"><%= coupon_instance.order_id %></span>
                 </td>
-                <td><%= coupon_instance.store.name %></td>
+                <td><%= coupon_instance.write_off_store_id %></td>
               <% else %>
                 <td></td>
                 <td></td>

@@ -37,14 +37,14 @@
               <div class="text-center mt10">
                 <a class="btn-default-rever-hllow btn-round" href="<%=phone_coupon_instance_path(ci)%>">查看详情</a> 
               </div>
-              <div class="effective-time"><%=ci.coupon.effect_time.strftime('%Y-%m-%d')+"至"+ci.coupon.invalid_time.strftime('%Y-%m-%d')%></div>
+              <div class="effective-time"><%="有效期至"+ci.coupon.invalid_time.strftime('%Y-%m-%d')%></div>
             </div>
           </div>
         </li>
       <%end%>
       </ul>
     </div>
-    <div class="load-tips">更多优惠卷陆续添加中</div>
+    <div class="load-tips">更多优惠券陆续添加中</div>
   </div>
 
 </body>

@@ -1,3 +1,7 @@
+require 'barby'
+require 'barby/barcode/code_39'
+require 'barby/barcode/code_93'
+require 'barby/outputter/png_outputter'
 class Phone::ScoreQueriesController < PhoneController
   before_action :authenticate_user!, except: [:new]
   layout "phone"
@@ -152,7 +156,15 @@ class Phone::ScoreQueriesController < PhoneController
         @coupon_instance.coupon_id = @coupon.id
         @coupon_instance.user_id = @user.id
         @coupon_instance.status = "未使用"
-        @coupon_instance.code = Time.now.strftime('%Y%m%d%H%M%S')
+        code1 = Time.now.strftime('%m%d')
+        code2 = rand(10000000..99999999).to_s
+        @coupon_instance.code = code1+code2
+        barcode = Barby::Code93.new(@coupon_instance.code)
+        save_path = Rails.root.to_s + "/public/assets/phone/coupons/codes/"
+        save_name = @coupon_instance.code + ".png"
+        File.open(save_path + save_name, 'w'){|f|
+          f.write barcode.to_png.force_encoding("UTF-8")
+        }
         @coupon_instance.save
         @go_url = phone_coupons_url(coupons_status: "ok")
       else

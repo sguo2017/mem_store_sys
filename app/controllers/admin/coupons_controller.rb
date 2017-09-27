@@ -5,7 +5,25 @@ class Admin::CouponsController < AdminController
   # GET /admin/coupons
   # GET /admin/coupons.json
   def index
-    @coupons = Coupon.all.order("created_at DESC").page(params[:page]).per(10)
+    @status     = params[:status].to_s
+    @name       = params[:name]
+    @created_at = params[:created_at]
+
+    _where = '1 = 1';
+    if @status == '1' or @status == '0'
+      @status = @status == '1' ? '发布' : '未发布'
+      _where = _where + " and status = '#{@status}'"
+    end
+
+    unless @name.blank?
+      _where = _where + " and name like '%#{@name}%'"
+    end
+
+    unless @created_at.blank?
+      _where = _where + " and created_at > '#{@created_at}'"
+    end
+
+    @coupons = Coupon.all.where(_where).order("created_at DESC").page(params[:page]).per(10)
   end
 
   # GET /admin/coupons/1

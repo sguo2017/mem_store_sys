@@ -5,7 +5,25 @@ class Admin::CouponInstancesController < AdminController
   # GET /admin/coupon_instances
   # GET /admin/coupon_instances.json
   def index
-    @coupon_instances = CouponInstance.all.order("created_at DESC").page(params[:page]).per(10)
+    @status         = params[:status].to_s
+    @created_at     = params[:created_at]
+    @write_off_time = params[:write_off_time]
+
+    _where = '1 = 1';
+    if @status == '1' or @status == '0'
+      @status = @status == '1' ? '已使用' : '未使用'
+      _where = _where + " and status = '#{@status}'"
+    end
+
+    unless @created_at.blank?
+      _where = _where + " and created_at > '#{@created_at}'"
+    end
+
+    unless @write_off_time.blank?
+      _where = _where + " and write_off_time > '#{@write_off_time}'"
+    end
+
+    @coupon_instances = CouponInstance.where(_where).order("created_at DESC").page(params[:page]).per(10)
   end
 
   # GET /admin/coupon_instances/1

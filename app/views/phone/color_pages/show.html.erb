@@ -1,60 +1,60 @@
 
 <% content_for :title, "促销" %>
 
-  <!-- header begin -->
-  <div class="header">
-    <a class="header-left" href="javascript:void(0)" onclick="window.location.href='/phone/homepages';">
-      <span class="ico-header-back"></span>
-    </a>
-    <div class="condition-group goods-catalog-cond" hidden>
-      <ul class="float-ul clearfix wu3">
-      
-      </ul>
-    </div>
+<!-- header begin -->
+<!-- <div class="header">
+  <a class="header-left" href="javascript:void(0)" onclick="window.location.href='/phone/homepages';">
+    <span class="ico-header-back"></span>
+  </a>
+  <div class="condition-group goods-catalog-cond" hidden>
+    <ul class="float-ul clearfix wu3">
+    
+    </ul>
   </div>
-  <!-- header end -->
-  
-  <!-- content begin -->
-  <div class="container">
-    <div class="adapt-img back-prepage-wrap">
-      <a href="" class="back-prepage"></a>
-      <img src="<%= @color_page.avatar %>" alt="Image" class="media-object">
-    </div>
-    <div class="block-mt">
-      <ul class="card-list ">
-        <li class="card-item sales-promotion-box">
-          <div class="sales-promotion-sign">促销</div>
-          <div class="exchange-wrap">
-            <div class="exchange-tit">促销活动</div>
-            <div class="text-tips block-mb">8月17日</div>
-            <div class="flex-wrap-top mb10">
-              <div class="flex-none">活动名称：</div>
-              <div class="flex-fluid"><%= @color_page.name %></div>
-            </div>  
-            <div class="flex-wrap-top mb10">
-              <div class="flex-none">活动时间：</div>
-              <div class="flex-fluid"><%= @color_page.time%></div>
-            </div>   
-            <%if @color_page.accept_users_type == 1 %>
-              <div class="flex-wrap-top mb10">
-                <div class="flex-none">活动对象：</div>
-                <div class="flex-fluid">所有人</div>
-              </div> 
-            <%else %>
-              <div class="flex-wrap-top mb10">
-                <div class="flex-none">活动对象：</div>
-                <div class="flex-fluid">无</div>
-              </div> 
-            <% end %> 
-            <div class="flex-wrap-top mb10">
-              <div class="flex-none">活动内容：</div>
-              <div class="flex-fluid"><%= @color_page.content %></div>
-            </div>  
-          </div>
-        </li>
-      </ul>
-    </div>
-    <div class="text-tips text-center block-mtb">没有内容了</div>  
+</div> -->
+<!-- header end -->
+
+<!-- content begin -->
+<div class="container">
+  <div class="adapt-img back-prepage-wrap" style="min-height: 35px;">
+    <img src="<%= @color_page.avatar %>" alt="Image" class="media-object">
+    <a href="javascript:void(0)" class="back-prepage" onclick="window.location.href='/phone/homepages';"></a>
   </div>
-  <!-- content end -->
+  <div class="block-mt">
+    <ul class="card-list ">
+      <li class="card-item sales-promotion-box">
+        <div class="sales-promotion-sign">促销</div>
+        <div class="exchange-wrap">
+          <div class="exchange-tit">促销活动</div>
+          <div class="text-tips block-mb">8月17日</div>
+          <div class="flex-wrap-top mb10">
+            <div class="flex-none">活动名称：</div>
+            <div class="flex-fluid"><%= @color_page.name %></div>
+          </div>  
+          <div class="flex-wrap-top mb10">
+            <div class="flex-none">活动时间：</div>
+            <div class="flex-fluid"><%= @color_page.time%></div>
+          </div>   
+          <%if @color_page.accept_users_type == 1 %>
+            <div class="flex-wrap-top mb10">
+              <div class="flex-none">活动对象：</div>
+              <div class="flex-fluid">所有人</div>
+            </div> 
+          <%else %>
+            <div class="flex-wrap-top mb10">
+              <div class="flex-none">活动对象：</div>
+              <div class="flex-fluid">无</div>
+            </div> 
+          <% end %> 
+          <div class="flex-wrap-top mb10">
+            <div class="flex-none">活动内容：</div>
+            <div class="flex-fluid"><%= @color_page.content %></div>
+          </div>  
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div class="text-tips text-center block-mtb">没有内容了</div>  
+</div>
+<!-- content end -->
   

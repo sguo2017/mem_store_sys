@@ -6,26 +6,21 @@
       <div class="panel-title">优惠卷实例列表</div>
     </div>
     <div class="panel-body">
-      <form action="" class="form-horizontal">
+      <%= form_tag("/admin/coupon_instances", method: "get",class: "form-horizontal") do %>
         <div class="row">
           <div class="col-xs-4">
             <div class="form-group">
               <label class="control-label col-xs-4">优惠券状态</label>
               <div class="col-xs-8">
                 <label class="radio-inline mr10">
-                  <input type="radio" name="coupon_instance_type">已使用
+                  <input type="radio" name="status" value="" <% if @status.blank? %> checked <% end %> >无
+                </label>
+                <label class="radio-inline mr10">
+                  <input type="radio" name="status" value="1" <% if @status == '已使用' %> checked <% end %> >已使用
                 </label>
                 <label class="radio-inline">
-                  <input type="radio" name="coupon_instance_type">未使用
+                  <input type="radio" name="status" value="0" <% if @status == '未使用' %> checked <% end %> >未使用
                 </label>
-              </div>
-            </div>
-          </div>
-          <div class="col-xs-4">
-            <div class="form-group">
-              <label class="control-label col-xs-4">创建时间</label>
-              <div class="col-xs-8">
-                <input class="form-control" type="text">
               </div>
             </div>
           </div>
@@ -33,17 +28,17 @@
         <div class="row">
           <div class="col-xs-4">
             <div class="form-group">
-              <label class="control-label col-xs-4">核销时间</label>
+              <label class="control-label col-xs-4">创建时间</label>
               <div class="col-xs-8">
-                <input class="form-control" type="text">
+                <input id="datetimepicker--couponInstanceCreateAt" class="form-control" type="text" name="created_at" value="<%= @created_at %>">
               </div>
-            </div>  
+            </div>
           </div>
           <div class="col-xs-4">
             <div class="form-group">
-              <label class="control-label col-xs-4">优惠券名称</label>
+              <label class="control-label col-xs-4">核销时间</label>
               <div class="col-xs-8">
-                <input class="form-control" type="text">
+                <input id="datetimepicker--couponInstanceWriteOffTime" class="form-control" type="text" name="write_off_time" value="<%= @write_off_time %>">
               </div>
             </div>  
           </div>
@@ -56,7 +51,7 @@
             </div>
           </div>
         </div>
-      </form>
+      <% end %>
       <div class="table-responsive">
         <table class="table table-striped">
           <tr>
@@ -96,10 +91,20 @@
           <% end %>
         </table>
       </div>
-       <%= paginate @coupon_instances %>
+       
+    </div>
+    <div class="panel-foot text-center">
+      <%= paginate @coupon_instances %>
     </div>
   </div>
   
 </div>
 
 <br>
+
+<script>
+  $(function() {
+    $("#datetimepicker--couponInstanceCreateAt").datetimepicker();
+    $("#datetimepicker--couponInstanceWriteOffTime").datetimepicker();
+  });
+</script>

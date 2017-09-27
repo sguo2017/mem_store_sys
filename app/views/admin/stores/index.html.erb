@@ -1,80 +1,84 @@
 <%- model_class = Store -%>
+
 <div class="container">
   <div class="panel">
+
     <div class="panel-heading">
       <div class="panel-title">门店列表</div>
     </div>
+
     <div class="panel-body">
-    <%if current_user.admin == 1%>
-    <%= render 'search_form' %>
-    <%end%>
-    <input type="hidden" id="store_id" value="" />
-<div class="table-responsive block-mt">
+
+      <%if current_user.admin == 1%>
+      <%= render 'search_form' %>
+      <%end%>
+
+      <input type="hidden" id="store_id" value="" />
+
+      <div class="table-responsive block-mt">
         <table class="table table-striped">
           <colgroup>
             <col width="20%">
           </colgroup>
-    <tr>
-      <!-- <th><%= model_class.human_attribute_name(:id) %></th> -->
-      <th class="text-nowrap"><%= model_class.human_attribute_name(:code) %></th>
-      <th class="text-nowrap"><%= model_class.human_attribute_name(:catalog) %></th>
-      <th class="text-nowrap"><%= model_class.human_attribute_name(:name) %></th>
-      <th class="text-nowrap"><%= model_class.human_attribute_name(:district) %></th>
-      <th class="text-nowrap"><%= model_class.human_attribute_name(:city) %></th>
-      <th class="text-nowrap"><%= model_class.human_attribute_name(:province) %></th>
-      <th class="text-nowrap"><%= model_class.human_attribute_name(:country) %></th>
-      <th class="text-nowrap">经纬度</th>
-      <th class="text-nowrap"><%= model_class.human_attribute_name(:addr) %></th>
-      <th class="text-nowrap"><%= model_class.human_attribute_name(:linkman) %></th>
-      <th class="text-nowrap"><%= model_class.human_attribute_name(:contact_num) %></th>
-      <th class="text-nowrap"><%= model_class.human_attribute_name(:created_at) %></th>
-      <th class="text-nowrap"><%=t '.actions', :default => t("helpers.actions") %></th>
-    </tr>
-  <tbody>
-    <% @stores.each do |store| %>
-      <tr>
-        <!-- <td><%= link_to store.id, admin_store_path(store) %></td> -->
-        <td><%= store.code %></td>
-        <td><%= store.catalog %></td>
-        <td><%= store.name %></td>
-        <td><%= store.district %></td>
-        <td><%= store.city %></td>
-        <td><%= store.province %></td>
-        <td><%= store.country %></td>
-        <td><%= store.latitude %>#<%= store.longitude %></td>
-        <td><%= store.addr %></td>
-        <td><%= store.linkman %></td>
-        <td><%= store.contact_num %></td>
-        <td><%= store.created_at.strftime('%Y-%m-%d %H:%M:%S') %></td>
-        <td>
-          <%= link_to t('.show', :default => ' 查  看 '),
-                      admin_store_path(store), :class => 'btn btn-default btn-xs' %>
-          <%if current_user.admin == Const::MANAGER[:supper_manager]%>
-          <a class='btn btn-default btn-xs' id="_set_admin" type="text"  placeholder="选择" data-toggle="modal" data-target="#modal_set_admin" value="设置" onclick="set_store_id(<%=store.id%>)">设置店长</a>
-          <%end%>
-<!--           <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                      edit_admin_store_path(store), :class => 'btn btn-default btn-xs' %> -->
-<!--           <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-                      admin_store_path(store),
-                      :method => :delete,
-                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => '您确认?')) },
-                      :class => 'btn btn-warning btn-xs mr5' %> -->
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+          <thead>
+            <tr>
+              <!-- <th><%= model_class.human_attribute_name(:id) %></th> -->
+              <th class="text-nowrap"><%= model_class.human_attribute_name(:code) %></th>
+              <th class="text-nowrap"><%= model_class.human_attribute_name(:catalog) %></th>
+              <th class="text-nowrap"><%= model_class.human_attribute_name(:name) %></th>
+              <th class="text-nowrap"><%= model_class.human_attribute_name(:district) %></th>
+              <th class="text-nowrap"><%= model_class.human_attribute_name(:city) %></th>
+              <th class="text-nowrap"><%= model_class.human_attribute_name(:province) %></th>
+              <th class="text-nowrap"><%= model_class.human_attribute_name(:country) %></th>
+              <th class="text-nowrap">经纬度</th>
+              <th class="text-nowrap"><%= model_class.human_attribute_name(:addr) %></th>
+              <th class="text-nowrap"><%= model_class.human_attribute_name(:linkman) %></th>
+              <th class="text-nowrap"><%= model_class.human_attribute_name(:contact_num) %></th>
+              <th class="text-nowrap"><%= model_class.human_attribute_name(:created_at) %></th>
+              <th class="text-nowrap"><%=t '.actions', :default => t("helpers.actions") %></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @stores.each do |store| %>
+            <tr>
+              <!-- <td><%= link_to store.id, admin_store_path(store) %></td> -->
+              <td><%= store.code %></td>
+              <td><%= store.catalog %></td>
+              <td><%= store.name %></td>
+              <td><%= store.district %></td>
+              <td><%= store.city %></td>
+              <td><%= store.province %></td>
+              <td><%= store.country %></td>
+              <td><%= store.latitude %>#<%= store.longitude %></td>
+              <td><%= store.addr %></td>
+              <td><%= store.linkman %></td>
+              <td><%= store.contact_num %></td>
+              <td><%= store.created_at.strftime('%Y-%m-%d %H:%M:%S') %></td>
+              <td>
+                <%= link_to t('.show', :default => ' 查  看 '), admin_store_path(store), :class => 'btn btn-default btn-xs' %>
+                <%if current_user.admin == Const::MANAGER[:supper_manager]%>
+                <a class='btn btn-default btn-xs' id="_set_admin" type="text"  placeholder="选择" data-toggle="modal" data-target="#modal_set_admin" value="设置" onclick="set_store_id(<%=store.id%>)">设置店长</a>
+                <%end%>
+              </td>
+            </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+
+  <!-- <div><%= link_to t('.new', :default => t("helpers.links.new")),
+              new_admin_store_path,
+              :class => 'btn btn-warning' %></div> -->
+        
+    </div>
+    <div class="panel-foot text-center">
+      <%= paginate @stores %>
+    </div>
+  </div>
 </div>
-<!-- <div><%= link_to t('.new', :default => t("helpers.links.new")),
-            new_admin_store_path,
-            :class => 'btn btn-warning' %></div> -->
-            <%= paginate @stores %>
-            </div>
-            </div>
-        </div>
 <script type="text/javascript">
   function set_store_id(store_id){
-  $("#store_id").val(store_id);
-}
+    $("#store_id").val(store_id);
+  }
 </script>
 <%= render :partial => 'modal_set_admin' %>

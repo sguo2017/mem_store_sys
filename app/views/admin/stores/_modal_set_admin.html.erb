@@ -1,3 +1,5 @@
+<% @users = User.all %>
+
 <div class="modal fade" id="modal_set_admin" tabindex="-1" role="dialog" aria-labelledby="modal_set_admin-label" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -6,7 +8,19 @@
         <h4 class="modal-title" id="modal-users-title">选择用户</h4>
       </div>
       <div class="modal-body">
-        
+
+        <div class="form-inline" style="margin-bottom: 10px;">
+          <div class="form-group" style="margin-right: 10px;">
+            <label for="modelSetAdmin--inputName">姓名：</label>
+            <input type="text" class="form-control" id="modelSetAdmin--inputName" placeholder="">
+          </div>
+          <div class="form-group" style="margin-right: 10px;">
+            <label for="modelSetAdmin--inputPhone">电话：</label>
+            <input type="text" class="form-control" id="modelSetAdmin--inputPhone" placeholder="">
+          </div>
+          <button class="btn btn-warning" id="modelSetAdmin--buttonSearch">搜索</button>
+        </div>
+
         <table class="table table-bordered">
           <thead>
           <tr>
@@ -17,7 +31,6 @@
           </tr>
           </thead>
           <tbody>
-		    <% @users = User.all%>
             <% @users.each do |user| %>
             <tr class="select" data-user_id="<%= user.id %>" >
               <td><%= user.id %></td>
@@ -36,3 +49,31 @@
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
+
+
+<script type="text/javascript">
+  $(function() {
+    var $name = $('#modelSetAdmin--inputName');
+    var $phone = $('#modelSetAdmin--inputPhone');
+    var $search = $('#modelSetAdmin--buttonSearch');
+
+    $search.on('click', function() {
+
+      $.ajax({
+        url: '/admin/users_of_store',
+        method: 'GET',
+        data: {
+          name: $name.val(),
+          phone: $phone.val()
+        },
+        success: function(res) {
+          console.log(res);
+        },
+        fail: function(err) {
+
+        }
+      })
+
+    });    
+  });
+</script>

@@ -69,6 +69,8 @@ Rails.application.routes.draw do
   post "phone/uploadLocation", to: "phone/profiles#uploadLocation"
   #设置店铺管理员
   post "admin/stores/set_store_admin", to: "admin/stores#setStoreAdmin"
+  #获取店铺的用户用户列表
+  get "admin/users_of_store", to: "admin/stores#getUsers"
   #短链接
   get "s/:url", to: "short_urls#redirect"
   #商品实例扫码短链接

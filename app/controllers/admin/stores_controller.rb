@@ -94,6 +94,7 @@ class Admin::StoresController < AdminController
     end
   end
 
+  #Self Defined
   #POST /admin/stores/set_admin
   def setStoreAdmin
     if current_user.admin == Const::MANAGER[:supper_manager]
@@ -103,6 +104,17 @@ class Admin::StoresController < AdminController
       @notice = "越权操作！"
     end
     render json:{notice: @notice}
+  end
+
+  #Self Defined
+  #GET /admin/users_of_store
+  def getUsers
+    @name  = params[:name]
+    @phone = params[:phone]
+
+    render json:{
+      user: [{'name': 'terry'}]
+    }
   end
   
   private

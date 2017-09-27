@@ -3,10 +3,10 @@
 <div class="container">
   <div class="panel">
     <div class="panel-heading">
-      <div class="panel-title">优惠卷规则列表</div>
+      <div class="panel-title">优惠券规则列表</div>
     </div>
     <div class="panel-body">
-      <form action="" class="form-horizontal">
+      <form action="<%=admin_coupons_path%>" class="form-horizontal">
         <div class="row">
           <div class="col-xs-4">
             <div class="form-group">
@@ -25,7 +25,7 @@
             <div class="form-group">
               <label class="control-label col-xs-4">创建时间</label>
               <div class="col-xs-8">
-                <input class="form-control" type="text">
+                <input class="form-control" name="coupon_created_time" type="date">
               </div>
             </div>
           </div>
@@ -33,26 +33,16 @@
         <div class="row">
           <div class="col-xs-4">
             <div class="form-group">
-              <label class="control-label col-xs-4">核销时间</label>
-              <div class="col-xs-8">
-                <input class="form-control" type="text">
-              </div>
-            </div>  
-          </div>
-          <div class="col-xs-4">
-            <div class="form-group">
               <label class="control-label col-xs-4">优惠券名称</label>
               <div class="col-xs-8">
-                <input class="form-control" type="text">
+                <input class="form-control" name="coupon_name" type="text">
               </div>
             </div>  
           </div>
           <div class="col-xs-4">
             <div class="form-group">
-              <button class="btn btn-warning">
-                <span class="glyphicon glyphicon-search"></span>
-                搜索
-              </button>
+
+              <input type="submit" name="commit" value="搜 索" class="btn btn-warning" data-disable-with="搜 索">
             </div>
           </div>
         </div>

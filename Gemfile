@@ -81,6 +81,7 @@ gem 'mini_magick'
 gem 'rqrcode_png'
 gem 'jquery-countdown-rails'
 gem 'settingslogic'
+gem 'barby', '~> 0.6.5'
 #gem 'jquery-datetimepicker-rails'
 source 'https://rails-assets.org' do
   gem 'rails-assets-datetimepicker'

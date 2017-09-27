@@ -49,6 +49,7 @@ GEM
     arel (8.0.0)
     autoprefixer-rails (7.1.1.2)
       execjs
+    barby (0.6.5)
     bcrypt (3.1.11)
     bindex (0.5.0)
     bootstrap-sass (3.3.7)
@@ -282,6 +283,7 @@ PLATFORMS
 DEPENDENCIES
   ancestry
   annotate
+  barby (~> 0.6.5)
   bootstrap-sass (~> 3.3.6)
   byebug
   cancancan (~> 2.0)

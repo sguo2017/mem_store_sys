@@ -30,7 +30,7 @@
             <th>操作</th>
           </tr>
           </thead>
-          <tbody>
+          <tbody id="tbody--usersOfStore">
             <% @users.each do |user| %>
             <tr class="select" data-user_id="<%= user.id %>" >
               <td><%= user.id %></td>
@@ -53,12 +53,20 @@
 
 <script type="text/javascript">
   $(function() {
-    var $name = $('#modelSetAdmin--inputName');
-    var $phone = $('#modelSetAdmin--inputPhone');
+    var $name   = $('#modelSetAdmin--inputName');
+    var $phone  = $('#modelSetAdmin--inputPhone');
     var $search = $('#modelSetAdmin--buttonSearch');
+    var $tbody  = $('#tbody--usersOfStore');
+    var _trHtml = [
+      '<tr class="select" data-user_id="_USER_ID_" >',
+        '<td>_USER_ID_</td>',
+        '<td>_USER_NAME_</td>',
+        '<td>_USER_PHONE_NUM_</td>',
+        '<td><a onclick="set_store_admin($(\'#store_id\').val(), _USER_ID_)" class="btn btn-primary btn-xs" href="javascript:void(0)">设置</a></td>',
+      '</tr>'
+    ].join('');
 
     $search.on('click', function() {
-
       $.ajax({
         url: '/admin/users_of_store',
         method: 'GET',
@@ -67,12 +75,23 @@
           phone: $phone.val()
         },
         success: function(res) {
-          console.log(res);
-        },
-        fail: function(err) {
+          var _html = '';
+          var users = res.data;
+          var user  = null;
+          for(var i = 0, L = users.length; i < L; i++) {
+            user = users[i];
 
-        }
-      })
+            // 高亮筛选条件
+            var _nameLight = user.name.replace(new RegExp($name.val(), 'g'), "<span class='text-danger bg-danger'>" + $name.val() + "</span>")  
+            var _phoneLight = user.phone_num.replace(new RegExp($phone.val(), 'g'), "<span class='text-danger bg-danger'>" + $phone.val() + "</span>")
+            
+            _html += _trHtml.replace(/_USER_ID_/g, user.id)
+              .replace(/_USER_NAME_/i, _nameLight)
+              .replace(/_USER_PHONE_NUM_/i, _phoneLight)
+          }
+          $tbody.html(_html);
+        },
+      });
 
     });    
   });

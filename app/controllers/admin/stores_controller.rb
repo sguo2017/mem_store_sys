@@ -121,13 +121,23 @@ class Admin::StoresController < AdminController
       _where = _where + " and phone_num like '%#{@phone}%'"
     end
 
-    @user = User.select("id, name, phone_num").where(_where).order('id DESC')#.page(params[:page]).per(10)
+    _per_num = 10
+    _sum_num = User.select("id").where(_where).count
+    @user = User.select("id, name, phone_num").where(_where).order('id DESC').page(params[:page]).per(_per_num)
 
-    render json:{
-      success: true,
-      #sum: User.select("id").where(_where).count,
-      data: @user
-    }
+    if @user
+      render json:{
+        success: true,
+        message: '获取用户数据成功',
+        totalPage: (_sum_num / _per_num).ceil,
+        data: @user
+      }
+    else
+      render json:{
+        success: false,
+        message: '获取用户数据失败'
+      }
+    end
   end
 
   private

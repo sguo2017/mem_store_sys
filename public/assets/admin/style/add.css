@@ -5,3 +5,7 @@
 .sub-navbar-nav li {
 	cursor: pointer;
 }
+
+.navbar .navbar-nav > li > a {
+	line-height: 24px !important;
+}

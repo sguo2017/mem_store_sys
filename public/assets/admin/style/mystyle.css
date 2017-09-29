@@ -6854,7 +6854,7 @@ fieldset[disabled] .btn-normal.focus {
   font-size: 16px !important;
 }
 .navbar .navbar-nav > li > a {
-  line-height: 1.5 !important;
+  line-height: 24px !important;
 }
 .navbar .navbar-nav > li.active,
 .navbar .navbar-nav > li:hover,

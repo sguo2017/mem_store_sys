@@ -1,0 +1,91 @@
+<!-- 超级管理员菜单 -->
+
+<div class="navbar navbar-inverse">
+  <div class="container">
+    <!-- navbar-header {-->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#my-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">
+        <%= image_tag("/assets/admin/images/brand.png")%>
+      </a>
+    </div>
+    <!--} navbar-header -->
+    <!-- navbar-collapse {-->
+    <div class="collapse navbar-collapse" id="my-collapse">
+      <ul id="adminMenu" class="nav navbar-nav navbar-right">
+        <li class="dropdown">
+          <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
+            商品
+            <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu">
+            <li><%= link_to "商品",       'javascript:void(0)', 'data-title'=>'商品',       'data-href'=>admin_goods_path %></li>
+            <li><%= link_to "商品实例",   'javascript:void(0)', 'data-title'=>'商品实例',   'data-href'=>admin_good_instances_path %></li>
+            <li><%= link_to "商品分类",   'javascript:void(0)', 'data-title'=>'商品分类',   'data-href'=>admin_goods_catalogs_path %></li>
+            <li><%= link_to "优惠券",     'javascript:void(0)', 'data-title'=>'优惠券',     'data-href'=>admin_coupons_path %></li>
+            <li><%= link_to "优惠券实例", 'javascript:void(0)', 'data-title'=>'优惠券实例', 'data-href'=>admin_coupon_instances_path %></li>
+            <li><%= link_to "优惠券核销", 'javascript:void(0)', 'data-title'=>'优惠券核销', 'data-href'=>'/admin/coupon_instances_write_off' %></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">
+            会员
+            <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu">
+            <li><%= link_to "会员",         'javascript:void(0)', 'data-title'=>'会员',         'data-href'=>admin_users_path %></li>
+            <li><%= link_to "中奖纪录",     'javascript:void(0)', 'data-title'=>'中奖纪录',     'data-href'=>admin_lotteries_path %></li>
+            <li><%= link_to "会员积分历史", 'javascript:void(0)', 'data-title'=>'会员积分历史', 'data-href'=>admin_score_histories_path %></li>
+            <li><%= link_to "会员红包历史", 'javascript:void(0)', 'data-title'=>'会员红包历史', 'data-href'=>admin_red_packet_histories_path %></li>
+            <li><%= link_to "会员分组",     'javascript:void(0)', 'data-title'=>'会员分组',     'data-href'=>admin_mem_groups_path %></li>
+          </ul>
+        </li>
+        <li><%= link_to "门店", 'javascript:void(0)', 'data-title'=>'门店', 'data-href'=>admin_stores_path %></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            积分
+            <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu">
+            <li><%= link_to "积分兑红包规则", 'javascript:void(0)', 'data-title'=>'积分兑红包规则', 'data-href'=>admin_bonus_changes_path %></li>
+            <li><%= link_to "会员等级",       'javascript:void(0)', 'data-title'=>'会员等级',       'data-href'=>admin_mem_levels_path %></li>
+          </ul>
+        </li>
+
+        <li><%= link_to "技术服务",     'javascript:void(0)', 'data-title'=>'技术服务',     'data-href'=>admin_tech_servs_path %></li>
+        <li><%= link_to "营销活动配置", 'javascript:void(0)', 'data-title'=>'营销活动配置', 'data-href'=>admin_activities_path %></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            统计报表
+            <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu">
+            <li><%= link_to "会员分析",       'javascript:void(0)', 'data-title'=>'会员分析',       'data-href'=>admin_report_mem_analyses_path %></li>
+            <li><%= link_to "高频预警分析",   'javascript:void(0)', 'data-title'=>'高频预警分析',   'data-href'=>admin_qr_code_scan_histories_path %></li>
+            <li><%= link_to "日趋势分析",     'javascript:void(0)', 'data-title'=>'日趋势分析',     'data-href'=>admin_report_trend_analyses_path %></li>
+
+            <li><%= link_to "地域扫码分布",   'javascript:void(0)', 'data-title'=>'地域扫码分布',   'data-href'=>admin_report_scan_geographical_distributions_path %></li>
+            <li><%= link_to "月扫码频次统计", 'javascript:void(0)', 'data-title'=>'月扫码频次统计', 'data-href'=>admin_report_month_scans_path %></li>
+            <li><%= link_to "会员地域分布",   'javascript:void(0)', 'data-title'=>'会员地域分布',   'data-href'=>admin_report_region_analyses_path %></li>
+          </ul>
+        </li> 
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            参数配置
+            <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu">
+            <li><%= link_to "系统参数配置", 'javascript:void(0)', 'data-title'=>'系统参数配置', 'data-href'=>admin_config_table_infos_path %></li>
+            <li><%= link_to "首页广告修改", 'javascript:void(0)', 'data-title'=>'首页广告修改', 'data-href'=>admin_ad_modifies_path %></li>
+            <li><%= link_to "红包基准",     'javascript:void(0)', 'data-title'=>'红包基准',     'data-href'=>admin_red_packet_base_rates_path %></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <!--} navbar-collapse -->
+  </div>
+</div>

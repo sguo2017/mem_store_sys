@@ -3,4 +3,8 @@ class WelcomeController < AdminController
   def index
     
   end
+
+  def welcome
+  	
+  end
 end

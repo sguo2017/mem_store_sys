@@ -1,0 +1,64 @@
+<!-- navbar 只有首页需要展示导航、菜单选项卡 {-->
+<% if current_user.admin == 1 %>
+  <%= render :partial => 'super_admin_menu' %>
+<% else %>
+  <%= render :partial => 'store_admin_menu' %>
+<% end %>
+<!--} navbar 只有首页需要展示导航、菜单选项卡 -->
+
+<!-- tab 只有首页需要展示导航、菜单选项卡 {-->
+<div class="container">
+  <!-- sub-navbar {-->
+  <div class="sub-navbar">
+    <div class="sub-navbar-left">
+      <a id="tabNavLeft" class="cub-tool" href="javascript:void(0)">
+        <span class="glyphicon glyphicon-backward"></span>
+      </a>
+    </div>
+    <div class="sub-navbar-nav-wrap">
+      <div style="position: relative; width: 10000px;">
+        <ul id="min_title_list" class="sub-navbar-nav clearfix">
+          <li class="active" data-href="/welcome/welcome">
+            <a href="javascript:void(0)">首页
+              <i class="glyphicon glyphicon-remove-sign"></i>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="sub-navbar-right">
+      <a id="tabNavRight" class="cub-tool" href="javascript:void(0)">
+        <span class="glyphicon glyphicon-forward"></span>
+      </a>
+      <div class="dropdown display-ilb">
+        <a class="dropdown-toggle cub-tool" data-toggle="dropdown" href="javascript:void(0)">设置操作
+          <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu">
+          <li><a id="closeallIframe" href="javascript:void(0)">关闭所有</a></li>
+          <li><a id="refreshShowIframe" href="javascript:void(0)">刷新当前</a></li>
+        </ul>
+      </div>
+      <%if user_signed_in?%>
+        <a class="cub-tool" rel="nofollow" data-method="delete" href="<%= destroy_user_session_path %>">
+          <span class="glyphicon glyphicon-log-out"></span>
+          退出
+        </a>
+      <%end%>
+    </div>
+  </div>
+  <!--} sub-navbar -->
+</div>
+<!--} tab 只有首页需要展示导航、菜单选项卡 -->
+
+<!-- iframe {-->
+<div class="container iframe_container">
+  <div class="row" id="iframe_box">
+    <div class="show_iframe">
+      <iframe frameborder="0" scrolling="no" frameborder="0" src="/welcome/welcome" style="width: 100%; height: 200px;"></iframe>
+    </div>
+  </div>
+</div>
+<!--} iframe -->
+
+<%= javascript_include_tag "/assets/admin/javascript/admin_menu" %>

@@ -1,0 +1,25 @@
+<!-- 门店管理员菜单 -->
+
+<div class="navbar navbar-inverse">
+  <div class="container">
+
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#my-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">
+        <%= image_tag("/assets/admin/images/brand.png")%>  
+      </a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="my-collapse">
+      <ul id="adminMenu" class="nav navbar-nav navbar-right">
+        <li><%= link_to "会员", 'javascript:void(0)', 'data-title'=>'会员', 'data-href'=>admin_users_path %></li>
+        <li><%= link_to "门店", 'javascript:void(0)', 'data-title'=>'门店', 'data-href'=>admin_stores_path %></li>
+      </ul>
+    </div>
+
+  </div>
+</div>

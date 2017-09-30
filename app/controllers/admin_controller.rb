@@ -20,7 +20,7 @@ class AdminController < ApplicationController
   end
 
   def admin_layout
-    current_user.admin == Const::MANAGER[:supper_manager] ? "application" : "store_admin"
+    # current_user.admin == Const::MANAGER[:supper_manager] ? "application" : "store_admin"
   end
 
   def forbid_store_manager

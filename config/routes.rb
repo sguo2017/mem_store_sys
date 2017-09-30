@@ -14,8 +14,6 @@ Rails.application.routes.draw do
       resources :month_scans
     end
   end
-  
-  get 'welcome/index'
 
   namespace :phone do
     resources :activities
@@ -65,6 +63,10 @@ Rails.application.routes.draw do
   mount Ckeditor::Engine => '/ckeditor'
 
   devise_for :users
+
+  get 'welcome/index'
+  get 'welcome/welcome'
+
   #用户上传当前地址
   post "phone/uploadLocation", to: "phone/profiles#uploadLocation"
   #设置店铺管理员
@@ -78,6 +80,7 @@ Rails.application.routes.draw do
   #核销订单
   get "admin/coupon_instances_write_off", to: "admin/coupon_instances#index_write_off"
   post "admin/coupon_instances_write_off", to: "admin/coupon_instances#write_off"
+  
   root 'welcome#index'
 
 end

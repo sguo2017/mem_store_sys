@@ -21,7 +21,7 @@
 
       <li class="data-item">
       <span class="ico-psw flex-none"></span>
-      <%= text_field_tag "sms_content", nil, class: "flex-fluid", placeholder: "请输入验证码" %>
+      <%= text_field_tag "sms_content", nil, class: "flex-fluid", placeholder: "请输入验证码", 'maxlength '=>'4' %>
       <a id="getSmsCode" class="text-primary">获取验证码</a>
       <span class="code-reload countdown_wrap" style="display: none"><span class="countdown_num">60</span>s后重新获取</span>
        

@@ -9,3 +9,25 @@
 .navbar .navbar-nav > li > a {
 	line-height: 24px !important;
 }
+
+.show_iframe .loading {
+    margin: 0px 10px;
+    background: white url(/assets/admin/images/iframe_loading.gif) no-repeat center;
+    height: 100px;
+}
+
+.sub-navbar .sub-navbar-nav-wrap {
+	position: relative;
+}
+
+.sub-navbar-nav-wrap {
+	height: 40px;
+}
+
+.sub-navbar .sub-navbar-nav {
+	position: relative;
+	margin: 0;
+	padding: 0;
+    display: inline-block;
+    width: auto;
+}

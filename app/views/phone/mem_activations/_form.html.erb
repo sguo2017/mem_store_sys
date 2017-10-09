@@ -1,4 +1,18 @@
 
+<style type="text/css">
+  #datePicker {
+    position: relative;
+    width: auto;
+  }
+  #datePicker:before {
+    color: #A9A9A9;
+    content: attr(placeholder);
+  }
+  #datePicker.full:before {
+    content: "" !important;
+  }
+</style>
+
 <%= form_for(phone_mem_activations_path,html: { class: "mem-avctivate-form" })   do |f| %> 
 
 
@@ -16,7 +30,7 @@
 
         <li class="data-item">
       <span class="ico-birth mr10"></span>
-      <input type="date" id="datePicker" name="user[birthday]" placeholder="请选择生日"/>
+      <input type="date" id="datePicker" name="user[birthday]" placeholder="请输入出生年月日"/>
       </li>
 
       <li class="data-item">
@@ -77,17 +91,17 @@
 
   <script type="text/javascript">
   function valid_form (){
-          if ('' === $('#recv_num').val()) {
-            alert("接受号码不能为空");
-            return false;
-          }
-          if (!/^1\d{10}$/.test($('#recv_num').val())) {
-            alert("号码格式不对");
-            return false;
-          }
-         
-          return true;
-        }
+    if ('' === $('#recv_num').val()) {
+      alert("接受号码不能为空");
+      return false;
+    }
+    if (!/^1\d{10}$/.test($('#recv_num').val())) {
+      alert("号码格式不对");
+      return false;
+    }
+   
+    return true;
+  }
   $(document).ready(function(){
       //     (function() {
       // $(function() {
@@ -128,9 +142,11 @@
             return $('.countdown_num').countdown('destroy');
           };
         });
+
         $('.notice_close_btn').click(function() {
           return $('.activation_popup_wrap').hide();
         });
+
         $('#ActiveButton').click(function() {
             if(valid_form() == true){
               if ('' === $('#sms_content').val()) {
@@ -142,9 +158,16 @@
             else {
               return false
             }
-        })
+        });
         
-      });
+        $("#datePicker").on("input",function(){
+          if($(this).val().length > 0){
+            $(this).addClass("full");
+          } else{
+            $(this).removeClass("full");
+          }
+        });
+    }); 
 
     
   </script>

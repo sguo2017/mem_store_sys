@@ -1,52 +1,61 @@
-	<div id="popup" class="popup-wrap popup-get-score" <% unless flash[:notice].blank? %>style="display:;"<% else %> style="display:none;"  <% end %>>
-		<div class="popup">
-			<div class="pop-close" type="button">
-				<button id="close" class="ico-pop-close"></button>
+<style type="text/css">
+	.popup-get-score .score-total {
+	    color: #fff;
+	    text-decoration: underline;
+	}
+</style>
+
+<div id="popup" class="popup-wrap popup-get-score" <% unless flash[:notice].blank? %>style="display:;"<% else %> style="display:none;"  <% end %>>
+	<div class="popup">
+		<div class="pop-close" type="button">
+			<button id="close" class="ico-pop-close"></button>
+		</div>
+		<div class="popup-score-heading">
+			<div class="popup-score-title">恭喜</div>
+		</div>
+		<div class="popup-score-body">
+			<%if @get_score.present? && @get_score != 0%>
+			<div class="get-score">
+				获得
+				<span class="score-num">+<%= @get_score %></span>
+				积分
 			</div>
-			<div class="popup-score-heading">
-				<div class="popup-score-title">恭喜</div>
+			<%end%>
+			<%if @get_money.present? && @get_money != 0%>
+			<div class="get-red-paper">
+				获得
+				<span class="red-paper-num"><%= @get_money %></span>
+				元红包
 			</div>
-			<div class="popup-score-body">
-				<%if @get_score.present? && @get_score != 0%>
-				<div class="get-score">
-					获得
-					<span class="score-num">+<%= @get_score %></span>
-					积分
-				</div>
-				<%end%>
-				<%if @get_money.present? && @get_money != 0%>
-				<div class="get-red-paper">
-					获得
-					<span class="red-paper-num"><%= @get_money %></span>
-					元红包
-				</div>
-				<%end%>
-				<div class="score-total">累计<%= @user.score_total %>积分</div>
-				<div class="scan-code">
-					<a id="notice" >
-						<span class="ico-scan2 mr10"></span>继续扫码
-					</a>
-				</div>
+			<%end%>
+			<a class="score-total" href="/phone/score_queries?pay_type=up">
+				累计<%= @user.score_total %>积分 >
+			</a>
+			<div class="scan-code">
+				<a id="notice" >
+					<span class="ico-scan2 mr10"></span>继续扫码
+				</a>
 			</div>
 		</div>
-		<div class="popup-bg"></div>
 	</div>
+	<div class="popup-bg"></div>
+</div>
 
-	<script type="text/javascript">
-    $(document).ready(function(){
-        $('#close').click(function() {
-            $('#popup').hide();
-            return
-        });
-        $('#notice').click(function() {
-	        $('#popup').hide();
-		    wx.scanQRCode({
-	        	needResult: 0,
-	        	scanType: ["qrCode","barCode"],
-	        	success: function(res){
-              		console.log(res.resultStr)       
-	        	}
-		  	})
-        });
-    })
+<script type="text/javascript">
+$(document).ready(function(){
+    $('#close').click(function() {
+        $('#popup').hide();
+        return
+    });
+    $('#notice').click(function() {
+        $('#popup').hide();
+	    wx.scanQRCode({
+        	needResult: 0,
+        	scanType: ["qrCode","barCode"],
+        	success: function(res){
+          		console.log(res.resultStr)       
+        	}
+	  	})
+    });
+})
 </script>

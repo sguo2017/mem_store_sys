@@ -1,3 +1,10 @@
+<style type="text/css">
+  #datePicker {
+    direction: rtl;
+    text-align: right;
+  }
+</style>
+
     <% content_for :title, "会员资料" %>
     <div class="header">
     <a class="header-left" href="javascript:void(0)" onclick="window.location.href='/phone/homepages';">
@@ -50,9 +57,8 @@
           生日  
         </div>
       <div class="calendar">
-        <div>
-            <input type="date" id="datePicker" name="user[birthday]" class="datetimepicke22r" value="<%if @user.birthday.present? %><%=@user.birthday.strftime('%Y-%m-%d')%><%else%><%=Time.new(1970).strftime('%Y-%m-%d')%><%end%>"/>
-        </div>
+          <input type="date" id="datePicker" name="user[birthday]" class="datetimepicke22r" 
+            value="<%if @user.birthday.present? %><%=@user.birthday.strftime('%Y-%m-%d')%><%else%><%=Time.new(1970).strftime('%Y-%m-%d')%><%end%>"/>
       </div>
       </li>
     </ul>
